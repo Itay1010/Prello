@@ -40,6 +40,7 @@ export const WhoWatch = () => {
 
     if (!watchers) return <div>Loading...</div>
     return <div className="who-watch">
+        <iframe width="1380" height="574" src="https://www.youtube.com/embed/sHbvLOtwaOs" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
         <button onClick={() => onAddWatcher()} style={{ display: 'block', margin: '0 auto 20px' }}>Add watcher</button>
         <div className="watchers" style={{ display: 'flex', 'justifyContent': 'center' }} >
             {watchers.map(watcher => {
