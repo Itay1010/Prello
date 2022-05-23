@@ -18,7 +18,7 @@ export const WhoWatch = () => {
 
     const onSelectWatcher = async (watcher) => {
         if (selectedWatcher !== watcher) dispatch(selectWatcher(watcher))
-        else if (selectedWatcher !== watcher) dispatch(selectWatcher(null))
+        else if (selectedWatcher === watcher) dispatch(selectWatcher(null))
         else dispatch(selectWatcher(watcher))
 
     }
