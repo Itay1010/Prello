@@ -18,7 +18,7 @@ export const WhoWatch = () => {
 
     const onSelectWatcher = async (watcher) => {
         if (selectedWatcher !== watcher) dispatch(selectWatcher(watcher))
-        else if (selectedWatcher === watcher) dispatch(selectWatcher(null))
+        else if (selectedWatcher !== watcher) dispatch(selectWatcher(null))
         else dispatch(selectWatcher(watcher))
 
     }
@@ -36,8 +36,6 @@ export const WhoWatch = () => {
     }
 
 
-
-
     if (!watchers) return <div>Loading...</div>
     return <div className="who-watch">
         <button onClick={() => onAddWatcher()} style={{ display: 'block', margin: '0 auto 20px' }}>Add watcher</button>
@@ -47,8 +45,8 @@ export const WhoWatch = () => {
                     <h3 style={{ color: 'white' }}>{watcher.username}</h3>
                     <img src={watcherImg} alt="watcher" width="100" height="100" style={{ display: 'block', margin: '0 auto 20px', border: '1px solid white', padding: '10px' }} />
                     {selectedWatcher === watcher && selectedWatcher.movies.map(movie => <p style={{ color: 'white' }}>{movie}</p>)}
-                    <button onClick={() => onSelectWatcher(watcher)} style={{ backgroundColor: 'white', color: watcher.color, border: 'none', 'marginInlineEnd': '10px', cursor: 'pointer', outline: 'none' }}>{selectedWatcher === watcher ? 'Close' : 'Select'}</button>
-                    <button onClick={() => onRemoveWatcher(watcher._id)} style={{ backgroundColor: 'white', color: watcher.color, border: 'none', cursor: 'pointer', outline: 'none' }}>Remove</button>
+                    <button onClick={() => onRemoveWatcher(watcher._id)} style={{ backgroundColor: 'white', color: watcher.color, border: 'none', 'marginInlineEnd': '10px', cursor: 'pointer', outline: 'none' }}>{selectedWatcher === watcher ? 'Close' : 'Select'}</button>
+                    <button onClick={() => onSelectWatcher(watcher)} style={{ backgroundColor: 'white', color: watcher.color, border: 'none', cursor: 'pointer', outline: 'none' }}>Remove</button>
                 </article>
             })}
         </div>
