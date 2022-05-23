@@ -1,10 +1,10 @@
 import React from 'react'
-import { somePage } from './pages/somePage'
+import { WhoWatch } from './pages/who-watch'
 
 export default function App() {
   return <div className='app'>
-    <h1>This is a test App</h1>
-    <somePage />
+    <h1>WHO WATCH???</h1>
+    <WhoWatch />
   </div>
 }
 
