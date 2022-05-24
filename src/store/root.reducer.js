@@ -8,7 +8,7 @@ const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose
 
 const rootReducer = combineReducers({
     userModule: userReducer,
-    boardModule: boardReducer
+    // boardModule: boardReducer
 })
 
 export const store = createStore(rootReducer, composeEnhancers(applyMiddleware(thunk)))
