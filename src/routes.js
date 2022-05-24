@@ -1,6 +1,6 @@
 import { Home } from "./pages/home";
 import { Login } from "./pages/login";
-import { Singup } from "./pages/signup";
+import { Signup } from "./pages/signup";
 import { Workspace } from "./pages/workspace";
 import { Board } from "./pages/board";
 
@@ -14,8 +14,8 @@ export const routes = [
         component: Login,
     },
     {
-        path: '/singup',
-        component: Singup,
+        path: '/signup',
+        component: Signup,
     },
     {
         path: '/workspace',

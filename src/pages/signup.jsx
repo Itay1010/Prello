@@ -1,6 +1,6 @@
 import React from "react"
 
 
-export const Singup = () => {
+export const Signup = () => {
     return <section>I am the Signup page</section>
 }
