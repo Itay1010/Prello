@@ -11,10 +11,11 @@
 
 
 //PAGES
-@import '../pages/board.scss';
+@import '../pages/board';
 
 
 
 // COMPONENTS
-@import '../cmps/shared_cmps/main-header';
-@import '../cmps/board/group-board'
+@import '../style/cmps/shared_cmps/main-header';
+@import '../style/cmps/board/group-board';
+@import '../style/cmps/board/task-preview';

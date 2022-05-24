@@ -1,8 +1,16 @@
 .group {
     width: 270px;
-    min-height: 32px;
     border-radius: 3px;
     margin-inline-end: 8px;
     background-color: $group;
+
+    h3 {
+
+    }
+    
+    .list-task {
+        padding: 0 4px;
+        margin: 0 4px;
+    }
 
 }
