@@ -1,22 +1,28 @@
+import { Home } from "./pages/home";
+import { Login } from "./pages/login";
+import { Singup } from "./pages/signup";
+import { Workspace } from "./pages/workspace";
+import { Board } from "./pages/board";
+
 export const routes = [
     {
         path: '/',
-        component: <Home />,
+        component: Home,
     },
     {
         path: '/login',
-        component: <Login />,
+        component: Login,
     },
     {
-        path: '/signup',
-        component: <Signup />,
+        path: '/singup',
+        component: Singup,
     },
     {
-        path: '/board',
-        component: <Browsing />,
+        path: '/workspace',
+        component: Workspace,
     },
     {
         path: '/board/:boardId',
-        component: <Board />,
+        component: Board,
     }
 ]
