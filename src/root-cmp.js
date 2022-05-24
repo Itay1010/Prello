@@ -5,4 +5,3 @@ export default function App() {
     <h1> </h1>
   </div>
 }
-
