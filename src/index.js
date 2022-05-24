@@ -2,6 +2,7 @@ import React from 'react'
 import { createRoot } from 'react-dom/client'
 import { Provider } from 'react-redux'
 import { store } from './store/root-reducer'
+import { Router } from 'react-router-dom'
 import App from './root-cmp'
 // import reportWebVitals from './reportWebVitals'
 import './style/style.scss'
@@ -11,7 +12,9 @@ const root = createRoot(container)
 
 root.render(
   <Provider store={store}>
-    <App />
+    <Router>
+      <App />
+    </Router>
   </Provider>
 )
 
