@@ -2,7 +2,7 @@ import React from "react"
 
 
 export const TaskPreview = () => {
-    return <section>
+    return <section className="task-preview">
         <div>
             task color
         </div>
