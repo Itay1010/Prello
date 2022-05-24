@@ -4,8 +4,17 @@
 // @import 'setup/mixins';
 @import './setup/functions';
 
-
-
+//BASICS
 @import './basic/helpers';
 @import './basic/base';
 // @import './basic/layout';
+
+
+//PAGES
+@import '../pages/board.scss';
+
+
+
+// COMPONENTS
+@import '../cmps/shared_cmps/main-header';
+@import '../cmps/board/group-board'
