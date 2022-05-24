@@ -5,7 +5,7 @@ import { store } from './store/root.reducer'
 import { Router } from 'react-router-dom'
 import App from './root.cmp'
 // import reportWebVitals from './reportWebVitals'
-import './style/style.scss'
+import '../src/assets/style/style.scss'
 
 const container = document.getElementById('root')
 const root = createRoot(container)
