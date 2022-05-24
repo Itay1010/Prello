@@ -1,5 +1,5 @@
 import io from 'socket.io-client'
-import { userService } from './user.service'
+import { userService } from './../user.service'
 
 export const SOCKET_EMIT_SEND_MSG = 'chat newMsg'
 export const SOCKET_EMIT_TYPING = 'chat typing'
