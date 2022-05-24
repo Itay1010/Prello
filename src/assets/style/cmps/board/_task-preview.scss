@@ -2,4 +2,39 @@
     width: 100%;
     background-color: $white;
     border-radius: 3px;
+    box-shadow: 0 1px 0 #091e4240;
+
+    &>* {
+        // border: 1px solid red;
+        padding: 0 8px;
+    }
+
+    .task-color {
+        line-height: 32px;
+        // background-color: purple;
+        border-radius: 3px 3px 0 0;
+
+    }
+
+    .task-label {
+        height: 12px;
+        // background-color: yellow;
+
+        .label {
+            height: 8px;
+            width: 40px;
+            background-color: green;
+            border-radius: 3px;
+        }
+    }
+
+    .task-title {
+        margin: 0 0 4px;
+        // background-color: pink;
+    }
+
+    .task-status {
+        // background-color: blue;
+        height: 28px;
+    }
 }
