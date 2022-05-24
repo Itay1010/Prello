@@ -4,13 +4,36 @@
     margin-inline-end: 8px;
     background-color: $group;
 
-    h3 {
+    .group-header {
+        height: 40px;
+        padding: 10px 8px;
+
+        h2 {
+            font-weight: 600;
+            font-size: rem(20px);
+
+        }
 
     }
-    
+
     .list-task {
         padding: 0 4px;
         margin: 0 4px;
+    }
+
+    .group-footer {
+        height: 38px;
+        padding: 0 8px;
+
+        a {
+            line-height: 38px;
+        }
+
+        .add-media {
+            width: 28px;
+            height: 28px;
+            background-color: red;
+        }
     }
 
 }

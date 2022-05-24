@@ -2,13 +2,11 @@ import React from "react"
 
 
 export const TaskPreview = () => {
-    return <section className="task-preview">
-        <div>
-            task color
-        </div>
-        <span>title</span>
-        <section>badges section</section>
-        <section>members section</section>
+    return <article className="task-preview">
+        <section className="task-color">task color</section>
+        <section className="task-label"><div className="label"></div></section>
+        <section className="task-title">title</section>
+        <section className="task-status">status</section>
 
-    </section>
+    </article>
 }
