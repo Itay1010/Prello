@@ -2,7 +2,11 @@ import { httpService } from './http.service'
 // import { socketService, SOCKET_EVENT_REVIEW_ADDED, SOCKET_EVENT_REVIEW_ABOUT_YOU } from './socket.service'
 // import { getActionRemoveReview, getActionAddReview } from '../store/.actions'
 import { store } from '../store/store'
+import { storageService } from './async-storage.service.js'
+
 import { showSuccessMsg } from '../services/event-bus.service'
+import { utilService } from './util.service.js'
+
 
 const reviewChannel = new BroadcastChannel('reviewChannel')
 
@@ -23,9 +27,9 @@ export const reviewService = {
     add,
     query,
     remove,
+    getById,
     // subscribe,
     // unsubscribe,
-    getById,
 }
 
 
@@ -46,8 +50,8 @@ function getById(boardId) {
 
 
 async function remove(reviewId) {
-    // await httpService.delete(`review/${reviewId}`)
     await storageService.remove(STORAGE_KEY, boardId)
+    // await httpService.delete(`review/${reviewId}`)
     // await storageService.remove('review', reviewId)
     // reviewChannel.postMessage(getActionRemoveReview(reviewId))
 }
@@ -60,41 +64,6 @@ async function add(review) {
     return addedReview
 }
 
-
-
-import { storageService } from './async-storage.service.js'
-import { utilService } from './util.service.js'
-import { userService } from './user.service.js'
-import { getActionRemoveBoard, getActionAddBoard, getActionUpdateBoard } from '../store/board.actions.js'
-
-const STORAGE_KEY = 'board'
-const boardChannel = new BroadcastChannel('boardChannel')
-// const listeners = []
-
-export const boardService = {
-    query,
-    save,
-    remove,
-    getEmptyBoard,
-    subscribe,
-    unsubscribe
-
-}
-window.cs = boardService;
-
-
-function query() {
-    return storageService.query(STORAGE_KEY)
-}
-function getById(boardId) {
-    return storageService.get(STORAGE_KEY, boardId)
-    // return axios.get(`/api/board/${boardId}`)
-}
-async function remove(boardId) {
-
-    await storageService.remove(STORAGE_KEY, boardId)
-    boardChannel.postMessage(getActionRemoveBoard(boardId))
-}
 async function save(board) {
     var savedBoard
     if (board._id) {
@@ -110,6 +79,11 @@ async function save(board) {
     return savedBoard
 }
 
+const STORAGE_KEY = 'board'
+const boardChannel = new BroadcastChannel('boardChannel')
+// const listeners = []
+
+window.cs = boardService;
 
 function getEmptyBoard() {
     return {
@@ -117,14 +91,6 @@ function getEmptyBoard() {
         price: utilService.getRandomIntInclusive(1000, 9000),
     }
 }
-
-// function subscribe(listener) {
-//     boardChannel.addEventListener('message', listener)
-// }
-// function unsubscribe(listener) {
-//     boardChannel.removeEventListener('message', listener)
-// }
-
 
 // ;(async ()=>{
     //     await userService.create({fullname: 'Puki Norma', username: 'user1', password:'123',score: 10000, isAdmin: false})

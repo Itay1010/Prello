@@ -22,9 +22,9 @@ export const boardService = {
     add,
     query,
     remove,
+    getById
     // subscribe,
     // unsubscribe,
-    getById
 }
 
 
@@ -46,15 +46,15 @@ async function remove(boardId) {
 }
 
 async function add(board) {
-    // const addedBoard = await httpService.post(`board`, board)
-
-    // board.byUser = userService.getLoggedinUser()
-    // board.aboutUser = await userService.getById(board.aboutUserId)
     const addedBoard = await storageService.post('board', board)
 
     boardChannel.postMessage(getActionAddBoard(addedBoard))
 
     return addedBoard
+    // const addedBoard = await httpService.post(`board`, board)
+
+    // board.byUser = userService.getLoggedinUser()
+    // board.aboutUser = await userService.getById(board.aboutUserId)
 }
 
 // function subscribe(listener) {
