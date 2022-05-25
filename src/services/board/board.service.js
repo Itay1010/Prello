@@ -1,8 +1,10 @@
-import { utilService } from './util.service.js'
+import { utilService } from '../../services/basic/util.service'
 import { storageService } from '../basic/async-storage.service'
-import { httpService } from '../basic/http.service'
+// import { httpService } from '../basic/http.service'
 import { getActionAddBoard, getActionRemoveBoard } from '../../store/board/board.action'
-
+import { userService } from "../../services/user.service";
+const emptyBoard = require('../../data/empty-board.json')
+const jsonBoard = require('../../data/prello-boards.json')
 // import { socketService, SOCKET_EVENT_REVIEW_ADDED, SOCKET_EVENT_REVIEW_ABOUT_YOU } from './socket.service'
 // import { showSuccessMsg } from '../services/event-bus.service'
 
@@ -23,7 +25,6 @@ const STORAGE_KEY = 'board'
 // })()
 
 export const boardService = {
-    add,
     query,
     remove,
     getById,
@@ -33,60 +34,85 @@ export const boardService = {
 }
 
 
-function query(filterBy) {
+async function query(filterBy) {
     var queryStr = (!filterBy) ? '' : `?name=${filterBy.name}&sort=anaAref`
-    // return httpService.get(`board${queryStr}`)
-    return storageService.query(STORAGE_KEY)
+    try {
+        // return await httpService.get(`board${queryStr}`)
+        const res =  await storageService.query(STORAGE_KEY)
+        return res
+    } catch (error) {
+        throw _logError(error)
+    }
 }
 
-function query() {
-    return storageService.query(STORAGE_KEY)
+async function getById(boardId) {
+    try {
+        return await storageService.get(STORAGE_KEY, boardId)
+    } catch (error) {
+        throw _logError(error)
+    }
+    // return httpService.get(`/api/board/${boardId}`)
 }
 
+<<<<<<< HEAD
 function getById(boardId) {
     return storageService.get(STORAGE_KEY, boardId)
     // return axios.get(`/api/board/${boardId}`)
 }
 
+=======
+>>>>>>> origin
 async function remove(boardId) {
-    await storageService.remove(STORAGE_KEY, boardId)
-    // await httpService.delete(`review/${reviewId}`)
-    // await storageService.remove('review', reviewId)
-    // reviewChannel.postMessage(getActionRemoveReview(reviewId))
-}
-
-
-
-async function add(board) {
-    const addedBoard = await httpService.post(`review`, board)
-    return addedBoard
+    try {
+        // reviewChannel.postMessage(getActionRemoveReview(reviewId))
+        // return await httpService.delete(`review/${reviewId}`)
+        return await storageService.remove(STORAGE_KEY, boardId)
+    } catch (error) {
+        throw _logError(error)
+    }
 }
 
 async function save(board) {
     var savedBoard
-    if (board._id) {
-        savedBoard = await storageService.put(STORAGE_KEY, board)
-        // boardChannel.postMessage(getActionUpdateBoard(savedBoard))
-
-    } else {
-        // Later, owner is set by the backend
-        // board.owner = userService.getLoggedinUser()
-        savedBoard = await storageService.post(STORAGE_KEY, board)
-        // boardChannel.postMessage(getActionAddBoard(savedBoard))
+    try {
+        if (board._id) {
+            savedBoard = await storageService.put(STORAGE_KEY, board)
+            // boardChannel.postMessage(getActionUpdateBoard(savedBoard))
+            return savedBoard
+        } else {
+            // Later, owner is set by the backend
+            board = { ..._getEmptyBoard(), createdAt: Date.now(), title: board.title }
+            board.createdBy = userService.getLoggedinUser() || {
+                "_id": "g",
+                "firstName": "Guest",
+                "imgUrl": utilService.getRandomColor()
+            }
+            savedBoard = await storageService.post(STORAGE_KEY, board)
+            // boardChannel.postMessage(getActionAddBoard(savedBoard))
+            return savedBoard
+        }
+    } catch (error) {
+        throw _logError(error)
     }
-    return savedBoard
 }
 
+const _logError = (err) => {
+    console.log('error in board service', err)
+    return err
+}
 
-function getEmptyBoard() {
+function _getEmptyBoard() {
+    return emptyBoard
 }
 
 // ;(async ()=>{
-    //     await userService.create({fullname: 'Puki Norma', username: 'user1', password:'123',score: 10000, isAdmin: false})
-    //     await userService.create({fullname: 'Master Adminov', username: 'admin', password:'123', score: 10000, isAdmin: true})
-    //     await userService.create({fullname: 'Muki G', username: 'muki', password:'123', score: 10000})
-    // })()
-// }
+//     await userService.create({fullname: 'Puki Norma', username: 'user1', password:'123',score: 10000, isAdmin: false})
+//     await userService.create({fullname: 'Master Adminov', username: 'admin', password:'123', score: 10000, isAdmin: true})
+//     await userService.create({fullname: 'Muki G', username: 'muki', password:'123', score: 10000})
+// })()
+
+// storageService.put(STORAGE_KEY, jsonBoard)
+
 
 
 
