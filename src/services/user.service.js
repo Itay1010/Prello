@@ -37,10 +37,10 @@ function remove(userId) {
 
 async function update(user) {
     await storageService.put('user', user)
+    return user;
     // user = await httpService.put(`user/${user._id}`, user)
     // Handle case in which admin updates other user's details
     // if (getLoggedinUser()._id === user._id) saveLocalUser(user)
-    return user;
 }
 
 async function login(userCred) {
@@ -48,21 +48,21 @@ async function login(userCred) {
     const user = users.find(user => user.username === userCred.username)
     return saveLocalUser(user)
 
+    // if (user) return saveLocalUser(user)
     // const user = await httpService.post('auth/login', userCred)
     // socketService.emit('set-user-socket', user._id);
-    if (user) return saveLocalUser(user)
 }
 async function signup(userCred) {
     userCred.score = 10000;
     const user = await storageService.post('user', userCred)
+    return saveLocalUser(user)
     // const user = await httpService.post('auth/signup', userCred)
     // socketService.emit('set-user-socket', user._id);
-    return saveLocalUser(user)
 }
 async function logout() {
     sessionStorage.removeItem(STORAGE_KEY_LOGGEDIN_USER)
+    // return await httpService.post('auth/logout')
     // socketService.emit('unset-user-socket');
-    return await httpService.post('auth/logout')
 }
 
 async function changeScore(by) {
@@ -98,15 +98,4 @@ function getLoggedinUser() {
         // })();
         
         
-        // const user = {
-        //     "_id": "u101",
-        //     "fullname": "Abi Abambi",
-        //     "username": "abi@ababmi.com",
-        //     "password": "aBambi123",
-        //     "imgUrl": "http://some-img.jpg",
-        //     "mentions": [{
-        //         "id": "m101",
-        //         "boardId": "m101",
-        //         "taskId": "t101"
-        //     }]
-        // }
+     
