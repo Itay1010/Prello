@@ -23,32 +23,31 @@ export const LoginForm = ({ onLogin }) => {
                     /* and other goodies */
 
                 }) => (
-                    <form className='login' onSubmit={handleSubmit}>
-                        {errors.firstName && touched.firstName && errors.firstName} <br />
-                        {errors.lastName && touched.lastName && errors.lastName} <br />
+                    <form className='login-form' onSubmit={handleSubmit}>
+                        {errors.firstName && touched.firstName && errors.firstName}
+                        {errors.lastName && touched.lastName && errors.lastName}
                         <label className="inputs-wrapper">
 
-                            <label>Username
-                                <input
-                                    type="text"
-                                    name="username"
-                                    onChange={handleChange}
-                                    onBlur={handleBlur}
-                                    value={values.name}
-                                />
-                            </label>
-                            <label>Password
-                                <input
-                                    type="password"
-                                    name="password"
-                                    onChange={handleChange}
-                                    onBlur={handleBlur}
-                                    value={values.name}
-                                />
-                            </label>
+
+                            <input
+                                type="text"
+                                name="username"
+                                onChange={handleChange}
+                                onBlur={handleBlur}
+                                value={values.name}
+                                placeholder='Your username'
+                            />
+                            <input
+                                type="password"
+                                name="password"
+                                onChange={handleChange}
+                                onBlur={handleBlur}
+                                value={values.name}
+                                placeholder='Your password'
+                            />
                         </label>
                         <button type="submit" disabled={isSubmitting}>
-                            login
+                            continue
                         </button>
                     </form>
                 )}

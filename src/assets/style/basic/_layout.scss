@@ -2,12 +2,13 @@
     display: grid;
     width: 100vw;
     grid-template-columns: 20px 1fr 20px;
+    grid-template-rows: 52px 1fr;
 
     >* {
         grid-column: 2;
     }
 
-    > *.full {
+    >*.full {
         grid-column: 1 / -1;
     }
 

@@ -87,8 +87,8 @@ class _Board extends React.Component {
         console.log(groups)
 
         return <React.Fragment>
-            <section className="board flex col">
-                <MainHeader />
+            <MainHeader />
+            <section className="board flex col main-layout">
                 <BoardHeader board={board} />
                 <section className="group-container flex">
                     {groups.map(group => {
