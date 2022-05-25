@@ -1,0 +1,118 @@
+{
+    "_id": "b101",
+    "title": "My Board",
+    "createdAt": 1589983468418,
+    "createdBy": {
+        "_id": "u101",
+        "firstName": "Eytan",
+        "lastName": "Silberberg",
+        "imgUrl": "http://cloudinary/user"
+    },
+    "style": {
+        "backgroundColor": "blue"
+    },
+    "labels": [
+        {
+            "id": "l101",
+            "title": "Done",
+            "color": "#61bd4f"
+        },
+        {
+            "id": "l102",
+            "title": "Progress",
+            "color": "#61bd33"
+        }
+    ],
+    "members": [
+        {
+            "_id": "u101",
+            "firstName": "Eytan",
+            "lastName": "Silberberg",
+            "imgUrl": "http://cloudinary/user"
+        }
+    ],
+    "groups": [
+        {
+            "id": "g101",
+            "title": "Basic UI",
+            "tasks": [
+                {
+                    "id": "t101",
+                    "title": "Replace logo"
+                },
+                {
+                    "id": "t102",
+                    "title": "Add json"
+                },
+                {
+                    "id": "t110",
+                    "title": "more json"
+                }
+            ]
+        },
+        {
+            "id": "g102",
+            "title": "done",
+            "tasks": [
+                {
+                    "id": "t103",
+                    "title": "Just do it now",
+                    "archivedAt": 1589983468418
+                },
+                {
+                    "id": "t104",
+                    "title": "new feature",
+                    "status": "in-progress",
+                    "description": "description",
+                    "comments": [
+                        {
+                            "id": "t108",
+                            "txt": "also @yaronb please CR this",
+                            "createdAt": 1590999817436.0,
+                            "byMember": {
+                                "_id": "u102",
+                                "firstName": "Tal",
+                                "lastName": "Tarablus",
+                                "imgUrl": "http://res.cloudinary.com/shaishar9/image/upload/v1590850482/j1glw3c9jsoz2py0miol.jpg"
+                            }
+                        }
+                    ],
+                    "createdAt": 1590999730348,
+                    "dueDate": 16156215211,
+                    "byMember": {
+                        "_id": "u101",
+                        "username": "Tal@gmail.com",
+                        "firstName": "Eytan",
+                        "lastName": "Silberberg",
+                        "imgUrl": "http://res.cloudinary.com/shaishar9/image/upload/v1590850482/j1glw3c9jsoz2py0miol.jpg"
+                    },
+                    "style": {
+                        "bgColor": "#26de81"
+                    }
+                }
+            ]
+        }
+    ],
+    "activities": [
+        {
+            "id": "a101",
+            "type": "Added Task",
+            "createdAt": 154514,
+            "byMember": {
+                "_id": "u101",
+                "firstName": "Eytan",
+                "lastName": "Silberberg",
+                "imgUrl": "http://cloudinary/user"
+            },
+            "task": {
+                "id": "c101",
+                "title": "Replace Logo"
+            }
+        }
+    ],
+    "cmpsOrder": [
+        "status-picker",
+        "member-picker",
+        "date-picker"
+    ]
+}
