@@ -1,22 +1,21 @@
 // import { showSuccessMsg } from '../services/event-bus.service'
-import { boardService } from '../services/board.service'
-import { userService } from '../services/user.service'
-
-const SCORE_FOR_REVIEW = 500
+import { boardService } from '../../services/board/board.service'
+// import { userService } from '../../services/user.service'
 
 // Action Creators
 export function getActionRemoveBoard(boardId) {
-    return { type: 'REMOVE_REVIEW', boardId }
+    return { type: 'REMOVE_BOARD', boardId }
 }
+
 export function getActionAddBoard(board) {
-    return { type: 'ADD_REVIEW', board }
+    return { type: 'ADD_BOARD', board }
 }
 
 export function loadBoard() {
     return async dispatch => {
         try {
             const board = await boardService.query()
-            dispatch({ type: 'SET_REVIEWS', board })
+            dispatch({ type: 'SET_BOARDS', board })
 
         } catch (err) {
             console.log('BoardActions: err in loadBoard', err)
