@@ -8,11 +8,14 @@
         margin: 40px 80px 0;
 
         .board-container {
-            padding: 0 0 20px;
+            padding: 0 15px 0;
 
             .board-preview-header {
                 display: flex;
-                justify-content: space-between;
+                margin-block-end: 20px;
+                &>* {
+                    margin: 10px 10px 10px 0;
+                }
             }
 
             .board-preview-body {
@@ -20,6 +23,7 @@
                 flex-wrap: wrap;
                 gap: 20px 8px;
                 border-radius: 3px;
+                margin: 0 0 50px;
                 &>* {
                     background-color: blue;
                     width: 200px;
