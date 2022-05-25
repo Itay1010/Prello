@@ -11,12 +11,12 @@ export function getActionAddBoard(board) {
     return { type: 'ADD_BOARD', board }
 }
 
-export function loadBoard() {
+export function loadBoardMinis() {
     return async dispatch => {
         try {
-            const board = await boardService.query()
-            dispatch({ type: 'SET_BOARDS', board })
-
+            const minis = await boardService.query()
+            // const minis = await boardService.query({ minis: true })
+            dispatch({ type: 'SET_BOARDS', minis })
         } catch (err) {
             console.log('BoardActions: err in loadBoard', err)
         }
@@ -26,15 +26,8 @@ export function loadBoard() {
 export function addBoard(board) {
     return async dispatch => {
         try {
-            const addedBoard = await boardService.add(board)
-            dispatch(getActionAddBoard(addedBoard))
-
-            // Change the score in user kept in sessionStorage
-            // userService.saveLocalUser(addedBoard.byUser)
-            const { score } = addedBoard.byUser
-            // const score = await userService.changeScore(SCORE_FOR_REVIEW)
-            dispatch({ type: 'SET_SCORE', score })
-
+            const boardMini = await boardService.save(board)
+            dispatch(getActionAddBoard(boardMini))
         } catch (err) {
             console.log('BoardActions: err in addBoard', err)
             throw err

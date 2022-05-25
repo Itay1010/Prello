@@ -35,7 +35,7 @@ export const boardService = {
 
 
 async function query(filterBy) {
-    var queryStr = (!filterBy) ? '' : `?name=${filterBy.name}&sort=anaAref`
+    var queryStr = (!filterBy) ? '' : `?minis=${filterBy.minis}&sort=anaAref`
     try {
         // return await httpService.get(`board${queryStr}`)
         const res =  await storageService.query(STORAGE_KEY)
