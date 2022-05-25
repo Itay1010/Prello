@@ -38,7 +38,7 @@ async function query(filterBy) {
     var queryStr = (!filterBy) ? '' : `?name=${filterBy.name}&sort=anaAref`
     try {
         // return await httpService.get(`board${queryStr}`)
-        const res =  await storageService.query(STORAGE_KEY)
+        const res = await storageService.query(STORAGE_KEY)
         return res
     } catch (error) {
         throw _logError(error)
@@ -54,14 +54,6 @@ async function getById(boardId) {
     // return httpService.get(`/api/board/${boardId}`)
 }
 
-<<<<<<< HEAD
-function getById(boardId) {
-    return storageService.get(STORAGE_KEY, boardId)
-    // return axios.get(`/api/board/${boardId}`)
-}
-
-=======
->>>>>>> origin
 async function remove(boardId) {
     try {
         // reviewChannel.postMessage(getActionRemoveReview(reviewId))

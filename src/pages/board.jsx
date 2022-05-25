@@ -18,10 +18,15 @@ class _Board extends React.Component {
     componentDidMount() {
         const { boardId } = this.props.match.params
         console.log(boardId)
-        this.setState({ board: boardService.getById(boardId) })
+        boardService.getById(boardId).then(board => this.setState({ board: board }, () => console.log(this.state)))
+
     }
 
     render() {
+        const board = this.state.board
+        if (!board) return <div>loading...</div>
+        const { groups } = board
+        console.log(groups)
 
         return <React.Fragment>
             <MainHeader />
@@ -30,7 +35,9 @@ class _Board extends React.Component {
                     Board's header
                 </header>
                 <section className="group-container flex">
-                    <Group />
+                    {groups.map(group => {
+                        return <Group group={group} />
+                    })}
                 </section>
             </section>
         </React.Fragment>
@@ -41,7 +48,7 @@ class _Board extends React.Component {
 
 const mapStateToProps = state => {
     return {
-        boards: state.boardModule.boards,
+        // boards: state.boardModule.boards,
         //   users: state.userModule.users,
         //   loggedInUser: state.userModule.user
     }
