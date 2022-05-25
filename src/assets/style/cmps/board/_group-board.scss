@@ -16,6 +16,15 @@
             font-size: rem(20px);
 
         }
+
+        .more {
+            width: 28px;
+            height: 28px;
+
+            &::before {
+                content: url('../../../imgs/icons/more.svg');
+            }
+        }
     }
 
     .list-task {
@@ -37,6 +46,7 @@
 
             &::before {
                 content: url('../../../imgs/icons/add.svg');
+                fill: $group-text;
             }
         }
 
