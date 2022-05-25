@@ -31,8 +31,12 @@ export class Auth extends React.Component {
         return <section className="auth-page">
             <h1>Prello</h1>
             <div className="form-wrapper">
+                <h2>Sign up for your account</h2>
                 {(type === 'signup') && <SignupForm onSignup={this.signup} />}
                 {(type === 'login') && <LoginForm onLogin={this.login} />}
+                <div className="login-method-separator">OR</div>
+                <a>Continue with Google</a>
+                <a>Continue with FaceBook</a>
 
             </div>
         </section>

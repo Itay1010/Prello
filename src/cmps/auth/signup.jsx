@@ -23,50 +23,46 @@ export const SignupForm = ({ onSignup }) => {
 
             }) => (
                 <form className='signup' onSubmit={handleSubmit}>
-                    {errors.firstName && touched.firstName && errors.firstName} <br />
-                    {errors.lastName && touched.lastName && errors.lastName} <br />
+                    {errors.firstName && touched.firstName && errors.firstName}
+                    {errors.lastName && touched.lastName && errors.lastName}
                     {errors.username && touched.username && errors.username}
                     {errors.password && touched.password && errors.password}
                     <label className="inputs-wrapper">
-                        <label htmlFor="">FIrst name
-                            <input
-                                type="text"
-                                name="firstName"
-                                onChange={handleChange}
-                                onBlur={handleBlur}
-                                value={values.name}
-                            />
-                        </label>
-                        <label>Last name
-                            <input
-                                type="text"
-                                name="lastName"
-                                onChange={handleChange}
-                                onBlur={handleBlur}
-                                value={values.name}
-                            />
-                        </label>
-                        <label>Username
-                            <input
-                                type="text"
-                                name="username"
-                                onChange={handleChange}
-                                onBlur={handleBlur}
-                                value={values.name}
-                            />
-                        </label>
-                        <label>Password
-                            <input
-                                type="password"
-                                name="password"
-                                onChange={handleChange}
-                                onBlur={handleBlur}
-                                value={values.name}
-                            />
-                        </label>
+                        <input
+                            type="text"
+                            name="firstName"
+                            onChange={handleChange}
+                            onBlur={handleBlur}
+                            value={values.name}
+                            placeholder='Your first name'
+                        />
+                        <input
+                            type="text"
+                            name="lastName"
+                            onChange={handleChange}
+                            onBlur={handleBlur}
+                            value={values.name}
+                            placeholder='Your last name'
+                        />
+                        <input
+                            type="text"
+                            name="username"
+                            onChange={handleChange}
+                            onBlur={handleBlur}
+                            value={values.name}
+                            placeholder='Your username'
+                        />
+                        <input
+                            type="password"
+                            name="password"
+                            onChange={handleChange}
+                            onBlur={handleBlur}
+                            value={values.name}
+                            placeholder='Your password'
+                        />
                     </label>
                     <button type="submit" disabled={isSubmitting}>
-                        Sign up
+                        continue
                     </button>
                 </form>
             )}

@@ -3,6 +3,7 @@
     object-fit: contain;
     height: 100vh;
 
+
     .main-header {
         background-color: $header-board;
 
@@ -20,6 +21,8 @@
     .group-container {
         overflow-x: auto;
         flex-grow: 1;
+        grid-column: 1 /-1;
+        padding-left: 20px;
     }
 
 }
