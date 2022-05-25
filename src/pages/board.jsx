@@ -1,8 +1,12 @@
+//basic
 import React from "react"
 import { connect } from 'react-redux'
+
+//libs
+import { TextareaAutosize } from '@mui/material';
+
+//privet
 import { MainHeader } from "../cmps/shared cmps/header/main-header"
-
-
 import { Group } from '../cmps/board/task-list'
 import { BoardHeader } from "../cmps/board/board-header/board-header"
 import { TaskPreview } from '../cmps/board/task-preview'
@@ -17,10 +21,10 @@ class _Board extends React.Component {
     }
 
     componentDidMount() {
-        this.loadBoard()
+        this._loadBoard()
     }
 
-    loadBoard = () => {
+    _loadBoard = () => {
         const { boardId } = this.props.match.params
         console.log(boardId)
         boardService.getById(boardId).then(board => this.setState({ board: board }, () => console.log(this.state)))
@@ -41,7 +45,7 @@ class _Board extends React.Component {
             this.setState(prevState => ({ ...prevState, board }))
             console.error('Had en error setting board', error)
         }
-        this.loadBoard()
+        this._loadBoard()
     }
 
     onArchiveTask = async ({ taskId, groupId }) => {
@@ -59,7 +63,7 @@ class _Board extends React.Component {
             this.setState(prevState => ({ ...prevState, board }))
             console.error('Had en error setting board', error)
         }
-        this.loadBoard()
+        this._loadBoard()
     }
 
     onArchiveGroup = async (groupId) => {
@@ -77,7 +81,24 @@ class _Board extends React.Component {
             this.setState(prevState => ({ ...prevState, board }))
             console.error('Had en error setting board', error)
         }
-        this.loadBoard()
+        this._loadBoard()
+    }
+
+    onGroupChange = async ({ txt, groupId }) => {
+        const board = { ...this.state.board }
+        const newBoard = { ...board }
+        newBoard.groups.map(group => {
+            if (group.id === groupId) group.title = txt
+        })
+
+        try {
+            this.setState((prevState) => ({ ...prevState, board: newBoard }))
+            await boardService.save(newBoard)
+        } catch (error) {
+            this.setState(prevState => ({ ...prevState, board }))
+            console.error('Had en error setting board', error)
+        }
+        this._loadBoard()
     }
 
     render() {
@@ -97,9 +118,12 @@ class _Board extends React.Component {
                             onAddTask={this.onAddTask}
                             onArchiveTask={this.onArchiveTask}
                             onArchiveGroup={this.onArchiveGroup}
+                            onGroupChange={this.onGroupChange}
                         />
                     })}
+                    <button style={({ height: "40px", width: "270px" })}>Add another list</button>
                 </section>
+
             </section>
         </React.Fragment>
 
