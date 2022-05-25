@@ -19,14 +19,15 @@
         flex-grow: 1;
 
         &>* {
-            background-color: $opc-black;
-            border: none;
-            color: $bg;
+            @include btn($type: dark);
+            // background-color: $opc-black;
+            // border: none;
+            // color: $bg;
             margin-inline-end: 4px;
 
-            &:hover {
-                background-color: $opc-black-hov;
-            }
+            // &:hover {
+            //     background-color: $opc-black-hov;
+            // }
 
             svg {
                 height: 15px;

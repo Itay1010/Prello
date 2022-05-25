@@ -1,6 +1,7 @@
 // BUTTONS
 
 // @mixin btn($type: regular, $bg: $clr1, $clr: $clr3, $padding: em(24px) em(44px), $hover: darken($bg, 8%)) {
+
 //   display: inline-flex;
 //   align-items: center;
 //   text-decoration: none;
@@ -11,6 +12,37 @@
 //   font-variation-settings: "wght" 430;
 //   border: none;
 //   cursor: pointer;
+// }
+
+@mixin btn ($type: regular, $height: 32px) {
+
+    height: $height;
+    border-radius: 3px;
+    line-height: $height;
+    padding: 0 16px;
+    border: none;
+
+    @if $type ==light {
+        background-color: $opc-white;
+        color: $txt;
+
+        &:hover {
+            background-color: $opc-white-hov;
+        }
+
+    }
+
+    @if $type==dark {
+        background-color: $opc-black;
+        color: $bg;
+
+        &:hover {
+            background-color: $opc-black-hov;
+        }
+    }
+}
+
+
 
 //   transition: background-color 0.2s;
 
