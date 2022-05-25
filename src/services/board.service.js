@@ -1,8 +1,8 @@
-import { httpService } from './http.service'
+// import { httpService } from './http.service'
 // import { socketService, SOCKET_EVENT_REVIEW_ADDED, SOCKET_EVENT_REVIEW_ABOUT_YOU } from './socket.service'
 // import { getActionRemoveReview, getActionAddReview } from '../store/.actions'
 import { store } from '../store/store'
-import { storageService } from './async-storage.service.js'
+import { storageService } from './basic/async-storage.service'
 
 // import { showSuccessMsg } from '../services/event-bus.service'
 import { utilService } from './util.service.js'
@@ -24,10 +24,10 @@ const reviewChannel = new BroadcastChannel('reviewChannel')
 // })()
 
 export const reviewService = {
-    add,
+    // add,
     query,
-    remove,
-    getById,
+    // remove,
+    // getById,
     // subscribe,
     // unsubscribe,
 }
@@ -43,18 +43,18 @@ function query() {
     return storageService.query(STORAGE_KEY)
 }
 
-function getById(boardId) {
-    return storageService.get(STORAGE_KEY, boardId)
-    // return axios.get(`/api/board/${boardId}`)
-}
+// function getById(boardId) {
+//     return storageService.get(STORAGE_KEY, boardId)
+//     // return axios.get(`/api/board/${boardId}`)
+// }
 
 
-async function remove(reviewId) {
-    await storageService.remove(STORAGE_KEY, boardId)
-    // await httpService.delete(`review/${reviewId}`)
-    // await storageService.remove('review', reviewId)
-    // reviewChannel.postMessage(getActionRemoveReview(reviewId))
-}
+// async function remove(boardId) {
+//     await storageService.remove(STORAGE_KEY, boardId)
+//     // await httpService.delete(`review/${reviewId}`)
+//     // await storageService.remove('review', reviewId)
+//     // reviewChannel.postMessage(getActionRemoveReview(reviewId))
+// }
 
 
 
@@ -72,9 +72,9 @@ async function save(board) {
 
     } else {
         // Later, owner is set by the backend
-        board.owner = userService.getLoggedinUser()
+        // board.owner = userService.getLoggedinUser()
         savedBoard = await storageService.post(STORAGE_KEY, board)
-        boardChannel.postMessage(getActionAddBoard(savedBoard))
+        // boardChannel.postMessage(getActionAddBoard(savedBoard))
     }
     return savedBoard
 }

@@ -1,6 +1,6 @@
 // import { showSuccessMsg } from '../services/event-bus.service'
-import { boardService } from '../services/board.service'
-import { userService } from '../services/user.service'
+import { boardService } from '../../services/board.service'
+// import { userService } from '../services/user.service'
 
 const SCORE_FOR_REVIEW = 500
 
@@ -31,7 +31,7 @@ export function addBoard(board) {
             dispatch(getActionAddBoard(addedBoard))
 
             // Change the score in user kept in sessionStorage
-            userService.saveLocalUser(addedBoard.byUser)
+            // userService.saveLocalUser(addedBoard.byUser)
             const { score } = addedBoard.byUser
             // const score = await userService.changeScore(SCORE_FOR_REVIEW)
             dispatch({ type: 'SET_SCORE', score })
