@@ -34,12 +34,20 @@
 
         a {
             line-height: 38px;
+
+            &::before {
+                content: url('../../../imgs/icons/add.svg');
+            }
         }
 
         .add-media {
             width: 28px;
             height: 28px;
             background-color: red;
+
+            &::before {
+                content: url('../../../imgs/icons/calender.svg');
+            }
         }
     }
 

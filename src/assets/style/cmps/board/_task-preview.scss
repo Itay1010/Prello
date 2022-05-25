@@ -11,30 +11,26 @@
 
     .task-color {
         line-height: 32px;
-        // background-color: purple;
         border-radius: 3px 3px 0 0;
 
     }
 
     .task-label {
         height: 12px;
-        // background-color: yellow;
 
         .label {
             height: 8px;
             width: 40px;
-            background-color: green;
+            background-color: $label1;
             border-radius: 3px;
         }
     }
 
     .task-title {
         margin: 0 0 4px;
-        // background-color: pink;
     }
 
     .task-status {
-        // background-color: blue;
         height: 28px;
     }
 }
