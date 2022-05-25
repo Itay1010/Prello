@@ -29,8 +29,8 @@ export class Auth extends React.Component {
     render() {
         const { type } = this.state
         return <section className="auth-page">
+            <h1>Prello</h1>
             <div className="form-wrapper">
-                <h1>Sign up for your account</h1>
                 {(type === 'signup') && <SignupForm onSignup={this.signup} />}
                 {(type === 'login') && <LoginForm onLogin={this.login} />}
 
