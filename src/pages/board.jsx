@@ -30,12 +30,48 @@ class _Board extends React.Component {
         const board = { ...this.state.board }
         const newBoard = { ...board }
         const groupIdx = board.groups.findIndex(group => group.id === newTask.groupId)
-        
+
         newTask = { id: utilService.makeId(), title: newTask.title }
         newBoard.groups[groupIdx].tasks.push(newTask)
 
         try {
-            this.setState((prevState) => ({ ...prevState, newBoard }))
+            this.setState((prevState) => ({ ...prevState, board: newBoard }))
+            await boardService.save(newBoard)
+        } catch (error) {
+            this.setState(prevState => ({ ...prevState, board }))
+            console.error('Had en error setting board', error)
+        }
+        this.loadBoard()
+    }
+
+    onArchiveTask = async ({ taskId, groupId }) => {
+        const board = { ...this.state.board }
+        const newBoard = { ...board }
+        const groupIdx = board.groups.findIndex(group => group.id === groupId)
+        newBoard.groups[groupIdx].tasks.map(task => {
+            if (task.id === taskId) task.archivedAt = Date.now()
+        })
+
+        try {
+            this.setState((prevState) => ({ ...prevState, board: newBoard }))
+            await boardService.save(newBoard)
+        } catch (error) {
+            this.setState(prevState => ({ ...prevState, board }))
+            console.error('Had en error setting board', error)
+        }
+        this.loadBoard()
+    }
+
+    onArchiveGroup = async (groupId) => {
+        const board = { ...this.state.board }
+        const newBoard = { ...board }
+        newBoard.groups.map(group => {
+            if (group.id === groupId) group.archivedAt = Date.now()
+        })
+        console.log('_Board - onArchiveGroup= - groups', newBoard.groups)
+
+        try {
+            this.setState((prevState) => ({ ...prevState, board: newBoard }))
             await boardService.save(newBoard)
         } catch (error) {
             this.setState(prevState => ({ ...prevState, board }))
@@ -56,7 +92,12 @@ class _Board extends React.Component {
                 <BoardHeader board={board} />
                 <section className="group-container flex">
                     {groups.map(group => {
-                        return <Group group={group} onAddTask={this.onAddTask} />
+                        if (group.archivedAt) return
+                        return <Group group={group}
+                            onAddTask={this.onAddTask}
+                            onArchiveTask={this.onArchiveTask}
+                            onArchiveGroup={this.onArchiveGroup}
+                        />
                     })}
                 </section>
             </section>
