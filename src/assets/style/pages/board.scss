@@ -1,4 +1,8 @@
 .board {
+    .group-container {
+        overflow-x: auto;
+    }
+
     header {
         height: 52px;
         border: 1px solid black;

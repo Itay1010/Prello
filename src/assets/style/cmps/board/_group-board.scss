@@ -1,8 +1,11 @@
 .group {
-    width: 270px;
+    min-width: 270px;
     border-radius: 3px;
     margin-inline-end: 8px;
-    background-color: $group;
+    background-color: $group-bg;
+    max-height: calc(100vh - 44px - 52px - 8px);
+    overflow-y: auto;
+    align-self: flex-start;
 
     .group-header {
         height: 40px;
@@ -13,7 +16,6 @@
             font-size: rem(20px);
 
         }
-
     }
 
     .list-task {
@@ -24,6 +26,11 @@
     .group-footer {
         height: 38px;
         padding: 0 8px;
+
+        &>* {
+            color: $group-text;
+            font-weight: 500;
+        }
 
         a {
             line-height: 38px;
