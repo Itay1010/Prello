@@ -38,7 +38,7 @@ async function query(filterBy) {
     var queryStr = (!filterBy) ? '' : `?minis=${filterBy.minis}&sort=anaAref`
     try {
         // return await httpService.get(`board${queryStr}`)
-        const res =  await storageService.query(STORAGE_KEY)
+        const res = await storageService.query(STORAGE_KEY)
         return res
     } catch (error) {
         throw _logError(error)

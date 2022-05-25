@@ -1,28 +1,43 @@
 import React from "react"
+import { connect } from 'react-redux'
 import { MainHeader } from "../cmps/shared cmps/main-header"
 
 
 import { Group } from '../cmps/board/task-list'
 import { TaskPreview } from '../cmps/board/task-preview'
-// import { loadBoard } from "../store/board/board.action"
+import { loadBoard } from "../store/board/board.action"
+import { boardService } from "../services/board/board.service"
 
-export class Board extends React.Component {
+class _Board extends React.Component {
 
-    // componentDidMount(){
-    //     const boardId=this.props.match.params
+    state = {
+        board: null
+    }
 
-    // }
+
+    componentDidMount() {
+        const { boardId } = this.props.match.params
+        console.log(boardId)
+        boardService.getById(boardId).then(board => this.setState({ board: board }, () => console.log(this.state)))
+
+    }
 
     render() {
+        const board = this.state.board
+        if (!board) return <div>loading...</div>
+        const { groups } = board
+        console.log(groups)
 
         return <React.Fragment>
-            <MainHeader />
             <section className="board">
-                <header>
+            <MainHeader />
+                <div className="board-header">
                     Board's header
-                </header>
+                </div>
                 <section className="group-container flex">
-                    <Group />
+                    {groups.map(group => {
+                        return <Group group={group} />
+                    })}
                 </section>
             </section>
         </React.Fragment>
@@ -30,64 +45,18 @@ export class Board extends React.Component {
     }
 }
 
-{/* <section className="group flex col">
-    <div className="group-header">
-        <textarea maxLength="521">group's title</textarea>
-    </div>
-    <div className="list-task">
-        <TaskPreview />
-    </div>
-    <div className="group-footer flex space-between align-center">
-        <a href="">Add a card</a>
-        <div className="add-media"></div>
-    </div>
-</section>
-<section className="group flex col">
-    <div className="group-header">
-        <textarea maxLength="521">group's title</textarea>
-    </div>
-    <div className="list-task">
-        <TaskPreview />
-    </div>
-    <div className="group-footer flex space-between align-center">
-        <a href="">Add a card</a>
-        <div className="add-media"></div>
-    </div>
-</section>
-<section className="group flex col">
-    <div className="group-header">
-        <textarea maxLength="521">group's title</textarea>
-    </div>
-    <div className="list-task">
-        <TaskPreview />
-    </div>
-    <div className="group-footer flex space-between align-center">
-        <a href="">Add a card</a>
-        <div className="add-media"></div>
-    </div>
-</section>
-<section className="group flex col">
-    <div className="group-header">
-        <textarea maxLength="521">group's title</textarea>
-    </div>
-    <div className="list-task">
-        <TaskPreview />
-    </div>
-    <div className="group-footer flex space-between align-center">
-        <a href="">Add a card</a>
-        <div className="add-media"></div>
-    </div>
-</section>
-<section className="group flex col">
-    <div className="group-header">
-        <textarea maxLength="521">group's title</textarea>
-    </div>
-    <div className="list-task">
-        <TaskPreview />
-    </div>
-    <div className="group-footer flex space-between align-center">
-        <a href="">Add a card</a>
-        <div className="add-media"></div>
-    </div>
-</section>
-</section>*/}
+
+const mapStateToProps = state => {
+    return {
+        // boards: state.boardModule.boards,
+        //   users: state.userModule.users,
+        //   loggedInUser: state.userModule.user
+    }
+}
+const mapDispatchToProps = {
+    // loadBoard,
+    // addReview,
+    // removeReview
+}
+
+export const Board = connect(mapStateToProps, mapDispatchToProps)(_Board)
