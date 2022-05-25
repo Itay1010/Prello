@@ -1,5 +1,5 @@
 import React from "react"
-import { MainHeader } from "../cmps/shared cmps/main-header"
+import { MainHeader } from "../cmps/shared cmps/header/main-header"
 import { BoardList } from '../cmps/workspace/board-list'
 
 

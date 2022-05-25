@@ -1,5 +1,5 @@
 import React from "react"
-import { MainHeader } from "../cmps/shared cmps/main-header"
+import { MainHeader } from "../cmps/shared cmps/header/main-header"
 
 
 import { Group } from '../cmps/board/task-list'
@@ -16,11 +16,11 @@ export class Board extends React.Component {
     render() {
 
         return <React.Fragment>
-            <MainHeader />
             <section className="board">
-                <header>
+            <MainHeader />
+                <div className="board-header">
                     Board's header
-                </header>
+                </div>
                 <section className="group-container flex">
                     <Group />
                 </section>

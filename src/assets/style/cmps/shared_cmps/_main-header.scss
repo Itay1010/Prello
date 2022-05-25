@@ -1,27 +1,37 @@
 .main-header {
     height: 44px;
-    background-color: $clr1;
     padding: 6px 20px;
 
     img {
-        height: 20px;
-        width: 20px;
+        height: 15px;
+        width: 15px;
         margin-inline-end: 4px;
     }
 
     h1 {
         font-family: nunito, sans-serif;
-        color: $bg;
-        font-size: rem(28px);
+        font-weight: 600;
+        font-size: rem(20px);
+        margin-inline-end: 4px;
     }
 
-    button {
-        background-color: $opc;
-        border: none;
+    .filter {
+        &>* {
+            background-color: $opc-black;
+            border: none;
+            color: $bg;
+            margin-inline-end: 4px;
 
-        &:hover {
-            background-color: $opc-hov;
+            &:hover {
+                background-color: $opc-black-hov;
+            }
+
+            svg {
+                height: 15px;
+                width: 15px;
+                fill: $bg;
+            }
         }
-
     }
+
 }

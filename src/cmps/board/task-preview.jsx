@@ -7,6 +7,5 @@ export const TaskPreview = () => {
         <section className="task-label"><div className="label"></div></section>
         <section className="task-title">title</section>
         <section className="task-status">status</section>
-
     </article>
 }

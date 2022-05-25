@@ -1,11 +1,25 @@
 .board {
+    // background-image: url('../../imgs/milad-fakurian-tUF--C9oOuE-unsplash.jpg');
+    object-fit: contain;
+    height: 100vh;
+
+    .main-header {
+        background-color: $header-board;
+
+        h1 {
+            color: $bg;
+        }
+    }
+
+    .board-header {
+        height: 52px;
+        width: 100%;
+        // background-color: yellow;
+    }
+
     .group-container {
         overflow-x: auto;
     }
 
-    header {
-        height: 52px;
-        border: 1px solid black;
-        width: 100vw;
-    }
+
 }
