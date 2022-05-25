@@ -1,6 +1,6 @@
 import React from "react"
 import { connect } from 'react-redux'
-import { MainHeader } from "../cmps/shared cmps/main-header"
+import { MainHeader } from "../cmps/shared cmps/header/main-header"
 
 
 import { Group } from '../cmps/board/task-list'
