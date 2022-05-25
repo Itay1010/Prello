@@ -1,18 +1,29 @@
 .main-header {
     height: 44px;
-    padding: 6px 20px;
+    // padding: 6px 20px;
 
-    img {
-        height: 15px;
-        width: 15px;
-        margin-inline-end: 4px;
-    }
+    .logo {
+        height: 32px;
+        cursor: pointer;
+        padding: 0 8px;
+        border-radius: 3px;
 
-    h1 {
-        font-family: nunito, sans-serif;
-        font-weight: 600;
-        font-size: rem(20px);
-        margin-inline-end: 4px;
+        &:hover {
+            background-color: $opc-black-hov;
+        }
+
+        img {
+            height: 15px;
+            width: 15px;
+            margin-inline-end: 8px;
+        }
+
+        h1 {
+            font-family: nunito, sans-serif;
+            font-weight: 600;
+            font-size: rem(20px);
+            margin-inline-end: 4px;
+        }
     }
 
     .filter {
@@ -20,14 +31,8 @@
 
         &>* {
             @include btn($type: dark);
-            // background-color: $opc-black;
-            // border: none;
-            // color: $bg;
             margin-inline-end: 4px;
-
-            // &:hover {
-            //     background-color: $opc-black-hov;
-            // }
+            background: transparent;
 
             svg {
                 height: 15px;
@@ -53,18 +58,25 @@
             margin: 0 4px;
         }
 
-        // &>* {
-        //     background-color: $opc-black;
-        //     border: none;
-        //     color: $bg;
-        //     margin-inline-end: 4px;
+    }
 
-        //     &:hover {
-        //         background-color: $opc-black-hov;
-        //     }
+    .btn-notification {
+        height: 32px;
+        width: 32px;
+        line-height: 32px;
+        border-radius: 3px;
+        margin-inline-end: 4px;
+        cursor: pointer;
 
+        &:hover {
+            background-color: $opc-black-hov;
+        }
 
-        // }
+        svg {
+            height: 20px;
+            width: 20px;
+            fill: $txt;
+        }
     }
 
     .profile {
