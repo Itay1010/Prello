@@ -14,12 +14,10 @@ class _Board extends React.Component {
         board: null
     }
 
-
     componentDidMount() {
         const { boardId } = this.props.match.params
         console.log(boardId)
         boardService.getById(boardId).then(board => this.setState({ board: board }, () => console.log(this.state)))
-
     }
 
     render() {
@@ -30,7 +28,7 @@ class _Board extends React.Component {
 
         return <React.Fragment>
             <section className="board">
-            <MainHeader />
+                <MainHeader />
                 <div className="board-header">
                     Board's header
                 </div>
@@ -45,7 +43,6 @@ class _Board extends React.Component {
     }
 }
 
-
 const mapStateToProps = state => {
     return {
         // boards: state.boardModule.boards,
@@ -53,6 +50,7 @@ const mapStateToProps = state => {
         //   loggedInUser: state.userModule.user
     }
 }
+
 const mapDispatchToProps = {
     // loadBoard,
     // addReview,
