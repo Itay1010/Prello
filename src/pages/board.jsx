@@ -29,8 +29,8 @@ class _Board extends React.Component {
         console.log(groups)
 
         return <React.Fragment>
-            <section className="board">
-            <MainHeader />
+            <section className="board flex col">
+                <MainHeader />
                 <div className="board-header">
                     Board's header
                 </div>

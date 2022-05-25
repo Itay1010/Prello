@@ -1,6 +1,6 @@
 ::selection {
-    background-color: $bg;
-    color: $txt;
+    background-color: $clr1;
+    color: $bg;
 }
 
 * {
@@ -37,6 +37,19 @@ img {
 
 p {
     margin: 0;
+}
+
+input {
+    border: none;
+    outline: none;
+    background: transparent;
+    font-family: pri-font, sans-serif;
+    color: $txt;
+
+}
+
+::placeholder {
+    color: $txt;
 }
 
 textarea {
