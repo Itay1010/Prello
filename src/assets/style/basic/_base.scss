@@ -3,6 +3,10 @@
     color: $bg;
 }
 
+::placeholder {
+    color: $txt;
+}
+
 * {
     box-sizing: border-box;
 }
@@ -45,12 +49,11 @@ input {
     background: transparent;
     font-family: pri-font, sans-serif;
     color: $txt;
+    margin-inline-end: 8px;
+    width: 100%;
 
 }
 
-::placeholder {
-    color: $txt;
-}
 
 textarea {
     border: none;

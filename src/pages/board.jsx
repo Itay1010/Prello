@@ -4,6 +4,7 @@ import { MainHeader } from "../cmps/shared cmps/header/main-header"
 
 
 import { Group } from '../cmps/board/task-list'
+import { BoardHeader } from "../cmps/board/board-header/board-header"
 import { TaskPreview } from '../cmps/board/task-preview'
 import { loadBoard } from "../store/board/board.action"
 import { boardService } from "../services/board/board.service"
@@ -29,9 +30,7 @@ class _Board extends React.Component {
         return <React.Fragment>
             <section className="board flex col">
                 <MainHeader />
-                <div className="board-header">
-                    Board's header
-                </div>
+                <BoardHeader board={board} />
                 <section className="group-container flex">
                     {groups.map(group => {
                         return <Group group={group} />
