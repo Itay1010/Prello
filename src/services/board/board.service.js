@@ -43,10 +43,10 @@ function query() {
     return storageService.query(STORAGE_KEY)
 }
 
-// function getById(boardId) {
-//     return storageService.get(STORAGE_KEY, boardId)
-//     // return axios.get(`/api/board/${boardId}`)
-// }
+function getById(boardId) {
+    return storageService.get(STORAGE_KEY, boardId)
+    // return axios.get(`/api/board/${boardId}`)
+}
 
 async function remove(boardId) {
     await storageService.remove(STORAGE_KEY, boardId)
