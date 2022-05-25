@@ -13,10 +13,12 @@
 //PAGES
 @import '../style/pages/board';
 @import '../style/pages/workspace';
+@import '../style/pages/auth';
 
 
 
 // COMPONENTS
 @import '../style/cmps/shared_cmps/main-header';
+@import '../style/cmps/board/board-header';
 @import '../style/cmps/board/group-board';
 @import '../style/cmps/board/task-preview';

@@ -1,6 +1,6 @@
 import { userService } from "../../services/user.service";
-import { showErrorMsg, showSuccessMsg } from '../services/event-bus.service.js'
-import { socketService, SOCKET_EMIT_USER_WATCH, SOCKET_EVENT_USER_UPDATED } from "../services/socket.service.js";
+// import { showErrorMsg, showSuccessMsg } from '../services/event-bus.service.js'
+// import { socketService, SOCKET_EMIT_USER_WATCH, SOCKET_EVENT_USER_UPDATED } from "../services/socket.service.js";
 
 export function loadUsers() {
     return async dispatch => {
@@ -36,7 +36,7 @@ export function onLogin(credentials) {
                 user
             })
         } catch (err) {
-            showErrorMsg('Cannot login')
+            // showErrorMsg('Cannot login')
             console.log('Cannot login', err)
         }
     }
@@ -52,7 +52,7 @@ export function onSignup(credentials) {
                 user
             })
         } catch (err) {
-            showErrorMsg('Cannot signup')
+            // showErrorMsg('Cannot signup')
             console.log('Cannot signup', err)
         }
 
@@ -68,7 +68,7 @@ export function onLogout() {
                 user: null
             })
         } catch (err) {
-            showErrorMsg('Cannot logout')
+            // showErrorMsg('Cannot logout')
             console.log('Cannot logout', err)
         }
     }
@@ -79,14 +79,14 @@ export function loadAndWatchUser(userId) {
         try {
             const user = await userService.getById(userId);
             dispatch({ type: 'SET_WATCHED_USER', user })
-            socketService.emit(SOCKET_EMIT_USER_WATCH, userId)
-            socketService.off(SOCKET_EVENT_USER_UPDATED)
-            socketService.on(SOCKET_EVENT_USER_UPDATED, user => {
-                showSuccessMsg(`This user ${user.fullname} just got updated from socket, new score: ${user.score}`)
-                dispatch({ type: 'SET_WATCHED_USER', user })
-            })
+            // socketService.emit(SOCKET_EMIT_USER_WATCH, userId)
+            // socketService.off(SOCKET_EVENT_USER_UPDATED)
+            // socketService.on(SOCKET_EVENT_USER_UPDATED, user => {
+            //     showSuccessMsg(`This user ${user.fullname} just got updated from socket, new score: ${user.score}`)
+            //     dispatch({ type: 'SET_WATCHED_USER', user })
+            // })
         } catch (err) {
-            showErrorMsg('Cannot load user')
+            // showErrorMsg('Cannot load user')
             console.log('Cannot load user', err)
         }
     }

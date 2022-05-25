@@ -1,5 +1,5 @@
 import { Home } from "./pages/home";
-import { Login } from "./pages/login";
+import { Auth } from "./pages/auth";
 import { Signup } from "./pages/signup";
 import { Workspace } from "./pages/workspace";
 import { Board } from "./pages/board";
@@ -10,8 +10,8 @@ export const routes = [
         component: Home,
     },
     {
-        path: '/login',
-        component: Login,
+        path: '/auth/:type',
+        component: Auth,
     },
     {
         path: '/signup',
