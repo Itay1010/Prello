@@ -1,6 +1,6 @@
 import React from 'react'
 
-import { Filter } from './header cmps/filter.jsx'
+import { Filter } from './header cmps/filter'
 const logo = require('../../../assets/imgs/logo/logo_20x20.png')
 
 export function MainHeader() {
