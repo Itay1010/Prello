@@ -4,7 +4,6 @@ import { boardService } from '../../services/board/board.service'
 
 // Board Action Creators
 export function getActionSetBoard(board) {
-    console.log('a123');
     return { type: 'SET_BOARD', board }
 }
 
@@ -61,7 +60,7 @@ export function updateMini(newMini) {
 //update board in state
 export function updateBoard(newBoard) {
     return async (dispatch, getState) => {
-        const prevBoard = { ...getState().boardModule.selectedBoard }
+        const prevBoard = { ...getState().boardModule.board }
         console.log('return - board', prevBoard)
         try {
             dispatch(getActionSetBoard(newBoard))

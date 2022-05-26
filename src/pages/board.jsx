@@ -97,7 +97,7 @@ class _Board extends React.Component {
 
 const mapStateToProps = state => {
     return {
-        board: state.boardModule.selectedBoard,
+        board: state.boardModule.board,
         //   users: state.userModule.users,
         //   loggedInUser: state.userModule.user
     }
