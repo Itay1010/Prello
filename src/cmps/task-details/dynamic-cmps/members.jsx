@@ -4,9 +4,9 @@ import { Link, useNavigate, useParams } from 'react-router-dom'
 
 import { boardService } from '../../../services/board/board.service'
 
-export const Members = ({ boardId }) => {
+export const Members = () => {
     const params = useParams()
-    const { taskId } = params
+    const { boardId, groupId, taskId } = params
 
 
     const [task, setTask] = useState(null)
@@ -16,19 +16,33 @@ export const Members = ({ boardId }) => {
     useEffect(() => {
         loadMembers(boardId)
         loadTask(taskId)
-
-
     }, [])
 
     const loadMembers = async (boardId) => {
         const board = await boardService.getById(boardId)
-        console.log(board);
+        console.log('board.members', board.members);
         setMembers(board.members)
     }
 
     const loadTask = async () => {
-        const task = await boardService.getTask(boardId, 'g102', taskId)
+        const task = await boardService.getTask(boardId, groupId, taskId)
+        console.log('task', task);
         setTask(task)
+    }
+
+    const toggleMember = (memberId) => {
+        console.log(memberId);
+        if (task.members.includes(memberId)) {
+            console.log(task.members);
+            const idx = task.members.findIndex(member => member === memberId)
+            console.log(idx);
+        } else {
+            console.log('not included');
+        }
+        // const members = task.members.filter(member => member.id !== memberId)
+        // console.log(members);
+        // const taskToSave = { ...task, members }
+        // setTask(taskToSave)
     }
 
     // const boardMembers = async () => {
@@ -45,17 +59,16 @@ export const Members = ({ boardId }) => {
             <hr />
             {/* <input type="text" value={filter.txt} onChange={filter} placeholder="Search members" /> */}
             <h3>Board members</h3>
-            {task.members.map(member => {
-                return <div className='member flex space-between'>
+            {members.map(member => {
+                return <div className='member flex space-between' onClick={() => toggleMember(member._id)}>
                     <div className='img-container'>
-                        IMG {/* <img src={member.imgUrl} alt="" /> */}
+                        IMG <img src={member.imgUrl} alt="" />
                     </div>
                     <p>{`${member.firstName} ${member.lastName}`}</p>
-                    {/* <input type="checkbox" value={} /> */}
-                    <input type="checkbox" checked={false} />
+                    {task.members.includes(member._id) && <div className='checked'>V</div>}
                 </div>
             })}
-        </section>
+        </section >
     )
 
 
