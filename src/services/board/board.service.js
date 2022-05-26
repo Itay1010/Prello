@@ -30,7 +30,8 @@ export const boardService = {
     getById,
     save,
     getTask,
-    getMembers
+    getMembers,
+    getLabels
     // subscribe,
     // unsubscribe,
 }
@@ -58,7 +59,6 @@ async function remove(boardId) {
 async function save(board) {
     var savedBoard
     try {
-        throw new Error('opps')
         if (board._id) {
             savedBoard = await storageService.put(STORAGE_KEY, board)
             // boardChannel.postMessage(getActionUpdateBoard(savedBoard))
@@ -90,6 +90,10 @@ async function getTask(boardId = 'b101', groupId = 'g102', taskId) {
 async function getMembers() {
     const board = await getById('b101')
     return board.members
+}
+
+function getLabels() {
+    return ['#61bd4f', '#f2d600', '#ff9f1a', '#eb5a46', '#c377e0', '#0079bf']
 }
 
 const _logError = (err) => {

@@ -35,16 +35,15 @@ export const TaskDetails = () => {
     }
 
     async function onLoad() {
-        console.log(board)
+        // console.log(board)
         const groupToAdd = await board.groups.find(group => group.id === groupId)
         setGroup(groupToAdd)
         const task = await groupToAdd.tasks.find(task => task.id === taskId)
-        console.log('task', task)
+        // console.log('task', task)
         setTask(task)
     }
     useEffect(() => {
         onLoad()
-        console.log('poop')
     }, [])
 
 
@@ -53,9 +52,25 @@ export const TaskDetails = () => {
         // setModalType(type)
     }
 
-    const saveMembers = (updatedTask) => {
-        console.log(updatedTask)
+    const saveMembers = (updatedTask, groupId) => {
+        const group = board.groups.find(group => group.id === groupId)
+        const idx = group.tasks.findIndex(task => task.id === updatedTask.id)
+        group.tasks[idx].members = updatedTask.members
+        setGroup(group)
+        saveBoard()
+
     }
+    // const saveMembers = (updatedTask, groupId) => {
+    //     // console.log('board before change', board);
+    //     const group = board.groups.find(group => group.id === groupId)
+    //     const idx = group.tasks.findIndex(task => task.id === updatedTask.id)
+    //     const currtask = group.tasks[idx]
+    //     currtask.members = updatedTask.members
+    //     setTask(currtask)
+    //     // console.log('currtask', currtask);
+    //     // console.log('task', task);
+    //     saveBoard()
+    // }
 
     const saveLabels = (updatedTask) => {
         console.log(updatedTask)
@@ -80,7 +95,6 @@ export const TaskDetails = () => {
     }
 
     const saveBoard = () => {
-
         dispatch(updateBoard(board))
     }
 

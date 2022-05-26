@@ -6,7 +6,7 @@ export const TaskPreview = ({ task, groupId, onArchiveTask }) => {
     const params = useParams()
     const { boardId } = params
 
-    console.log(task);
+    // console.log(task);
     return <article className="task-preview">
         <Link to={`/board/${boardId}/${groupId}/${task.id}`}>
             {task.style?.bgColor && <section className="task-color" style={({ backgroundColor: task.style.bgColor })}></section>}

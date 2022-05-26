@@ -21,7 +21,7 @@ export const Members = ({ saveMembers }) => {
 
     useEffect(() => {
         loadMembers(boardId, filter)
-    }, [filter])
+    }, [filter, members])
 
     const loadMembers = async (boardId, filter) => {
         const board = await boardService.getById(boardId)
@@ -45,10 +45,10 @@ export const Members = ({ saveMembers }) => {
         if (task.members.includes(memberId)) {
             const idx = task.members.findIndex(member => member === memberId)
             task.members.splice(idx, 1)
-            saveMembers(task)
+            saveMembers(task, groupId)
         } else {
             task.members.push(memberId)
-            saveMembers(task)
+            saveMembers(task, groupId)
         }
     }
 
@@ -61,7 +61,7 @@ export const Members = ({ saveMembers }) => {
             <input onChange={(event) => handleChange(event)} type="text" value={filter} placeholder="Search members" />
             <h3>Board members</h3>
             {members.map(member => {
-                return <div className='member flex space-between' onClick={() => toggleMember(member._id)}>
+                return <div className='member flex space-between' onClick={() => toggleMember(member._id)} key={member._id}>
                     <div className='img-container'>
                         IMG <img src={member.imgUrl} alt="" />
                     </div>
