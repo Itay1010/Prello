@@ -11,9 +11,10 @@
 
 
 //PAGES
-@import '../style/pages/board';
-@import '../style/pages/workspace';
-@import '../style/pages/auth';
+@import './pages/board';
+@import './pages/workspace';
+@import './pages/auth';
+@import './pages/task-details';
 
 
 

@@ -17,6 +17,9 @@ import { utilService } from "../services/basic/util.service"
 import { Switch, Route } from 'react-router-dom'
 import { Members } from '../cmps/task-details/members'
 
+// Routes
+import { TaskDetails } from './task-details.jsx'
+
 class _Board extends React.Component {
 
     state = {
@@ -126,10 +129,9 @@ class _Board extends React.Component {
                     })}
                     <button style={({ height: "40px", width: "270px" })}>Add another list</button>
                 </section>
-                {/* <Switch>
-                  <Route path={''}/>
-                </Switch> */}
-                <Members />
+                <Switch>
+                    <Route path={'/board/:boardId/task/:taskId'} component={TaskDetails} />
+                </Switch>
             </section>
         </React.Fragment>
     }
