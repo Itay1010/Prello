@@ -55,7 +55,6 @@ async function remove(boardId) {
 }
 
 async function save(board) {
-    throw new Error('opps')
     var savedBoard
     try {
         if (board._id) {
