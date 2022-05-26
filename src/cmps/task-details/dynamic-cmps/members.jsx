@@ -2,7 +2,7 @@ import React from 'react'
 import { Component, useEffect, useState } from 'react'
 import { Link, useNavigate, useParams } from 'react-router-dom'
 
-import { boardService } from '../../services/board/board.service'
+import { taskService } from '../../../services/board/task.service'
 
 export const Members = ({ boardId }) => {
     const [members, setMembers] = useState(null)
@@ -13,10 +13,10 @@ export const Members = ({ boardId }) => {
     }, [])
 
     const loadMembers = async () => {
-        const members = await boardService.getMembers()
-        console.log('test', members);
-        setMembers(members)
-        console.log(members);
+        // const members = await boardService.getMembers()
+        // console.log('test', members);
+        // setMembers(members)
+        // console.log(members);
     }
 
     return (

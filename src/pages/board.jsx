@@ -16,7 +16,6 @@ import { utilService } from "../services/basic/util.service"
 import { groupService } from "../services/board/group.service";
 // import { Switch } from "react-router-dom/cjs/react-router-dom.min"
 import { Switch, Route } from 'react-router-dom'
-import { Members } from '../cmps/task-details/members'
 
 // Routes
 import { TaskDetails } from './task-details.jsx'

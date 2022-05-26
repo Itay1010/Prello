@@ -1,14 +1,20 @@
 import React, { useState } from 'react';
 import { useHistory, useParams } from 'react-router-dom/cjs/react-router-dom.min';
-import { Members } from '../cmps/task-details/members';
+import { Members } from '../cmps/task-details/dynamic-cmps/members.jsx';
+import { Labels } from '../cmps/task-details/dynamic-cmps/labels.jsx'
+import { Checklist } from '../cmps/task-details/dynamic-cmps/checklist.jsx'
+import { Dates } from '../cmps/task-details/dynamic-cmps/dates.jsx'
+import { Attachment } from '../cmps/task-details/dynamic-cmps/attachment.jsx'
+import { Location } from '../cmps/task-details/dynamic-cmps/location.jsx'
+
 
 
 export const TaskDetails = () => {
     const params = useParams()
     const { boardId } = params
     const history = useHistory()
-    const [isModal, setIsModal] = useState(false)
-    // const [modalType, setModalType] = useState('')
+    // const [isModal, setIsModal] = useState(false)
+    const [modalType, setModalType] = useState(null)
 
 
     const onGoBack = () => {
@@ -17,9 +23,31 @@ export const TaskDetails = () => {
 
     const setModal = (type) => {
         console.log(type)
-        setIsModal(true)
+        setModalType(type)
         // setModalType(type)
 
+    }
+
+    const saveTask = (newTask) => {
+
+    }
+    const DynamicModal = () => {
+        switch (modalType) {
+            case 'members':
+                return <Members />
+            case 'labels':
+                return <Labels />
+            case 'checklist':
+                return <Checklist />
+            case 'dates':
+                return <Dates />
+            case 'attachment':
+                return <Attachment />
+            case 'location':
+                return <Location />
+            default:
+                break;
+        }
     }
 
 
@@ -36,8 +64,12 @@ export const TaskDetails = () => {
                 <button onClick={() => setModal('attachment')}>Attachment</button>
                 <button onClick={() => setModal('location')}>Location</button>
             </div>
+<<<<<<< HEAD
             <Members boardId={boardId} />
             {/* {isModal && <DynamicModal type={modalType} />} */}
+=======
+            {modalType && <DynamicModal type={modalType} boardId={boardId} onSaveTask={saveTask} />}
+>>>>>>> a2b16b974dccfe2dbe0a8867f3e05c28c6f0ac2c
         </section>
     </section>
 }
