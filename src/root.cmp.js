@@ -1,5 +1,6 @@
 import React from 'react'
 import { Switch, Route } from 'react-router-dom'
+import { TaskDetails } from './pages/task-details'
 import { routes } from './routes'
 
 export default function App() {
@@ -7,5 +8,6 @@ export default function App() {
     <Switch>
       {routes.map(route => <Route key={route.path} exact component={route.component} path={route.path} />)}
     </Switch>
+
   </div>
 }
