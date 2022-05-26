@@ -137,7 +137,7 @@ export const TaskDetails = () => {
     const { checklist } = task
     return <section onClick={onGoBack} className='task-details-shadow'>
         <section className='task-details flex space-between' onClick={(event) => event.stopPropagation()}>
-            {checklist.length > 0 && <div className='task-content'>
+            {checklist?.length > 0 && <div className='task-content'>
                 {checklist.length > 0 && <ChecklistList checklist={checklist} />}
             </div>}
 
