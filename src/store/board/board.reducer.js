@@ -1,7 +1,7 @@
 // import undoable from "redux-undo";
 const initialState = {
     miniBoards: [],
-    selectedBoard: null
+    board: null
 }
 
 export function boardReducer(state = initialState, action = {}) {
@@ -20,9 +20,9 @@ export function boardReducer(state = initialState, action = {}) {
                 )
             }
         case 'SET_BOARD':
-            return { ...state, selectedBoard: action.board }
+            return { ...state, board: action.board }
         case 'CLEAR_BOARD':
-            return { ...state, selectedBoard: null }
+            return { ...state, board: null }
         default:
             return state
     }
