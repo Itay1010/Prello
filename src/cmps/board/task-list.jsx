@@ -16,7 +16,7 @@ export const Group = ({ group, onAddTask, onArchiveTask, onArchiveGroup, onGroup
         setNewTask(prevState => ({ ...prevState, [name]: value }))
     }
 
-    return <section className="group flex col">
+    return <section className="group flex col" onBlur={ev => setIsTaskOpen(prevState => false)}>
         <div className="group-header flex space-between">
             <TextareaAutosize
                 maxLength="521"
@@ -55,7 +55,7 @@ export const Group = ({ group, onAddTask, onArchiveTask, onArchiveGroup, onGroup
                     value={newTask.title}
                     placeholder="Enter a title for this card..."
                     onChange={handleChange}
-                    onBlur={ev => setIsTaskOpen(prevState => false)}
+
                     onKeyDown={ev => {
                         if (ev.key === "Enter") {
                             ev.preventDefault()

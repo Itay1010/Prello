@@ -17,7 +17,7 @@ import { Switch, Route } from 'react-router-dom'
 
 // Routes
 import { TaskDetails } from './task-details.jsx'
-
+import { AddGroupForm } from "../cmps/board/add-group-form";
 class _Board extends React.Component {
 
     componentDidMount() {
@@ -87,11 +87,7 @@ class _Board extends React.Component {
                             onGroupChange={this.onGroupChange}
                         />
                     })}
-                    <form onSubmit={ev => {
-                        ev.preventDefault()
-                    }}>
-                        <a className="add-list-btn" style={({ height: "40px", width: "270px" })}>Add another list</a>
-                    </form>
+                    <AddGroupForm />
                 </section>
                 <Switch>
                     <Route path={'/board/:boardId/:groupId/:taskId'} component={TaskDetails} />

@@ -63,9 +63,10 @@
             &::before {
                 position: absolute;
                 content: url('../../../imgs/icons/add.svg');
-                left: 0;
-                top: 0;
                 fill: $group-text;
+                left: 0;
+                transform: translate(0%, 20%);
+                height: 20px;
             }
 
         }

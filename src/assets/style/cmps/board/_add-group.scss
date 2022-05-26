@@ -1,0 +1,64 @@
+.add-list-container {
+    display: block;
+    position: relative;
+    align-self: flex-start;
+    background-color: transparent;
+    border-radius: 3px;
+
+    .open-edit-btn {
+        display: block;
+        @include btn($type: dark, $height: 40px);
+        background-color: $white;
+        border-radius: 3px;
+        color: darkblue;
+        width: 270px;
+        cursor: pointer;
+    }
+
+    form.add-list {
+        position: relative;
+        display: none;
+        background-color: $group-bg;
+        border-radius: 3px;
+        padding: 4px;
+
+        input {
+            // position: absolute;
+            display: block;
+            box-shadow: inset 0 0 0 2px #0079bf;
+            background-color: white;
+            padding: 8px 12px;
+            margin-bottom: 4px;
+        }
+
+        .add-list-btn {
+            @include btn($type: dark);
+            display: inline-block;
+            background-color: rebeccapurple;
+            margin: 0;
+            width: 80px;
+            height: 100%;
+            float: left;
+        }
+
+        a {
+            @include btn($type: dark, $height: 40px);
+            position: relative;
+            display: inline-block;
+            width: 32px;
+            height: 32px;
+            &::before {
+                position: absolute;
+                content: url("../../../imgs/icons/add.svg");
+                transform: translate(-50%, 10%);
+                height: 20px;
+            }
+        }
+
+        &.editing {
+            input {
+                display: block;
+            }
+        }
+    }
+}
