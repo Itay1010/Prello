@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import { useForm } from '../../../hooks/useForm'
+import { ClItemsList } from './cl-items-list.jsx'
 
 
 
@@ -17,24 +18,24 @@ export const ChecklistItemPreview = ({ item, saveChecklistTask }) => {
         setInput(!isInputOpen)
     }
 
-    const { title } = item
+    const { title, items } = item
 
-    return <div className='checklist-item-preview flex'>
-        <div className='checklist-side-icons'>
-            <div>icon</div>
-            <span>%</span>
-        </div>
+    return <div className='checklist-item-preview'>
+
         <div className='item-content flex'>
             <div className='checklist-item-header flex'>
+                <div>icon</div>
                 <h2>{title}</h2>
                 <button>delete</button>
             </div>
             <div>% Bar</div>
             <div className='checklist-item-footer'>
+                {items?.length > 0 && <ClItemsList items={items} />}
+                <div className='space2'>1</div>
                 {!isInputOpen && <button onClick={onToggleInput}>Add an item</button>}
                 {isInputOpen && <React.Fragment>
                     <form action="" onSubmit={onSaveChecklistTask} >
-                        <input onChange={handleChange} onBlur={onToggleInput} type="text" placeholder='Add an item' name='txt' />
+                        <input autoComplete='off' onChange={handleChange} onBlur={onToggleInput} type="text" placeholder='Add an item' name='txt' />
                         <button onMouseDown={onSaveChecklistTask}>Add item</button>
                     </form>
                 </React.Fragment>}

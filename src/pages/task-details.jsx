@@ -97,16 +97,18 @@ export const TaskDetails = () => {
         saveBoard()
     }
 
-    const onSaveChecklistTask = (txt, taskId) => {
+    const onSaveChecklistTask = (txt, clTaskId) => {
         const newItem = {
             txt,
             checklistTaskId: utilService.makeId()
         }
-        // task.checklist.find()
 
-
-
+        const checklistTask = task.checklist.find(clTask => clTask.id === clTaskId)
+        checklistTask.items.push(newItem)
+        console.log(checklistTask)
         console.log(taskId)
+
+        saveBoard()
     }
 
     const onSaveAttachment = (url) => {

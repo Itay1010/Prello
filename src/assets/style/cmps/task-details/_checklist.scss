@@ -1,4 +1,5 @@
 .checklist-item-preview {
+    display: flex;
     flex-grow: 1;
 
     .item-content {
@@ -9,4 +10,27 @@
     .checklist-item-header {
         justify-content: space-between;
     }
+}
+
+.cl-task {
+    display: flex;
+
+    input {
+        margin: 0;
+        display: inline-block;
+    }
+
+    .checklist-item-footer {
+        display: flex;
+    }
+
+    .space {
+        width: 30px;
+        height: 30px;
+    }
+
+    .space2 {
+        margin: 30px;
+    }
+
 }
