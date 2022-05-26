@@ -1,16 +1,26 @@
 import React, { useEffect, useState } from 'react';
 import { useHistory, useParams } from 'react-router-dom/cjs/react-router-dom.min';
+import { useSelector, useDispatch } from 'react-redux';
+
+// DYNAMIC CMS
 import { Members } from '../cmps/task-details/dynamic-cmps/members.jsx';
 import { Labels } from '../cmps/task-details/dynamic-cmps/labels.jsx'
 import { Checklist } from '../cmps/task-details/dynamic-cmps/checklist.jsx'
 import { Dates } from '../cmps/task-details/dynamic-cmps/dates.jsx'
 import { Attachment } from '../cmps/task-details/dynamic-cmps/attachment.jsx'
 import { Location } from '../cmps/task-details/dynamic-cmps/location.jsx'
-import { useSelector } from 'react-redux';
+
+// ACTIONS
+import { updateBoard } from '../store/board/board.action'
+
+// SERVICES
+import { utilService } from '../services/basic/util.service.js';
+
 
 
 export const TaskDetails = () => {
     const params = useParams()
+    const dispatch = useDispatch()
     const { boardId, groupId, taskId } = params
     const history = useHistory()
     const { board } = useSelector(storeState => storeState.boardModule)
@@ -25,13 +35,16 @@ export const TaskDetails = () => {
     }
 
     async function onLoad() {
-        const groupToAdd = board.groups.find(group => group.id === groupId)
+        console.log(board)
+        const groupToAdd = await board.groups.find(group => group.id === groupId)
         setGroup(groupToAdd)
-        const task = groupToAdd.tasks.find(task => task.id === taskId)
+        const task = await groupToAdd.tasks.find(task => task.id === taskId)
+        console.log('task', task)
         setTask(task)
     }
     useEffect(() => {
         onLoad()
+        console.log('poop')
     }, [])
 
 
@@ -40,18 +53,35 @@ export const TaskDetails = () => {
         // setModalType(type)
     }
 
+    const saveMembers = (updatedTask) => {
+        console.log(updatedTask)
+    }
+
+    const saveLabels = (updatedTask) => {
+        console.log(updatedTask)
+    }
+
     const saveChecklist = (checklistTitle) => {
+        console.log('checklistTitle', checklistTitle)
+        console.log(task)
         const newChecklist = {
             title: checklistTitle,
-            items: []
+            items: [],
+            id: 'Cl' + utilService.makeId()
         }
-        const task = group.tasks.find(task => task.id === taskId)
+
         if (task.checklist) {
             task.checklist.push(newChecklist)
         } else {
             task.checklist = [newChecklist]
         }
         setGroup(group)
+        saveBoard()
+    }
+
+    const saveBoard = () => {
+
+        dispatch(updateBoard(board))
     }
 
     const onSaveAttachment = (url) => {
@@ -61,15 +91,15 @@ export const TaskDetails = () => {
         } else {
             task.Attachments = [url]
         }
-        setGroup(group)
+        setGroup(...group)
     }
 
     const DynamicModal = () => {
         switch (modalType) {
             case 'members':
-                return <Members />
+                return <Members saveMembers={saveMembers} members={board.members} />
             case 'labels':
-                return <Labels />
+                return <Labels saveLabels={saveLabels} />
             case 'checklist':
                 return <Checklist saveChecklist={saveChecklist} group={group} />
             case 'dates':
