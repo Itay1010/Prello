@@ -8,6 +8,7 @@ export const Checklist = ({ saveChecklist, group }) => {
     const onCreateChecklist = (ev) => {
         ev.preventDefault()
         const { value } = ev.target.name
+        console.log(value)
         saveChecklist(value)
     }
 

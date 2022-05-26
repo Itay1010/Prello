@@ -1,16 +1,22 @@
 import React from 'react'
 
-export const Attachment = () => {
-    const onCreateChecklist = (ev) => {
+export const Attachment = ({ saveAttachment }) => {
+
+    const onSaveAttachment = (ev) => {
         ev.preventDefault()
-        const { value } = ev.target.name
+        const { target } = ev
+        const { value } = target.name
+        console.log(value)
+        saveAttachment(value)
     }
+
+
 
 
     return <div className='modal-type'>
         <h4>Title</h4>
-        <form action="" onSubmit={onCreateChecklist}>
-            <input type="text" placeholder='Checklist title' name='name' />
+        <form onSubmit={onSaveAttachment}>
+            <input type="text" placeholder='Enter img url' name='name' />
             <button>Save</button>
         </form>
     </div>

@@ -18,6 +18,7 @@ export const TaskDetails = () => {
     const { boardId, groupId, taskId } = params
     const history = useHistory()
     const [group, setGroup] = useState(null)
+    const [task, setTask] = useState(null)
     // const [isModal, setIsModal] = useState(false)
     const [modalType, setModalType] = useState(null)
 
@@ -29,6 +30,8 @@ export const TaskDetails = () => {
     async function onLoad() {
         const groupToAdd = await groupService.getGroupById(groupId, boardId)
         setGroup(groupToAdd)
+        const task = groupToAdd.tasks.find(task => task.id === taskId)
+        setTask(task)
 
     }
     useEffect(() => {
@@ -56,6 +59,19 @@ export const TaskDetails = () => {
         groupService.editChecklist(group, groupId)
 
     }
+
+    const onSaveAttachment = (url) => {
+        console.log(url)
+        if (task.Attachments) {
+            task.Attachments.push(url)
+        } else {
+            task.Attachments = [url]
+        }
+        setGroup(group)
+        groupService.editChecklist(group, groupId)
+
+
+    }
     const DynamicModal = () => {
         switch (modalType) {
             case 'members':
@@ -67,7 +83,7 @@ export const TaskDetails = () => {
             case 'dates':
                 return <Dates />
             case 'attachment':
-                return <Attachment />
+                return <Attachment saveAttachment={onSaveAttachment} />
             case 'location':
                 return <Location />
             default:
@@ -91,7 +107,7 @@ export const TaskDetails = () => {
             </div>
             {modalType && <div className='action-type-modal'>
                 <h3>{modalType}</h3>
-                <DynamicModal type={modalType} boardId={boardId} />
+                <DynamicModal type={modalType} />
             </div>}
         </section>
     </section>
