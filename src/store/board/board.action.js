@@ -26,8 +26,9 @@ export function loadBoardMinis() {
 export function addBoard(board) {
     return async dispatch => {
         try {
-            const boardMini = await boardService.save(board)
-            dispatch(getActionAddBoard(boardMini))
+            let savedBoard = await boardService.save(board)
+            savedBoard = boardService.minify(savedBoard)
+            dispatch(getActionAddBoard(savedBoard))
         } catch (err) {
             console.log('BoardActions: err in addBoard', err)
             throw err
