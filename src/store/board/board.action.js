@@ -61,7 +61,6 @@ export function updateMini(newMini) {
 export function updateBoard(newBoard) {
     return async (dispatch, getState) => {
         const prevBoard = { ...getState().boardModule.board }
-        console.log('return - board', prevBoard)
         try {
             dispatch(getActionSetBoard(newBoard))
             await boardService.save(newBoard)

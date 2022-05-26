@@ -15,12 +15,15 @@
         cursor: pointer;
     }
 
-    form.add-list {
-        position: relative;
+    .add-list {
+        position: absolute;
         display: none;
-        background-color: $group-bg;
+        background-color: transparentize($group-bg, 1);
         border-radius: 3px;
         padding: 4px;
+        width: 100%;
+        top: 0;
+        transition: transparency;
 
         input {
             // position: absolute;
@@ -34,31 +37,40 @@
         .add-list-btn {
             @include btn($type: dark);
             display: inline-block;
-            background-color: rebeccapurple;
+            background-color: $header-workspace;
             margin: 0;
             width: 80px;
             height: 100%;
             float: left;
+
+            &:hover {
+                background-color: darken($header-workspace, 5%);
+            }
         }
 
         a {
             @include btn($type: dark, $height: 40px);
+            background-color: transparent;
             position: relative;
             display: inline-block;
             width: 32px;
             height: 32px;
+            
             &::before {
                 position: absolute;
                 content: url("../../../imgs/icons/add.svg");
                 transform: translate(-50%, 10%);
                 height: 20px;
             }
-        }
-
-        &.editing {
-            input {
-                display: block;
+            &:hover {
+                background-color: transparent;
             }
         }
+
+    }
+
+    &.editing .add-list {
+        display: inline-block;
+        background-color: transparentize($group-bg, 0);
     }
 }
