@@ -11,35 +11,13 @@ export const groupService = {
 
 async function archiveGroup(groupId) {
 
-    let { boardModule: { selectedBoard: board } } = store.getState()
-    board = { ...board }
-    const newBoard = { ...board }
-    newBoard.groups.map(group => {
-        if (group.id === groupId) group.archivedAt = Date.now()
-    })
-    try {
-        store.dispatch(getActionSetBoard(newBoard))
-        await boardService.save(newBoard)
-    } catch (error) {
-        store.dispatch(getActionSetBoard(board))
-        console.error('Had en error setting board', error)
-    }
-    this._loadBoard()
+
+   
 }
 
 
 async function groupChange({ txt, groupId }, board) {
-    board = { ...board }
-    const newBoard = { ...board }
-    newBoard.groups.map(group => {
-        if (group.id === groupId) group.title = txt
-    })
 
-    try {
-        store.dispatch(getActionSetBoard(newBoard))
-        await storageService.put(newBoard)
-    } catch (error) {
-        store.dispatch(getActionSetBoard(board))
-        console.error('Had en error setting board', error)
-    }
+
+ 
 }
