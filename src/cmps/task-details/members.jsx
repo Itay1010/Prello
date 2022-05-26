@@ -2,23 +2,22 @@ import React from 'react'
 import { Component, useEffect, useState } from 'react'
 import { Link, useNavigate, useParams } from 'react-router-dom'
 
-import { taskService } from '../../services/board/task.service'
+import { boardService } from '../../services/board/board.service'
 
-export const Members = () => {
+export const Members = ({ boardId }) => {
     const [members, setMembers] = useState(null)
     const [filter, setFilter] = useState({ txt: '' })
 
     useEffect(() => {
-        loadMembers()
+        loadMembers(boardId)
     }, [])
 
     const loadMembers = async () => {
-        const members = await taskService.getMembers()
+        const members = await boardService.getMembers()
+        console.log('test', members);
         setMembers(members)
         console.log(members);
     }
-
-
 
     return (
         <section className='members'>

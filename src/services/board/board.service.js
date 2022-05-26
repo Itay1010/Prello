@@ -78,8 +78,9 @@ async function save(board) {
     }
 }
 
-function getMembers() {
-    return []
+async function getMembers() {
+    const board = await getById('b101')
+    return board.members
 }
 
 const _logError = (err) => {
