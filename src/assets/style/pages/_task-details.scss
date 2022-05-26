@@ -15,5 +15,15 @@
         width: 700px;
         height: 1000px;
         margin-bottom: 40px;
+
+        .task-content {
+            flex-grow: 1;
+        }
+    }
+
+    .task-edit {
+        &>* {
+            @include btn($type: light)
+        }
     }
 }
