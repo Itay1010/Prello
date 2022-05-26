@@ -30,6 +30,7 @@ class _Board extends React.Component {
     }
 
     onAddTask = async (newTask) => {
+        if(!newTask.title) return
         const newBoard = JSON.parse(JSON.stringify(this.props.board))
         const groupIdx = newBoard.groups.findIndex(group => group.id === newTask.groupId)
 
