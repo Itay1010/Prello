@@ -78,7 +78,9 @@ class _Board extends React.Component {
                 <section className="group-container flex">
                     {groups.map(group => {
                         if (group.archivedAt) return
-                        return <Group group={group}
+                        return <Group
+                            group={group}
+                            key={group.id}
                             onAddTask={this.onAddTask}
                             onArchiveTask={this.onArchiveTask}
                             onArchiveGroup={this.onArchiveGroup}
