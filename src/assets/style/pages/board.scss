@@ -23,6 +23,10 @@
         flex-grow: 1;
         grid-column: 1 /-1;
         padding-left: 20px;
+
+        .add-list-btn {
+            @include btn($type: dark);
+        }
     }
 
 }

@@ -67,7 +67,7 @@ export const Group = ({ group, onAddTask, onArchiveTask, onArchiveGroup, onGroup
             </article>}
         </div>
         {isTaskOpen || <div className="group-footer flex space-between align-center">
-            <button onClick={ev => setIsTaskOpen(true)
+            <button className="add-card-btn" onClick={ev => setIsTaskOpen(true)
             }>Add a card</button>
             <div className="add-media"></div>
         </div>}

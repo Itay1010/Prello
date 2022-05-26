@@ -85,7 +85,11 @@ class _Board extends React.Component {
                             onGroupChange={this.onGroupChange}
                         />
                     })}
-                    <button style={({ height: "40px", width: "270px" })}>Add another list</button>
+                    <form onSubmit={ev => {
+                        ev.preventDefault()
+                    }}>
+                        <a className="add-list-btn" style={({ height: "40px", width: "270px" })}>Add another list</a>
+                    </form>
                 </section>
                 <Switch>
                     <Route path={'/board/:boardId/:groupId/:taskId'} component={TaskDetails} />
