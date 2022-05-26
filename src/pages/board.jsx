@@ -132,7 +132,7 @@ class _Board extends React.Component {
 
 const mapStateToProps = state => {
     return {
-        // boards: state.boardModule.boards,
+        // board: state.boardModule.boards,
         //   users: state.userModule.users,
         //   loggedInUser: state.userModule.user
     }
