@@ -1,0 +1,12 @@
+.checklist-item-preview {
+    flex-grow: 1;
+
+    .item-content {
+        flex-direction: column;
+        flex-grow: 1;
+    }
+
+    .checklist-item-header {
+        justify-content: space-between;
+    }
+}

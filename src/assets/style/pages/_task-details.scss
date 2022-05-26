@@ -26,4 +26,12 @@
             @include btn($type: light)
         }
     }
+
+    .modal {
+        position: absolute;
+        right: 0;
+        background-color: aliceblue;
+        width: 300px;
+        min-height: 300px;
+    }
 }

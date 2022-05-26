@@ -93,6 +93,18 @@ export const TaskDetails = () => {
         saveBoard()
     }
 
+    const onSaveChecklistTask = (txt, taskId) => {
+        const newItem = {
+            txt,
+            checklistTaskId: utilService.makeId()
+        }
+        // task.checklist.find()
+
+
+
+        console.log(taskId)
+    }
+
     const onSaveAttachment = (url) => {
         if (task.Attachments) {
             task.Attachments.push(url)
@@ -138,7 +150,7 @@ export const TaskDetails = () => {
     return <section onClick={onGoBack} className='task-details-shadow'>
         <section className='task-details flex space-between' onClick={(event) => event.stopPropagation()}>
             {checklist?.length > 0 && <div className='task-content'>
-                {checklist.length > 0 && <ChecklistList checklist={checklist} />}
+                {checklist.length > 0 && <ChecklistList checklist={checklist} saveChecklistTask={onSaveChecklistTask} />}
             </div>}
 
             <div className='task-edit flex col'>
@@ -153,8 +165,10 @@ export const TaskDetails = () => {
 
             </div>
             {modalType && <div className='action-type-modal'>
-                <h3>{modalType}</h3>
-                <DynamicModal type={modalType} />
+                <div className='modal'>
+                    <h3>{modalType}</h3>
+                    <DynamicModal type={modalType} />
+                </div>
             </div>}
         </section>
     </section>
