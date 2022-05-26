@@ -4,7 +4,6 @@ export const Attachment = () => {
     const onCreateChecklist = (ev) => {
         ev.preventDefault()
         const { value } = ev.target.name
-        saveChecklist(value)
     }
 
 
