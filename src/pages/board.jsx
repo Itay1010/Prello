@@ -9,6 +9,8 @@ import { TaskPreview } from '../cmps/board/task-preview'
 import { loadBoard } from "../store/board/board.action"
 import { boardService } from "../services/board/board.service"
 import { utilService } from "../services/basic/util.service"
+// import { Switch } from "react-router-dom/cjs/react-router-dom.min"
+import { Switch, Route } from 'react-router-dom'
 
 class _Board extends React.Component {
 
@@ -100,9 +102,11 @@ class _Board extends React.Component {
                         />
                     })}
                 </section>
+                {/* <Switch>
+                  <Route path={''}/>
+                </Switch> */}
             </section>
         </React.Fragment>
-
     }
 }
 
