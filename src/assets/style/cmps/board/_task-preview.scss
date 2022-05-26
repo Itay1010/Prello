@@ -20,12 +20,14 @@
         padding: 6px 8px 2px;
 
         .task-label {
+            display: flex;
             .label {
                 display: inline-block;
                 height: 8px;
                 width: 40px;
                 background-color: $label1;
                 border-radius: 3px;
+                margin: 0 4px 4px 0;
             }
         }
 

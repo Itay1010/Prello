@@ -39,25 +39,40 @@
     .group-footer {
         height: 38px;
         padding: 0 8px;
+        margin-bottom: 5px;
 
         &>* {
             color: $group-text;
             font-weight: 500;
         }
 
-        a {
-            line-height: 38px;
+        .add-card-btn {
+            @include btn();
+            position: relative;
+            width: 100%;
+            height: 100%;
+            text-align: start;
+            border-radius: 3px;
+            padding-left: 24px;
+
+
+            &:hover {
+                background-color: #0000000e;
+            }
 
             &::before {
+                position: absolute;
                 content: url('../../../imgs/icons/add.svg');
+                left: 0;
+                top: 0;
                 fill: $group-text;
             }
+
         }
 
         .add-media {
             width: 28px;
             height: 28px;
-            background-color: red;
 
             &::before {
                 content: url('../../../imgs/icons/calender.svg');

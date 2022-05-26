@@ -22,7 +22,7 @@
     padding: 0 16px;
     border: none;
 
-    @if $type ==light {
+    @if $type==light {
         background-color: $opc-white;
         color: $txt;
 
