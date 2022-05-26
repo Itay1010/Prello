@@ -25,6 +25,7 @@ export const Group = ({ group, onAddTask, onArchiveTask, onArchiveGroup, onGroup
                     setGroupTitle(prevState => ({ ...prevState, txt: ev.target.value }))
                 }}
                 onBlur={ev => {
+                    if (!groupTitle.txt) return
                     onGroupChange(groupTitle)
                 }}
                 onKeyDown={ev => {
@@ -55,12 +56,13 @@ export const Group = ({ group, onAddTask, onArchiveTask, onArchiveGroup, onGroup
                     value={newTask.title}
                     placeholder="Enter a title for this card..."
                     onChange={handleChange}
-
                     onKeyDown={ev => {
                         if (ev.key === "Enter") {
                             ev.preventDefault()
-                            onAddTask(newTask)
-                            setNewTask({ title: '', groupId: group.id })
+                            if(newTask.title) {
+                                onAddTask(newTask)
+                                setNewTask({ title: '', groupId: group.id })
+                            }
                         }
                     }}
                 ></TextareaAutosize>
