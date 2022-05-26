@@ -6,7 +6,7 @@ import { useForm } from '../../../hooks/useForm'
 export const ChecklistItemPreview = ({ item, saveChecklistTask }) => {
     const [checklistTask, handleChange] = useForm(null)
     const [isInputOpen, setInput] = useState(false)
-    console.log(item.id)
+    // console.log(item.id)
     const onSaveChecklistTask = () => {
         const { txt } = checklistTask
         setInput(false)
