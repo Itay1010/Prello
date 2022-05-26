@@ -16,6 +16,10 @@ import { utilService } from "../services/basic/util.service"
 import { groupService } from "../services/board/group.service";
 // import { Switch } from "react-router-dom/cjs/react-router-dom.min"
 import { Switch, Route } from 'react-router-dom'
+import { Members } from '../cmps/task-details/members'
+
+// Routes
+import { TaskDetails } from './task-details.jsx'
 
 class _Board extends React.Component {
 
@@ -96,9 +100,9 @@ class _Board extends React.Component {
                     })}
                     <button style={({ height: "40px", width: "270px" })}>Add another list</button>
                 </section>
-                {/* <Switch>
-                  <Route path={''}/>
-                </Switch> */}
+                <Switch>
+                    <Route path={'/board/:boardId/task/:taskId'} component={TaskDetails} />
+                </Switch>
             </section>
         </React.Fragment>
     }

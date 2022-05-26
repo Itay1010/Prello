@@ -1,0 +1,19 @@
+.task-details-shadow {
+    position: fixed;
+    top: 0;
+    height: 100%;
+    width: 100%;
+    background-color: #000000a3;
+    display: flex;
+    justify-content: center;
+    overflow-y: scroll;
+
+    .task-details {
+        overflow-y: scroll;
+        background-color: white;
+        margin-top: 40px;
+        width: 700px;
+        height: 1000px;
+        margin-bottom: 40px;
+    }
+}
