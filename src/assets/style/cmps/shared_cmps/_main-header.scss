@@ -1,6 +1,13 @@
 .main-header {
+    position: fixed;
     height: 44px;
-    // padding: 6px 20px;
+    width: 100vw;
+    padding: 0 20px;
+    background-color: $header;
+
+    h1 {
+        color: $bg;
+    }
 
     .logo {
         height: 32px;
@@ -44,17 +51,25 @@
 
     .search {
         border-radius: 3px;
-        background-color: $opc-black;
-        border: 1px solid $opc-black-hov;
+        background-color: $opc-white;
+        border: 1px solid $opc-white-hov;
         height: 32px;
         margin-inline-end: 4px;
         width: 250px;
 
+        ::placeholder {
+            color: $bg;
+        }
+
+        input {
+            color: $bg;
+            width: 100%;
+        }
 
         svg {
             height: 20px;
             width: 20px;
-            fill: $txt;
+            fill: $bg;
             margin: 0 4px;
         }
 
@@ -75,7 +90,7 @@
         svg {
             height: 20px;
             width: 20px;
-            fill: $txt;
+            fill: $bg;
         }
     }
 
