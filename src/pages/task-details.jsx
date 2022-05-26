@@ -91,7 +91,7 @@ export const TaskDetails = () => {
             </div>
             {modalType && <div className='action-type-modal'>
                 <h3>{modalType}</h3>
-                <DynamicModal type={modalType} boardId={boardId} />
+                <DynamicModal type={modalType} />
             </div>}
         </section>
     </section>
