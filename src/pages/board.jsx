@@ -20,6 +20,7 @@ import { Members } from '../cmps/task-details/members'
 
 // Routes
 import { TaskDetails } from './task-details.jsx'
+import { taskService } from "../services/board/task.service";
 
 class _Board extends React.Component {
 
@@ -34,39 +35,11 @@ class _Board extends React.Component {
     }
 
     onAddTask = async (newTask) => {
-        const board = { ...this.props.board }
-        const newBoard = { ...board }
-        const groupIdx = board.groups.findIndex(group => group.id === newTask.groupId)
-
-        newTask = { id: utilService.makeId(), title: newTask.title }
-        newBoard.groups[groupIdx].tasks.push(newTask)
-
-        try {
-            this.setState((prevState) => ({ ...prevState, board: newBoard }))
-            await boardService.save(newBoard)
-        } catch (error) {
-            this.setState(prevState => ({ ...prevState, board }))
-            console.error('Had en error setting board', error)
-        }
-        this._loadBoard()
+        taskService.addTask(newTask)
     }
 
-    onArchiveTask = async ({ taskId, groupId }) => {
-        const board = { ...this.props.board }
-        const newBoard = { ...board }
-        const groupIdx = board.groups.findIndex(group => group.id === groupId)
-        newBoard.groups[groupIdx].tasks.map(task => {
-            if (task.id === taskId) task.archivedAt = Date.now()
-        })
-
-        try {
-            this.setState((prevState) => ({ ...prevState, board: newBoard }))
-            await boardService.save(newBoard)
-        } catch (error) {
-            this.setState(prevState => ({ ...prevState, board }))
-            console.error('Had en error setting board', error)
-        }
-        this._loadBoard()
+    onArchiveTask = async (task) => {
+        taskService.archiveTask(task)
     }
 
     onArchiveGroup = async (groupId) => {
@@ -78,11 +51,9 @@ class _Board extends React.Component {
     }
 
     render() {
-        console.log('_Board - render - this.props', this.props)
         const { board } = this.props
         if (!board) return <div>loading...</div>
         const { groups } = board
-        console.log(groups)
 
         return <React.Fragment>
             <MainHeader />

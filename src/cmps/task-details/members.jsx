@@ -2,7 +2,7 @@ import React from 'react'
 import { Component, useEffect, useState } from 'react'
 import { Link, useNavigate, useParams } from 'react-router-dom'
 
-import { taskService } from '../../services/task.service'
+import { taskService } from '../../services/board/task.service'
 
 export const Members = () => {
     const [members, setMembers] = useState(null)

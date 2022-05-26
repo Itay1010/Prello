@@ -97,7 +97,7 @@ function _getEmptyBoard() {
 //     await userService.create({fullname: 'Muki G', username: 'muki', password:'123', score: 10000})
 // })()
 
-// storageService.put(STORAGE_KEY, jsonBoard)
+// storageService.post(STORAGE_KEY, jsonBoard)
 
 
 
