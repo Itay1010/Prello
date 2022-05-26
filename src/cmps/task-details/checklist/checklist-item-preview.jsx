@@ -3,7 +3,6 @@ import React from 'react'
 
 export const ChecklistItemPreview = ({ item }) => {
     const { title } = item
-    console.log(item)
     return <div className='checklist-item-preview'>
         <div className='checklist-item-header'>
             <div className='checklist-side-icons'>
