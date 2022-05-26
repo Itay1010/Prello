@@ -22,9 +22,7 @@ export const TaskDetails = () => {
     }
 
     const setModal = (type) => {
-        console.log(type)
         setModalType(type)
-        // setModalType(type)
 
     }
 
