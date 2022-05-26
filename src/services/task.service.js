@@ -1,9 +1,11 @@
 // import { httpService } from './http.service'
 // import { socketService, SOCKET_EVENT_REVIEW_ADDED, SOCKET_EVENT_REVIEW_ABOUT_YOU } from './socket.service'
 // import { getActionRemoveBoard, getActionAddBoard } from '../store/board.actions'
-import { store } from '../store/store'
-import { showSuccessMsg } from '../services/event-bus.service'
+// import { store } from '../store/store'
+// import { showSuccessMsg } from '../services/event-bus.service'
 // const boardChannel = new BroadcastChannel('boardChannel')
+
+import { boardService } from '../services/board/board.service'
 
 // ; (() => {
 //     boardChannel.addEventListener('message', (ev) => {
@@ -18,44 +20,49 @@ import { showSuccessMsg } from '../services/event-bus.service'
 //     })
 // })()
 
-export const boardService = {
-    add,
-    query,
-    remove,
-    getById
+export const taskService = {
+    getMembers,
+    // add,
+    // query,
+    // remove,
+    // getById
     // subscribe,
     // unsubscribe,
 }
 
-
-function query(filterBy) {
-    // var queryStr = (!filterBy) ? '' : `?name=${filterBy.name}&sort=anaAref`
-    // return httpService.get(`board${queryStr}`)
-    return storageService.query(STORAGE_KEY)
-    // return storageService.query('board')
+async function getMembers() {
+    const board = await boardService.query() || []
+    return board.members
 }
 
-function getById(boardId) {
-    return storageService.get(STORAGE_KEY, boardId)
-}
+// function query(filterBy) {
+//     // var queryStr = (!filterBy) ? '' : `?name=${filterBy.name}&sort=anaAref`
+//     // return httpService.get(`board${queryStr}`)
+//     return storageService.query(STORAGE_KEY)
+//     // return storageService.query('board')
+// }
 
-async function remove(boardId) {
-    // await httpService.delete(`board/${boardId}`)
-    await storageService.remove('board', boardId)
-    // boardChannel.postMessage(getActionRemoveBoard(boardId))
-}
+// function getById(boardId) {
+//     return storageService.get(STORAGE_KEY, boardId)
+// }
 
-async function add(board) {
-    const addedBoard = await storageService.post('board', board)
+// async function remove(boardId) {
+//     // await httpService.delete(`board/${boardId}`)
+//     await storageService.remove('board', boardId)
+//     // boardChannel.postMessage(getActionRemoveBoard(boardId))
+// }
 
-    boardChannel.postMessage(getActionAddBoard(addedBoard))
+// async function add(board) {
+//     const addedBoard = await storageService.post('board', board)
 
-    return addedBoard
-    // const addedBoard = await httpService.post(`board`, board)
+//     boardChannel.postMessage(getActionAddBoard(addedBoard))
 
-    // board.byUser = userService.getLoggedinUser()
-    // board.aboutUser = await userService.getById(board.aboutUserId)
-}
+//     return addedBoard
+//     // const addedBoard = await httpService.post(`board`, board)
+
+//     // board.byUser = userService.getLoggedinUser()
+//     // board.aboutUser = await userService.getById(board.aboutUserId)
+// }
 
 // function subscribe(listener) {
 //     boardChannel.addEventListener('message', listener)

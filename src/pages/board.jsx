@@ -15,6 +15,7 @@ import { boardService } from "../services/board/board.service"
 import { utilService } from "../services/basic/util.service"
 // import { Switch } from "react-router-dom/cjs/react-router-dom.min"
 import { Switch, Route } from 'react-router-dom'
+import { Members } from '../cmps/task-details/members'
 
 class _Board extends React.Component {
 
@@ -128,6 +129,7 @@ class _Board extends React.Component {
                 {/* <Switch>
                   <Route path={''}/>
                 </Switch> */}
+                <Members />
             </section>
         </React.Fragment>
     }
