@@ -16,8 +16,16 @@ export const TaskDetails = () => {
     const disableGoBack = (ev) => {
         ev.stopPropagation()
     }
+    // const onOpenChecklistModal=()=>{
+
+    // }
+
     return <section onClick={onGoBack} className='task-details-shadow'>
         <section onClick={(event) => disableGoBack(event)} className='task-details'>
+            <div className='task-content'></div>
+            <div className='task-buttons-wrapper'>
+                {/* <button onClick={onOpenChecklistModal}>CheckList</button> */}
+            </div>
             <Members />
         </section>
     </section>
