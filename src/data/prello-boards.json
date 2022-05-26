@@ -29,6 +29,24 @@
             "firstName": "Eytan",
             "lastName": "Silberberg",
             "imgUrl": "http://cloudinary/user"
+        },
+        {
+            "_id": "u102",
+            "firstName": "Itay",
+            "lastName": "Zonshine",
+            "imgUrl": "http://cloudinary/user"
+        },
+        {
+            "_id": "u103",
+            "firstName": "Offir",
+            "lastName": "Carmi",
+            "imgUrl": "http://cloudinary/user"
+        },
+        {
+            "_id": "u104",
+            "firstName": "Idan",
+            "lastName": "Gez",
+            "imgUrl": "http://cloudinary/user"
         }
     ],
     "groups": [
