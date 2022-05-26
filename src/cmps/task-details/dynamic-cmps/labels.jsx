@@ -1,7 +1,15 @@
 import React from 'react'
 
 
-export const Labels = () => {
+export const Labels = ({saveLabels}) => {
 
-    return <div>I am the labels modal</div>
+
+
+
+
+
+    
+    return <div className='labels'>
+
+    </div>
 }

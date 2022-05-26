@@ -1,63 +1,64 @@
 import React from 'react'
-import { Component, useEffect, useState } from 'react'
-import { Link, useNavigate, useParams } from 'react-router-dom'
+import { useEffect, useState } from 'react'
+import { useParams } from 'react-router-dom'
 
 import { boardService } from '../../../services/board/board.service'
 
-export const Members = () => {
+export const Members = ({ saveMembers }) => {
     const params = useParams()
     const { boardId, groupId, taskId } = params
 
 
     const [task, setTask] = useState(null)
     const [members, setMembers] = useState(null)
-    // const [filter, setFilter] = useState({ txt: '' })
+    const [filter, setFilter] = useState('')
 
     useEffect(() => {
-        loadMembers(boardId)
+        loadMembers(boardId, filter)
         loadTask(taskId)
+
     }, [])
 
-    const loadMembers = async (boardId) => {
+    useEffect(() => {
+        loadMembers(boardId, filter)
+    }, [filter])
+
+    const loadMembers = async (boardId, filter) => {
         const board = await boardService.getById(boardId)
-        console.log('board.members', board.members);
-        setMembers(board.members)
+        if (filter) {
+            const filteredMembers = board.members.filter(member => member.firstName.toLowerCase().includes(filter.toLowerCase()) || member.lastName.toLowerCase().includes(filter.toLowerCase()))
+            setMembers(filteredMembers)
+        } else setMembers(board.members)
+
     }
 
     const loadTask = async () => {
         const task = await boardService.getTask(boardId, groupId, taskId)
-        console.log('task', task);
         setTask(task)
     }
 
-    const toggleMember = (memberId) => {
-        console.log(memberId);
-        if (task.members.includes(memberId)) {
-            console.log(task.members);
-            const idx = task.members.findIndex(member => member === memberId)
-            console.log(idx);
-        } else {
-            console.log('not included');
-        }
-        // const members = task.members.filter(member => member.id !== memberId)
-        // console.log(members);
-        // const taskToSave = { ...task, members }
-        // setTask(taskToSave)
+    const handleChange = ({ target }) => {
+        setFilter(target.value)
     }
 
-    // const boardMembers = async () => {
-    //     return await boardService.getMembers()
-    // }
+    const toggleMember = (memberId) => {
+        if (task.members.includes(memberId)) {
+            const idx = task.members.findIndex(member => member === memberId)
+            task.members.splice(idx, 1)
+            saveMembers(task)
+        } else {
+            task.members.push(memberId)
+            saveMembers(task)
+        }
+    }
 
-    // if (boardMembers.length === 0) return <div>loading...</div>
     if (!members || members.length === 0) return <div>loading...</div>
-    // if (!task.members) return <div>loading...</div>
     return (
         <section className='members'>
             <button>x</button>
             <h2>Members</h2>
             <hr />
-            {/* <input type="text" value={filter.txt} onChange={filter} placeholder="Search members" /> */}
+            <input onChange={(event) => handleChange(event)} type="text" value={filter} placeholder="Search members" />
             <h3>Board members</h3>
             {members.map(member => {
                 return <div className='member flex space-between' onClick={() => toggleMember(member._id)}>
@@ -70,6 +71,4 @@ export const Members = () => {
             })}
         </section >
     )
-
-
 }

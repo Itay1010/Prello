@@ -40,6 +40,14 @@ export const TaskDetails = () => {
         // setModalType(type)
     }
 
+    const saveMembers = (updatedTask) => {
+        console.log(updatedTask)
+    }
+
+    const saveLabels = (updatedTask) => {
+        console.log(updatedTask)
+    }
+
     const saveChecklist = (checklistTitle) => {
         const newChecklist = {
             title: checklistTitle,
@@ -67,9 +75,9 @@ export const TaskDetails = () => {
     const DynamicModal = () => {
         switch (modalType) {
             case 'members':
-                return <Members />
+                return <Members saveMembers={saveMembers} members={board.members} />
             case 'labels':
-                return <Labels />
+                return <Labels saveLabels={saveLabels} />
             case 'checklist':
                 return <Checklist saveChecklist={saveChecklist} group={group} />
             case 'dates':
