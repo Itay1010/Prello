@@ -6,17 +6,18 @@ export const TaskPreview = ({ task, groupId, onArchiveTask }) => {
     const params = useParams()
     const { boardId } = params
 
+    console.log(task);
     return <article className="task-preview">
         <Link to={`/board/${boardId}/${groupId}/${task.id}`}>
             {task.style?.bgColor && <section className="task-color" style={({ backgroundColor: task.style.bgColor })}></section>}
-            {task.labelIds && <section className="task-label"><div className="label"></div></section>}
-            <section className="task-title">{task.title}</section>
-            {/* <section className="task-status">
-                <section></section>
-                <section></section>
-            </section> */}
+            <div className="task-info">
+                {<section className="task-label"><div className="label"></div></section>}
+                <section className="task-title">{task.title}</section>
+                <section className="task-status flex space-between wrap">
+                    <section className="badges">badges</section>
+                    <section className="members">members</section>
+                </section>
+            </div>
         </Link>
-        <button onClick={ev => onArchiveTask({ taskId: task.id, groupId })}>Archive card</button>
-
     </article>
 }
