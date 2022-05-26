@@ -1,8 +1,9 @@
 import { utilService } from '../../services/basic/util.service'
 import { storageService } from '../basic/async-storage.service'
 // import { httpService } from '../basic/http.service'
-import { getActionAddBoard, getActionRemoveBoard } from '../../store/board/board.action'
+import { getActionSetBoard, getActionRemoveBoard } from '../../store/board/board.action'
 import { userService } from "../../services/user.service";
+import { useState } from 'react';
 const emptyBoard = require('../../data/empty-board.json')
 const jsonBoard = require('../../data/prello-boards.json')
 // import { socketService, SOCKET_EVENT_REVIEW_ADDED, SOCKET_EVENT_REVIEW_ABOUT_YOU } from './socket.service'
@@ -25,26 +26,14 @@ const STORAGE_KEY = 'board'
 // })()
 
 export const boardService = {
-    query,
     remove,
     getById,
-    save
+    save,
+    getMembers
     // subscribe,
     // unsubscribe,
 }
 
-
-async function query(filterBy) {
-    // var queryStr = (!filterBy) ? '' : `?minis=${filterBy.minis}&sort=anaAref`
-    try {
-        // return await httpService.get(`board${queryStr}`)
-        const res = await storageService.query(STORAGE_KEY)
-        console.log('query - res', res)
-        return res
-    } catch (error) {
-        throw _logError(error)
-    }
-}
 
 async function getById(boardId) {
     try {
@@ -87,6 +76,10 @@ async function save(board) {
     } catch (error) {
         throw _logError(error)
     }
+}
+
+function getMembers() {
+    return []
 }
 
 const _logError = (err) => {

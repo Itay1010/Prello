@@ -2,33 +2,47 @@
 import { boardService } from '../../services/board/board.service'
 // import { userService } from '../../services/user.service'
 
-// Action Creators
+// Board Action Creators
+export function getActionSetBoard(board) {
+    return { type: 'SET_BOARD', board }
+}
+
 export function getActionRemoveBoard(boardId) {
-    return { type: 'REMOVE_BOARD', boardId }
+    return { type: 'CLEAR_BOARD', boardId }
 }
 
-export function getActionAddBoard(board) {
-    return { type: 'ADD_BOARD', board }
+//Minis Action Creators
+function getActionSetMinis(minis) {
+    return { type: 'SET_MINIS', minis }
+}
+function getActionAddMini(mini) {
+    return { type: 'ADD_MINI', mini }
+}
+function getActionRemoveMini(mini) {
+    return { type: 'REMOVE_MINI', mini }
+}
+function getActionUpdateMini(mini) {
+    return { type: 'UPDATE_MINI', mini }
 }
 
+//load minis to state
 export function loadBoardMinis() {
     return async dispatch => {
         try {
             const minis = await boardService.query()
-            // const minis = await boardService.query({ minis: true })
-            dispatch({ type: 'SET_BOARDS', minis })
+            dispatch({ type: 'SET_MINIS', minis })
         } catch (err) {
             console.log('BoardActions: err in loadBoard', err)
         }
     }
 }
 
-export function addBoard(board) {
+//load board to state
+export function setBoard(board) {
+    console.log(board);
     return async dispatch => {
         try {
-            let savedBoard = await boardService.save(board)
-            savedBoard = boardService.minify(savedBoard)
-            dispatch(getActionAddBoard(savedBoard))
+            dispatch(getActionSetBoard(board))
         } catch (err) {
             console.log('BoardActions: err in addBoard', err)
             throw err
@@ -36,14 +50,30 @@ export function addBoard(board) {
     }
 }
 
-export function removeBoard(boardId) {
+//update mini in state
+export function updateMini(newMini) {
     return async dispatch => {
-        try {
-            await boardService.remove(boardId)
-            dispatch(getActionRemoveBoard(boardId))
-        } catch (err) {
-            console.log('BoardActions: err in removeBoard', err)
-            throw err
+        dispatch(getActionUpdateMini(newMini))
+    }
+}
+
+//update board in state
+export function updateBoard(board) {
+    return async dispatch => {
+        if (!board) {
+            try {
+                dispatch(getActionRemoveBoard())
+            } catch (err) {
+                console.log('BoardActions: err in removeBoard', err)
+                throw err
+            }
+        } else {
+            try {
+                dispatch(getActionSetBoard(board))
+            } catch (err) {
+                console.log('BoardActions: err in addBoard', err)
+                throw err
+            }
         }
     }
 }
