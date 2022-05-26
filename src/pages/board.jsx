@@ -72,7 +72,7 @@ class _Board extends React.Component {
                     <button style={({ height: "40px", width: "270px" })}>Add another list</button>
                 </section>
                 <Switch>
-                    <Route path={'/board/:boardId/task/:taskId'} component={TaskDetails} />
+                    <Route path={'/board/:boardId/:groupId/:taskId'} component={TaskDetails} />
                 </Switch>
             </section>
         </React.Fragment>

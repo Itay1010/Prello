@@ -5,7 +5,8 @@ import { boardService } from './board.service'
 
 export const taskService = {
     addTask,
-    archiveTask
+    archiveTask,
+    getById
 }
 
 
@@ -20,7 +21,7 @@ async function addTask(newTask) {
     try {
         store.dispatch(getActionSetBoard(newBoard))
         await boardService.save(newBoard)
-        
+
     } catch (error) {
         store.dispatch(getActionSetBoard(board))
         console.error('Had en error setting board', error)
@@ -43,4 +44,9 @@ async function archiveTask({ taskId, groupId }) {
         store.dispatch(getActionSetBoard(board))
         console.error('Had en error setting board', error)
     }
+}
+
+async function getById(taskId) {
+    let { boardModule: { selectedBoard: board } } = store.getState()
+    console.log(taskId)
 }

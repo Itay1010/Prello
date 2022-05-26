@@ -4,6 +4,7 @@ import { boardService } from '../../services/board/board.service'
 
 // Board Action Creators
 export function getActionSetBoard(board) {
+    console.log('a123');
     return { type: 'SET_BOARD', board }
 }
 
