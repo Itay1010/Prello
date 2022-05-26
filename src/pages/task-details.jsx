@@ -10,6 +10,10 @@ import { Dates } from '../cmps/task-details/dynamic-cmps/dates.jsx'
 import { Attachment } from '../cmps/task-details/dynamic-cmps/attachment.jsx'
 import { Location } from '../cmps/task-details/dynamic-cmps/location.jsx'
 
+// CMPS
+
+import { ChecklistList } from '../cmps/task-details/checklist/checklistList.jsx';
+
 // ACTIONS
 import { updateBoard } from '../store/board/board.action'
 
@@ -35,17 +39,14 @@ export const TaskDetails = () => {
     }
 
     async function onLoad() {
-        console.log(board)
         const groupToAdd = await board.groups.find(group => group.id === groupId)
         setGroup(groupToAdd)
         const task = await groupToAdd.tasks.find(task => task.id === taskId)
-        console.log('task', task)
         setTask(task)
     }
     useEffect(() => {
         onLoad()
-        console.log('poop')
-    }, [])
+    }, [task, group])
 
 
     const setModal = (type) => {
@@ -54,16 +55,12 @@ export const TaskDetails = () => {
     }
 
     const saveMembers = (updatedTask) => {
-        console.log(updatedTask)
     }
 
     const saveLabels = (updatedTask) => {
-        console.log(updatedTask)
     }
 
     const saveChecklist = (checklistTitle) => {
-        console.log('checklistTitle', checklistTitle)
-        console.log(task)
         const newChecklist = {
             title: checklistTitle,
             items: [],
@@ -79,20 +76,20 @@ export const TaskDetails = () => {
         saveBoard()
     }
 
-    const saveBoard = () => {
-
-        dispatch(updateBoard(board))
-    }
-
     const onSaveAttachment = (url) => {
-        console.log(url)
         if (task.Attachments) {
             task.Attachments.push(url)
         } else {
             task.Attachments = [url]
         }
-        setGroup(...group)
+        setGroup(group)
+        saveBoard()
     }
+    const saveBoard = () => {
+
+        dispatch(updateBoard(board))
+    }
+
 
     const DynamicModal = () => {
         switch (modalType) {
@@ -116,13 +113,17 @@ export const TaskDetails = () => {
     // const onArchiveTask = async (task) => {
     //     taskService.archiveTask(task, board)
     // }
+    // 
+    // console.log(task)
 
-
+    if (!group || !task) return <React.Fragment></React.Fragment>
+    const { checklist } = task
     return <section onClick={onGoBack} className='task-details-shadow'>
         <section className='task-details flex space-between' onClick={(event) => event.stopPropagation()}>
-            <div className='task-content'>
-                CONTENT
-            </div>
+            {checklist.length > 0 && <div className='task-content'>
+                {checklist.length > 0 && <ChecklistList checklist={checklist} />}
+            </div>}
+
             <div className='task-edit flex col'>
                 <button onClick={() => setModal('members')}>Members</button>
                 <button onClick={() => setModal('labels')}>Labels</button>

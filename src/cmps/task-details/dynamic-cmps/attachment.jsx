@@ -6,7 +6,6 @@ export const Attachment = ({ saveAttachment }) => {
         ev.preventDefault()
         const { target } = ev
         const { value } = target.name
-        console.log(value)
         saveAttachment(value)
     }
 
