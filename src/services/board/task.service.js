@@ -20,6 +20,7 @@ async function addTask(newTask) {
     try {
         store.dispatch(getActionSetBoard(newBoard))
         await boardService.save(newBoard)
+        
     } catch (error) {
         store.dispatch(getActionSetBoard(board))
         console.error('Had en error setting board', error)
