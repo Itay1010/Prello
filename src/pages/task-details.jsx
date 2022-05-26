@@ -26,14 +26,9 @@ export const TaskDetails = () => {
         history.push(`/board/${boardId}`)
     }
 
-<<<<<<< HEAD
-    const setModal = (type) => {
-        setModalType(type)
-=======
     async function onLoad() {
         const groupToAdd = await groupService.getGroupById(groupId, boardId)
         setGroup(groupToAdd)
->>>>>>> b4c3c3c84686ab06d15ddc56f902fa6e93e97246
 
     }
     useEffect(() => {
