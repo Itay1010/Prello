@@ -40,7 +40,7 @@ export const Group = ({ group, onAddTask, onArchiveTask, onArchiveGroup, onGroup
         <div className="list-task">
             {tasks.map(task => {
                 if (task.archivedAt) return
-                return <TaskPreview task={task} groupId={group.id} onArchiveTask={onArchiveTask} />
+                return <TaskPreview key={task.id} task={task} groupId={group.id} onArchiveTask={onArchiveTask} />
             })}
             {isTaskOpen && <article className="task-preview">
                 <TextareaAutosize
