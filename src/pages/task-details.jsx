@@ -11,7 +11,6 @@ import { Attachment } from '../cmps/task-details/dynamic-cmps/attachment.jsx'
 import { Location } from '../cmps/task-details/dynamic-cmps/location.jsx'
 
 // CMPS
-
 import { ChecklistList } from '../cmps/task-details/checklist/checklistList.jsx';
 
 // ACTIONS
@@ -54,14 +53,14 @@ export const TaskDetails = () => {
         // setModalType(type)
     }
 
-    const saveMembers = (updatedTask, groupId) => {
+    const saveMembers = (updatedTask) => {
         const group = board.groups.find(group => group.id === groupId)
         const idx = group.tasks.findIndex(task => task.id === updatedTask.id)
         group.tasks[idx].members = updatedTask.members
         setGroup(group)
         saveBoard()
-
     }
+
     // const saveMembers = (updatedTask, groupId) => {
     //     // console.log('board before change', board);
     //     const group = board.groups.find(group => group.id === groupId)
@@ -75,6 +74,11 @@ export const TaskDetails = () => {
     // }
 
     const saveLabels = (updatedTask) => {
+        const group = board.groups.find(group => group.id === groupId)
+        const idx = group.tasks.findIndex(task => task.id === updatedTask.id)
+        group.tasks[idx].members = updatedTask.members
+        setGroup(group)
+        saveBoard()
     }
 
     const saveChecklist = (checklistTitle) => {
@@ -123,9 +127,11 @@ export const TaskDetails = () => {
     const DynamicModal = () => {
         switch (modalType) {
             case 'members':
-                return <Members saveMembers={saveMembers} members={board.members} />
+                return <Members saveMembers={saveMembers} boardMembers={board.members} task={task} />
+            // case 'members':
+            //     return <Members saveMembers={saveMembers} members={board.members} />
             case 'labels':
-                return <Labels saveLabels={saveLabels} />
+                return <Labels saveLabels={saveLabels} task={task} />
             case 'checklist':
                 return <Checklist saveChecklist={saveChecklist} group={group} />
             case 'dates':
