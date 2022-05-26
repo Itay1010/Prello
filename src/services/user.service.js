@@ -1,4 +1,5 @@
 import { storageService } from './basic/async-storage.service'
+import { utilService } from './basic/util.service'
 // import { httpService } from './basic/http.service'
 // import { socketService, SOCKET_EVENT_USER_UPDATED } from './socket.service'
 
@@ -19,8 +20,9 @@ function getLoggedinUser() {
 }
 
 async function signup(userCred,onGoOn) {
-    const miniUser = await storageService.post(LOCAL_STORAGE_USER_DB, userCred)
-    login(miniUser)
+    const user = await storageService.post(LOCAL_STORAGE_USER_DB, userCred)
+    // user._id = utilService.makeId()
+    login(user)
     onGoOn()
 }
 

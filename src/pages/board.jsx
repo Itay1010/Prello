@@ -78,11 +78,9 @@ class _Board extends React.Component {
     }
 
     render() {
-        console.log('_Board - render - this.props', this.props)
         const { board } = this.props
         if (!board) return <div>loading...</div>
         const { groups } = board
-        console.log(groups)
 
         return <React.Fragment>
             <MainHeader />
