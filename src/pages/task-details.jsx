@@ -54,8 +54,25 @@ export const TaskDetails = () => {
         // setModalType(type)
     }
 
-    const saveMembers = (updatedTask) => {
+    const saveMembers = (updatedTask, groupId) => {
+        const group = board.groups.find(group => group.id === groupId)
+        const idx = group.tasks.findIndex(task => task.id === updatedTask.id)
+        group.tasks[idx].members = updatedTask.members
+        setGroup(group)
+        saveBoard()
+
     }
+    // const saveMembers = (updatedTask, groupId) => {
+    //     // console.log('board before change', board);
+    //     const group = board.groups.find(group => group.id === groupId)
+    //     const idx = group.tasks.findIndex(task => task.id === updatedTask.id)
+    //     const currtask = group.tasks[idx]
+    //     currtask.members = updatedTask.members
+    //     setTask(currtask)
+    //     // console.log('currtask', currtask);
+    //     // console.log('task', task);
+    //     saveBoard()
+    // }
 
     const saveLabels = (updatedTask) => {
     }

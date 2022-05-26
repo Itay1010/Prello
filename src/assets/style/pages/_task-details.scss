@@ -20,4 +20,10 @@
             flex-grow: 1;
         }
     }
+
+    .task-edit {
+        &>* {
+            @include btn($type: light)
+        }
+    }
 }
