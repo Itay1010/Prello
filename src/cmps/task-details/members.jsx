@@ -25,6 +25,7 @@ export const Members = () => {
             <button>x</button>
             <h2>Members</h2>
             <hr />
+
             <input type="text" value={filter.txt} onChange={filter} placeholder="Search members" />
             <h3>Board members</h3>
             {/* {members.map(member => {

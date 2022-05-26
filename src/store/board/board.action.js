@@ -39,7 +39,7 @@ export function loadBoardMinis() {
 
 //load board to state
 export function setBoard(board) {
-    console.log(board);
+    // console.log(board);
     return async dispatch => {
         try {
             dispatch(getActionSetBoard(board))

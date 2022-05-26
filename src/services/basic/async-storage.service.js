@@ -17,13 +17,9 @@ function query(entityType) {
 }
 
 async function post(entityType, newEntity) {
-    newEntity._id = utilService.makeId()
     const users = await query(entityType)
     users.push(newEntity)
     _save(entityType, users)
-    delete newEntity.firstName
-    delete newEntity.lastName
-    delete newEntity._id
     return newEntity
 }
 
