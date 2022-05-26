@@ -11,9 +11,7 @@ import { Group } from '../cmps/board/task-list'
 import { BoardHeader } from "../cmps/board/board-header/board-header"
 
 import { loadBoard, updateBoard } from "../store/board/board.action"
-import { boardService } from "../services/board/board.service"
 import { utilService } from "../services/basic/util.service"
-import { groupService } from "../services/board/group.service";
 // import { Switch } from "react-router-dom/cjs/react-router-dom.min"
 import { Switch, Route } from 'react-router-dom'
 
@@ -69,6 +67,7 @@ class _Board extends React.Component {
 
     render() {
         const { board } = this.props
+        // console.log('_Board - render - board', board)
         if (!board) return <div>loading...</div>
         const { groups } = board
 
@@ -89,7 +88,7 @@ class _Board extends React.Component {
                     <button style={({ height: "40px", width: "270px" })}>Add another list</button>
                 </section>
                 <Switch>
-                    <Route path={'/board/:boardId/task/:taskId'} component={TaskDetails} />
+                    <Route path={'/board/:boardId/:groupId/:taskId'} component={TaskDetails} />
                 </Switch>
             </section>
         </React.Fragment>

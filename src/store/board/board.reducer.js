@@ -1,4 +1,4 @@
-import undoable from "redux-undo";
+// import undoable from "redux-undo";
 const initialState = {
     miniBoards: [],
     selectedBoard: null

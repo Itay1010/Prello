@@ -29,6 +29,7 @@ export const boardService = {
     remove,
     getById,
     save,
+    getTask,
     getMembers
     // subscribe,
     // unsubscribe,
@@ -77,6 +78,13 @@ async function save(board) {
     } catch (error) {
         throw _logError(error)
     }
+}
+
+async function getTask(boardId = 'b101', groupId = 'g102', taskId) {
+    const board = await getById(boardId)
+    const group = board.groups.find(group => group.id === groupId)
+    const task = group.tasks.find(task => task.id === taskId)
+    return task
 }
 
 async function getMembers() {

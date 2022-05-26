@@ -56,31 +56,37 @@
             "tasks": [
                 {
                     "id": "t101",
-                    "title": "Replace logo"
+                    "title": "Replace logo",
+                    "members": [ "u101"]
                 },
                 {
                     "id": "t102",
-                    "title": "Add json"
+                    "title": "Add json",
+                    "members": ["u103", "u102"]
                 },
                 {
                     "id": "t110",
-                    "title": "more json"
+                    "title": "more json",
+                    "members": []
                 }
             ]
         },
         {
             "id": "g102",
             "title": "done",
+            "members": [],
             "tasks": [
                 {
                     "id": "t103",
                     "title": "Just do it now",
-                    "archivedAt": 1589983468418
+                    "archivedAt": 1589983468418,
+                    "members": ["u102", "u101"]
                 },
                 {
                     "id": "t104",
                     "title": "new feature",
                     "status": "in-progress",
+                    "members": ["u103"],
                     "description": "description",
                     "comments": [
                         {
