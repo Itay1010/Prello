@@ -10,7 +10,7 @@ import { MainHeader } from "../cmps/shared cmps/header/main-header"
 import { Group } from '../cmps/board/task-list'
 import { BoardHeader } from "../cmps/board/board-header/board-header"
 
-import { setBoard, updateBoard } from "../store/board/board.action"
+import { loadBoard, updateBoard } from "../store/board/board.action"
 import { boardService } from "../services/board/board.service"
 import { utilService } from "../services/basic/util.service"
 import { groupService } from "../services/board/group.service";
@@ -19,39 +19,56 @@ import { Switch, Route } from 'react-router-dom'
 
 // Routes
 import { TaskDetails } from './task-details.jsx'
-import { taskService } from "../services/board/task.service";
 
 class _Board extends React.Component {
 
     componentDidMount() {
-        this._loadBoard()
+        this._setBoard()
     }
 
-    _loadBoard = async () => {
+    _setBoard = async () => {
         const { boardId } = this.props.match.params
-        const board = await boardService.getById(boardId)
-        this.props.setBoard(board)
+        this.props.loadBoard(boardId)
     }
 
     onAddTask = async (newTask) => {
-        taskService.addTask(newTask)
+        const newBoard = JSON.parse(JSON.stringify(this.props.board))
+        const groupIdx = newBoard.groups.findIndex(group => group.id === newTask.groupId)
+
+        newTask = { id: utilService.makeId(), title: newTask.title }
+        newBoard.groups[groupIdx].tasks.push(newTask)
+        this.props.updateBoard(newBoard)
     }
 
-    onArchiveTask = async (task) => {
-        taskService.archiveTask(task)
+    onArchiveTask = async ({ taskId, groupId }) => {
+        const newBoard = JSON.parse(JSON.stringify(this.props.board))
+        const groupIdx = newBoard.groups.findIndex(group => group.id === groupId)
+
+        newBoard.groups[groupIdx].tasks.map(task => {
+            if (task.id === taskId) task.archivedAt = Date.now()
+        })
+        this.props.updateBoard(newBoard)
     }
 
     onArchiveGroup = async (groupId) => {
-        groupService.archiveGroup(groupId)
+        const newBoard = JSON.parse(JSON.stringify(this.props.board))
+
+        newBoard.groups.map(group => {
+            if (group.id === groupId) group.archivedAt = Date.now()
+        })
+        this.props.updateBoard(newBoard)
     }
 
-    onGroupChange = async (pack) => {
-        groupService.groupChange(pack)
+    onGroupChange = async ({ txt, groupId }) => {
+        const newBoard = JSON.parse(JSON.stringify(this.props.board))
+        newBoard.groups.map(group => {
+            if (group.id === groupId) group.title = txt
+        })
+        this.props.updateBoard(newBoard)
     }
 
     render() {
         const { board } = this.props
-        console.log('_Board - render - board', board)
         if (!board) return <div>loading...</div>
         const { groups } = board
 
@@ -88,7 +105,7 @@ const mapStateToProps = state => {
 }
 
 const mapDispatchToProps = {
-    setBoard,
+    loadBoard,
     updateBoard,
     // removeReview
 }

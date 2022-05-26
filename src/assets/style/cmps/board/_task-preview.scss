@@ -1,16 +1,19 @@
 .task-preview {
     width: 100%;
+    position: relative;
     background-color: $white;
+    padding: 6px 8px 2px;
     border-radius: 3px;
     box-shadow: 0 1px 0 #091e4240;
 
     &>* {
         // border: 1px solid red;
-        padding: 0 8px;
     }
 
     .task-color {
+        
         line-height: 32px;
+        height: 10px;
         border-radius: 3px 3px 0 0;
 
     }

@@ -31,7 +31,6 @@ export const Group = ({ group, onAddTask, onArchiveTask, onArchiveGroup, onGroup
                     if (ev.key === "Enter") {
                         ev.preventDefault()
                         ev.target.blur()
-                        onGroupChange(groupTitle)
                     }
                 }}></TextareaAutosize>
             <div className="more" onClick={ev => {

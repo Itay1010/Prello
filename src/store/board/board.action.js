@@ -30,7 +30,7 @@ export function loadBoardMinis() {
     return async dispatch => {
         try {
             const minis = await boardService.query()
-            dispatch({ type: 'SET_MINIS', minis })
+            dispatch(getActionSetMinis(minis))
         } catch (err) {
             console.log('BoardActions: err in loadBoard', err)
         }
@@ -38,10 +38,10 @@ export function loadBoardMinis() {
 }
 
 //load board to state
-export function setBoard(board) {
-    // console.log(board);
+export function loadBoard(boardId) {
     return async dispatch => {
         try {
+            const board = await boardService.getById(boardId)
             dispatch(getActionSetBoard(board))
         } catch (err) {
             console.log('BoardActions: err in addBoard', err)
@@ -58,22 +58,16 @@ export function updateMini(newMini) {
 }
 
 //update board in state
-export function updateBoard(board) {
-    return async dispatch => {
-        if (!board) {
-            try {
-                dispatch(getActionRemoveBoard())
-            } catch (err) {
-                console.log('BoardActions: err in removeBoard', err)
-                throw err
-            }
-        } else {
-            try {
-                dispatch(getActionSetBoard(board))
-            } catch (err) {
-                console.log('BoardActions: err in addBoard', err)
-                throw err
-            }
+export function updateBoard(newBoard) {
+    return async (dispatch, getState) => {
+        const prevBoard = { ...getState().boardModule.selectedBoard }
+        console.log('return - board', prevBoard)
+        try {
+            dispatch(getActionSetBoard(newBoard))
+            await boardService.save(newBoard)
+        } catch (error) {
+            dispatch(getActionSetBoard(prevBoard))
+            console.error('Had en error setting board', error)
         }
     }
 }

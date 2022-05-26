@@ -28,9 +28,7 @@ async function archiveGroup(groupId) {
 }
 
 
-async function groupChange({ txt, groupId }) {
-
-    let { boardModule: { selectedBoard: board } } = store.getState()
+async function groupChange({ txt, groupId }, board) {
     board = { ...board }
     const newBoard = { ...board }
     newBoard.groups.map(group => {

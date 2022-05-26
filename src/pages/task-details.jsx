@@ -6,6 +6,7 @@ import { Checklist } from '../cmps/task-details/dynamic-cmps/checklist.jsx'
 import { Dates } from '../cmps/task-details/dynamic-cmps/dates.jsx'
 import { Attachment } from '../cmps/task-details/dynamic-cmps/attachment.jsx'
 import { Location } from '../cmps/task-details/dynamic-cmps/location.jsx'
+import { taskService } from '../services/board/task.service.js';
 
 
 
@@ -50,6 +51,10 @@ export const TaskDetails = () => {
         }
     }
 
+    // const onArchiveTask = async (task) => {
+    //     taskService.archiveTask(task, board)
+    // }
+
 
     return <section onClick={onGoBack} className='task-details-shadow'>
         <section className='task-details flex space-between' onClick={(event) => event.stopPropagation()}>
@@ -63,6 +68,9 @@ export const TaskDetails = () => {
                 <button onClick={() => setModal('dates')}>Dates</button>
                 <button onClick={() => setModal('attachment')}>Attachment</button>
                 <button onClick={() => setModal('location')}>Location</button>
+                <button>Archive card</button>
+                {/* <button onClick={ev => onArchiveTask({ taskId: task.id, groupId })}>Archive card</button> */}
+
             </div>
             {modalType && <DynamicModal type={modalType} boardId={boardId} onSaveTask={saveTask} />}
         </section>
