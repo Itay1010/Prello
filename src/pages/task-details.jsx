@@ -64,12 +64,7 @@ export const TaskDetails = () => {
                 <button onClick={() => setModal('attachment')}>Attachment</button>
                 <button onClick={() => setModal('location')}>Location</button>
             </div>
-<<<<<<< HEAD
-            <Members boardId={boardId} />
-            {/* {isModal && <DynamicModal type={modalType} />} */}
-=======
             {modalType && <DynamicModal type={modalType} boardId={boardId} onSaveTask={saveTask} />}
->>>>>>> a2b16b974dccfe2dbe0a8867f3e05c28c6f0ac2c
         </section>
     </section>
 }
