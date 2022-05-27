@@ -1,10 +1,23 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useForm } from '../../../hooks/useForm'
 import { ClItemsList } from './cl-items-list.jsx'
+import Box from '@mui/material/Box';
+import LinearProgress from '@mui/material/LinearProgress';
 
 
 
-export const ChecklistItemPreview = ({ item, saveChecklistTask }) => {
+export const ChecklistItemPreview = ({ item, saveChecklistTask, setIsDone, checklistId }) => {
+
+
+    const { items, title } = item
+    const checklistLength = items.length
+    let checklistDoneLength = 0
+    items.forEach(item => {
+        if (item.isDone) checklistDoneLength++
+        console.log(checklistDoneLength)
+    })
+
+    const [progress, setProgress] = useState(null);
     const [checklistTask, handleChange] = useForm(null)
     const [isInputOpen, setInput] = useState(false)
     // console.log(item.id)
@@ -18,8 +31,11 @@ export const ChecklistItemPreview = ({ item, saveChecklistTask }) => {
         setInput(!isInputOpen)
     }
 
-    const { title, items } = item
+    useEffect(() => {
+        setProgress(checklistDoneLength)
+    }, [checklistLength, checklistDoneLength])
 
+    // const { title, items } = item
     return <div className='checklist-item-preview'>
 
         <div className='item-content flex'>
@@ -28,9 +44,11 @@ export const ChecklistItemPreview = ({ item, saveChecklistTask }) => {
                 <h2>{title}</h2>
                 <button>delete</button>
             </div>
-            <div>% Bar</div>
+            <Box sx={{ width: '100%' }}>
+                <LinearProgress variant="determinate" value={progress} />
+            </Box>
             <div className='checklist-item-list'>
-                {items?.length > 0 && <ClItemsList items={items} />}
+                {items?.length > 0 && <ClItemsList checklistId={checklistId} items={items} setIsDone={setIsDone} />}
 
 
 

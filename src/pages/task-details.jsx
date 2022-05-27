@@ -100,7 +100,8 @@ export const TaskDetails = () => {
     const onSaveChecklistTask = (txt, clTaskId) => {
         const newItem = {
             txt,
-            checklistTaskId: utilService.makeId()
+            checklistTaskId: utilService.makeId(),
+            isDone: false
         }
 
         const checklistTask = task.checklist.find(clTask => clTask.id === clTaskId)
@@ -123,6 +124,19 @@ export const TaskDetails = () => {
     const saveBoard = () => {
 
         dispatch(updateBoard(board))
+    }
+
+    const deepCloneBoard = () => {
+        return JSON.parse(JSON.stringify(board))
+    }
+
+    const onSetIsDone = (checklistId, clTaskItem) => {
+        // console.log(checklistId)
+        // const requestedChecklist = task.checklist.find(checklist => checklistId === checklist.id)
+        // let requestedItemInChecklistIdx = requestedChecklist.items.findIndex(item => item.id === clTaskItem.id)
+        // requestedChecklist.items.splice(requestedItemInChecklistIdx, 1, clTaskItem)
+        // console.log(task.checklist[0].items)
+        saveBoard()
     }
 
 
@@ -168,7 +182,7 @@ export const TaskDetails = () => {
             <div className='task-container flex space-between'>
                 <div className="task-content">
                     {checklist?.length > 0 && <div className='task-content'>
-                        {checklist.length > 0 && <ChecklistList checklist={checklist} saveChecklistTask={onSaveChecklistTask} />}
+                        {checklist.length > 0 && <ChecklistList checklist={checklist} saveChecklistTask={onSaveChecklistTask} setIsDone={onSetIsDone} />}
                     </div>}
                 </div>
 
