@@ -58,6 +58,7 @@ input {
     font-family: pri-font, sans-serif;
     color: $txt;
     margin-inline-end: 8px;
+    cursor: pointer;
 
 }
 
@@ -71,11 +72,12 @@ textarea {
     resize: none;
     font-size: rem(18px);
     font-weight: 600;
-    // overflow: hidden;
     overflow-wrap: break-word;
     height: 28px;
     line-height: 1;
     padding: 0 8px;
+    cursor: pointer;
+
 
     &:focus {
         background-color: $white;

@@ -30,7 +30,7 @@ class _Board extends React.Component {
     }
 
     onAddTask = async (newTask) => {
-        if(!newTask.title) return
+        if (!newTask.title) return
         const newBoard = JSON.parse(JSON.stringify(this.props.board))
         const groupIdx = newBoard.groups.findIndex(group => group.id === newTask.groupId)
 
@@ -65,6 +65,13 @@ class _Board extends React.Component {
         })
         this.props.updateBoard(newBoard)
     }
+    
+    onAddGroup = async (title) => {
+        const newBoard = JSON.parse(JSON.stringify(this.props.board))
+        const newGroup = { id: utilService.makeId(), title, tasks: [] }
+        newBoard.groups.push(newGroup)
+        this.props.updateBoard(newBoard)
+    }
 
     render() {
         const { board } = this.props
@@ -88,7 +95,7 @@ class _Board extends React.Component {
                             onGroupChange={this.onGroupChange}
                         />
                     })}
-                    <AddGroupForm />
+                    <AddGroupForm handleSubmit={this.onAddGroup} />
                 </section>
                 <Switch>
                     <Route path={'/board/:boardId/:groupId/:taskId'} component={TaskDetails} />

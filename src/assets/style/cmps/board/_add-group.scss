@@ -4,17 +4,17 @@
     align-self: flex-start;
     background-color: transparent;
     border-radius: 3px;
-
+    
     .open-edit-btn {
         display: block;
         @include btn($type: dark, $height: 40px);
-        background-color: $white;
         border-radius: 3px;
         color: darkblue;
         width: 270px;
         cursor: pointer;
+        transition: background-color, 0.09zs;
     }
-
+    
     .add-list {
         position: absolute;
         display: none;
@@ -24,7 +24,7 @@
         width: 100%;
         top: 0;
         transition: transparency;
-
+        
         input {
             // position: absolute;
             display: block;
@@ -32,6 +32,8 @@
             background-color: white;
             padding: 8px 12px;
             margin-bottom: 4px;
+            border-radius: 3px;
+            width: 100%;
         }
 
         .add-list-btn {

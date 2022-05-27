@@ -14,7 +14,7 @@ export const Checklist = ({ saveChecklist, group }) => {
     return <div className='modal-type'>
         <h4>Title</h4>
         <form action="" onSubmit={onCreateChecklist}>
-            <input autoComplete='off' type="text" placeholder='Checklist title' name='name' />
+            <input autoComplete='off' type="text" placeholder='Checklist title' name='name' onChange={() => console.log('yalla balagan')} />
             <button >Save</button>
         </form>
     </div>

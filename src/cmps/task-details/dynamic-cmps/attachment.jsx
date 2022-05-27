@@ -15,7 +15,7 @@ export const Attachment = ({ saveAttachment }) => {
     return <div className='modal-type'>
         <h4>Title</h4>
         <form onSubmit={onSaveAttachment}>
-            <input autoComplete='off' type="text" placeholder='Enter img url' name='name' />
+            <input autoComplete='off' type="text" placeholder='Enter img url' name='name' onChange={() => console.log('yalla balagan')} />
             <button>Save</button>
         </form>
     </div>
