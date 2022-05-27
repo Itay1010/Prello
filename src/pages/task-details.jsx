@@ -130,8 +130,6 @@ export const TaskDetails = () => {
         switch (modalType) {
             case 'members':
                 return <Members saveMembers={saveMembers} boardMembers={board.members} task={task} />
-            // case 'members':
-            //     return <Members saveMembers={saveMembers} members={board.members} />
             case 'labels':
                 return <Labels saveLabels={saveLabels} task={task} />
             case 'checklist':
@@ -155,8 +153,9 @@ export const TaskDetails = () => {
 
     if (!group || !task) return <React.Fragment></React.Fragment>
     const { checklist } = task
-    return <section onClick={onGoBack} className='task-details-shadow'>
+    return <section onClick={onGoBack} className='task-details-shadow flex justify-center'>
         <section className='task-details flex space-between' onClick={(event) => event.stopPropagation()}>
+            {/* <h2>{task.title}</h2> */}
             {checklist?.length > 0 && <div className='task-content'>
                 {checklist.length > 0 && <ChecklistList checklist={checklist} saveChecklistTask={onSaveChecklistTask} />}
             </div>}

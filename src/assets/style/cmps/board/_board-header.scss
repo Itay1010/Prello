@@ -18,11 +18,11 @@
 
         input {
             font-size: rem(20px);
-            font-weight: 600;
+            font-weight: 700;
             margin-bottom: 4px;
+            flex-grow: 1;
+            // width: auto;
 
-
-            // width: 100%;
             &:focus {
                 outline: 1px solid $txt;
                 border-radius: 3px;

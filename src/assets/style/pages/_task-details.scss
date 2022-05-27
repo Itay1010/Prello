@@ -1,23 +1,28 @@
 .task-details-shadow {
     position: fixed;
     top: 0;
-    height: 100%;
-    width: 100%;
-    background-color: #000000a3;
-    display: flex;
-    justify-content: center;
-    overflow-y: scroll;
+    height: 100vh;
+    width: 100vw;
+    background-color: rgba(0, 0, 0, 0.5);
+    overflow-y: auto;
+    margin-bottom: 54px;
 
     .task-details {
-        // overflow-y: scroll;
         background-color: white;
-        margin-top: 40px;
-        width: 700px;
-        height: 1000px;
+        margin-top: 54px;
+        width: 768px;
+        // height: 1000px;
         margin-bottom: 40px;
+        padding: 16px;
 
         .task-content {
             flex-grow: 1;
+
+            h2 {
+                // &::before {
+                //     content: "\e912";
+                // }
+            }
         }
     }
 
