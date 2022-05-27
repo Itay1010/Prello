@@ -12,6 +12,7 @@ import { Location } from '../cmps/task-details/dynamic-cmps/location.jsx'
 
 // CMPS
 import { ChecklistList } from '../cmps/task-details/checklist/checklistList.jsx';
+import { AttachmentList } from '../cmps/task-details/attachments/attachment-list.jsx'
 
 // ACTIONS
 import { updateBoard } from '../store/board/board.action'
@@ -101,7 +102,7 @@ export const TaskDetails = () => {
     const onSaveChecklistTask = (txt, clTaskId) => {
         const newItem = {
             txt,
-            checklistTaskId: utilService.makeId(),
+            id: utilService.makeId(),
             isDone: false
         }
 
@@ -113,13 +114,15 @@ export const TaskDetails = () => {
         saveBoard()
     }
 
-    const onSaveAttachment = (url) => {
-        if (task.Attachments) {
-            task.Attachments.push(url)
+    const onSaveAttachment = (attachment) => {
+        attachment.createdAt = Date.now()
+        if (task.attachments) {
+            task.attachments.push(attachment)
         } else {
-            task.Attachments = [url]
+            task.attachments = [attachment]
         }
-        setGroup(group)
+        console.log(task)
+        // setGroup(group)
         saveBoard()
     }
     const saveBoard = () => {
@@ -136,7 +139,18 @@ export const TaskDetails = () => {
         // const requestedChecklist = task.checklist.find(checklist => checklistId === checklist.id)
         // let requestedItemInChecklistIdx = requestedChecklist.items.findIndex(item => item.id === clTaskItem.id)
         // requestedChecklist.items.splice(requestedItemInChecklistIdx, 1, clTaskItem)
-        // console.log(task.checklist[0].items)
+        saveBoard()
+    }
+
+    const onDeleteClTask = (clTaskId, item) => {
+        // console.log(task)
+        // console.log(clTaskId, item)
+        // item.items.filter(clTask => clTask.id !== clTaskId)
+
+        const clTaskIdx = item.items.findIndex(clTask => clTask.id === clTaskId)
+        // console.log(clTaskIdx)
+        item.items.splice(clTaskIdx, 1)
+
         saveBoard()
     }
 
@@ -166,7 +180,8 @@ export const TaskDetails = () => {
     // 
     // console.log(task)
     if (!group || !task) return <React.Fragment></React.Fragment>
-    const { checklist } = task
+    const { checklist, attachments } = task
+    console.log(attachments)
 
     return <section onClick={onGoBack} className='task-details-shadow flex justify-center'>
         <section className='task-details flex col' onClick={(event) => event.stopPropagation()}>
@@ -217,9 +232,10 @@ export const TaskDetails = () => {
                             <textarea cols="65" rows="40" placeholder='Add a more detailed description...'></textarea>
                         </div>
                     </div>
-                    {/* {checklist?.length > 0 && <div className='checklist'>
-                        {checklist.length > 0 && <ChecklistList checklist={checklist} saveChecklistTask={onSaveChecklistTask} />}
-                    </div>} */}
+                    {checklist?.length > 0 && <div className='checklist'>
+                        {checklist.length > 0 && <ChecklistList checklist={checklist} saveChecklistTask={onSaveChecklistTask} setIsDone={onSetIsDone} deleteClTask={onDeleteClTask} />}
+                    </div>}
+                    {attachments?.length > 0 && <AttachmentList attachments={attachments} />}
                 </div>
 
                 <div className='task-edit flex col'>
@@ -240,7 +256,7 @@ export const TaskDetails = () => {
                         <svg width="24" height="24" role="presentation" focusable="false" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M13 6C13 5.44772 12.5523 5 12 5C11.4477 5 11 5.44772 11 6V12C11 12.2652 11.1054 12.5196 11.2929 12.7071L13.7929 15.2071C14.1834 15.5976 14.8166 15.5976 15.2071 15.2071C15.5976 14.8166 15.5976 14.1834 15.2071 13.7929L13 11.5858V6Z" fill="currentColor" /><path fillRule="evenodd" clipRule="evenodd" d="M22 12C22 17.5228 17.5228 22 12 22C6.47715 22 2 17.5228 2 12C2 6.47715 6.47715 2 12 2C17.5228 2 22 6.47715 22 12ZM12 20C16.4183 20 20 16.4183 20 12C20 7.58172 16.4183 4 12 4C7.58172 4 4 7.58172 4 12C4 16.4183 7.58172 20 12 20Z" /></svg>
                         <p>Dates</p>
                     </div>
-                    <div className='btn-edit-task-key flex align-center' onClick={() => setModal('dates')}>
+                    <div className='btn-edit-task-key flex align-center' onClick={() => setModal('attachment')}>
 
                         <p>Attachment</p>
                     </div>
