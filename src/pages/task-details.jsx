@@ -220,9 +220,6 @@ export const TaskDetails = () => {
                     {/* {checklist?.length > 0 && <div className='checklist'>
                         {checklist.length > 0 && <ChecklistList checklist={checklist} saveChecklistTask={onSaveChecklistTask} />}
                     </div>} */}
-                    {/* {checklist?.length > 0 && <div className='task-content'>
-                        {checklist.length > 0 && <ChecklistList checklist={checklist} saveChecklistTask={onSaveChecklistTask} setIsDone={onSetIsDone} />}
-                    </div>} */}
                 </div>
 
                 <div className='task-edit flex col'>
