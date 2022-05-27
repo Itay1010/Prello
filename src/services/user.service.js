@@ -11,12 +11,17 @@ export const userService = {
     signup,
     login,
     logout,
+    getUserById,
 }
 
 window.userService = userService
 
 function getLoggedinUser() {
     return JSON.parse(sessionStorage.getItem(LOCAL_STORAGE_LOGGEDIN_USER) || 'null')
+}
+
+function getUserById(userId) {
+    console.log(userId);
 }
 
 async function signup(userCred,onGoOn) {
@@ -41,6 +46,7 @@ async function login(userCred,onGoOn) {
 async function logout() {
     sessionStorage.removeItem(LOCAL_STORAGE_LOGGEDIN_USER)
 }
+
 
 function _saveLocalUser(user) {
     sessionStorage.setItem(LOCAL_STORAGE_LOGGEDIN_USER, JSON.stringify(user))
