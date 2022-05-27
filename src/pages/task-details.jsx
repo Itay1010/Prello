@@ -198,6 +198,10 @@ export const TaskDetails = () => {
 
     if (!group || !task) return <React.Fragment></React.Fragment>
     const { checklist, attachments } = task
+<<<<<<< HEAD
+=======
+    // console.log(attachments)
+>>>>>>> origin
 
     return <section onClick={onGoBack} className='task-details-shadow flex justify-center'>
         <section className='task-details flex col' onClick={(event) => event.stopPropagation()}>

@@ -98,8 +98,8 @@ async function getTask(boardId = 'b101', groupId = 'g102', taskId) {
     return task
 }
 
-async function getMembers() {
-    const board = await getById('b101')
+async function getMembers(boardId = 'b101') {
+    const board = await getById(boardId)
     return board.members
 }
 

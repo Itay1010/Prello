@@ -52,7 +52,7 @@ class _Board extends React.Component {
 
     onArchiveGroup = async (groupId) => {
         const newBoard = JSON.parse(JSON.stringify(this.props.board))
-        console.log(groupId);
+        // console.log(groupId);
         newBoard.groups.map(group => {
             if (group.id === groupId) group.archivedAt = Date.now()
         })
