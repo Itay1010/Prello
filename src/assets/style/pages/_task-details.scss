@@ -14,23 +14,90 @@
         // height: 1000px;
         margin-bottom: 40px;
         padding: 16px;
+        flex-wrap: wrap;
 
-        .task-content {
-            flex-grow: 1;
+        .task-header {
+            position: relative;
+            height: 60px;
 
-            h2 {
-                // &::before {
-                //     content: "\e912";
-                // }
+            .icon {
+                height: 32px;
+                width: 32px;
+                background-color: green;
+                margin-inline-end: 16px;
+            }
+
+            .data {
+                h2 {
+                    font-size: 20px;
+                    font-weight: 600;
+                    margin-bottom: 8px;
+                }
+
+                p {
+                    a {
+                        text-decoration: underline;
+                    }
+                }
+            }
+
+            .close-modal {
+                position: absolute;
+                display: fixed;
+                right: 0;
+                border: none;
+                height: 40px;
+                width: 40px;
+                border-radius: 100px;
+                cursor: pointer;
+
+                &:hover {
+                    background-color: $opc-black-hov;
+                }
+
             }
         }
+
+        .task-container {
+            gap: 16px;
+
+            .task-content {
+                flex-grow: 1;
+
+            }
+
+            .task-edit {
+                h3 {
+                    font-size: rem(14px);
+                    font-weight: 600;
+                    margin-bottom: 8px;
+                    // padding: 0 0 0 8px;
+
+                }
+
+                .btn-edit-task-key {
+                    @include btn($type: dark);
+                    cursor: pointer;
+                    color: $txt;
+                    width: 168px;
+                    margin-bottom: 8px;
+                    padding: 0 0 0 8px;
+
+                    svg {
+                        height: 16px;
+                        width: 16px;
+                        margin-inline-end: 8px;
+                    }
+                }
+
+            }
+        }
+
     }
 
-    .task-edit {
-        &>* {
-            @include btn($type: light)
-        }
-    }
+
+
+
 
     .modal {
         position: absolute;
