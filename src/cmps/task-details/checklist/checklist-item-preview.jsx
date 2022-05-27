@@ -14,8 +14,10 @@ export const ChecklistItemPreview = ({ item, saveChecklistTask, setIsDone, check
     let checklistDoneLength = 0
     items.forEach(item => {
         if (item.isDone) checklistDoneLength++
-        console.log(checklistDoneLength)
+        // console.log(checklistDoneLength)
     })
+
+    // const donePercentage=
 
     const [progress, setProgress] = useState(null);
     const [checklistTask, handleChange] = useForm(null)
