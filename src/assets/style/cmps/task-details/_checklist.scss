@@ -25,12 +25,15 @@
     }
 
     .space {
+        display: flex;
+        justify-content: center;
+        align-items: center;
         width: 30px;
         height: 30px;
     }
 
     .space2 {
-        margin: 30px;
+        margin: 0 4px;
     }
 
 }
