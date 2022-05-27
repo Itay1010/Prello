@@ -1,73 +1,45 @@
 import React, { useState } from "react"
-import { TextareaAutosize } from '@mui/material'
 import { TaskPreview } from "./task-preview"
-
+import { GroupTitle } from "./group-title"
+import { AddTask } from "./add-task"
 
 
 export const Group = ({ group, onAddTask, onArchiveTask, onArchiveGroup, onGroupChange }) => {
     const { tasks } = group
 
     const [newTask, setNewTask] = useState({ title: '', groupId: group.id })
-    const [groupTitle, setGroupTitle] = useState({ txt: group.title, groupId: group.id })
-    const [isTaskOpen, setIsTaskOpen] = useState(false)
-
     const handleChange = ({ target }) => {
         const { value, name } = target
         setNewTask(prevState => ({ ...prevState, [name]: value }))
     }
 
+    const [groupTitle, setGroupTitle] = useState({ txt: group.title, groupId: group.id })
+    const [isTaskOpen, setIsTaskOpen] = useState(false)
+
+
     return <section className="group flex col" onBlur={ev => setIsTaskOpen(prevState => false)}>
-        <div className="group-header flex space-between">
-            <TextareaAutosize
-                maxLength="521"
-                value={groupTitle.txt}
-                onChange={ev => {
-                    setGroupTitle(prevState => ({ ...prevState, txt: ev.target.value }))
-                }}
-                onBlur={ev => {
-                    if (!groupTitle.txt) return
-                    onGroupChange(groupTitle)
-                }}
-                onKeyDown={ev => {
-                    if (ev.key === "Enter") {
-                        ev.preventDefault()
-                        ev.target.blur()
-                    }
-                }}></TextareaAutosize>
-            <div className="more" onClick={ev => {
-                onArchiveGroup(group.id)
-            }}></div>
-        </div>
+        <GroupTitle
+            //Group header is just a textarea with two way data binding
+            groupInfo={groupTitle}
+            setGroupTitle={setGroupTitle}
+            onArchiveGroup={onArchiveGroup}
+            onGroupChange={onGroupChange}
+        />
         <div className="list-task">
             {tasks.map(task => {
                 if (task.archivedAt) return
                 return <TaskPreview key={task.id} task={task} groupId={group.id} onArchiveTask={onArchiveTask} />
             })}
-            {isTaskOpen && <article className="task-preview">
-                <TextareaAutosize
-                    minRows="3"
-                    maxRows="10"
-                    type="text"
-                    autoComplete="off"
-                    className="task-title"
-                    name="title"
-                    autoFocus
-                    style={({ width: '100%' })}
-                    value={newTask.title}
-                    placeholder="Enter a title for this card..."
-                    onChange={handleChange}
-                    onKeyDown={ev => {
-                        if (ev.key === "Enter") {
-                            ev.preventDefault()
-                            if(newTask.title) {
-                                onAddTask(newTask)
-                                setNewTask({ title: '', groupId: group.id })
-                            }
-                        }
-                    }}
-                ></TextareaAutosize>
-            </article>}
+            {isTaskOpen && <AddTask
+                // a card with the same class as the the others but with a textarea
+                group={group}
+                onAddTask={onAddTask}
+                handleChange={handleChange}
+                newTask={newTask}
+                setNewTask={setNewTask}
+            />}
         </div>
+
         {isTaskOpen || <div className="group-footer flex space-between align-center">
             <button className="add-card-btn" onClick={ev => setIsTaskOpen(true)
             }>Add a card</button>

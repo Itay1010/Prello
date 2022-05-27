@@ -8,11 +8,11 @@
     .open-edit-btn {
         display: block;
         @include btn($type: dark, $height: 40px);
-        background-color: $white;
         border-radius: 3px;
         color: darkblue;
         width: 270px;
         cursor: pointer;
+        transition: background-color, 0.09zs;
     }
     
     .add-list {
