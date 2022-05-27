@@ -13,7 +13,7 @@ export const AddTask = ({ group, onAddTask, newTask, handleChange, setNewTask })
             className="task-title"
             name="title"
             autoFocus
-            style={({ width: '100%' })}
+            // style={({ width: '100%' })}
             value={newTask.title}
             placeholder="Enter a title for this card..."
             onChange={handleChange}

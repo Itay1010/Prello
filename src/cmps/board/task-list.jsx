@@ -1,10 +1,12 @@
 import React, { useState } from "react"
+import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
+
 import { TaskPreview } from "./task-preview"
 import { GroupTitle } from "./group-title"
 import { AddTask } from "./add-task"
 
 
-export const Group = ({ group, onAddTask, onArchiveTask, onArchiveGroup, onGroupChange }) => {
+export const Group = ({ group, onAddTask, onArchiveTask, onArchiveGroup, onGroupChange, provided }) => {
     const { tasks } = group
 
     const [newTask, setNewTask] = useState({ title: '', groupId: group.id })
@@ -17,7 +19,13 @@ export const Group = ({ group, onAddTask, onArchiveTask, onArchiveGroup, onGroup
     const [isTaskOpen, setIsTaskOpen] = useState(false)
 
 
-    return <section className="group flex col" onBlur={ev => setIsTaskOpen(prevState => false)}>
+    return <section
+        ref={provided.innerRef}
+        {...provided.draggableProps}
+        {...provided.dragHandleProps}
+        className="group flex col"
+        onBlur={ev => setIsTaskOpen(prevState => false)}
+    >
         <GroupTitle
             //Group header is just a textarea with two way data binding
             groupInfo={groupTitle}

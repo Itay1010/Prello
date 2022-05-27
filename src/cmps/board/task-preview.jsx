@@ -8,7 +8,9 @@ export const TaskPreview = ({ task, groupId, onArchiveTask }) => {
 
     return <article className="task-preview">
         <Link to={`/board/${boardId}/${groupId}/${task.id}`}>
-            {task.style?.bgColor && <section className="task-color" style={({ backgroundColor: task.style.bgColor })}></section>}
+            {task.style?.bgColor && <section className="task-color"
+            // style={({ backgroundColor: task.style.bgColor })}
+            ></section>}
             <div className="task-info">
                 {<div className="task-label">
                     <div className="label"></div>

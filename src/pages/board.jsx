@@ -4,6 +4,7 @@ import { connect } from 'react-redux'
 
 //libs
 import { TextareaAutosize } from '@mui/material';
+import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
 
 //privet
 import { MainHeader } from "../cmps/shared cmps/header/main-header"
@@ -65,11 +66,27 @@ class _Board extends React.Component {
         })
         this.props.updateBoard(newBoard)
     }
-    
+
     onAddGroup = async (title) => {
         const newBoard = JSON.parse(JSON.stringify(this.props.board))
         const newGroup = { id: utilService.makeId(), title, tasks: [] }
         newBoard.groups.push(newGroup)
+        this.props.updateBoard(newBoard)
+    }
+
+
+    handleOnDragEnd = (result) => {
+        console.log('handle')
+        if (!result.destination) return
+        const { board } = this.props
+
+        const items = JSON.parse(JSON.stringify(board.groups))
+        const [reorderedItem] = items.splice(result.source.index, 1)
+        items.splice(result.destination.index, 0, reorderedItem)
+
+        // setGroups(items)
+        const newBoard = board.groups = items
+        console.log('handleOnDragEnd - newBoard', items)
         this.props.updateBoard(newBoard)
     }
 
@@ -83,20 +100,33 @@ class _Board extends React.Component {
             <MainHeader />
             <section className="board flex col main-layout">
                 <BoardHeader board={board} />
-                <section className="group-container flex">
-                    {groups.map(group => {
-                        if (group.archivedAt) return
-                        return <Group
-                            group={group}
-                            key={group.id}
-                            onAddTask={this.onAddTask}
-                            onArchiveTask={this.onArchiveTask}
-                            onArchiveGroup={this.onArchiveGroup}
-                            onGroupChange={this.onGroupChange}
-                        />
-                    })}
-                    <AddGroupForm handleSubmit={this.onAddGroup} />
-                </section>
+                <DragDropContext onDragEnd={this.handleOnDragEnd}>
+                    <Droppable droppableId="groups">
+                        {(provided) => {
+                            return <section className="group-container flex groups" ref={provided.innerRef}>
+                                {groups.map((group, idx) => {
+                                    if (group.archivedAt) return
+                                    return <Draggable key={group.id} draggableId={group.id} index={idx}>
+                                        {(provided) => (
+                                            <Group
+                                                provided={provided}
+                                                group={group}
+                                                key={group.id}
+                                                onAddTask={this.onAddTask}
+                                                onArchiveTask={this.onArchiveTask}
+                                                onArchiveGroup={this.onArchiveGroup}
+                                                onGroupChange={this.onGroupChange}
+                                            />
+                                        )}
+                                    </Draggable>
+                                })}
+                                {provided.placeholder}
+                                <AddGroupForm handleSubmit={this.onAddGroup} />
+                            </section>
+                        }}
+
+                    </Droppable>
+                </DragDropContext>
                 <Switch>
                     <Route path={'/board/:boardId/:groupId/:taskId'} component={TaskDetails} />
                 </Switch>

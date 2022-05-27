@@ -28,7 +28,9 @@ export const Labels = ({ saveLabels, task }) => {
         {/* <input onChange={(event) => handleChange(event)} type="text" value={filter} placeholder="Search members" /> */}
         {labels.map(label => {
             return <div className='label' key={label}>
-                <div className='label-bar' onClick={() => toggleLabel(label)} style={{ backgroundColor: label }}>
+                <div className='label-bar' onClick={() => toggleLabel(label)}
+                // style={{ backgroundColor: label }}
+                >
                     {taskToUpdate.labels?.includes(label) && <p>V</p>}
                 </div>
                 <button>E</button>
