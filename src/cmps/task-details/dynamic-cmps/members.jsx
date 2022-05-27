@@ -8,12 +8,12 @@ export const Members = ({ saveMembers, boardMembers, task, closeModal }) => {
     useEffect(() => {
         if (!filter) return setMembersToDisplay(boardMembers)
         const members = membersToDisplay.filter(member => member.firstName.toLowerCase().includes(filter.toLowerCase()) || member.lastName.toLowerCase().includes(filter.toLowerCase()))
-        console.log('members', members);
+        // console.log('members', members);
         setMembersToDisplay(members)
     }, [filter])
 
     const handleChange = ({ target }) => {
-        console.log(target.value);
+        // console.log(target.value);
         setFilter(target.value)
     }
 

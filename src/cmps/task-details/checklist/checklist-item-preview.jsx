@@ -6,7 +6,7 @@ import LinearProgress from '@mui/material/LinearProgress';
 
 
 
-export const ChecklistItemPreview = ({ item, saveChecklistTask, setIsDone, checklistId }) => {
+export const ChecklistItemPreview = ({ item, saveChecklistTask, setIsDone, checklistId, deleteClTask }) => {
 
 
     const { items, title } = item
@@ -17,9 +17,9 @@ export const ChecklistItemPreview = ({ item, saveChecklistTask, setIsDone, check
         // console.log(checklistDoneLength)
     })
 
-    // const donePercentage=
+    const donePercentage = checklistDoneLength / checklistLength * 100
 
-    const [progress, setProgress] = useState(null);
+    const [progress, setProgress] = useState(0);
     const [checklistTask, handleChange] = useForm(null)
     const [isInputOpen, setInput] = useState(false)
     // console.log(item.id)
@@ -33,8 +33,14 @@ export const ChecklistItemPreview = ({ item, saveChecklistTask, setIsDone, check
         setInput(!isInputOpen)
     }
 
+    const onDeleteClTask = (clTaskId) => {
+        deleteClTask(clTaskId, item)
+        // console.log(clTaskId, item)
+
+    }
+
     useEffect(() => {
-        setProgress(checklistDoneLength)
+        setProgress(donePercentage)
     }, [checklistLength, checklistDoneLength])
 
     // const { title, items } = item
@@ -46,11 +52,14 @@ export const ChecklistItemPreview = ({ item, saveChecklistTask, setIsDone, check
                 <h2>{title}</h2>
                 <button>delete</button>
             </div>
-            <Box sx={{ width: '100%' }}>
-                <LinearProgress variant="determinate" value={progress} />
-            </Box>
+            <div>
+
+                <Box sx={{ width: '100%' }}>
+                    <LinearProgress variant="determinate" value={progress} />
+                </Box>
+            </div>
             <div className='checklist-item-list'>
-                {items?.length > 0 && <ClItemsList checklistId={checklistId} items={items} setIsDone={setIsDone} />}
+                {items?.length > 0 && <ClItemsList checklistId={checklistId} items={items} setIsDone={setIsDone} deleteClTask={onDeleteClTask} />}
 
 
 
@@ -61,7 +70,10 @@ export const ChecklistItemPreview = ({ item, saveChecklistTask, setIsDone, check
                 {isInputOpen && <React.Fragment>
                     <form action="" onSubmit={onSaveChecklistTask} >
                         <input autoComplete='off' onChange={handleChange} onBlur={onToggleInput} type="text" placeholder='Add an item' name='txt' />
-                        <button onMouseDown={onSaveChecklistTask}>Add item</button>
+                        <div className='toggle-modal-buttons'>
+                            <button onMouseDown={onSaveChecklistTask}>Add item</button>
+                            <button onMouseDown={onToggleInput}>Cancel</button>
+                        </div>
                     </form>
                 </React.Fragment>}
             </div>
