@@ -12,8 +12,34 @@
     }
 }
 
-.cl-task {
+.cl-task-wrapper {
+    width: 100%;
     display: flex;
+
+    .cl-task {
+        display: flex;
+        justify-content: space-between;
+        flex-grow: 1;
+    }
+
+    .cl-task-buttons {
+        display: none;
+    }
+
+    &:hover {
+        background-color: #e2e4e9ed;
+
+        .cl-task-buttons {
+            display: inline-block;
+
+            a:hover {
+                background-color: antiquewhite;
+            }
+        }
+
+
+
+    }
 
     input {
         margin: 0;
@@ -25,7 +51,7 @@
     }
 
     .space {
-        display: flex;
+        display: inline-block;
         justify-content: center;
         align-items: center;
         width: 30px;
