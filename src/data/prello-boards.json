@@ -6,7 +6,7 @@
         "_id": "u101",
         "firstName": "Eytan",
         "lastName": "Silberberg",
-        "imgUrl": "http://cloudinary/user"
+        "imgUrl": "/static/media/eytan.c76ba47a23dc9a524158.jpeg"
     },
     "style": {
         "backgroundColor": "blue"
@@ -28,25 +28,25 @@
             "_id": "u101",
             "firstName": "Eytan",
             "lastName": "Silberberg",
-            "imgUrl": "http://cloudinary/user"
+            "imgUrl": "/static/media/eytan.c76ba47a23dc9a524158.jpeg"
         },
         {
             "_id": "u102",
             "firstName": "Itay",
             "lastName": "Zonshine",
-            "imgUrl": "http://cloudinary/user"
+            "imgUrl": "/static/media/itay.c4c3d7159f1d6bf24084.jpg"
         },
         {
             "_id": "u103",
             "firstName": "Offir",
             "lastName": "Carmi",
-            "imgUrl": "http://cloudinary/user"
+            "imgUrl": "/static/media/offir.ba20e421301b2c0cd6cf.jpg"
         },
         {
             "_id": "u104",
             "firstName": "Idan",
             "lastName": "Gez",
-            "imgUrl": "http://cloudinary/user"
+            "imgUrl": "https://media-exp1.licdn.com/dms/image/C4E03AQHS2IrCTjh7kQ/profile-displayphoto-shrink_800_800/0/1645011912408?e=1658966400&v=beta&t=ztcm1v1QLUsANcPVcXF8c-2icQB51oLyQ5hgK5sn-VQ"
         }
     ],
     "groups": [
@@ -57,12 +57,17 @@
                 {
                     "id": "t101",
                     "title": "Replace logo",
-                    "members": [ "u101"]
+                    "members": [
+                        "u101"
+                    ]
                 },
                 {
                     "id": "t102",
                     "title": "Add json",
-                    "members": ["u103", "u102"]
+                    "members": [
+                        "u103",
+                        "u102"
+                    ]
                 },
                 {
                     "id": "t110",
@@ -80,13 +85,18 @@
                     "id": "t103",
                     "title": "Just do it now",
                     "archivedAt": 1589983468418,
-                    "members": ["u102", "u101"]
+                    "members": [
+                        "u102",
+                        "u101"
+                    ]
                 },
                 {
                     "id": "t104",
                     "title": "new feature",
                     "status": "in-progress",
-                    "members": ["u103"],
+                    "members": [
+                        "u103"
+                    ],
                     "description": "description",
                     "comments": [
                         {
@@ -95,20 +105,19 @@
                             "createdAt": 1590999817436.0,
                             "byMember": {
                                 "_id": "u102",
-                                "firstName": "Tal",
-                                "lastName": "Tarablus",
-                                "imgUrl": "http://res.cloudinary.com/shaishar9/image/upload/v1590850482/j1glw3c9jsoz2py0miol.jpg"
+                                "firstName": "Itay",
+                                "lastName": "Zonshine",
+                                "imgUrl": "/static/media/itay.c4c3d7159f1d6bf24084.jpg"
                             }
                         }
                     ],
                     "createdAt": 1590999730348,
                     "dueDate": 16156215211,
                     "byMember": {
-                        "_id": "u101",
-                        "username": "Tal@gmail.com",
-                        "firstName": "Eytan",
-                        "lastName": "Silberberg",
-                        "imgUrl": "http://res.cloudinary.com/shaishar9/image/upload/v1590850482/j1glw3c9jsoz2py0miol.jpg"
+                        "_id": "u103",
+                        "firstName": "Offir",
+                        "lastName": "Carmi",
+                        "imgUrl": "/static/media/offir.ba20e421301b2c0cd6cf.jpg"
                     },
                     "style": {
                         "bgColor": "#26de81"
@@ -123,10 +132,10 @@
             "type": "Added Task",
             "createdAt": 154514,
             "byMember": {
-                "_id": "u101",
-                "firstName": "Eytan",
-                "lastName": "Silberberg",
-                "imgUrl": "http://cloudinary/user"
+                "_id": "u104",
+                "firstName": "Idan",
+                "lastName": "Gez",
+                "imgUrl": "https://media-exp1.licdn.com/dms/image/C4E03AQHS2IrCTjh7kQ/profile-displayphoto-shrink_800_800/0/1645011912408?e=1658966400&v=beta&t=ztcm1v1QLUsANcPVcXF8c-2icQB51oLyQ5hgK5sn-VQ"
             },
             "task": {
                 "id": "c101",

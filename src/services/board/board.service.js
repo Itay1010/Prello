@@ -31,11 +31,24 @@ export const boardService = {
     save,
     getTask,
     getMembers,
-    getLabels
+    getLabels,
+    getMemberById,
     // subscribe,
     // unsubscribe,
 }
 
+async function getMemberById(memberId) {
+    console.log(memberId);
+    try {
+        const members = await getMembers()
+        console.log(members);
+        const member = members.filter(member => member._id === memberId)
+        return member[0]
+    } catch (error) {
+        throw _logError(error)
+    }
+
+}
 
 async function getById(boardId) {
     try {
@@ -105,11 +118,6 @@ function _getEmptyBoard() {
     return emptyBoard
 }
 
-// ;(async ()=>{
-//     await userService.create({fullname: 'Puki Norma', username: 'user1', password:'123',score: 10000, isAdmin: false})
-//     await userService.create({fullname: 'Master Adminov', username: 'admin', password:'123', score: 10000, isAdmin: true})
-//     await userService.create({fullname: 'Muki G', username: 'muki', password:'123', score: 10000})
-// })()
 
 // storageService.post(STORAGE_KEY, jsonBoard)
 
