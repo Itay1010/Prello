@@ -8,8 +8,8 @@ import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
 
 //privet
 import { MainHeader } from "../cmps/shared cmps/header/main-header"
-import { Group } from '../cmps/board/task-list'
 import { BoardHeader } from "../cmps/board/board-header/board-header"
+import { AddGroupForm } from "../cmps/board/add-group-form"
 
 import { loadBoard, updateBoard } from "../store/board/board.action"
 import { utilService } from "../services/basic/util.service"
@@ -18,7 +18,7 @@ import { Switch, Route } from 'react-router-dom'
 
 // Routes
 import { TaskDetails } from './task-details.jsx'
-import { AddGroupForm } from "../cmps/board/add-group-form";
+import { GroupList } from "../cmps/board/group-list";
 class _Board extends React.Component {
 
     componentDidMount() {
@@ -52,7 +52,7 @@ class _Board extends React.Component {
 
     onArchiveGroup = async (groupId) => {
         const newBoard = JSON.parse(JSON.stringify(this.props.board))
-
+        console.log(groupId);
         newBoard.groups.map(group => {
             if (group.id === groupId) group.archivedAt = Date.now()
         })
@@ -76,17 +76,16 @@ class _Board extends React.Component {
 
 
     handleOnDragEnd = (result) => {
-        console.log('handle')
+        // console.log('handle', result)
         if (!result.destination) return
         const { board } = this.props
+        const newBoard = JSON.parse(JSON.stringify(board))
+        console.log('_Board - board', board)
 
-        const items = JSON.parse(JSON.stringify(board.groups))
+        const items = newBoard.groups
         const [reorderedItem] = items.splice(result.source.index, 1)
         items.splice(result.destination.index, 0, reorderedItem)
-
-        // setGroups(items)
-        const newBoard = board.groups = items
-        console.log('handleOnDragEnd - newBoard', items)
+        console.log(newBoard.groups)
         this.props.updateBoard(newBoard)
     }
 
@@ -95,42 +94,25 @@ class _Board extends React.Component {
         // console.log('_Board - render - board', board)
         if (!board) return <div>loading...</div>
         const { groups } = board
+        const eventHandlers = {
+            onAddTask: this.onAddTask,
+            onArchiveTask: this.onArchiveTask,
+            onGroupChange: this.onGroupChange,
+            onAddGroup: this.onAddGroup,
+            onArchiveGroup: this.onArchiveGroup
+        }
 
         return <React.Fragment>
-            <MainHeader />
-            <section className="board flex col main-layout">
-                <BoardHeader board={board} />
-                <DragDropContext onDragEnd={this.handleOnDragEnd}>
-                    <Droppable droppableId="groups">
-                        {(provided) => {
-                            return <section className="group-container flex groups" ref={provided.innerRef}>
-                                {groups.map((group, idx) => {
-                                    if (group.archivedAt) return
-                                    return <Draggable key={group.id} draggableId={group.id} index={idx}>
-                                        {(provided) => (
-                                            <Group
-                                                provided={provided}
-                                                group={group}
-                                                key={group.id}
-                                                onAddTask={this.onAddTask}
-                                                onArchiveTask={this.onArchiveTask}
-                                                onArchiveGroup={this.onArchiveGroup}
-                                                onGroupChange={this.onGroupChange}
-                                            />
-                                        )}
-                                    </Draggable>
-                                })}
-                                {provided.placeholder}
-                                <AddGroupForm handleSubmit={this.onAddGroup} />
-                            </section>
-                        }}
-
-                    </Droppable>
-                </DragDropContext>
-                <Switch>
-                    <Route path={'/board/:boardId/:groupId/:taskId'} component={TaskDetails} />
-                </Switch>
-            </section>
+            <DragDropContext onDragEnd={this.handleOnDragEnd}>
+                <MainHeader />
+                <section className="board flex col main-layout">
+                    <BoardHeader board={board} />
+                    <GroupList groups={groups} eventHandlers={eventHandlers} />
+                    <Switch>
+                        <Route path={'/board/:boardId/:groupId/:taskId'} component={TaskDetails} />
+                    </Switch>
+                </section>
+            </DragDropContext>
         </React.Fragment>
     }
 }
