@@ -38,10 +38,8 @@ export const boardService = {
 }
 
 async function getMemberById(memberId) {
-    console.log(memberId);
     try {
         const members = await getMembers()
-        console.log(members);
         const member = members.filter(member => member._id === memberId)
         return member[0]
     } catch (error) {
@@ -110,7 +108,6 @@ function getLabels() {
 }
 
 const _logError = (err) => {
-    console.log('error in board service', err)
     return err
 }
 

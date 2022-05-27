@@ -6,8 +6,7 @@ import LinearProgress from '@mui/material/LinearProgress';
 
 
 
-export const ChecklistItemPreview = ({ item, saveChecklistTask, setIsDone, checklistId, deleteClTask }) => {
-
+export const ChecklistItemPreview = ({ item, saveChecklistTask, setIsDone, checklistId, deleteClTask, deleteChecklist }) => {
 
     const { items, title } = item
     const checklistLength = items.length
@@ -39,6 +38,10 @@ export const ChecklistItemPreview = ({ item, saveChecklistTask, setIsDone, check
 
     }
 
+    const onDeleteChecklist = () => {
+        deleteChecklist(checklistId)
+    }
+
     useEffect(() => {
         setProgress(donePercentage)
     }, [checklistLength, checklistDoneLength])
@@ -50,7 +53,7 @@ export const ChecklistItemPreview = ({ item, saveChecklistTask, setIsDone, check
             <div className='checklist-item-header flex'>
                 <div>icon</div>
                 <h2>{title}</h2>
-                <button>delete</button>
+                <button onClick={onDeleteChecklist}>delete</button>
             </div>
             <div>
 

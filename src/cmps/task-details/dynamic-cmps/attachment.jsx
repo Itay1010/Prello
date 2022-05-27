@@ -1,19 +1,21 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { useForm } from '../../../hooks/useForm'
 
-export const Attachment = ({ saveAttachment }) => {
+export const Attachment = ({ saveAttachment, closeModal }) => {
     const [attachment, handleChange] = useForm({
         title: '',
         url: '',
     })
+    // let divRef = React.useRef(null);
+
+    // useEffect(() => {
+    //     // divRef.current.focus();
+    // }, []);
 
     const onSaveAttachment = (ev) => {
         ev.preventDefault()
         const { url } = attachment
-        console.log(url)
         const isUrlValid = isUrl(url)
-        console.log(isUrlValid)
-        console.log(attachment)
         if (isUrlValid) saveAttachment(attachment)
     }
 
@@ -26,7 +28,12 @@ export const Attachment = ({ saveAttachment }) => {
 
 
 
-    return <div className='modal-type'>
+    return <div
+        //  ref={divRef} 
+        // tabIndex={0}
+        // onFocus={() => { console.log('main', 'focus'); }}
+        // onBlur={closeModal}
+        className='modal-type' tabindex={1}>
         <h4>Title</h4>
         <form onSubmit={onSaveAttachment}>
             <input autoComplete='off' type="text" placeholder='Enter title' name='title' onChange={handleChange} />

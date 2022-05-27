@@ -80,12 +80,10 @@ class _Board extends React.Component {
         if (!result.destination) return
         const { board } = this.props
         const newBoard = JSON.parse(JSON.stringify(board))
-        console.log('_Board - board', board)
 
         const items = newBoard.groups
         const [reorderedItem] = items.splice(result.source.index, 1)
         items.splice(result.destination.index, 0, reorderedItem)
-        console.log(newBoard.groups)
         this.props.updateBoard(newBoard)
     }
 
