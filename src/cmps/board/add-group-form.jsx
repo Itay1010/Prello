@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 
-export const AddGroupForm = () => {
+export const AddGroupForm = ({ handleSubmit }) => {
     const [isEditing, setIsEditing] = useState(false)
     const [listTitle, setListTitle] = useState('')
     return <form
@@ -10,9 +10,11 @@ export const AddGroupForm = () => {
         // }}
         onSubmit={ev => {
             ev.preventDefault()
+            if (!listTitle) return
             setListTitle('')
             ev.target.blur()
             setIsEditing(false)
+            handleSubmit(listTitle)
         }}>
         <a href="#" className="open-edit-btn" onClick={ev => setIsEditing(true)}>Add another list</a>
         <section className={`add-list`} >
