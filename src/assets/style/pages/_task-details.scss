@@ -8,7 +8,7 @@
     margin-bottom: 54px;
 
     .task-details {
-        background-color: white;
+        background-color: #f4f5f7;
         margin-top: 54px;
         width: 768px;
         // height: 1000px;
@@ -18,28 +18,7 @@
 
         .task-header {
             position: relative;
-            height: 60px;
-
-            .icon {
-                height: 32px;
-                width: 32px;
-                background-color: green;
-                margin-inline-end: 16px;
-            }
-
-            .data {
-                h2 {
-                    font-size: 20px;
-                    font-weight: 600;
-                    margin-bottom: 8px;
-                }
-
-                p {
-                    a {
-                        text-decoration: underline;
-                    }
-                }
-            }
+            height: 72px;
 
             .close-modal {
                 position: absolute;
@@ -64,14 +43,16 @@
             .task-content {
                 flex-grow: 1;
 
+                &>* {
+                    margin-bottom: 12px;
+                }
             }
 
             .task-edit {
                 h3 {
-                    font-size: rem(14px);
+                    font-size: 14px;
                     font-weight: 600;
                     margin-bottom: 8px;
-                    // padding: 0 0 0 8px;
 
                 }
 
@@ -102,8 +83,126 @@
     .modal {
         position: absolute;
         right: 0;
-        background-color: aliceblue;
+        background-color: #f4f5f7;
         width: 300px;
         min-height: 300px;
+        border-radius: 3px;
+    }
+}
+
+.task-status {
+    height: 72px;
+
+    .members {
+        margin-inline-end: 16px;
+
+        h3 {
+            font-size: 14px;
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+
+        .task-members {
+            gap: 4px;
+
+            &>* {
+                height: 32px;
+                width: 32px;
+                border-radius: 100px;
+                color: $bg;
+                font-weight: 600;
+            }
+
+            .add-member {
+                background-color: $opc-black;
+                color: $edit;
+
+                &:hover {
+                    background-color: $opc-black-hov;
+                }
+            }
+
+            .member {
+
+                background-color: red;
+            }
+        }
+    }
+
+    .labels {
+        h3 {
+            font-size: 14px;
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+
+        .task-labels {
+            gap: 4px;
+
+            &>* {
+                height: 32px;
+                width: 40px;
+                border-radius: 3px;
+
+            }
+
+            .add-label {
+                background-color: $opc-black;
+                color: $edit;
+                font-weight: 600;
+
+                &:hover {
+                    background-color: $opc-black-hov;
+                }
+            }
+        }
+
+    }
+
+
+}
+
+.description-data {
+    h2 {
+        font-size: 16px;
+        font-weight: 600;
+        margin-bottom: 8px;
+    }
+
+    textarea {
+        min-height: 40px;
+        background-color: $opc-black;
+        border-radius: 3px;
+        font-weight: 400;
+        font-size: 14px;
+        padding: 8px 12px;
+    }
+
+}
+
+.section-icon {
+    height: 32px;
+    width: 32px;
+    // background-color: green;
+    margin-inline-end: 8px;
+
+    svg {
+        height: 24px;
+        width: 24px;
+        margin-inline-end: 8px;
+    }
+}
+
+.section-data {
+    h2 {
+        font-size: 20px;
+        font-weight: 600;
+        margin-bottom: 8px;
+    }
+
+    p {
+        a {
+            text-decoration: underline;
+        }
     }
 }

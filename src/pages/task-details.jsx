@@ -18,6 +18,7 @@ import { updateBoard } from '../store/board/board.action'
 
 // SERVICES
 import { utilService } from '../services/basic/util.service.js';
+import { userService } from '../services/user.service.js';
 
 
 
@@ -164,26 +165,67 @@ export const TaskDetails = () => {
     // }
     // 
     // console.log(task)
-
     if (!group || !task) return <React.Fragment></React.Fragment>
     const { checklist } = task
+
     return <section onClick={onGoBack} className='task-details-shadow flex justify-center'>
         <section className='task-details flex col' onClick={(event) => event.stopPropagation()}>
 
             <div className='task-header flex'>
                 <div className='close-modal flex justify-center align-center'><svg width="24" height="24" viewBox="0 0 24 24" ><path fillRule="evenodd" clipRule="evenodd" d="M10.5858 12L5.29289 6.70711C4.90237 6.31658 4.90237 5.68342 5.29289 5.29289C5.68342 4.90237 6.31658 4.90237 6.70711 5.29289L12 10.5858L17.2929 5.29289C17.6834 4.90237 18.3166 4.90237 18.7071 5.29289C19.0976 5.68342 19.0976 6.31658 18.7071 6.70711L13.4142 12L18.7071 17.2929C19.0976 17.6834 19.0976 18.3166 18.7071 18.7071C18.3166 19.0976 17.6834 19.0976 17.2929 18.7071L12 13.4142L6.70711 18.7071C6.31658 19.0976 5.68342 19.0976 5.29289 18.7071C4.90237 18.3166 4.90237 17.6834 5.29289 17.2929L10.5858 12Z" /></svg></div>
-                <div className='icon'></div>
-                <div className="data">
+                <div className='section-icon'>
+                    <svg viewBox="0 0 24 24"><path class="st0" d="M-15.3,6.4c1.9,0,3.8,0,5.7,0c1,0,1.7,0.6,1.7,1.6c0,2.8,0,5.5,0,8.3c0,1-0.7,1.7-1.7,1.7c-3.8,0-7.7,0-11.5,0 c-1.1,0-1.7-0.6-1.7-1.7c0-2.7,0-5.5,0-8.2c0-1.1,0.7-1.7,1.7-1.7C-19.1,6.4-17.2,6.4-15.3,6.4z M-21.2,8c0,1.6,0,3.2,0,4.7 c0,0.1,0.3,0.4,0.5,0.4c3.6,0,7.2,0,10.8,0c0.4,0,0.5-0.2,0.5-0.6c0-0.9,0-1.8,0-2.7c0-0.6,0-1.2,0-1.9H-21.2z M-18.7,14.6 c-0.5,0-1.1,0-1.6,0c-0.5,0-0.9,0.3-0.9,0.8c0,0.6,0.3,0.9,0.8,0.9c1.1,0,2.3,0,3.4,0c0.5,0,0.9-0.4,0.8-0.9c0-0.5-0.4-0.8-0.9-0.8 C-17.6,14.6-18.1,14.6-18.7,14.6z M-9.4,15.5c0-0.5-0.4-0.9-0.9-0.9c-0.5,0-0.9,0.4-0.9,0.9c0,0.5,0.5,0.9,0.9,0.9 C-9.8,16.4-9.4,15.9-9.4,15.5z" /><path d="M19.4,5.4H4.6C4,5.4,3.5,5.9,3.5,6.5v11c0,0.6,0.5,1.1,1.1,1.1h14.8c0.6,0,1.1-0.5,1.1-1.1v-11C20.5,5.9,20,5.4,19.4,5.4z  M10.1,16.8H6.2c-0.6,0-1-0.4-1-1c0-0.6,0.4-1,1-1h3.8c0.6,0,1,0.4,1,1C11.1,16.4,10.6,16.8,10.1,16.8z M17.8,16.8c-0.6,0-1-0.4-1-1 c0-0.6,0.4-1,1-1c0.6,0,1,0.4,1,1C18.8,16.4,18.3,16.8,17.8,16.8z M18.8,11.9c0,0.6-0.5,1.1-1.1,1.1H6.4c-0.6,0-1.1-0.5-1.1-1.1V8.3 c0-0.6,0.5-1.1,1.1-1.1h11.2c0.6,0,1.1,0.5,1.1,1.1V11.9z" /></svg>
+                </div>
+                <div className="section-data flex col">
                     <h2 className='task-title'>{task.title}</h2>
                     <p>in list <a href="">{group.title}</a></p>
                 </div>
             </div>
 
             <div className='task-container flex space-between'>
+
                 <div className="task-content">
+<<<<<<< HEAD
                     {checklist?.length > 0 && <div className='task-content'>
                         {checklist.length > 0 && <ChecklistList checklist={checklist} saveChecklistTask={onSaveChecklistTask} setIsDone={onSetIsDone} />}
                     </div>}
+=======
+                    <div className="task-status flex">
+                        <div className='section-icon'></div>
+                        {task.members?.length > 0 && <div className="members flex col">
+                            <h3>Members</h3>
+                            <section className='task-members flex'>
+                                {task.members.map(member => {
+                                    // const user = userService.getUserById(member)
+                                    return <div className='member flex justify-center align-center'>{member.charAt(0).toUpperCase()}</div>
+                                    // return <div className='member'>{member.firstName.charAt(0).toUpperCase()}</div>
+                                })}
+                                <div className='add-member flex justify-center align-center'>+</div>
+                            </section>
+                        </div>}
+                        {task.labels?.length > 0 && <div className="labels flex col">
+                            <h3>Labels</h3>
+                            <section className='task-labels flex'>
+                                {task.labels.map(label => {
+                                    return <div className='label' style={{ backgroundColor: label }}></div>
+                                })}
+                                <div className='add-label flex justify-center align-center'>+</div>
+                            </section>
+                        </div>}
+                    </div>
+                    <div className="description flex">
+                        <div className='section-icon'>
+                            <svg viewBox="0 0 24 24" ><path d="M-45,3c-1.1,0-2,0.9-2,2v14c0,1.1,0.9,2,2,2h14c1.1,0,2-0.9,2-2v-6.8c0-0.6-0.4-1-1-1h0c-0.6,0-1,0.4-1,1l0,5.8 c0,0.6-0.4,1-1,1h-12c-0.6,0-1-0.4-1-1V6c0-0.6,0.4-1,1-1h9.8c0.6,0,1-0.4,1-1v0c0-0.6-0.4-1-1-1H-45z M-29.4,4l-9.1,9.1 c-0.3,0.3-0.7,0.3-0.9,0l-2.1-2.1c-0.4-0.4-1-0.4-1.4,0v0c-0.4,0.4-0.4,1,0,1.4l3.3,3.3c0.4,0.4,1,0.4,1.4,0L-28,5.4 c0.4-0.4,0.4-1,0-1.4v0C-28.4,3.6-29,3.6-29.4,4z" /><path d="M20.1,10.9H3.9C3.4,10.9,3,10.5,3,10v0C3,9.4,3.4,9,3.9,9h16.2C20.6,9,21,9.4,21,10v0C21,10.5,20.6,10.9,20.1,10.9z" /><path d="M21,5.9L21,5.9c0-0.5-0.4-0.9-0.9-0.9H3.9C3.4,4.9,3,5.4,3,5.9v0c0,0.5,0.4,0.9,0.9,0.9h16.2C20.6,6.8,21,6.4,21,5.9z" /><path d="M15.1,18.1L15.1,18.1c0-0.5-0.4-0.9-0.9-0.9H3.9c-0.5,0-0.9,0.4-0.9,0.9v0c0,0.5,0.4,0.9,0.9,0.9h10.2 C14.7,19.1,15.1,18.6,15.1,18.1z" /><path d="M21,14L21,14c0-0.5-0.4-0.9-0.9-0.9H3.9C3.4,13.1,3,13.5,3,14v0C3,14.6,3.4,15,3.9,15h16.2C20.6,15,21,14.6,21,14z" /></svg>
+                        </div>
+                        <div className="description-data flex col">
+                            <h2>Description</h2>
+                            <textarea cols="65" rows="40" placeholder='Add a more detailed description...'></textarea>
+                        </div>
+                    </div>
+                    {/* {checklist?.length > 0 && <div className='checklist'>
+                        {checklist.length > 0 && <ChecklistList checklist={checklist} saveChecklistTask={onSaveChecklistTask} />}
+                    </div>} */}
+>>>>>>> origin
                 </div>
 
                 <div className='task-edit flex col'>
