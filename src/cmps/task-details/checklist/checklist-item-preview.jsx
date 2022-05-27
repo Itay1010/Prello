@@ -29,9 +29,14 @@ export const ChecklistItemPreview = ({ item, saveChecklistTask }) => {
                 <button>delete</button>
             </div>
             <div>% Bar</div>
-            <div className='checklist-item-footer'>
+            <div className='checklist-item-list'>
                 {items?.length > 0 && <ClItemsList items={items} />}
-                <div className='space2'>1</div>
+
+
+
+            </div>
+            <div className='checklist-item-footer'>
+                <div className='space2'>000</div>
                 {!isInputOpen && <button onClick={onToggleInput}>Add an item</button>}
                 {isInputOpen && <React.Fragment>
                     <form action="" onSubmit={onSaveChecklistTask} >
@@ -39,7 +44,6 @@ export const ChecklistItemPreview = ({ item, saveChecklistTask }) => {
                         <button onMouseDown={onSaveChecklistTask}>Add item</button>
                     </form>
                 </React.Fragment>}
-
             </div>
         </div>
     </div>
