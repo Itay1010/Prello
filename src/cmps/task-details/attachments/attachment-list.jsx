@@ -8,7 +8,7 @@ export const AttachmentList = ({ attachments, removeAttachment }) => {
         <div className='attachment-list'>
             <h2>{(attachments.length > 1) ? 'attachments' : 'attachment'}</h2>
             {attachments.map(attachment => {
-                return <AttachmentPreview attachment={attachment} removeAttachment={removeAttachment} />
+                return <AttachmentPreview key={attachment.id} attachment={attachment} removeAttachment={removeAttachment} />
             })}
         </div>
     </div>

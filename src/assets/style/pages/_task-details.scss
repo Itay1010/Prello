@@ -80,17 +80,26 @@
 
 
 
+    .modal-btn {
+        position: relative;
 
+        .action-type-modal {
+            position: absolute;
+            left: 0;
+        }
+    }
 
     .modal {
         position: absolute;
-        right: 50px;
-        top: 200px;
+        left: 0;
+        // right: 50px;
+        // top: 200px;
         background-color: #f4f5f7;
         width: 300px;
         // min-height: 300px;
         border-radius: 3px;
         padding: 12px;
+        z-index: 10;
 
 
         .members {
