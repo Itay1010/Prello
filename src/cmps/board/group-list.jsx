@@ -3,7 +3,6 @@ import { Group } from './task-list'
 import { Droppable, Draggable } from 'react-beautiful-dnd'
 
 import { AddGroupForm } from "./add-group-form"
-import { GroupFooter } from './group-footer'
 
 
 
@@ -23,22 +22,15 @@ export const GroupList = ({ groups, eventHandlers }) => {
                 ref={provided.innerRef}>
                 {groups.map((group, idx) => {
                     if (group.archivedAt) return
-                    return <React.Fragment>
-                        <Group
-                            idx={idx}
-                            key={group.id}
-                            group={group}
-                            onAddTask={onAddTask}
-                            onArchiveTask={onArchiveTask}
-                            onArchiveGroup={onArchiveGroup}
-                            onGroupChange={onGroupChange}
-                        />
-                        {/* <GroupFooter
-                            group={group}
-                            onAddTask={onAddTask}
-                            /> */}
-                    </React.Fragment>
-
+                    return <Group
+                        idx={idx}
+                        key={group.id}
+                        group={group}
+                        onAddTask={onAddTask}
+                        onArchiveTask={onArchiveTask}
+                        onArchiveGroup={onArchiveGroup}
+                        onGroupChange={onGroupChange}
+                    />
                 })}
                 {provided.placeholder}
                 <AddGroupForm handleSubmit={onAddGroup} />
