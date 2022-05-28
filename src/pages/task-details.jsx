@@ -26,11 +26,13 @@ import { IAttachment } from '../cmps/icons/i-attachment.jsx'
 import { IChecklist } from '../cmps/icons/i-checklist.jsx'
 import { IAdd } from '../cmps/icons/i-add.jsx'
 import { ITask } from '../cmps/icons/i-task.jsx'
+import { IDescription } from '../cmps/icons/i-description.jsx';
 
 // LIBS
 
 import TextareaAutosize from '@mui/material/TextareaAutosize';
 import { TaskLabels } from '../cmps/task-preview/task-labels.jsx';
+import { ModalImg } from '../cmps/task-details/modal-img.jsx';
 
 export default function EmptyTextarea() {
     return (
@@ -55,7 +57,7 @@ export const TaskDetails = ({ onArchiveTask }) => {
     const [group, setGroup] = useState(null)
     const [task, setTask] = useState(null)
     const [boardMembers, setBoardMembers] = useState(board.members)
-    // const [isModal, setIsModal] = useState(false)
+    const [isModal, setIsModal] = useState('')
     const [modalType, setModalType] = useState(null)
     const [isTitleEditable, setTitle] = useState(null)
     const [title, setTitleValue] = useState('')
@@ -64,11 +66,6 @@ export const TaskDetails = ({ onArchiveTask }) => {
 
     const titleRef = React.useRef()
     const descriptionRef = React.useRef()
-
-    // useEffect(() => {
-
-
-    // }, [])
 
     const onGoBack = () => {
         history.push(`/board/${boardId}`)
@@ -80,6 +77,7 @@ export const TaskDetails = ({ onArchiveTask }) => {
         const task = await groupToAdd.tasks.find(task => task.id === taskId)
         setTask(task)
     }
+
     useEffect(() => {
         onLoad()
     }, [task, group, height])
@@ -132,7 +130,6 @@ export const TaskDetails = ({ onArchiveTask }) => {
     }
 
     const onSaveChecklistTask = (txt, clTaskId) => {
-        console.log(task);
         const newItem = {
             txt,
             id: utilService.makeId(),
@@ -154,13 +151,11 @@ export const TaskDetails = ({ onArchiveTask }) => {
         }
     }
 
-    const saveTaskDescription = (ev) => {
-        if (ev.key === 'Enter') {
+    const saveTaskDescription = () => {
+        task.description = description
+        setDescriptionEditable(false)
+        saveBoard()
 
-            task.description = description
-            setDescriptionEditable(false)
-            saveBoard()
-        }
     }
 
     const onSaveAttachment = (attachment) => {
@@ -174,8 +169,8 @@ export const TaskDetails = ({ onArchiveTask }) => {
         // setGroup(group)
         saveBoard()
     }
-    const saveBoard = () => {
 
+    const saveBoard = () => {
         dispatch(updateBoard(board))
     }
 
@@ -184,22 +179,13 @@ export const TaskDetails = ({ onArchiveTask }) => {
     }
 
     const onSetIsDone = (checklistId, clTaskItem) => {
-        // console.log(checklistId)
-        // const requestedChecklist = task.checklist.find(checklist => checklistId === checklist.id)
-        // let requestedItemInChecklistIdx = requestedChecklist.items.findIndex(item => item.id === clTaskItem.id)
-        // requestedChecklist.items.splice(requestedItemInChecklistIdx, 1, clTaskItem)
+
         saveBoard()
     }
 
     const onDeleteClTask = (clTaskId, item) => {
-        // console.log(task)
-        // console.log(clTaskId, item)
-        // item.items.filter(clTask => clTask.id !== clTaskId)
-
         const clTaskIdx = item.items.findIndex(clTask => clTask.id === clTaskId)
-        // console.log(clTaskIdx)
         item.items.splice(clTaskIdx, 1)
-
         saveBoard()
     }
 
@@ -231,7 +217,6 @@ export const TaskDetails = ({ onArchiveTask }) => {
         }
     }
 
-
     const DynamicModal = () => {
         switch (modalType) {
             case 'members':
@@ -260,10 +245,16 @@ export const TaskDetails = ({ onArchiveTask }) => {
         setModalType('')
     }
 
+
+
     const onRemoveAttachment = (attachmentId) => {
         const requiredAttachmentIdx = task.attachments.findIndex(attachment => attachment.id === attachmentId)
         task.attachments.splice(requiredAttachmentIdx, 1)
         saveBoard()
+    }
+
+    const openImgModal = (id) => {
+        setIsModal(id)
     }
 
 
@@ -282,7 +273,6 @@ export const TaskDetails = ({ onArchiveTask }) => {
                     {!isTitleEditable && <h2 onClick={setTitleEditable} className='task-title'>{task.title ? task.title : 'Please enter task title'}</h2>}
                     {/* {isTitleEditable && <input onChange={handleTitleChange} onBlur={setTitleEditable} ref={titleRef} value={title} onKeyDown={(event) => saveTaskTitle(event)} />} */}
                     {isTitleEditable && <TextareaAutosize
-
                         onKeyDown={(event) => saveTaskTitle(event)}
                         onChange={handleTitleChange}
                         ref={titleRef}
@@ -324,24 +314,35 @@ export const TaskDetails = ({ onArchiveTask }) => {
                     </div>
                     <div className="description flex">
                         <div className='section-icon'>
-                            <svg viewBox="0 0 24 24" ><path d="M-45,3c-1.1,0-2,0.9-2,2v14c0,1.1,0.9,2,2,2h14c1.1,0,2-0.9,2-2v-6.8c0-0.6-0.4-1-1-1h0c-0.6,0-1,0.4-1,1l0,5.8 c0,0.6-0.4,1-1,1h-12c-0.6,0-1-0.4-1-1V6c0-0.6,0.4-1,1-1h9.8c0.6,0,1-0.4,1-1v0c0-0.6-0.4-1-1-1H-45z M-29.4,4l-9.1,9.1 c-0.3,0.3-0.7,0.3-0.9,0l-2.1-2.1c-0.4-0.4-1-0.4-1.4,0v0c-0.4,0.4-0.4,1,0,1.4l3.3,3.3c0.4,0.4,1,0.4,1.4,0L-28,5.4 c0.4-0.4,0.4-1,0-1.4v0C-28.4,3.6-29,3.6-29.4,4z" /><path d="M20.1,10.9H3.9C3.4,10.9,3,10.5,3,10v0C3,9.4,3.4,9,3.9,9h16.2C20.6,9,21,9.4,21,10v0C21,10.5,20.6,10.9,20.1,10.9z" /><path d="M21,5.9L21,5.9c0-0.5-0.4-0.9-0.9-0.9H3.9C3.4,4.9,3,5.4,3,5.9v0c0,0.5,0.4,0.9,0.9,0.9h16.2C20.6,6.8,21,6.4,21,5.9z" /><path d="M15.1,18.1L15.1,18.1c0-0.5-0.4-0.9-0.9-0.9H3.9c-0.5,0-0.9,0.4-0.9,0.9v0c0,0.5,0.4,0.9,0.9,0.9h10.2 C14.7,19.1,15.1,18.6,15.1,18.1z" /><path d="M21,14L21,14c0-0.5-0.4-0.9-0.9-0.9H3.9C3.4,13.1,3,13.5,3,14v0C3,14.6,3.4,15,3.9,15h16.2C20.6,15,21,14.6,21,14z" /></svg>
+                            <IDescription />
                         </div>
                         <div className="description-data flex col">
-                            <h2 >Description</h2>
-                            {!isDescriptionEditable && <p placeholder={task.description} onClick={toggleEditDescription}>{!task.description ? 'Enter task description' : `${task.description}`}</p>}
+                            <h2>Description</h2>
+                            {!isDescriptionEditable && <p placeholder={task.description} onClick={toggleEditDescription}>{!task.description ? 'Add a more detailed description...' : `${task.description}`}</p>}
                             {/* {isDescriptionEditable && <textarea value={description} ref={descriptionRef} onChange={handleDescriptionChange} onKeyDown={(event) => saveTaskDescription(event)} cols="65" rows="40" placeholder='Add a more detailed description...'></textarea>} */}
-                            {isDescriptionEditable && <TextareaAutosize
-
-                                onKeyDown={(event) => saveTaskDescription(event)}
-                                onChange={handleDescriptionChange}
-                                ref={descriptionRef}
-                                onBlur={toggleEditDescription}
-                                maxRows={4}
-                                aria-label="maximum height"
-                                placeholder='Add a more detailed description...'
-                                defaultValue={task.description ? task.description : ''}
-                                style={{ width: '100%' }}
-                            />}
+                            {isDescriptionEditable && <div className='edit-description'>
+                                <TextareaAutosize
+                                    onKeyDown={(event) => {
+                                        if (event.key === 'Enter') {
+                                            saveTaskDescription(event)
+                                        }
+                                    }}
+                                    onChange={handleDescriptionChange}
+                                    ref={descriptionRef}
+                                    onBlur={() => {
+                                        toggleEditDescription()
+                                        saveTaskDescription()
+                                    }}
+                                    maxRows={4}
+                                    aria-label="maximum height"
+                                    placeholder='Add a more detailed description...'
+                                    defaultValue={task.description ? task.description : ''}
+                                    style={{ width: '100%', minHeight: '108px' }}
+                                />
+                                <button className='btn-save'>Save</button>
+                                <button className='btn-cancel' onMouseDown={(event) => { event.preventDefault(); toggleEditDescription() }}>Cancel</button>
+                                {/* <button className='btn-cancel' onClick={toggleEditDescription}>Cancel</button> */}
+                            </div>}
                         </div>
                     </div>
                     {/* {checklist?.length > 0 && <div className='checklist'>
@@ -351,12 +352,12 @@ export const TaskDetails = ({ onArchiveTask }) => {
                     {checklist?.length > 0 && <ChecklistList checklist={checklist} saveChecklistTask={onSaveChecklistTask} setIsDone={onSetIsDone} deleteClTask={onDeleteClTask} deleteChecklist={onDeleteChecklist} />}
 
 
-                    {attachments?.length > 0 && <AttachmentList attachments={attachments} removeAttachment={onRemoveAttachment} />}
+                    {attachments?.length > 0 && <AttachmentList attachments={attachments} removeAttachment={onRemoveAttachment} openImgModal={openImgModal} />}
                 </div>
 
                 <div className='task-edit flex col'>
                     <h3>Add to card</h3>
-                    <div className='modal-btn btn-edit-task-key flex align-center' onClick={() => setModal('members')}>
+                    <div className='modal-btn btn-edit-task-key flex align-center' onClick={() => setModalType('members')}>
                         <svg width="24" height="24" role="presentation" focusable="false" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path fillRule="evenodd" clipRule="evenodd" d="M12.0254 3C9.25613 3 7.01123 5.23858 7.01123 8C7.01123 10.7614 9.25613 13 12.0254 13C14.7946 13 17.0395 10.7614 17.0395 8C17.0395 5.23858 14.7946 3 12.0254 3ZM9.01688 8C9.01688 9.65685 10.3638 11 12.0254 11C13.6869 11 15.0338 9.65685 15.0338 8C15.0338 6.34315 13.6869 5 12.0254 5C10.3638 5 9.01688 6.34315 9.01688 8Z" fill="currentColor" /><path fillRule="evenodd" clipRule="evenodd" d="M12.0254 11C16.7803 11 20.6765 14.6667 21.0254 19.3194C20.8721 20.2721 20.0439 21 19.0452 21H18.9741C18.9741 21 18.9741 21 18.9741 21L5.0767 21C5.07671 21 5.0767 21 5.0767 21L5.00562 21C4.00691 21 3.1787 20.2721 3.02539 19.3193C3.37428 14.6667 7.27038 11 12.0254 11ZM5.0767 19H18.9741C18.4875 15.6077 15.5618 13 12.0254 13C8.48892 13 5.56331 15.6077 5.0767 19ZM19.0451 19.9769V20.0231C19.0452 20.0154 19.0452 20.0077 19.0452 20C19.0452 19.9923 19.0452 19.9846 19.0451 19.9769Z" fill="currentColor" /></svg>
                         <p>Members</p>
                         {modalType === 'members' && <div className='action-type-modal'>
@@ -366,7 +367,7 @@ export const TaskDetails = ({ onArchiveTask }) => {
                             </div>
                         </div>}
                     </div>
-                    <div className='modal-btn btn-edit-task-key label flex align-center' onClick={() => setModal('labels')}>
+                    <div className='modal-btn btn-edit-task-key label flex align-center' onClick={() => setModalType('labels')}>
                         <svg viewBox="0 0 24 24" ><path d="M-37.2,3c-1.1,0-2,0.9-2,2v14c0,1.1,0.9,2,2,2h14c1.1,0,2-0.9,2-2v-6.8c0-0.6-0.4-1-1-1h0c-0.6,0-1,0.4-1,1l0,5.8 c0,0.6-0.4,1-1,1h-12c-0.6,0-1-0.4-1-1V6c0-0.6,0.4-1,1-1h9.8c0.6,0,1-0.4,1-1v0c0-0.6-0.4-1-1-1H-37.2z" /><path d="M-21.6,4l-9.1,9.1c-0.3,0.3-0.7,0.3-0.9,0l-2.1-2.1c-0.4-0.4-1-0.4-1.4,0v0c-0.4,0.4-0.4,1,0,1.4l3.3,3.3 c0.4,0.4,1,0.4,1.4,0l10.3-10.3c0.4-0.4,0.4-1,0-1.4l0,0C-20.6,3.6-21.2,3.6-21.6,4z" /><path d="M4.9,19.1c-2.6-2.6-2.6-6.8,0-9.3l6.1-6.1c0.8-0.8,2-0.8,2.8,0l6.5,6.5c0.8,0.8,0.8,2,0,2.8l-6.1,6.1 C11.7,21.6,7.5,21.6,4.9,19.1z M12.6,4.9L6.3,11c-1.9,1.9-1.9,4.9,0,6.7s4.9,1.8,6.7,0l6.1-6.1L12.6,4.9z M7.9,16.1 c-1.1-1.1-1.1-3,0-4.1s3-1.1,4.1,0c1.1,1.1,1.1,3,0,4.1S9,17.3,7.9,16.1z M10.7,13.3c-0.4-0.4-1.1-0.4-1.5,0s-0.4,1.1,0,1.5 c0.4,0.4,1.1,0.4,1.5,0C11.1,14.4,11.1,13.7,10.7,13.3z" /></svg>
                         <p>Labels</p>
                         {modalType === 'labels' && <div className='action-type-modal'>
@@ -381,7 +382,7 @@ export const TaskDetails = ({ onArchiveTask }) => {
                         {modalType === 'checklist' && <div className='action-type-modal'>
                             <div className='modal'>
                                 {/* <h3>{modalType}</h3> */}
-                                <DynamicModal type={modalType} />
+                                <DynamicModal />
                             </div>
                         </div>}
                     </div>
@@ -410,5 +411,6 @@ export const TaskDetails = ({ onArchiveTask }) => {
             {/* </div> */}
             {/* </div>} */}
         </section>
+        {/* {isModal && <ModalImg url={isModal} />} */}
     </section>
 }

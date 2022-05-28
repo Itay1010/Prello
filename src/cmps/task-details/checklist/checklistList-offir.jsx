@@ -29,7 +29,6 @@ export const ChecklistList = ({ checklist, saveChecklistTask, setIsDone, deleteC
 
     const toggleIsDone = async (clId, todoId) => {
         const todo = await getTodoById(clId, todoId)
-        console.log(todo);
         todo.isDone = !todo.isDone
 
     }

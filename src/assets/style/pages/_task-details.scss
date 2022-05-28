@@ -483,30 +483,127 @@
     h2 {
         font-size: 16px;
         font-weight: 600;
-        margin-bottom: 8px;
+        margin-bottom: 12px;
     }
 
-    textarea {
-        min-height: 40px;
-        background-color: $opc-black;
-        border-radius: 3px;
-        font-weight: 400;
-        font-size: 14px;
+    p {
+        background-color: $td-input;
+        // height: 56px;
         padding: 8px 12px;
+        color: $td-main;
+
+    }
+
+    .edit-description {
+        textarea {
+            min-height: 40px;
+            background-color: $white;
+            border-radius: 3px;
+            font-weight: 400;
+            font-size: 14px;
+            padding: 8px 12px;
+            // outline: 2px solid $clr1;
+            // border: none;
+            border: 2px solid $clr1;
+            color: $td-sub;
+            height: 350px;
+        }
+
+        .btn-save {
+            @include btn($type: dark);
+            display: inline-block;
+            background-color: $clr1;
+            margin: 8px 4px 0 0;
+            // margin-inline-end: 4px;
+            width: 80px;
+            // float: left;
+
+            &:hover {
+                background-color: darken($header-workspace, 5%);
+            }
+        }
+
+        .btn-cancel {
+            @include btn($type: light);
+
+            &:hover {
+                background-color: $opc-black;
+            }
+        }
     }
 
 }
 
+.attachments {
+    width: 100%;
+
+    h2 {
+        font-size: 16px;
+        font-weight: 600;
+        margin-bottom: 12px;
+    }
+
+    p {
+        // background-color: $td-input;
+        // height: 56px;
+        padding: 8px 12px;
+        color: $td-main;
+
+    }
+
+    .edit-description {
+        textarea {
+            min-height: 40px;
+            background-color: $white;
+            border-radius: 3px;
+            font-weight: 400;
+            font-size: 14px;
+            padding: 8px 12px;
+            // outline: 2px solid $clr1;
+            // border: none;
+            border: 2px solid $clr1;
+            color: $td-sub;
+            height: 350px;
+        }
+
+        .btn-save {
+            @include btn($type: dark);
+            display: inline-block;
+            background-color: $clr1;
+            margin: 8px 4px 0 0;
+            // margin-inline-end: 4px;
+            width: 80px;
+            // float: left;
+
+            &:hover {
+                background-color: darken($header-workspace, 5%);
+            }
+        }
+
+        .btn-cancel {
+            @include btn($type: light);
+
+            &:hover {
+                background-color: $opc-black;
+            }
+        }
+    }
+
+}
+
+
 .section-icon {
     height: 32px;
     width: 32px;
-    // background-color: green;
     margin-inline-end: 8px;
 
     svg {
         height: 24px;
         width: 24px;
         margin-inline-end: 8px;
+        fill: $td-svg;
+
+
     }
 }
 
@@ -518,7 +615,7 @@
         font-family: inherit;
         font-size: 16px;
         width: 100%;
-        background-color: aqua;
+        // background-color: aqua;
     }
 
     h2 {

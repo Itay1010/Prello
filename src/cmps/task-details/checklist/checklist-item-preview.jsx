@@ -52,11 +52,13 @@ export const ChecklistItemPreview = ({ item, saveChecklistTask, setIsDone, check
         <div className='item-content flex'>
             <div className='checklist-item-header flex'>
                 <div>icon</div>
-                <h2>{title}</h2>
-                <button onClick={onDeleteChecklist}>delete</button>
+                <div className='header-details-wrapper'>
+                    <h2>{title}</h2>
+                    <button onClick={onDeleteChecklist}>delete</button>
+                </div>
             </div>
-            <div>
-
+            <div className='percentage-bar'>
+                <span>{Math.floor(donePercentage)}%</span>
                 <Box sx={{ width: '100%' }}>
                     <LinearProgress variant="determinate" value={progress} />
                 </Box>
@@ -68,13 +70,12 @@ export const ChecklistItemPreview = ({ item, saveChecklistTask, setIsDone, check
 
             </div>
             <div className='checklist-item-footer'>
-                <div className='space2'>000</div>
                 {!isInputOpen && <button onClick={onToggleInput}>Add an item</button>}
                 {isInputOpen && <React.Fragment>
                     <form action="" onSubmit={onSaveChecklistTask} >
                         <input autoComplete='off' onChange={handleChange} onBlur={onToggleInput} type="text" placeholder='Add an item' name='txt' />
                         <div className='toggle-modal-buttons'>
-                            <button onMouseDown={onSaveChecklistTask}>Add item</button>
+                            <button onMouseDown={onSaveChecklistTask}>Add</button>
                             <button onMouseDown={onToggleInput}>Cancel</button>
                         </div>
                     </form>
