@@ -296,6 +296,65 @@
                 }
             }
         }
+
+        .attachments {
+            .close-modal {
+                float: right;
+                color: $edit;
+                height: 16px;
+                width: 16px;
+                cursor: pointer;
+
+                &:hover {
+                    color: $txt;
+                }
+
+                svg {
+                    fill: $edit;
+
+                    &:hover {
+                        fill: $txt;
+                    }
+                }
+
+            }
+
+            h2 {
+                font-size: 14px;
+                text-align: center;
+                font-weight: 400;
+            }
+
+            h3 {
+                font-size: 12px;
+                font-weight: 600;
+                color: $edit;
+                margin-bottom: 8px;
+            }
+
+            input {
+                width: 100%;
+                outline: 2px solid $clr1;
+                border-radius: 3px;
+                height: 32px;
+                padding-inline-start: 4px;
+                margin-bottom: 16px;
+
+            }
+
+            button {
+                @include btn($type: dark);
+                background-color: $header-workspace;
+                margin: 0;
+                width: 80px;
+                height: 100%;
+                float: left;
+
+                &:hover {
+                    background-color: darken($header-workspace, 5%);
+                }
+            }
+        }
     }
 }
 
@@ -334,12 +393,18 @@
 
             .add-member {
                 background-color: $opc-black;
-                color: $edit;
                 cursor: pointer;
 
                 &:hover {
                     background-color: $opc-black-hov;
                 }
+
+                svg {
+                    height: 16px;
+                    width: 16px;
+                    fill: $edit;
+                }
+
             }
 
             .member {
@@ -370,12 +435,19 @@
 
             .add-label {
                 background-color: $opc-black;
-                color: $edit;
-                font-weight: 600;
+                cursor: pointer;
 
                 &:hover {
                     background-color: $opc-black-hov;
                 }
+
+                svg {
+                    height: 16px;
+                    width: 16px;
+                    fill: $edit;
+                }
+
+
             }
         }
 

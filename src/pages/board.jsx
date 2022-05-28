@@ -76,15 +76,21 @@ class _Board extends React.Component {
 
 
     handleOnDragEnd = (result) => {
-        // console.log('handle', result)
         if (!result.destination) return
         const { board } = this.props
         const newBoard = JSON.parse(JSON.stringify(board))
 
-        const items = newBoard.groups
-        const [reorderedItem] = items.splice(result.source.index, 1)
-        items.splice(result.destination.index, 0, reorderedItem)
-        this.props.updateBoard(newBoard)
+        if (result.type === 'groups') {
+            const items = newBoard.groups
+            const [reorderedItem] = items.splice(result.source.index, 1)
+            items.splice(result.destination.index, 0, reorderedItem)
+            this.props.updateBoard(newBoard)
+        } else {
+            const items = newBoard.groups.find(group => group.id === result.source.droppableId).tasks
+            const [reorderedItem] = items.splice(result.source.index, 1)
+            newBoard.groups.find(group => group.id === result.destination.droppableId).tasks.splice(result.destination.index, 0, reorderedItem)
+            this.props.updateBoard(newBoard)
+        }
     }
 
     onSaveBoardHeader = (newBoardHeader) => {
