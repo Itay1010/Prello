@@ -136,30 +136,6 @@
             "title": "Backlog",
             "tasks": [
                 {
-                    "id": "0PJ4Tz8YXrIHdKe",
-                    "title": "dnd not working correctly",
-                    "members": [],
-                    "labels": [
-                        "#61bd4f"
-                    ]
-                },
-                {
-                    "id": "Z7KvoTPF8egRGV1",
-                    "title": "Monitization",
-                    "members": []
-                },
-                {
-                    "id": "T1fl90Kk5ytxKx3",
-                    "title": "Localization",
-                    "members": []
-                }
-            ]
-        },
-        {
-            "id": "QDFBNV7sXFGUcwK",
-            "title": "Bugs",
-            "tasks": [
-                {
                     "id": "Cqd8rrORDIWrD9l",
                     "title": "Make the best app",
                     "members": [],
@@ -188,10 +164,51 @@
                     ]
                 },
                 {
+                    "id": "Z7KvoTPF8egRGV1",
+                    "title": "Monitization",
+                    "members": []
+                },
+                {
+                    "id": "T1fl90Kk5ytxKx3",
+                    "title": "Localization",
+                    "members": []
+                },
+                {
                     "id": "FGU5WNSkRUrdjUH",
                     "title": "Integrate sockets",
                     "members": []
                 },
+                {
+                    "id": "jnY2SqOxqzlDYA7",
+                    "title": "Home page",
+                    "members": []
+                },
+                {
+                    "id": "zY4IQ0tk6KG4ftR",
+                    "title": "Login page",
+                    "members": []
+                },
+                {
+                    "id": "er8WjQTp26FGMo9",
+                    "title": "Permanently delete tasks",
+                    "members": []
+                },
+                {
+                    "id": "P6bbGdI8Qczeoyx",
+                    "title": "Change h3 to input ",
+                    "members": []
+                },
+                {
+                    "id": "KkRFCGoODyFuY4v",
+                    "title": "Label shrink grow",
+                    "members": []
+                }
+            ]
+        },
+        {
+            "id": "QDFBNV7sXFGUcwK",
+            "title": "Bugs",
+            "tasks": [
                 {
                     "id": "4b2iFE9LZ3flkLy",
                     "title": "These don't work",
@@ -203,7 +220,8 @@
                             "createdAt": 1653743774070,
                             "id": "QggxUeVhw9es6Bv"
                         }
-                    ]
+                    ],
+                    "archivedAt": 1653768728559
                 }
             ]
         },
@@ -212,17 +230,30 @@
             "title": "Done",
             "tasks": [
                 {
-                    "id": "WzSlH8bNsqkeI63",
-                    "title": "Creating data",
-                    "members": [
-                        "u101"
+                    "id": "0PJ4Tz8YXrIHdKe",
+                    "title": "",
+                    "members": [],
+                    "labels": [
+                        "#61bd4f"
                     ],
-                    "attachments": []
+                    "checklist": []
                 },
                 {
                     "id": "MZ7rE7sToaHOA35",
-                    "title": "Cloudinary",
-                    "members": []
+                    "title": "Cloudinaryfd",
+                    "members": [],
+                    "description": ""
+                },
+                {
+                    "id": "4p4J9EibwH5xqaO",
+                    "title": "new",
+                    "archivedAt": 1653756701533
+                },
+                {
+                    "id": "xRA9ypsgbpilQKl",
+                    "title": "new",
+                    "members": [],
+                    "archivedAt": 1653756706168
                 }
             ]
         },
@@ -230,6 +261,11 @@
             "id": "MeTX99MywubXar2",
             "title": "QA",
             "tasks": [
+                {
+                    "id": "C4EKu5dRlFNDQfl",
+                    "title": "More CSS",
+                    "members": []
+                },
                 {
                     "id": "20l6C4k6NVExNOc",
                     "title": "Dynamic header",
@@ -254,8 +290,21 @@
             "title": "Production",
             "tasks": [
                 {
+                    "id": "WzSlH8bNsqkeI63",
+                    "title": "Creating data",
+                    "members": [
+                        "u101"
+                    ],
+                    "attachments": []
+                },
+                {
                     "id": "Sj7c2Hbc6AyCFcZ",
                     "title": "Crud",
+                    "members": []
+                },
+                {
+                    "id": "iGSyNjxNY1p38T9",
+                    "title": "Basic CSS",
                     "members": []
                 }
             ]

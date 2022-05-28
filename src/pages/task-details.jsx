@@ -142,13 +142,11 @@ export const TaskDetails = ({ onArchiveTask }) => {
         saveBoard()
     }
 
-    const saveTaskTitle = (ev) => {
-        if (ev.key === 'Enter') {
-
-            task.title = title
-            setTitle(false)
-            saveBoard()
-        }
+    const saveTaskTitle = () => {
+        console.log('saved');
+        task.title = title
+        setTitle(false)
+        saveBoard()
     }
 
     const saveTaskDescription = () => {
@@ -207,16 +205,6 @@ export const TaskDetails = ({ onArchiveTask }) => {
         }
     }
 
-    const setTitleEditable = async () => {
-        if (isTitleEditable) {
-            setTitle(false)
-        } else {
-            await setTitle(true)
-            setTitleValue(task.title)
-            titleRef.current.focus()
-        }
-    }
-
     const DynamicModal = () => {
         switch (modalType) {
             case 'members':
@@ -270,19 +258,22 @@ export const TaskDetails = ({ onArchiveTask }) => {
                     <ITask />
                 </div>
                 <div className="section-data flex col">
-                    {!isTitleEditable && <h2 onClick={setTitleEditable} className='task-title'>{task.title ? task.title : 'Please enter task title'}</h2>}
-                    {/* {isTitleEditable && <input onChange={handleTitleChange} onBlur={setTitleEditable} ref={titleRef} value={title} onKeyDown={(event) => saveTaskTitle(event)} />} */}
-                    {isTitleEditable && <TextareaAutosize
-                        onKeyDown={(event) => saveTaskTitle(event)}
+                    <TextareaAutosize
+                        className='task-title'
+                        onKeyDown={(ev) => {
+                            if (ev.key === 'Enter') {
+                                ev.preventDefault()
+                                ev.target.blur()
+                            }
+                        }}
                         onChange={handleTitleChange}
                         ref={titleRef}
-                        onBlur={setTitleEditable}
+                        onBlur={saveTaskTitle}
                         maxRows={4}
                         aria-label="maximum height"
                         placeholder='Add a more detailed description...'
                         defaultValue={task.title ? task.title : ''}
-                        style={{ width: '100%' }}
-                    />}
+                    />
                     <p>in list {group.title}</p>
                 </div>
             </div>
