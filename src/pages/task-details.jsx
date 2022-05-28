@@ -169,11 +169,6 @@ export const TaskDetails = () => {
         // setGroup(group)
         saveBoard()
     }
-<<<<<<< HEAD
-
-    const saveBoard = () => {
-=======
->>>>>>> 5d8f725d9de2736a816dbde58dd25d086104d5d5
 
     const saveBoard = () => {
         dispatch(updateBoard(board))
