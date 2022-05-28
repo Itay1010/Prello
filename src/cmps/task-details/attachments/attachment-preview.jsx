@@ -1,6 +1,6 @@
 import React from 'react'
 
-export const AttachmentPreview = ({ attachment, removeAttachment }) => {
+export const AttachmentPreview = ({ attachment, removeAttachment, openImgModal }) => {
     const { url, title, createdAt, id } = attachment
     let diff = (Date.now() - createdAt) / 1000
 
@@ -17,13 +17,22 @@ export const AttachmentPreview = ({ attachment, removeAttachment }) => {
     const onRemoveAttachment = () => {
         removeAttachment(id)
     }
-    return <div className='attachment-preview'>
-        <img src={url} alt="" />
-        <div className='attachment-title-and-options'>
-            <p>{title}</p>
-            <div className='attachment-options'>
-                <p>{dateToDisplay()}  </p><div className='attachment-button'> <a onClick={onRemoveAttachment}>Remove</a><span>-</span><a>Edit</a></div>
-            </div>
+
+
+
+    return <div className='attachment-preview flex space-between'>
+        {/* <div className='img-container' onClick={() => openImgModal(url)}>
+            <img src={url} alt="" />
+        </div> */}
+        <a href={attachment.url} target={'_blank'} className='img-container'>
+            <img src={url} alt="" />
+        </a>
+        {/* <a href=""></a> */}
+        {/* <div className='attachment-title-and-options'> */}
+        <div className='attachment-data flex col space-between'>
+            <h3>{title}</h3>
+            <p>{dateToDisplay()}  </p>
+            <div className='attachment-button'> <a onClick={onRemoveAttachment}>Remove</a><span>-</span><a>Edit</a></div>
         </div>
     </div>
 }
