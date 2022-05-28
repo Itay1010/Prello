@@ -39,7 +39,7 @@ export const Group = ({ group, onAddTask, onArchiveTask, onArchiveGroup, onGroup
                     onGroupChange={onGroupChange}
                 />
                 <Droppable type="cards" droppableId={`${group.id}`} direction="vertical">
-                    {(provided) => {
+                    {(provided, snapshot) => {
                         return <div className="list-task" {...provided.droppableProps} ref={provided.innerRef}>
                             {tasks.map((task, idx) => {
                                 if (!task.archivedAt) return <TaskPreview key={task.id} task={task} groupId={group.id} idx={idx} />
@@ -52,27 +52,27 @@ export const Group = ({ group, onAddTask, onArchiveTask, onArchiveGroup, onGroup
                                 newTask={newTask}
                                 setNewTask={setNewTask}
                             />}
-                            {provided.placeholder}
+                            {snapshot.isDraggingOver && provided.placeholder}
+                            {
+                                isTaskOpen || <div className="group-footer flex space-between align-center">
+                                    <button className="add-card-btn" onClick={ev => setIsTaskOpen(true)
+                                    }>Add a card</button>
+                                </div>
+                            }
+                            {
+                                isTaskOpen && <div className="group-footer flex align-center">
+                                    <button onMouseDown={ev => {
+                                        onAddTask(newTask)
+                                        setNewTask({ title: '', groupId: group.id })
+                                    }}>Add card</button>
+                                    <button onClick={ev => setIsTaskOpen(false)}>X</button>
+                                </div>
+                            }
                         </div>
 
                     }}
                 </Droppable>
 
-                {
-                    isTaskOpen || <div className="group-footer flex space-between align-center">
-                        <button className="add-card-btn" onClick={ev => setIsTaskOpen(true)
-                        }>Add a card</button>
-                    </div>
-                }
-                {
-                    isTaskOpen && <div className="group-footer flex align-center">
-                        <button onMouseDown={ev => {
-                            onAddTask(newTask)
-                            setNewTask({ title: '', groupId: group.id })
-                        }}>Add card</button>
-                        <button onClick={ev => setIsTaskOpen(false)}>X</button>
-                    </div>
-                }
 
             </section >
         }}

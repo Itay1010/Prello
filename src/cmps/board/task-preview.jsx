@@ -60,7 +60,7 @@ export const TaskPreview = ({ task, groupId, idx }) => {
 
 function _getStyle(style, snapshot) {
     if (!snapshot.isDropAnimating) {
-        return style;
+        return style
     }
     const { moveTo, curve, duration } = snapshot.dropAnimation;
     // move to the right spot

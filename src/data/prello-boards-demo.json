@@ -1,0 +1,286 @@
+{
+    "_id": "b101",
+    "title": "My Board",
+    "createdAt": 1589983468418,
+    "createdBy": {
+        "_id": "u101",
+        "firstName": "Eytan",
+        "lastName": "Silberberg",
+        "imgUrl": "/static/media/eytan.c76ba47a23dc9a524158.jpeg"
+    },
+    "style": {
+        "backgroundColor": "blue"
+    },
+    "labels": [
+        {
+            "id": "l101",
+            "title": "Done",
+            "color": "#61bd4f"
+        },
+        {
+            "id": "l102",
+            "title": "Progress",
+            "color": "#61bd33"
+        }
+    ],
+    "members": [
+        {
+            "_id": "u101",
+            "firstName": "Eytan",
+            "lastName": "Silberberg",
+            "imgUrl": "https://res.cloudinary.com/di5o0obqy/image/upload/v1653742446/eytan_vl7skf.jpg",
+            "backgroundColor": "#44C5CB"
+        },
+        {
+            "_id": "u102",
+            "firstName": "Itay",
+            "lastName": "Zonshine",
+            "imgUrl": "https://res.cloudinary.com/di5o0obqy/image/upload/v1653742446/itay_brzaf1.jpg",
+            "backgroundColor": "#FCE315"
+        },
+        {
+            "_id": "u103",
+            "firstName": "Offir",
+            "lastName": "Carmi",
+            "imgUrl": "https://res.cloudinary.com/di5o0obqy/image/upload/v1653742446/offir_ixxjf7.jpg",
+            "backgroundColor": "#F53D52"
+        },
+        {
+            "_id": "u104",
+            "firstName": "Idan",
+            "lastName": "Gez",
+            "imgUrl": "https://media-exp1.licdn.com/dms/image/C4E03AQHS2IrCTjh7kQ/profile-displayphoto-shrink_800_800/0/1645011912408?e=1658966400&v=beta&t=ztcm1v1QLUsANcPVcXF8c-2icQB51oLyQ5hgK5sn-VQ",
+            "backgroundColor": "#FF9200"
+        }
+    ],
+    "groups": [
+        {
+            "id": "g101",
+            "title": "Basic UI",
+            "tasks": [
+                {
+                    "id": "t101",
+                    "title": "Replace logo",
+                    "members": [
+                        "u101"
+                    ]
+                },
+                {
+                    "id": "t102",
+                    "title": "Add json",
+                    "members": [
+                        "u103",
+                        "u102"
+                    ]
+                },
+                {
+                    "id": "t110",
+                    "title": "more json",
+                    "members": []
+                }
+            ],
+            "archivedAt": 1653737140300
+        },
+        {
+            "id": "g102",
+            "title": "done",
+            "members": [],
+            "tasks": [
+                {
+                    "id": "t103",
+                    "title": "Just do it now",
+                    "archivedAt": 1589983468418,
+                    "members": [
+                        "u102",
+                        "u101"
+                    ]
+                },
+                {
+                    "id": "t104",
+                    "title": "new feature",
+                    "status": "in-progress",
+                    "members": [
+                        "u103"
+                    ],
+                    "description": "description",
+                    "comments": [
+                        {
+                            "id": "t108",
+                            "txt": "also @yaronb please CR this",
+                            "createdAt": 1590999817436,
+                            "byMember": {
+                                "_id": "u102",
+                                "firstName": "Itay",
+                                "lastName": "Zonshine",
+                                "imgUrl": "/static/media/itay.c4c3d7159f1d6bf24084.jpg"
+                            }
+                        }
+                    ],
+                    "createdAt": 1590999730348,
+                    "dueDate": 16156215211,
+                    "byMember": {
+                        "_id": "u103",
+                        "firstName": "Offir",
+                        "lastName": "Carmi",
+                        "imgUrl": "/static/media/offir.ba20e421301b2c0cd6cf.jpg"
+                    },
+                    "style": {
+                        "bgColor": "#26de81"
+                    }
+                }
+            ],
+            "archivedAt": 1653737140723
+        },
+        {
+            "id": "GVK180ok5i37EKV",
+            "title": "Backlog",
+            "tasks": [
+                {
+                    "id": "0PJ4Tz8YXrIHdKe",
+                    "title": "dnd not working correctly",
+                    "members": [],
+                    "labels": [
+                        "#61bd4f"
+                    ]
+                },
+                {
+                    "id": "Z7KvoTPF8egRGV1",
+                    "title": "Monitization",
+                    "members": []
+                },
+                {
+                    "id": "T1fl90Kk5ytxKx3",
+                    "title": "Localization",
+                    "members": []
+                }
+            ]
+        },
+        {
+            "id": "QDFBNV7sXFGUcwK",
+            "title": "Bugs",
+            "tasks": [
+                {
+                    "id": "Cqd8rrORDIWrD9l",
+                    "title": "Make the best app",
+                    "members": [],
+                    "checklist": [
+                        {
+                            "title": "To Do",
+                            "items": [
+                                {
+                                    "txt": "Basic build",
+                                    "id": "N51kpr55iiW9n6K",
+                                    "isDone": false
+                                },
+                                {
+                                    "txt": "Upload to heroku",
+                                    "id": "m9nQOPuwzpVcKim",
+                                    "isDone": false
+                                },
+                                {
+                                    "txt": "Profit",
+                                    "id": "rNevVoHIRC5Y2PA",
+                                    "isDone": false
+                                }
+                            ],
+                            "id": "Clc2hVdPzYc1X8DKn"
+                        }
+                    ]
+                },
+                {
+                    "id": "FGU5WNSkRUrdjUH",
+                    "title": "Integrate sockets",
+                    "members": []
+                },
+                {
+                    "id": "4b2iFE9LZ3flkLy",
+                    "title": "These don't work",
+                    "members": [],
+                    "attachments": [
+                        {
+                            "title": "the father the son and the holy spirit",
+                            "url": "https://www.kindpng.com/picc/m/78-787343_html5-css-javascript-html-css-js-icon-hd.png",
+                            "createdAt": 1653743774070,
+                            "id": "QggxUeVhw9es6Bv"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "id": "z4rDFYSnEZaC6mR",
+            "title": "Done",
+            "tasks": [
+                {
+                    "id": "WzSlH8bNsqkeI63",
+                    "title": "Creating data",
+                    "members": [
+                        "u101"
+                    ],
+                    "attachments": []
+                },
+                {
+                    "id": "MZ7rE7sToaHOA35",
+                    "title": "Cloudinary",
+                    "members": []
+                }
+            ]
+        },
+        {
+            "id": "MeTX99MywubXar2",
+            "title": "QA",
+            "tasks": [
+                {
+                    "id": "20l6C4k6NVExNOc",
+                    "title": "Dynamic header",
+                    "members": []
+                },
+                {
+                    "id": "9RzHckmTZus9XLS",
+                    "title": "Changing board's name with input",
+                    "members": [
+                        "u104"
+                    ]
+                },
+                {
+                    "id": "PhCwd6Fu3IDZiSu",
+                    "title": "Auth system",
+                    "members": []
+                }
+            ]
+        },
+        {
+            "id": "vC6Sh9b9pW3wn5K",
+            "title": "Production",
+            "tasks": [
+                {
+                    "id": "Sj7c2Hbc6AyCFcZ",
+                    "title": "Crud",
+                    "members": []
+                }
+            ]
+        }
+    ],
+    "activities": [
+        {
+            "id": "a101",
+            "type": "Added Task",
+            "createdAt": 154514,
+            "byMember": {
+                "_id": "u104",
+                "firstName": "Idan",
+                "lastName": "Gez",
+                "imgUrl": "https://media-exp1.licdn.com/dms/image/C4E03AQHS2IrCTjh7kQ/profile-displayphoto-shrink_800_800/0/1645011912408?e=1658966400&v=beta&t=ztcm1v1QLUsANcPVcXF8c-2icQB51oLyQ5hgK5sn-VQ"
+            },
+            "task": {
+                "id": "c101",
+                "title": "Replace Logo"
+            }
+        }
+    ],
+    "cmpsOrder": [
+        "status-picker",
+        "member-picker",
+        "date-picker"
+    ]
+}

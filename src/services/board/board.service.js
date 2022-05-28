@@ -5,7 +5,7 @@ import { getActionSetBoard, getActionRemoveBoard } from '../../store/board/board
 import { userService } from "../../services/user.service"
 import { useState } from 'react'
 const emptyBoard = require('../../data/empty-board.json')
-const jsonBoard = require('../../data/prello-boards.json')
+const jsonBoard = require('../../data/prello-boards-demo.json')
 // import { socketService, SOCKET_EVENT_REVIEW_ADDED, SOCKET_EVENT_REVIEW_ABOUT_YOU } from './socket.service'
 // import { showSuccessMsg } from '../services/event-bus.service'
 

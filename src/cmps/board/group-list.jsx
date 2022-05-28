@@ -19,9 +19,7 @@ export const GroupList = ({ groups, eventHandlers }) => {
             return <section
                 className="group-container flex groups"
                 {...provided.droppableProps}
-                ref={provided.innerRef}
-            // style={{ backgroundColor: snapshot.isDraggingOver ? 'red' : 'blue' }}
-            >
+                ref={provided.innerRef}>
                 {groups.map((group, idx) => {
                     if (group.archivedAt) return
                     return <Group
