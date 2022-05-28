@@ -25,12 +25,14 @@ export const TaskPreview = ({ task, groupId, idx }) => {
         setMembersToDisplay(filteredMembers)
     }
 
-    return <Draggable draggableId={task.id} index={idx}>
-        {(provided) => {
+    return <Draggable type="cards" draggableId={task.id} index={idx}>
+        {(provided, snapshot) => {
             return <article className="task-preview"
                 ref={provided.innerRef}
                 {...provided.draggableProps}
-                {...provided.dragHandleProps}>
+                {...provided.dragHandleProps}
+                style={_getStyle(provided.draggableProps.style, snapshot)}
+            >
                 <Link to={`/board/${boardId}/${groupId}/${task.id}`}>
                     {task.style?.bgColor && <section className="task-color"
                         style={({ backgroundColor: task.style.bgColor })}
@@ -55,6 +57,24 @@ export const TaskPreview = ({ task, groupId, idx }) => {
 
 
 
+function _getStyle(style, snapshot) {
+    if (!snapshot.isDropAnimating) {
+        return style;
+    }
+    const { moveTo, curve, duration } = snapshot.dropAnimation;
+    // move to the right spot
+    const translate = `translate(${moveTo.x}px, ${moveTo.y}px)`;
+    // add a rotate
+    // const rotate = `rotate(15deg)`
+
+    // patching the existing style
+    return {
+        ...style,
+        transform: `${translate}`,
+        // slowing down the drop because we can
+        transition: `all ${curve} ${0.01}s`,
+    };
+}
 
 // import React, { useEffect, useState } from 'react';
 // import { Link, useParams } from "react-router-dom"

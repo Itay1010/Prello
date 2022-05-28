@@ -5,7 +5,7 @@ import { TaskPreview } from "./task-preview"
 import { GroupTitle } from "./group-title"
 import { AddTask } from "./add-task"
 
-export const Group = ({ group, onAddTask, onArchiveTask, onArchiveGroup, onGroupChange, idx, isDragging }) => {
+export const Group = ({ group, onAddTask, onArchiveTask, onArchiveGroup, onGroupChange, idx }) => {
     // console.log('Group - onArchiveGroup', onArchiveGroup)
     const { tasks } = group
     const [newTask, setNewTask] = useState({ title: '', groupId: group.id })
@@ -17,14 +17,14 @@ export const Group = ({ group, onAddTask, onArchiveTask, onArchiveGroup, onGroup
     const [groupTitle, setGroupTitle] = useState({ txt: group.title, groupId: group.id })
     const [isTaskOpen, setIsTaskOpen] = useState(false)
 
-    return <Draggable draggableId={group.id} index={idx}>
+    return <Draggable type="groups" draggableId={group.id} index={idx}>
         {(provided, snapshot) => {
             const style = {
                 transform: snapshot.isDragging ? 'transform: rotateZ(3deg);' : 'transform: rotateZ(0deg);',
                 ...provided.draggableProps.style,
             }
             return <section
-                onClick={ev => ev.stopPropagation()}
+                // onClick={ev => ev.stopPropagation()}
                 ref={provided.innerRef}
                 {...provided.draggableProps}
                 {...provided.dragHandleProps}
@@ -38,15 +38,14 @@ export const Group = ({ group, onAddTask, onArchiveTask, onArchiveGroup, onGroup
                     onArchiveGroup={onArchiveGroup}
                     onGroupChange={onGroupChange}
                 />
-                <Droppable droppableId="card">
+                <Droppable type="cards" droppableId={`${group.id}`} direction="vertical">
                     {(provided) => {
                         return <div className="list-task" {...provided.droppableProps} ref={provided.innerRef}>
                             {tasks.map((task, idx) => {
-                                if (!task.archivedAt) return <TaskPreview key={task.id} task={task} groupId={group.id} />
+                                if (!task.archivedAt) return <TaskPreview key={task.id} task={task} groupId={group.id} idx={idx} />
                             })}
                             {isTaskOpen && <AddTask
                                 // a card with the same class as the the others but with a textarea
-                                idx={idx}
                                 group={group}
                                 onAddTask={onAddTask}
                                 handleChange={handleChange}

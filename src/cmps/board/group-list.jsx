@@ -14,7 +14,7 @@ export const GroupList = ({ groups, eventHandlers }) => {
         onGroupChange,
         onAddGroup
     } = eventHandlers
-    return <Droppable droppableId="groups" direction="horizontal">
+    return <Droppable type="groups" droppableId="groups" direction="horizontal">
         {(provided, snapshot) => {
             return <section
                 className="group-container flex groups"
