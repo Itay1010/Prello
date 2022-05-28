@@ -1,30 +1,30 @@
 import React, { useState, useRef, useEffect } from "react";
 
-export const TxtInputCmp = ({ saveBoardHeader, isBoardTitleEditable, toggleBoardTitleEditable, boardInitialTitle }) => {
+export const TxtInputCmp = ({ saveFunc, toggleContentEditable, contentInitialState }) => {
 
 
-    const [boardTitle, setBoardTitleValue] = useState('')
-    const boardTitleRef = useRef()
+    const [content, setBoardTitleValue] = useState('')
+    const contentRef = useRef()
     const [width, setWidth] = useState(0);
 
-    const handleBoardTitleChange = ({ target, isBoardTitleEditable }) => {
+    const handleContentChange = ({ target }) => {
         setWidth(target.value.length + 'ch')
         setBoardTitleValue(target.value)
     }
 
     useEffect(() => {
-        setBoardTitleValue(boardInitialTitle)
-        setWidth(boardInitialTitle.length + 'ch')
+        setBoardTitleValue(contentInitialState)
+        setWidth(contentInitialState.length + 'ch')
     }, [])
 
 
 
     const onSaveBoardTitle = (ev) => {
         if (ev.key === 'Enter') {
-            toggleBoardTitleEditable()
-            saveBoardHeader(boardTitle)
+            toggleContentEditable()
+            saveFunc(content)
         }
     }
 
-    return <input style={{ width }} ref={boardTitleRef} autoFocus type="text" value={boardTitle} placeholder='Enter board name' onChange={handleBoardTitleChange} onBlur={toggleBoardTitleEditable} onKeyDown={onSaveBoardTitle} />
+    return <input className="min-width-input" style={{ width }} ref={contentRef} autoFocus type="text" value={content} placeholder='Enter board name' onChange={handleContentChange} onBlur={toggleContentEditable} onKeyDown={onSaveBoardTitle} />
 }
