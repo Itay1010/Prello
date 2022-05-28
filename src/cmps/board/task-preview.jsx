@@ -33,7 +33,7 @@ export const TaskPreview = ({ task, groupId, idx }) => {
                 ref={provided.innerRef}
                 {...provided.draggableProps}
                 {...provided.dragHandleProps}
-                style={_getStyle(provided.draggableProps.style, snapshot)}
+                // style={_getStyle(provided.draggableProps.style, snapshot, provided)}
             >
                 <Link to={`/board/${boardId}/${groupId}/${task.id}`}>
                     {task.style?.bgColor && <section className="task-color"
@@ -59,22 +59,23 @@ export const TaskPreview = ({ task, groupId, idx }) => {
 }
 
 function _getStyle(style, snapshot) {
-    if (!snapshot.isDropAnimating) {
-        return style
-    }
-    const { moveTo, curve, duration } = snapshot.dropAnimation;
-    // move to the right spot
-    const translate = `translate(${moveTo.x}px, ${moveTo.y}px)`;
-    // add a rotate
-    // const rotate = `rotate(15deg)`
 
-    // patching the existing style
+    if (!snapshot.isDragging) {
+        return {
+            transform: `${style.transform} skew(0deg)`,
+            ...style,
+    
+        }
+    }
+    const { moveTo, curve, duration } = snapshot;
+    const skew = `skew(50deg)`;
     return {
         ...style,
-        transform: `${translate}`,
-        // slowing down the drop because we can
-        transition: `all ${curve} ${0.01}s`,
-    };
+        transform: `${style.transform} ${skew}`,
+
+    }
+
+
 }
 
 // import React, { useEffect, useState } from 'react';

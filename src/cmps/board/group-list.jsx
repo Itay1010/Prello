@@ -1,6 +1,6 @@
 import React from 'react'
 import { Group } from './task-list'
-import { Droppable, Draggable } from 'react-beautiful-dnd'
+import { Droppable } from 'react-beautiful-dnd'
 
 import { AddGroupForm } from "./add-group-form"
 
