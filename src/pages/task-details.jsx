@@ -48,7 +48,7 @@ let height
 
 
 
-export const TaskDetails = () => {
+export const TaskDetails = ({ onArchiveTask }) => {
     const params = useParams()
     const dispatch = useDispatch()
     const { boardId, groupId, taskId } = params
@@ -142,13 +142,11 @@ export const TaskDetails = () => {
         saveBoard()
     }
 
-    const saveTaskTitle = (ev) => {
-        if (ev.key === 'Enter') {
-
-            task.title = title
-            setTitle(false)
-            saveBoard()
-        }
+    const saveTaskTitle = () => {
+        console.log('saved');
+        task.title = title
+        setTitle(false)
+        saveBoard()
     }
 
     const saveTaskDescription = () => {
@@ -207,16 +205,6 @@ export const TaskDetails = () => {
         }
     }
 
-    const setTitleEditable = async () => {
-        if (isTitleEditable) {
-            setTitle(false)
-        } else {
-            await setTitle(true)
-            setTitleValue(task.title)
-            titleRef.current.focus()
-        }
-    }
-
     const DynamicModal = () => {
         switch (modalType) {
             case 'members':
@@ -270,19 +258,22 @@ export const TaskDetails = () => {
                     <ITask />
                 </div>
                 <div className="section-data flex col">
-                    {!isTitleEditable && <h2 onClick={setTitleEditable} className='task-title'>{task.title ? task.title : 'Please enter task title'}</h2>}
-                    {/* {isTitleEditable && <input onChange={handleTitleChange} onBlur={setTitleEditable} ref={titleRef} value={title} onKeyDown={(event) => saveTaskTitle(event)} />} */}
-                    {isTitleEditable && <TextareaAutosize
-                        onKeyDown={(event) => saveTaskTitle(event)}
+                    <TextareaAutosize
+                        className='task-title'
+                        onKeyDown={(ev) => {
+                            if (ev.key === 'Enter') {
+                                ev.preventDefault()
+                                ev.target.blur()
+                            }
+                        }}
                         onChange={handleTitleChange}
                         ref={titleRef}
-                        onBlur={setTitleEditable}
+                        onBlur={saveTaskTitle}
                         maxRows={4}
                         aria-label="maximum height"
                         placeholder='Add a more detailed description...'
                         defaultValue={task.title ? task.title : ''}
-                        style={{ width: '100%' }}
-                    />}
+                    />
                     <p>in list {group.title}</p>
                 </div>
             </div>
@@ -395,8 +386,11 @@ export const TaskDetails = () => {
                             </div>
                         </div>}
                     </div>
-                    <div className='modal-btn btn-edit-task-key flex align-center'>
-                        <svg viewBox="0 0 24 24" ><g className="st0"><path className="st1" d="M-38.3,3c-1.1,0-2,0.9-2,2v14c0,1.1,0.9,2,2,2h14c1.1,0,2-0.9,2-2v-6.8c0-0.6-0.4-1-1-1h0c-0.6,0-1,0.4-1,1 l0,5.8c0,0.6-0.4,1-1,1h-12c-0.6,0-1-0.4-1-1V6c0-0.6,0.4-1,1-1h9.8c0.6,0,1-0.4,1-1v0c0-0.6-0.4-1-1-1H-38.3z" /><path className="st1" d="M-21.6,4l-9.1,9.1c-0.3,0.3-0.7,0.3-0.9,0l-2.1-2.1c-0.4-0.4-1-0.4-1.4,0v0c-0.4,0.4-0.4,1,0,1.4l3.3,3.3 c0.4,0.4,1,0.4,1.4,0l10.3-10.3c0.4-0.4,0.4-1,0-1.4l0,0C-20.6,3.6-21.2,3.6-21.6,4z" /><path className="st2" d="M-79,24.7h-34.4c-2.1,0-3.7-1.7-3.7-3.7V-4.6h41.9V21C-75.3,23-76.9,24.7-79,24.7z" /><line className="st2" x1="-101.2" y1="5.6" x2="-91" y2="5.6" /><line className="st2" x1="-117.1" y1="-14.1" x2="-75.3" y2="-17.3" /></g><g><g><path d="M15.6,21H8.4C5.4,21,3,18.6,3,15.7V7.8H21v7.9C21,18.6,18.6,21,15.6,21z M5.3,10v5.7c0,1.7,1.4,3.1,3.1,3.1h7.3 c1.7,0,3.1-1.4,3.1-3.1V10H5.3z" /></g><g><path d="M13.9,13.8h-3.8c-0.6,0-1.1-0.5-1.1-1.1s0.5-1.1,1.1-1.1h3.8c0.6,0,1.1,0.5,1.1,1.1S14.5,13.8,13.9,13.8z" /></g><g><path d="M4.2,6.5C3.6,6.5,3.1,6,3,5.4c0-0.6,0.4-1.2,1-1.2L19.8,3C20.4,3,20.9,3.4,21,4c0,0.6-0.4,1.2-1,1.2L4.2,6.5 C4.2,6.5,4.2,6.5,4.2,6.5z" /></g></g></svg>                        <p>Archive card</p>
+                    <div className='modal-btn btn-edit-task-key flex align-center' onClick={ev => {
+                        onArchiveTask({ taskId, groupId })
+                        onGoBack()
+                    }}>
+                        <svg viewBox="0 0 24 24" ><g class="st0"><path class="st1" d="M-38.3,3c-1.1,0-2,0.9-2,2v14c0,1.1,0.9,2,2,2h14c1.1,0,2-0.9,2-2v-6.8c0-0.6-0.4-1-1-1h0c-0.6,0-1,0.4-1,1 l0,5.8c0,0.6-0.4,1-1,1h-12c-0.6,0-1-0.4-1-1V6c0-0.6,0.4-1,1-1h9.8c0.6,0,1-0.4,1-1v0c0-0.6-0.4-1-1-1H-38.3z" /><path class="st1" d="M-21.6,4l-9.1,9.1c-0.3,0.3-0.7,0.3-0.9,0l-2.1-2.1c-0.4-0.4-1-0.4-1.4,0v0c-0.4,0.4-0.4,1,0,1.4l3.3,3.3 c0.4,0.4,1,0.4,1.4,0l10.3-10.3c0.4-0.4,0.4-1,0-1.4l0,0C-20.6,3.6-21.2,3.6-21.6,4z" /><path class="st2" d="M-79,24.7h-34.4c-2.1,0-3.7-1.7-3.7-3.7V-4.6h41.9V21C-75.3,23-76.9,24.7-79,24.7z" /><line class="st2" x1="-101.2" y1="5.6" x2="-91" y2="5.6" /><line class="st2" x1="-117.1" y1="-14.1" x2="-75.3" y2="-17.3" /></g><g><g><path d="M15.6,21H8.4C5.4,21,3,18.6,3,15.7V7.8H21v7.9C21,18.6,18.6,21,15.6,21z M5.3,10v5.7c0,1.7,1.4,3.1,3.1,3.1h7.3 c1.7,0,3.1-1.4,3.1-3.1V10H5.3z" /></g><g><path d="M13.9,13.8h-3.8c-0.6,0-1.1-0.5-1.1-1.1s0.5-1.1,1.1-1.1h3.8c0.6,0,1.1,0.5,1.1,1.1S14.5,13.8,13.9,13.8z" /></g><g><path d="M4.2,6.5C3.6,6.5,3.1,6,3,5.4c0-0.6,0.4-1.2,1-1.2L19.8,3C20.4,3,20.9,3.4,21,4c0,0.6-0.4,1.2-1,1.2L4.2,6.5 C4.2,6.5,4.2,6.5,4.2,6.5z" /></g></g></svg>                        <p>Archive card</p>
                     </div>
                 </div>
             </div>

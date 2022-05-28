@@ -611,6 +611,17 @@
 .section-data {
     width: 650px;
 
+    .task-title {
+        width: 100%;
+        font-size: 20px;
+        padding: 3px 3px;
+        margin-bottom: 2px;
+        &:focus {
+            border: none;
+            box-shadow: inset 0px 0 0px 1px black;
+        }
+    }
+
     input {
         font-family: inherit;
         font-size: 16px;
