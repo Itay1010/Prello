@@ -74,7 +74,7 @@
 
         }
 
-        .add-card-btn {
+        .add-card-open-btn {
             @include btn();
             position: relative;
             width: 100%;
@@ -84,7 +84,6 @@
             padding-left: 24px;
             height: 28px;
             line-height: 28px;
-
 
             &:hover {
                 background-color: #0000000e;
@@ -98,7 +97,30 @@
                 transform: translate(0%, 20%);
                 height: 20px;
             }
+        }
 
+        .add-card-btn {
+            @include btn($type: dark);
+            background-color: #0079BF;
+            margin-inline-end: 4px;
+
+            &:hover {
+                background-color: darken(#0079BF, 4%);
+            }
+        }
+
+        .add-card-close-btn {
+            @include btn();
+            display: flex;
+            align-items: center;
+            padding: 0;
+
+            svg {
+                fill: $edit;
+                &:hover {
+                    fill: $txt;
+                }
+            }
         }
 
     }

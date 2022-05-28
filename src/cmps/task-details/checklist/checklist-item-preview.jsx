@@ -58,7 +58,7 @@ export const ChecklistItemPreview = ({ item, saveChecklistTask, setIsDone, check
                 </div>
             </div>
             <div className='percentage-bar'>
-                <span>{donePercentage}%</span>
+                <span>{Math.floor(donePercentage)}%</span>
                 <Box sx={{ width: '100%' }}>
                     <LinearProgress variant="determinate" value={progress} />
                 </Box>
