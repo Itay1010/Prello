@@ -7,11 +7,12 @@
     overflow-y: auto;
     margin-bottom: 54px;
 
+
+
     .task-details {
-        background-color: #f4f5f7;
+        background-color: $td-bg;
         margin-top: 54px;
         width: 768px;
-        // height: 1000px;
         margin-bottom: 40px;
         padding: 16px;
         flex-wrap: wrap;
@@ -20,18 +21,38 @@
             position: relative;
             height: 72px;
 
+            .section-icon {
+                svg {
+                    fill: $td-svg;
+                    transform: translateY(12%);
+                }
+            }
+
+            h2 {
+                color: $td-main;
+                font-size: 20px;
+            }
+
+            p {
+                color: $td-sub;
+                font-size: 14px;
+            }
+
             .close-modal {
                 position: absolute;
                 display: fixed;
                 right: 0;
-                border: none;
                 height: 40px;
                 width: 40px;
                 border-radius: 100px;
                 cursor: pointer;
 
                 &:hover {
-                    background-color: $opc-black-hov;
+                    background-color: $td-btn-hov;
+                }
+
+                svg {
+                    fill: $td-svg;
                 }
 
             }
@@ -457,6 +478,8 @@
 }
 
 .description-data {
+    width: 100%;
+
     h2 {
         font-size: 16px;
         font-weight: 600;
@@ -487,8 +510,19 @@
     }
 }
 
+
 .section-data {
+    width: 650px;
+
+    input {
+        font-family: inherit;
+        font-size: 16px;
+        width: 100%;
+        background-color: aqua;
+    }
+
     h2 {
+        word-break: break-all;
         font-size: 20px;
         font-weight: 600;
         margin-bottom: 4px;
