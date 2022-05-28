@@ -21,7 +21,6 @@ export const GroupList = ({ groups, eventHandlers }) => {
                 {...provided.droppableProps}
                 ref={provided.innerRef}
             // style={{ backgroundColor: snapshot.isDraggingOver ? 'red' : 'blue' }}
-
             >
                 {groups.map((group, idx) => {
                     if (group.archivedAt) return

@@ -3,9 +3,11 @@ import { Link, useParams } from "react-router-dom"
 import { TaskLabels } from "../task-preview/task-labels"
 import { TaskMembers } from "../task-preview/task-members"
 import { boardService } from "../../services/board/board.service"
+import { Droppable, Draggable } from 'react-beautiful-dnd';
 
 
-export const TaskPreview = ({ task, groupId, onArchiveTask }) => {
+
+export const TaskPreview = ({ task, groupId, idx }) => {
     const params = useParams()
     const { boardId } = params
 
@@ -23,25 +25,32 @@ export const TaskPreview = ({ task, groupId, onArchiveTask }) => {
         setMembersToDisplay(filteredMembers)
     }
 
-    return <article className="task-preview">
-        <Link to={`/board/${boardId}/${groupId}/${task.id}`}>
-            {task.style?.bgColor && <section className="task-color"
-                style={({ backgroundColor: task.style.bgColor })}
-            ></section>}
-            <div className="task-info">
-                {task.labels?.length > 0 && <div className="task-label">
-                    <TaskLabels labels={task.labels} />
-                </div>}
-                <section className="task-title">{task.title}</section>
-                <section className="task-status flex space-between wrap">
-                    <section className="badges">badges</section>
-                    {membersToDisplay?.length > 0 && <section className="members flex">
-                        <TaskMembers members={membersToDisplay} />
-                    </section>}
-                </section>
-            </div>
-        </Link>
-    </article>
+    return <Draggable draggableId={task.id} index={idx}>
+        {(provided) => {
+            return <article className="task-preview"
+                ref={provided.innerRef}
+                {...provided.draggableProps}
+                {...provided.dragHandleProps}>
+                <Link to={`/board/${boardId}/${groupId}/${task.id}`}>
+                    {task.style?.bgColor && <section className="task-color"
+                        style={({ backgroundColor: task.style.bgColor })}
+                    ></section>}
+                    <div className="task-info">
+                        {task.labels?.length > 0 && <div className="task-label">
+                            <TaskLabels labels={task.labels} />
+                        </div>}
+                        <section className="task-title">{task.title}</section>
+                        <section className="task-status flex space-between wrap">
+                            <section className="badges">badges</section>
+                            {membersToDisplay?.length > 0 && <section className="members flex">
+                                <TaskMembers members={membersToDisplay} />
+                            </section>}
+                        </section>
+                    </div>
+                </Link>
+            </article>
+        }}
+    </Draggable>
 }
 
 
