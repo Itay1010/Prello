@@ -35,8 +35,8 @@ export const TaskPreview = ({ task, groupId, onArchiveTask }) => {
                     <TaskLabels labels={task.labels} />
                 </div>}
                 <section className="task-title">{task.title}</section>
-                <section className="task-status flex space-between wrap">
-                     <TaskBadges task={task} /> 
+                <section className="task-status flex space-between wrap align-center">
+                    <TaskBadges task={task} />
                     {membersToDisplay?.length > 0 && <section className="members flex">
                         <TaskMembers members={membersToDisplay} />
                     </section>}

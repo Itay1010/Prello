@@ -21,6 +21,9 @@ import { updateBoard } from '../store/board/board.action'
 import { utilService } from '../services/basic/util.service.js'
 import { userService } from '../services/user.service.js'
 import { boardService } from '../services/board/board.service.js'
+import { IAttachment } from '../cmps/icons/i-attachment.jsx'
+import { IChecklist } from '../cmps/icons/i-checklist.jsx'
+import { IAdd } from '../cmps/icons/i-add.jsx'
 
 
 
@@ -107,6 +110,7 @@ export const TaskDetails = () => {
     }
 
     const onSaveChecklistTask = (txt, clTaskId) => {
+        console.log(task);
         const newItem = {
             txt,
             id: utilService.makeId(),
@@ -273,13 +277,12 @@ export const TaskDetails = () => {
                         <div className='section-icon'></div>
                         {task.members?.length > 0 && <div className="members flex col">
                             <h3>Members</h3>
-                            {/* {console.log('task.members', task.members)} */}
                             <section className='task-members flex'>
                                 {task.members.map(memberId => {
                                     const member = getMemberById(memberId)
                                     return <div className='member flex justify-center align-center' key={member._id}> <img src={member.imgUrl} alt="" /> </div>
                                 })}
-                                <div className='add-member flex justify-center align-center' onClick={() => setModalType('members')}>+</div>
+                                <div className='add-member flex justify-center align-center' onClick={() => setModalType('members')}> <IAdd /> </div>
                             </section>
                         </div>}
                         {task.labels?.length > 0 && <div className="labels flex col">
@@ -288,7 +291,7 @@ export const TaskDetails = () => {
                                 {task.labels.map(label => {
                                     return <div className='label' style={{ backgroundColor: label }} key={label}></div>
                                 })}
-                                <div className='add-label flex justify-center align-center'>+</div>
+                                <div className='add-label flex justify-center align-center' onClick={() => setModalType('labels')} ><IAdd /></div>
                             </section>
                         </div>}
                     </div>
@@ -318,23 +321,19 @@ export const TaskDetails = () => {
                         <p>Labels</p>
                     </div>
                     <div className='btn-edit-task-key flex align-center' onClick={() => setModal('checklist')}>
-                        <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" viewBox="0 0 24 24"><path d="M5,3C3.9,3,3,3.9,3,5v14c0,1.1,0.9,2,2,2h14c1.1,0,2-0.9,2-2v-6.8c0-0.6-0.4-1-1-1h0c-0.6,0-1,0.4-1,1l0,5.8 c0,0.6-0.4,1-1,1H6c-0.6,0-1-0.4-1-1V6c0-0.6,0.4-1,1-1h9.8c0.6,0,1-0.4,1-1v0c0-0.6-0.4-1-1-1H5z M20.6,4l-9.1,9.1 c-0.3,0.3-0.7,0.3-0.9,0L8.4,11c-0.4-0.4-1-0.4-1.4,0l0,0c-0.4,0.4-0.4,1,0,1.4l3.3,3.3c0.4,0.4,1,0.4,1.4,0L22,5.4 c0.4-0.4,0.4-1,0-1.4v0C21.6,3.6,21,3.6,20.6,4z" /></svg>
-                        <p>Checklist</p>
+                        <IChecklist /><p>Checklist</p>
                     </div>
-                    <div className='btn-edit-task-key flex align-center' onClick={() => setModal('dates')}>
+                    {/* <div className='btn-edit-task-key flex align-center' onClick={() => setModal('dates')}>
                         <svg width="24" height="24" role="presentation" focusable="false" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M13 6C13 5.44772 12.5523 5 12 5C11.4477 5 11 5.44772 11 6V12C11 12.2652 11.1054 12.5196 11.2929 12.7071L13.7929 15.2071C14.1834 15.5976 14.8166 15.5976 15.2071 15.2071C15.5976 14.8166 15.5976 14.1834 15.2071 13.7929L13 11.5858V6Z" fill="currentColor" /><path fillRule="evenodd" clipRule="evenodd" d="M22 12C22 17.5228 17.5228 22 12 22C6.47715 22 2 17.5228 2 12C2 6.47715 6.47715 2 12 2C17.5228 2 22 6.47715 22 12ZM12 20C16.4183 20 20 16.4183 20 12C20 7.58172 16.4183 4 12 4C7.58172 4 4 7.58172 4 12C4 16.4183 7.58172 20 12 20Z" /></svg>
                         <p>Dates</p>
-                    </div>
+                    </div> */}
                     <div className='btn-edit-task-key flex align-center' onClick={() => setModal('attachment')}>
-                        <svg viewBox="0 0 24 24"><path d="M-38.3,3c-1.1,0-2,0.9-2,2v14c0,1.1,0.9,2,2,2h14c1.1,0,2-0.9,2-2v-6.8c0-0.6-0.4-1-1-1h0c-0.6,0-1,0.4-1,1l0,5.8 c0,0.6-0.4,1-1,1h-12c-0.6,0-1-0.4-1-1V6c0-0.6,0.4-1,1-1h9.8c0.6,0,1-0.4,1-1v0c0-0.6-0.4-1-1-1H-38.3z" /><path d="M-21.6,4l-9.1,9.1c-0.3,0.3-0.7,0.3-0.9,0l-2.1-2.1c-0.4-0.4-1-0.4-1.4,0v0c-0.4,0.4-0.4,1,0,1.4l3.3,3.3 c0.4,0.4,1,0.4,1.4,0l10.3-10.3c0.4-0.4,0.4-1,0-1.4l0,0C-20.6,3.6-21.2,3.6-21.6,4z" /><path d="M-130.8-5.5c0,11.2,0,22.4,0,33.6c-1.6,7.7-8.5,13.3-16.3,13.3c-7.9,0-14.7-5.6-16.3-13.3c0-11.2,0-22.4,0-33.6 c-1.2-8,4.9-14.4,10.9-14.4s12.1,6.5,10.9,14.4c0,9.7,0,19.3,0,29c-0.5,2.6-2.8,4.6-5.4,4.6s-5-1.9-5.4-4.6c0-9.7,0-19.3,0-29" /><g><path d="M9.6,21.1c-1.5,0-3.1-0.6-4.2-1.7c-2-2-2.3-5.1-0.8-7.5l0.1-0.2l7-7c0.8-1.1,2.1-1.8,3.5-1.9c1.3-0.1,2.5,0.3,3.3,1.1 c0.8,0.8,1.2,2,1.1,3.3c-0.1,1.4-0.8,2.7-1.9,3.5l-6.2,6.1c-1.1,0.7-2.5,0.6-3.4-0.3c-0.9-0.9-1-2.3-0.3-3.4L8,13.1L14.1,7 c0.4-0.4,1-0.4,1.4,0c0.4,0.4,0.4,1,0,1.4l-6,6c-0.1,0.2-0.1,0.6,0.1,0.8c0.2,0.2,0.5,0.2,0.8,0.1l6.1-6.1c0.7-0.5,1.1-1.3,1.2-2.1 c0.1-0.7-0.1-1.3-0.5-1.7c-0.4-0.4-1-0.6-1.7-0.5c-0.8,0.1-1.6,0.5-2.1,1.2l-0.1,0.1l-7,7c-1,1.5-0.7,3.6,0.6,4.9 c1.3,1.3,3.3,1.5,4.9,0.6l7-7c0.4-0.4,1-0.4,1.4,0s0.4,1,0,1.4l-7.2,7.2C11.9,20.8,10.7,21.1,9.6,21.1z" /></g></svg>
-                        <p>Attachment</p>
+                        <IAttachment /><p>Attachment</p>
                     </div>
-                    <div className='btn-edit-task-key flex align-center' onClick={() => setModal('location')}>
+                    {/* <div className='btn-edit-task-key flex align-center' onClick={() => setModal('location')}>
                         <svg x="0px" y="0px" viewBox="0 0 24 24"><path d="M12,1.4c-4.1,0-7.4,3.3-7.4,7.4c0,3.9,6.7,13,7,13.4l0.3,0.4c0,0,0.1,0.1,0.1,0.1c0.1,0,0.1,0,0.1-0.1l0.3-0.4 c0.3-0.4,7-9.5,7-13.4C19.4,4.7,16.1,1.4,12,1.4z M12,4.7c2.3,0,4.1,1.8,4.1,4.1c0,2.3-1.8,4.1-4.1,4.1c-2.3,0-4.1-1.8-4.1-4.1 C7.9,6.5,9.7,4.7,12,4.7z" /></svg>
                         <p>Location</p>
-                    </div>
-
-
+                    </div> */}
 
                     <div className='btn-edit-task-key flex align-center'>
                         <svg viewBox="0 0 24 24" ><g className="st0"><path className="st1" d="M-38.3,3c-1.1,0-2,0.9-2,2v14c0,1.1,0.9,2,2,2h14c1.1,0,2-0.9,2-2v-6.8c0-0.6-0.4-1-1-1h0c-0.6,0-1,0.4-1,1 l0,5.8c0,0.6-0.4,1-1,1h-12c-0.6,0-1-0.4-1-1V6c0-0.6,0.4-1,1-1h9.8c0.6,0,1-0.4,1-1v0c0-0.6-0.4-1-1-1H-38.3z" /><path className="st1" d="M-21.6,4l-9.1,9.1c-0.3,0.3-0.7,0.3-0.9,0l-2.1-2.1c-0.4-0.4-1-0.4-1.4,0v0c-0.4,0.4-0.4,1,0,1.4l3.3,3.3 c0.4,0.4,1,0.4,1.4,0l10.3-10.3c0.4-0.4,0.4-1,0-1.4l0,0C-20.6,3.6-21.2,3.6-21.6,4z" /><path className="st2" d="M-79,24.7h-34.4c-2.1,0-3.7-1.7-3.7-3.7V-4.6h41.9V21C-75.3,23-76.9,24.7-79,24.7z" /><line className="st2" x1="-101.2" y1="5.6" x2="-91" y2="5.6" /><line className="st2" x1="-117.1" y1="-14.1" x2="-75.3" y2="-17.3" /></g><g><g><path d="M15.6,21H8.4C5.4,21,3,18.6,3,15.7V7.8H21v7.9C21,18.6,18.6,21,15.6,21z M5.3,10v5.7c0,1.7,1.4,3.1,3.1,3.1h7.3 c1.7,0,3.1-1.4,3.1-3.1V10H5.3z" /></g><g><path d="M13.9,13.8h-3.8c-0.6,0-1.1-0.5-1.1-1.1s0.5-1.1,1.1-1.1h3.8c0.6,0,1.1,0.5,1.1,1.1S14.5,13.8,13.9,13.8z" /></g><g><path d="M4.2,6.5C3.6,6.5,3.1,6,3,5.4c0-0.6,0.4-1.2,1-1.2L19.8,3C20.4,3,20.9,3.4,21,4c0,0.6-0.4,1.2-1,1.2L4.2,6.5 C4.2,6.5,4.2,6.5,4.2,6.5z" /></g></g></svg>                        <p>Archive card</p>

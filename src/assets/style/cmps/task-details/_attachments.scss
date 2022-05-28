@@ -1,41 +1,43 @@
-.attachments {
-    display: flex;
-    width: 100%;
-
-    .attachment-list {
-        flex-grow: 1;
-    }
-}
-
-.modal-type {
-    &:focus {
-        outline: none;
-    }
-}
-
-.attachment-preview {
-    display: flex;
-
-    p {
-        margin: none;
-    }
-
-    img {
-        width: 120px;
-    }
-
-    .attachment-title-and-options {
-        flex-grow: 1;
+.task-content {
+    .attachments {
         display: flex;
-        flex-direction: column;
-        justify-content: space-between;
+        width: 100%;
 
-        .attachment-options {
+        .attachment-list {
+            flex-grow: 1;
+        }
+    }
+
+    .modal-type {
+        &:focus {
+            outline: none;
+        }
+    }
+
+    .attachment-preview {
+        display: flex;
+
+        p {
+            margin: none;
+        }
+
+        img {
+            width: 120px;
+        }
+
+        .attachment-title-and-options {
+            flex-grow: 1;
             display: flex;
+            flex-direction: column;
+            justify-content: space-between;
 
-            a {
-                text-decoration: underline;
-                cursor: pointer;
+            .attachment-options {
+                display: flex;
+
+                a {
+                    text-decoration: underline;
+                    cursor: pointer;
+                }
             }
         }
     }
