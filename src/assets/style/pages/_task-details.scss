@@ -8,10 +8,9 @@
     margin-bottom: 54px;
 
     .task-details {
-        background-color: #f4f5f7;
+        background-color: $td-bg;
         margin-top: 54px;
         width: 768px;
-        // height: 1000px;
         margin-bottom: 40px;
         padding: 16px;
         flex-wrap: wrap;
@@ -20,18 +19,38 @@
             position: relative;
             height: 72px;
 
+            .section-icon {
+                svg {
+                    fill: $td-svg;
+                    transform: translateY(12%);
+                }
+            }
+
+            h2 {
+                color: $td-main;
+                font-size: 20px;
+            }
+
+            p {
+                color: $td-sub;
+                font-size: 14px;
+            }
+
             .close-modal {
                 position: absolute;
                 display: fixed;
                 right: 0;
-                border: none;
                 height: 40px;
                 width: 40px;
                 border-radius: 100px;
                 cursor: pointer;
 
                 &:hover {
-                    background-color: $opc-black-hov;
+                    background-color: $td-btn-hov;
+                }
+
+                svg {
+                    fill: $td-svg;
                 }
 
             }

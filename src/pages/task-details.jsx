@@ -24,6 +24,7 @@ import { boardService } from '../services/board/board.service.js'
 import { IAttachment } from '../cmps/icons/i-attachment.jsx'
 import { IChecklist } from '../cmps/icons/i-checklist.jsx'
 import { IAdd } from '../cmps/icons/i-add.jsx'
+import { ITask } from '../cmps/icons/i-task.jsx'
 
 
 
@@ -260,13 +261,12 @@ export const TaskDetails = () => {
             <div className='task-header flex'>
                 <div className='close-modal flex justify-center align-center' onClick={onGoBack}><svg width="24" height="24" viewBox="0 0 24 24" ><path fillRule="evenodd" clipRule="evenodd" d="M10.5858 12L5.29289 6.70711C4.90237 6.31658 4.90237 5.68342 5.29289 5.29289C5.68342 4.90237 6.31658 4.90237 6.70711 5.29289L12 10.5858L17.2929 5.29289C17.6834 4.90237 18.3166 4.90237 18.7071 5.29289C19.0976 5.68342 19.0976 6.31658 18.7071 6.70711L13.4142 12L18.7071 17.2929C19.0976 17.6834 19.0976 18.3166 18.7071 18.7071C18.3166 19.0976 17.6834 19.0976 17.2929 18.7071L12 13.4142L6.70711 18.7071C6.31658 19.0976 5.68342 19.0976 5.29289 18.7071C4.90237 18.3166 4.90237 17.6834 5.29289 17.2929L10.5858 12Z" /></svg></div>
                 <div className='section-icon'>
-                    <svg viewBox="0 0 24 24"><path className="st0" d="M-15.3,6.4c1.9,0,3.8,0,5.7,0c1,0,1.7,0.6,1.7,1.6c0,2.8,0,5.5,0,8.3c0,1-0.7,1.7-1.7,1.7c-3.8,0-7.7,0-11.5,0 c-1.1,0-1.7-0.6-1.7-1.7c0-2.7,0-5.5,0-8.2c0-1.1,0.7-1.7,1.7-1.7C-19.1,6.4-17.2,6.4-15.3,6.4z M-21.2,8c0,1.6,0,3.2,0,4.7 c0,0.1,0.3,0.4,0.5,0.4c3.6,0,7.2,0,10.8,0c0.4,0,0.5-0.2,0.5-0.6c0-0.9,0-1.8,0-2.7c0-0.6,0-1.2,0-1.9H-21.2z M-18.7,14.6 c-0.5,0-1.1,0-1.6,0c-0.5,0-0.9,0.3-0.9,0.8c0,0.6,0.3,0.9,0.8,0.9c1.1,0,2.3,0,3.4,0c0.5,0,0.9-0.4,0.8-0.9c0-0.5-0.4-0.8-0.9-0.8 C-17.6,14.6-18.1,14.6-18.7,14.6z M-9.4,15.5c0-0.5-0.4-0.9-0.9-0.9c-0.5,0-0.9,0.4-0.9,0.9c0,0.5,0.5,0.9,0.9,0.9 C-9.8,16.4-9.4,15.9-9.4,15.5z" /><path d="M19.4,5.4H4.6C4,5.4,3.5,5.9,3.5,6.5v11c0,0.6,0.5,1.1,1.1,1.1h14.8c0.6,0,1.1-0.5,1.1-1.1v-11C20.5,5.9,20,5.4,19.4,5.4z  M10.1,16.8H6.2c-0.6,0-1-0.4-1-1c0-0.6,0.4-1,1-1h3.8c0.6,0,1,0.4,1,1C11.1,16.4,10.6,16.8,10.1,16.8z M17.8,16.8c-0.6,0-1-0.4-1-1 c0-0.6,0.4-1,1-1c0.6,0,1,0.4,1,1C18.8,16.4,18.3,16.8,17.8,16.8z M18.8,11.9c0,0.6-0.5,1.1-1.1,1.1H6.4c-0.6,0-1.1-0.5-1.1-1.1V8.3 c0-0.6,0.5-1.1,1.1-1.1h11.2c0.6,0,1.1,0.5,1.1,1.1V11.9z" /></svg>
+                    <ITask />
                 </div>
                 <div className="section-data flex col">
                     {!isTitleEditable && <h2 onClick={setTitleEditable} className='task-title'>{task.title}</h2>}
                     {isTitleEditable && <input onChange={handleTitleChange} onBlur={setTitleEditable} ref={titleRef} value={title} onKeyDown={(event) => saveTaskTitle(event)} />}
                     <p>in list {group.title}</p>
-                    {/* <p>in list <a href={`/board/${boardId}`}>{group.title}</a></p> */}
                 </div>
             </div>
 
@@ -304,9 +304,13 @@ export const TaskDetails = () => {
                             {isDescriptionEditable && <textarea onBlur={toggleEditDescription} value={description} ref={descriptionRef} onChange={handleDescriptionChange} onKeyDown={(event) => saveTaskDescription(event)} cols="65" rows="40" placeholder='Add a more detailed description...'></textarea>}
                         </div>
                     </div>
-                    {checklist?.length > 0 && <div className='checklist'>
-                        {checklist.length > 0 && <ChecklistList checklist={checklist} saveChecklistTask={onSaveChecklistTask} setIsDone={onSetIsDone} deleteClTask={onDeleteClTask} deleteChecklist={onDeleteChecklist} />}
-                    </div>}
+                    {/* {checklist?.length > 0 && <div className='checklist'>
+                        {checklist.length > 0 && <ChecklistList checklists={checklist} saveChecklistTask={onSaveChecklistTask} setIsDone={onSetIsDone} deleteClTask={onDeleteClTask} deleteChecklist={onDeleteChecklist} />}
+                    </div>} */}
+
+                    {checklist?.length > 0 && <ChecklistList checklist={checklist} saveChecklistTask={onSaveChecklistTask} setIsDone={onSetIsDone} deleteClTask={onDeleteClTask} deleteChecklist={onDeleteChecklist} />}
+
+
                     {attachments?.length > 0 && <AttachmentList attachments={attachments} removeAttachment={onRemoveAttachment} />}
                 </div>
 
