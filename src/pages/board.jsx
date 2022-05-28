@@ -40,6 +40,7 @@ class _Board extends React.Component {
     }
 
     onArchiveTask = async ({ taskId, groupId }) => {
+        console.log('_Board - onArchiveTask= - taskId, groupId', taskId, groupId)
         const newBoard = JSON.parse(JSON.stringify(this.props.board))
         const groupIdx = newBoard.groups.findIndex(group => group.id === groupId)
 
@@ -118,7 +119,9 @@ class _Board extends React.Component {
                     <BoardHeader board={board} saveBoardHeader={this.onSaveBoardHeader} />
                     <GroupList groups={groups} eventHandlers={eventHandlers} />
                     <Switch>
-                        <Route path={'/board/:boardId/:groupId/:taskId'} component={TaskDetails} />
+                        <Route path={'/board/:boardId/:groupId/:taskId'}>
+                            <TaskDetails onArchiveTask={this.onArchiveTask} />
+                        </Route>
                     </Switch>
                 </section>
             </DragDropContext>

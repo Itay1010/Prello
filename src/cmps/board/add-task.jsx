@@ -1,19 +1,26 @@
-import React, { useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { TextareaAutosize } from '@mui/material'
 
-export const AddTask = ({ group, onAddTask, newTask, handleChange, setNewTask }) => {
+export const AddTask = ({ group, onAddTask, newTask, handleChange, setNewTask, setIsTaskOpen }) => {
+    const addTaskRef = useRef()
 
-    
-    return <article className="task-preview add-task">
+    useEffect(() => {
+        addTaskRef.current.scrollIntoView()
+    }, [])
+
+    return <article className="task-preview add-task" ref={addTaskRef}>
         <TextareaAutosize
-            minRows="3"
+            minRows="3.5"
             maxRows="10"
             type="text"
             autoComplete="off"
             className="task-title"
             name="title"
             autoFocus
-            // style={({ width: '100%' })}
+            onBlur={ev => {
+                setIsTaskOpen(false)
+            }}
+            style={({ width: '100%' })}
             value={newTask.title}
             placeholder="Enter a title for this card..."
             onChange={handleChange}
