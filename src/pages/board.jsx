@@ -87,6 +87,13 @@ class _Board extends React.Component {
         this.props.updateBoard(newBoard)
     }
 
+    onSaveBoardHeader = (newBoardHeader) => {
+        const { board } = this.props
+        const newBoard = JSON.parse(JSON.stringify(board))
+        newBoard.title = newBoardHeader
+        this.props.updateBoard(newBoard)
+    }
+
     render() {
         const { board } = this.props
         // console.log('_Board - render - board', board)
@@ -104,7 +111,7 @@ class _Board extends React.Component {
             <DragDropContext onDragEnd={this.handleOnDragEnd}>
                 <MainHeader />
                 <section className="board flex col main-layout">
-                    <BoardHeader board={board} />
+                    <BoardHeader board={board} saveBoardHeader={this.onSaveBoardHeader} />
                     <GroupList groups={groups} eventHandlers={eventHandlers} />
                     <Switch>
                         <Route path={'/board/:boardId/:groupId/:taskId'} component={TaskDetails} />
