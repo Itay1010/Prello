@@ -53,7 +53,7 @@ export const ChecklistPreview = ({ item, saveChecklistTask, setIsDone, checklist
             <div className='checklist-item-header flex'>
                 <div>icon</div>
                 <h2>{title}</h2>
-                <button onClick={onDeleteChecklist}>delete</button>
+                <button onClick={onDeleteChecklist}>Delete</button>
             </div>
             <div>
 

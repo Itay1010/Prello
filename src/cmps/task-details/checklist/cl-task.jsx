@@ -22,9 +22,9 @@ export const ClTask = ({ deleteClTask, item, setIsDone, checklistId }) => {
 
 
     return <div className='cl-task-wrapper'>
-
-        <input type="checkbox" onChange={toggleIsDone} checked={receivedItem.isDone ? 'checked' : ''} />
-
+        <div className='checkbox-wrapper'>
+            <input type="checkbox" onChange={toggleIsDone} checked={receivedItem.isDone ? 'checked' : ''} />
+        </div>
 
         <div className='cl-task'>
             <p>{receivedItem.txt}</p>

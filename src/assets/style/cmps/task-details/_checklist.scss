@@ -7,19 +7,35 @@
     }
 
     .checklist-item-header {
+        display: flex;
+        align-items: center;
 
+        .icon-wrapper {
+            width: 32px;
+            margin-inline-end: 8px;
 
-        // justify-content: space-between;
+            svg {
+                height: 24px;
+                width: 24px;
+                margin-inline-end: 8px;
+            }
+        }
+
         .header-details-wrapper {
+            h2 {
+                font-size: 16px;
+                font-family: pri-font;
+                font-weight: 600
+            }
+
             button {
                 @include btn
             }
 
             display: flex;
             justify-content: space-between;
+            align-items: center;
             flex-grow: 1;
-            margin-left: 10px;
-            margin-bottom: 10px;
 
         }
     }
@@ -29,10 +45,13 @@
     display: flex;
     align-items: center;
 
-    span {
-        padding-right: 20px;
+    .percentage-num-wrapper {
+        width: 32px;
+        margin-inline-end: 8px;
 
-
+        .percent-num {
+            margin-inline-end: 8px;
+        }
     }
 
 }
@@ -44,11 +63,17 @@
     height: 40px;
     margin-top: 10px;
 
-    input[type=checkbox] {
-        width: 20px;
-        margin: 0;
-        display: inline-block;
-        padding: 0 5px;
+    .checkbox-wrapper {
+        width: 32px;
+        margin-inline-end: 8px;
+
+        input[type=checkbox] {
+            width: 24px;
+            margin: 0;
+            display: inline-block;
+            margin-inline-end: 8px;
+            // padding: 0 5px;
+        }
     }
 
     &:last-child {
@@ -56,7 +81,6 @@
     }
 
     .cl-task {
-        padding-left: 20px;
         height: 100%;
         display: flex;
         align-items: center;
@@ -84,14 +108,15 @@
             }
 
             a {
+                fill: $td-svg;
                 display: flex;
                 justify-content: center;
                 align-items: center;
-                height: 20px;
-                width: 20px;
+                height: 24px;
+                min-width: 24px;
                 display: flex;
                 align-items: center;
-                margin-inline-end: 8px;
+                margin-inline-end: 4px;
                 background-color: $opc-black;
                 border-radius: 50%;
             }
@@ -104,13 +129,7 @@
                 background-color: $opc-black-hov;
             }
         }
-
-
-
     }
-
-
-
 
     .space {
         display: inline-block;
@@ -142,7 +161,7 @@
     }
 
     input {
-        @include input($width: 95%);
+        @include input($width: 93%);
         margin-inline-start: 40px;
     }
 

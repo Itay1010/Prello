@@ -3,6 +3,7 @@ import { useForm } from '../../../hooks/useForm'
 import { ClItemsList } from './cl-items-list.jsx'
 import Box from '@mui/material/Box';
 import LinearProgress from '@mui/material/LinearProgress';
+import { IChecklist } from '../../icons/i-checklist.jsx'
 
 
 
@@ -51,14 +52,16 @@ export const ChecklistItemPreview = ({ item, saveChecklistTask, setIsDone, check
 
         <div className='item-content flex'>
             <div className='checklist-item-header flex'>
-                <div>icon</div>
+                <div className='icon-wrapper'><IChecklist /></div>
                 <div className='header-details-wrapper'>
                     <h2>{title}</h2>
-                    <button onClick={onDeleteChecklist}>delete</button>
+                    <button onClick={onDeleteChecklist}>Delete</button>
                 </div>
             </div>
             <div className='percentage-bar'>
-                <span>{Math.floor(donePercentage)}%</span>
+                <div className='percentage-num-wrapper'>
+                    <span className='percent-num'>{!donePercentage ? 0 : Math.floor(donePercentage)}%</span>
+                </div>
                 <Box sx={{ width: '100%' }}>
                     <LinearProgress variant="determinate" value={progress} />
                 </Box>
@@ -73,7 +76,7 @@ export const ChecklistItemPreview = ({ item, saveChecklistTask, setIsDone, check
                 {!isInputOpen && <button onClick={onToggleInput}>Add an item</button>}
                 {isInputOpen && <React.Fragment>
                     <form action="" onSubmit={onSaveChecklistTask} >
-                        <input autoComplete='off' onChange={handleChange} onBlur={onToggleInput} type="text" placeholder='Add an item' name='txt' />
+                        <input autoComplete='off' onChange={handleChange} autoFocus onBlur={onToggleInput} type="text" placeholder='Add an item' name='txt' />
                         <div className='toggle-modal-buttons'>
                             <button onMouseDown={onSaveChecklistTask}>Add</button>
                             <button onMouseDown={onToggleInput}>Cancel</button>
