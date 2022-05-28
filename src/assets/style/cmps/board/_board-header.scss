@@ -7,6 +7,11 @@
         //     display: inline-block;
         // }
 
+        h2 {
+            font-size: 18px;
+            font-weight: 700;
+        }
+
         &>*:not(last-child) {
             margin-inline-end: 4px;
         }
@@ -21,7 +26,6 @@
             font-weight: 700;
             margin-bottom: 4px;
             flex-grow: 1;
-            // width: auto;
 
             &:focus {
                 outline: 1px solid $txt;
@@ -58,8 +62,6 @@
             }
 
         }
-
-
     }
 
     .board-features {
@@ -69,11 +71,12 @@
 
         div {
             @include btn($type: dark);
+            padding: 0 12px;
             color: $txt;
             cursor: pointer;
 
             svg {
-                margin-inline-end: 4px;
+                margin-inline-end: 8px;
             }
         }
     }

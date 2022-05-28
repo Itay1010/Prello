@@ -50,6 +50,13 @@ export const TaskPreview = ({ task, groupId, idx }) => {
                                 <TaskMembers members={membersToDisplay} />
                             </section>}
                         </section>
+                        {/* {!task.attacments && task.attacments.length === 0 && !task.members && task.members.length === 0 && !task.comments && task.comments.length === 0 && !task.checklist && task.checklist.length === 0
+                            && <section className="task-status flex space-between wrap">
+                                <TaskBadges task={task} />
+                                {membersToDisplay?.length > 0 && <section className="members flex">
+                                    <TaskMembers members={membersToDisplay} />
+                                </section>}
+                            </section>} */}
                     </div>
                 </Link>
             </article>

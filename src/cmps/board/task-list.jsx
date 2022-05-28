@@ -4,6 +4,7 @@ import { Droppable, Draggable } from 'react-beautiful-dnd';
 import { TaskPreview } from "./task-preview"
 import { GroupTitle } from "./group-title"
 import { AddTask } from "./add-task"
+import { IAdd } from "../icons/i-add";
 
 export const Group = ({ group, onAddTask, onArchiveTask, onArchiveGroup, onGroupChange, idx }) => {
     // console.log('Group - onArchiveGroup', onArchiveGroup)
@@ -49,9 +50,18 @@ export const Group = ({ group, onAddTask, onArchiveTask, onArchiveGroup, onGroup
                             />}
                             {snapshot.isDraggingOver && provided.placeholder}
                             {
-                                isTaskOpen || <div className="group-footer flex space-between align-center" >
+
+                                // isTaskOpen || <div className="group-footer flex align-center" >
+                                //     <div className="add-card flex align-center"><IAdd />
+                                //         <button className="add-card-open-btn" onClick={ev => setIsTaskOpen(true)
+                                //         }>Add a card</button>
+                                //     </div>
+                                // </div>
+                                isTaskOpen || <div className="group-footer flex align-center" >
+                                    {/* <div className="add-card flex align-center"> </div> */}
                                     <button className="add-card-open-btn" onClick={ev => setIsTaskOpen(true)
-                                    }>Add a card</button>
+                                    }><IAdd /> Add a card</button>
+
                                 </div>
                             }
                             {
