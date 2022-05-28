@@ -3,6 +3,7 @@ import { Link, useParams } from "react-router-dom"
 import { TaskLabels } from "../task-preview/task-labels"
 import { TaskMembers } from "../task-preview/task-members"
 import { boardService } from "../../services/board/board.service"
+import { TaskBadges } from '../task-preview/task-badges';
 
 
 export const TaskPreview = ({ task, groupId, onArchiveTask }) => {
@@ -19,6 +20,7 @@ export const TaskPreview = ({ task, groupId, onArchiveTask }) => {
 
     const getMembersToDisplay = async () => {
         const members = await boardService.getMembers()
+        if (!task.members) task.members = []
         const filteredMembers = members.filter(member => task.members.includes(member._id))
         setMembersToDisplay(filteredMembers)
     }
@@ -34,7 +36,7 @@ export const TaskPreview = ({ task, groupId, onArchiveTask }) => {
                 </div>}
                 <section className="task-title">{task.title}</section>
                 <section className="task-status flex space-between wrap">
-                    <section className="badges">badges</section>
+                     <TaskBadges task={task} /> 
                     {membersToDisplay?.length > 0 && <section className="members flex">
                         <TaskMembers members={membersToDisplay} />
                     </section>}

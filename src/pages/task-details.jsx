@@ -1,9 +1,9 @@
-import React, { useEffect, useState } from 'react';
-import { useHistory, useParams } from 'react-router-dom/cjs/react-router-dom.min';
-import { useSelector, useDispatch } from 'react-redux';
+import React, { useEffect, useState } from 'react'
+import { useHistory, useParams } from 'react-router-dom/cjs/react-router-dom.min'
+import { useSelector, useDispatch } from 'react-redux'
 
 // DYNAMIC CMS
-import { Members } from '../cmps/task-details/dynamic-cmps/members.jsx';
+import { Members } from '../cmps/task-details/dynamic-cmps/members.jsx'
 import { Labels } from '../cmps/task-details/dynamic-cmps/labels.jsx'
 import { Checklist } from '../cmps/task-details/dynamic-cmps/checklist.jsx'
 import { Dates } from '../cmps/task-details/dynamic-cmps/dates.jsx'
@@ -11,16 +11,16 @@ import { Attachment } from '../cmps/task-details/dynamic-cmps/attachment.jsx'
 import { Location } from '../cmps/task-details/dynamic-cmps/location.jsx'
 
 // CMPS
-import { ChecklistList } from '../cmps/task-details/checklist/checklistList.jsx';
+import { ChecklistList } from '../cmps/task-details/checklist/checklistList.jsx'
 import { AttachmentList } from '../cmps/task-details/attachments/attachment-list.jsx'
 
 // ACTIONS
 import { updateBoard } from '../store/board/board.action'
 
 // SERVICES
-import { utilService } from '../services/basic/util.service.js';
-import { userService } from '../services/user.service.js';
-import { boardService } from '../services/board/board.service.js';
+import { utilService } from '../services/basic/util.service.js'
+import { userService } from '../services/user.service.js'
+import { boardService } from '../services/board/board.service.js'
 
 
 
@@ -36,10 +36,9 @@ export const TaskDetails = () => {
     // const [isModal, setIsModal] = useState(false)
     const [modalType, setModalType] = useState(null)
 
-    // useEffect(() => {
-
-
-    // }, [])
+    useEffect(() => {
+        onLoad()
+    }, [])
 
     const onGoBack = () => {
         history.push(`/board/${boardId}`)
@@ -51,6 +50,7 @@ export const TaskDetails = () => {
         const task = await groupToAdd.tasks.find(task => task.id === taskId)
         setTask(task)
     }
+
     useEffect(() => {
         onLoad()
     }, [task, group])
@@ -170,7 +170,7 @@ export const TaskDetails = () => {
             case 'location':
                 return <Location closeModal={closeModal} />
             default:
-                break;
+                break
         }
     }
 
@@ -198,10 +198,6 @@ export const TaskDetails = () => {
 
     if (!group || !task) return <React.Fragment></React.Fragment>
     const { checklist, attachments } = task
-<<<<<<< HEAD
-=======
-    // console.log(attachments)
->>>>>>> origin
 
     return <section onClick={onGoBack} className='task-details-shadow flex justify-center'>
         <section className='task-details flex col' onClick={(event) => event.stopPropagation()}>
@@ -278,7 +274,7 @@ export const TaskDetails = () => {
                         <p>Dates</p>
                     </div>
                     <div className='btn-edit-task-key flex align-center' onClick={() => setModal('attachment')}>
-                        <svg viewBox="0 0 24 24"><path d="M-38.3,3c-1.1,0-2,0.9-2,2v14c0,1.1,0.9,2,2,2h14c1.1,0,2-0.9,2-2v-6.8c0-0.6-0.4-1-1-1h0c-0.6,0-1,0.4-1,1l0,5.8 c0,0.6-0.4,1-1,1h-12c-0.6,0-1-0.4-1-1V6c0-0.6,0.4-1,1-1h9.8c0.6,0,1-0.4,1-1v0c0-0.6-0.4-1-1-1H-38.3z" /><path d="M-21.6,4l-9.1,9.1c-0.3,0.3-0.7,0.3-0.9,0l-2.1-2.1c-0.4-0.4-1-0.4-1.4,0v0c-0.4,0.4-0.4,1,0,1.4l3.3,3.3 c0.4,0.4,1,0.4,1.4,0l10.3-10.3c0.4-0.4,0.4-1,0-1.4l0,0C-20.6,3.6-21.2,3.6-21.6,4z" /><path class="st0" d="M-130.8-5.5c0,11.2,0,22.4,0,33.6c-1.6,7.7-8.5,13.3-16.3,13.3c-7.9,0-14.7-5.6-16.3-13.3c0-11.2,0-22.4,0-33.6 c-1.2-8,4.9-14.4,10.9-14.4s12.1,6.5,10.9,14.4c0,9.7,0,19.3,0,29c-0.5,2.6-2.8,4.6-5.4,4.6s-5-1.9-5.4-4.6c0-9.7,0-19.3,0-29" /><g><path d="M9.6,21.1c-1.5,0-3.1-0.6-4.2-1.7c-2-2-2.3-5.1-0.8-7.5l0.1-0.2l7-7c0.8-1.1,2.1-1.8,3.5-1.9c1.3-0.1,2.5,0.3,3.3,1.1 c0.8,0.8,1.2,2,1.1,3.3c-0.1,1.4-0.8,2.7-1.9,3.5l-6.2,6.1c-1.1,0.7-2.5,0.6-3.4-0.3c-0.9-0.9-1-2.3-0.3-3.4L8,13.1L14.1,7 c0.4-0.4,1-0.4,1.4,0c0.4,0.4,0.4,1,0,1.4l-6,6c-0.1,0.2-0.1,0.6,0.1,0.8c0.2,0.2,0.5,0.2,0.8,0.1l6.1-6.1c0.7-0.5,1.1-1.3,1.2-2.1 c0.1-0.7-0.1-1.3-0.5-1.7c-0.4-0.4-1-0.6-1.7-0.5c-0.8,0.1-1.6,0.5-2.1,1.2l-0.1,0.1l-7,7c-1,1.5-0.7,3.6,0.6,4.9 c1.3,1.3,3.3,1.5,4.9,0.6l7-7c0.4-0.4,1-0.4,1.4,0s0.4,1,0,1.4l-7.2,7.2C11.9,20.8,10.7,21.1,9.6,21.1z" /></g></svg>
+                        <svg viewBox="0 0 24 24"><path d="M-38.3,3c-1.1,0-2,0.9-2,2v14c0,1.1,0.9,2,2,2h14c1.1,0,2-0.9,2-2v-6.8c0-0.6-0.4-1-1-1h0c-0.6,0-1,0.4-1,1l0,5.8 c0,0.6-0.4,1-1,1h-12c-0.6,0-1-0.4-1-1V6c0-0.6,0.4-1,1-1h9.8c0.6,0,1-0.4,1-1v0c0-0.6-0.4-1-1-1H-38.3z" /><path d="M-21.6,4l-9.1,9.1c-0.3,0.3-0.7,0.3-0.9,0l-2.1-2.1c-0.4-0.4-1-0.4-1.4,0v0c-0.4,0.4-0.4,1,0,1.4l3.3,3.3 c0.4,0.4,1,0.4,1.4,0l10.3-10.3c0.4-0.4,0.4-1,0-1.4l0,0C-20.6,3.6-21.2,3.6-21.6,4z" /><path d="M-130.8-5.5c0,11.2,0,22.4,0,33.6c-1.6,7.7-8.5,13.3-16.3,13.3c-7.9,0-14.7-5.6-16.3-13.3c0-11.2,0-22.4,0-33.6 c-1.2-8,4.9-14.4,10.9-14.4s12.1,6.5,10.9,14.4c0,9.7,0,19.3,0,29c-0.5,2.6-2.8,4.6-5.4,4.6s-5-1.9-5.4-4.6c0-9.7,0-19.3,0-29" /><g><path d="M9.6,21.1c-1.5,0-3.1-0.6-4.2-1.7c-2-2-2.3-5.1-0.8-7.5l0.1-0.2l7-7c0.8-1.1,2.1-1.8,3.5-1.9c1.3-0.1,2.5,0.3,3.3,1.1 c0.8,0.8,1.2,2,1.1,3.3c-0.1,1.4-0.8,2.7-1.9,3.5l-6.2,6.1c-1.1,0.7-2.5,0.6-3.4-0.3c-0.9-0.9-1-2.3-0.3-3.4L8,13.1L14.1,7 c0.4-0.4,1-0.4,1.4,0c0.4,0.4,0.4,1,0,1.4l-6,6c-0.1,0.2-0.1,0.6,0.1,0.8c0.2,0.2,0.5,0.2,0.8,0.1l6.1-6.1c0.7-0.5,1.1-1.3,1.2-2.1 c0.1-0.7-0.1-1.3-0.5-1.7c-0.4-0.4-1-0.6-1.7-0.5c-0.8,0.1-1.6,0.5-2.1,1.2l-0.1,0.1l-7,7c-1,1.5-0.7,3.6,0.6,4.9 c1.3,1.3,3.3,1.5,4.9,0.6l7-7c0.4-0.4,1-0.4,1.4,0s0.4,1,0,1.4l-7.2,7.2C11.9,20.8,10.7,21.1,9.6,21.1z" /></g></svg>
                         <p>Attachment</p>
                     </div>
                     <div className='btn-edit-task-key flex align-center' onClick={() => setModal('location')}>
@@ -289,7 +285,7 @@ export const TaskDetails = () => {
 
 
                     <div className='btn-edit-task-key flex align-center'>
-                        <svg viewBox="0 0 24 24" ><g class="st0"><path class="st1" d="M-38.3,3c-1.1,0-2,0.9-2,2v14c0,1.1,0.9,2,2,2h14c1.1,0,2-0.9,2-2v-6.8c0-0.6-0.4-1-1-1h0c-0.6,0-1,0.4-1,1 l0,5.8c0,0.6-0.4,1-1,1h-12c-0.6,0-1-0.4-1-1V6c0-0.6,0.4-1,1-1h9.8c0.6,0,1-0.4,1-1v0c0-0.6-0.4-1-1-1H-38.3z" /><path class="st1" d="M-21.6,4l-9.1,9.1c-0.3,0.3-0.7,0.3-0.9,0l-2.1-2.1c-0.4-0.4-1-0.4-1.4,0v0c-0.4,0.4-0.4,1,0,1.4l3.3,3.3 c0.4,0.4,1,0.4,1.4,0l10.3-10.3c0.4-0.4,0.4-1,0-1.4l0,0C-20.6,3.6-21.2,3.6-21.6,4z" /><path class="st2" d="M-79,24.7h-34.4c-2.1,0-3.7-1.7-3.7-3.7V-4.6h41.9V21C-75.3,23-76.9,24.7-79,24.7z" /><line class="st2" x1="-101.2" y1="5.6" x2="-91" y2="5.6" /><line class="st2" x1="-117.1" y1="-14.1" x2="-75.3" y2="-17.3" /></g><g><g><path d="M15.6,21H8.4C5.4,21,3,18.6,3,15.7V7.8H21v7.9C21,18.6,18.6,21,15.6,21z M5.3,10v5.7c0,1.7,1.4,3.1,3.1,3.1h7.3 c1.7,0,3.1-1.4,3.1-3.1V10H5.3z" /></g><g><path d="M13.9,13.8h-3.8c-0.6,0-1.1-0.5-1.1-1.1s0.5-1.1,1.1-1.1h3.8c0.6,0,1.1,0.5,1.1,1.1S14.5,13.8,13.9,13.8z" /></g><g><path d="M4.2,6.5C3.6,6.5,3.1,6,3,5.4c0-0.6,0.4-1.2,1-1.2L19.8,3C20.4,3,20.9,3.4,21,4c0,0.6-0.4,1.2-1,1.2L4.2,6.5 C4.2,6.5,4.2,6.5,4.2,6.5z" /></g></g></svg>                        <p>Archive card</p>
+                        <svg viewBox="0 0 24 24" ><g className="st0"><path className="st1" d="M-38.3,3c-1.1,0-2,0.9-2,2v14c0,1.1,0.9,2,2,2h14c1.1,0,2-0.9,2-2v-6.8c0-0.6-0.4-1-1-1h0c-0.6,0-1,0.4-1,1 l0,5.8c0,0.6-0.4,1-1,1h-12c-0.6,0-1-0.4-1-1V6c0-0.6,0.4-1,1-1h9.8c0.6,0,1-0.4,1-1v0c0-0.6-0.4-1-1-1H-38.3z" /><path className="st1" d="M-21.6,4l-9.1,9.1c-0.3,0.3-0.7,0.3-0.9,0l-2.1-2.1c-0.4-0.4-1-0.4-1.4,0v0c-0.4,0.4-0.4,1,0,1.4l3.3,3.3 c0.4,0.4,1,0.4,1.4,0l10.3-10.3c0.4-0.4,0.4-1,0-1.4l0,0C-20.6,3.6-21.2,3.6-21.6,4z" /><path className="st2" d="M-79,24.7h-34.4c-2.1,0-3.7-1.7-3.7-3.7V-4.6h41.9V21C-75.3,23-76.9,24.7-79,24.7z" /><line className="st2" x1="-101.2" y1="5.6" x2="-91" y2="5.6" /><line className="st2" x1="-117.1" y1="-14.1" x2="-75.3" y2="-17.3" /></g><g><g><path d="M15.6,21H8.4C5.4,21,3,18.6,3,15.7V7.8H21v7.9C21,18.6,18.6,21,15.6,21z M5.3,10v5.7c0,1.7,1.4,3.1,3.1,3.1h7.3 c1.7,0,3.1-1.4,3.1-3.1V10H5.3z" /></g><g><path d="M13.9,13.8h-3.8c-0.6,0-1.1-0.5-1.1-1.1s0.5-1.1,1.1-1.1h3.8c0.6,0,1.1,0.5,1.1,1.1S14.5,13.8,13.9,13.8z" /></g><g><path d="M4.2,6.5C3.6,6.5,3.1,6,3,5.4c0-0.6,0.4-1.2,1-1.2L19.8,3C20.4,3,20.9,3.4,21,4c0,0.6-0.4,1.2-1,1.2L4.2,6.5 C4.2,6.5,4.2,6.5,4.2,6.5z" /></g></g></svg>                        <p>Archive card</p>
                     </div>
                     {/* <button onClick={ev => onArchiveTask({ taskId: task.id, groupId })}>Archive card</button> */}
 
