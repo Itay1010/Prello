@@ -106,7 +106,7 @@
 
         .action-type-modal {
             position: absolute;
-            left: 0;
+            right: 0;
         }
     }
 
@@ -619,7 +619,7 @@
 
         &:focus {
             border: none;
-            box-shadow: inset 0px 0 0px 1px black;
+            box-shadow: inset 0px 0px 5px #0079bf;
         }
     }
 

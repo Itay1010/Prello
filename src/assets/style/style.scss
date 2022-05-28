@@ -11,12 +11,11 @@
 
 
 //PAGES
+@import './pages/home';
 @import './pages/board';
 @import './pages/workspace';
 @import './pages/auth';
 @import './pages/task-details';
-
-
 
 // COMPONENTS
 @import './cmps/shared_cmps/main-header';

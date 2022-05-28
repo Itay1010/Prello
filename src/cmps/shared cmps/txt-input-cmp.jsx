@@ -26,5 +26,5 @@ export const TxtInputCmp = ({ saveFunc, toggleContentEditable, contentInitialSta
         }
     }
 
-    return <input className="min-width-input" style={{ width }} ref={contentRef} autoFocus type="text" value={content} placeholder='Enter board name' onChange={handleContentChange} onBlur={toggleContentEditable} onKeyDown={onSaveBoardTitle} />
+    return <input className="min-width-input board-name" style={{ width }} ref={contentRef} autoFocus type="text" value={content} placeholder='Enter board name' onChange={handleContentChange} onBlur={toggleContentEditable} onKeyDown={onSaveBoardTitle} />
 }
