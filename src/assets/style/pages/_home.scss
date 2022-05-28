@@ -2,5 +2,14 @@
     background: linear-gradient(0deg, #fff, #eae6ff 100%);
     color: #172b4d;
     width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+
+}
+
+.hero {
+    display: flex;
 
 }
