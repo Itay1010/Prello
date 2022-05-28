@@ -33,7 +33,7 @@ export const TaskPreview = ({ task, groupId, idx }) => {
                 ref={provided.innerRef}
                 {...provided.draggableProps}
                 {...provided.dragHandleProps}
-                // style={_getStyle(provided.draggableProps.style, snapshot, provided)}
+            // style={_getStyle(provided.draggableProps.style, snapshot, provided)}
             >
                 <Link to={`/board/${boardId}/${groupId}/${task.id}`}>
                     {task.style?.bgColor && <section className="task-color"
@@ -44,19 +44,19 @@ export const TaskPreview = ({ task, groupId, idx }) => {
                             <TaskLabels labels={task.labels} />
                         </div>}
                         <section className="task-title">{task.title}</section>
-                        <section className="task-status flex space-between wrap">
+                        {/* <section className="task-status flex space-between wrap">
                             <TaskBadges task={task} />
                             {membersToDisplay?.length > 0 && <section className="members flex">
                                 <TaskMembers members={membersToDisplay} />
                             </section>}
-                        </section>
-                        {/* {!task.attacments && task.attacments.length === 0 && !task.members && task.members.length === 0 && !task.comments && task.comments.length === 0 && !task.checklist && task.checklist.length === 0
+                        </section> */}
+                        {(task.attachments?.length > 0 || task.members?.length > 0 || task.comments?.length > 0 || task.checklist?.length > 0)
                             && <section className="task-status flex space-between wrap">
                                 <TaskBadges task={task} />
                                 {membersToDisplay?.length > 0 && <section className="members flex">
                                     <TaskMembers members={membersToDisplay} />
                                 </section>}
-                            </section>} */}
+                            </section>}
                     </div>
                 </Link>
             </article>
@@ -71,7 +71,7 @@ function _getStyle(style, snapshot) {
         return {
             transform: `${style.transform} skew(0deg)`,
             ...style,
-    
+
         }
     }
     const { moveTo, curve, duration } = snapshot;

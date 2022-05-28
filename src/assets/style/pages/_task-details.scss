@@ -614,8 +614,9 @@
     .task-title {
         width: 100%;
         font-size: 20px;
-        padding: 3px 3px;
+        padding: 4px;
         margin-bottom: 2px;
+
         &:focus {
             border: none;
             box-shadow: inset 0px 0 0px 1px black;
