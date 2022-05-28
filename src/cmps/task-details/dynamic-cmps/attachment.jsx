@@ -33,7 +33,7 @@ export const Attachment = ({ saveAttachment, closeModal }) => {
         // tabIndex={0}
         // onFocus={() => { console.log('main', 'focus'); }}
         // onBlur={closeModal}
-        className='modal-type' tabindex={1}>
+        className='modal-type'>
         <h4>Title</h4>
         <form onSubmit={onSaveAttachment}>
             <input autoComplete='off' type="text" placeholder='Enter title' name='title' onChange={handleChange} />

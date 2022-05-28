@@ -15,10 +15,8 @@ export const AttachmentPreview = ({ attachment, removeAttachment }) => {
     }
 
     const onRemoveAttachment = () => {
-        console.log(id)
         removeAttachment(id)
     }
-
     return <div className='attachment-preview'>
         <img src={url} alt="" />
         <div className='attachment-title-and-options'>

@@ -2,8 +2,8 @@ import { utilService } from '../../services/basic/util.service'
 import { storageService } from '../basic/async-storage.service'
 // import { httpService } from '../basic/http.service'
 import { getActionSetBoard, getActionRemoveBoard } from '../../store/board/board.action'
-import { userService } from "../../services/user.service";
-import { useState } from 'react';
+import { userService } from "../../services/user.service"
+import { useState } from 'react'
 const emptyBoard = require('../../data/empty-board.json')
 const jsonBoard = require('../../data/prello-boards.json')
 // import { socketService, SOCKET_EVENT_REVIEW_ADDED, SOCKET_EVENT_REVIEW_ABOUT_YOU } from './socket.service'
@@ -12,7 +12,7 @@ const jsonBoard = require('../../data/prello-boards.json')
 const STORAGE_KEY = 'board'
 // const boardChannel = new BroadcastChannel('boardChannel')
 
-// ; (() => {
+//  (() => {
 //     boardChannel.addEventListener('message', (ev) => {
 //         store.dispatch(ev.data)
 //     })

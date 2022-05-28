@@ -1,9 +1,10 @@
 .group {
-    width: 270px;
+    max-width: 270px;
+    min-width: 270px;
     border-radius: 3px;
     margin-inline-end: 8px;
     background-color: $group-bg;
-    max-height: calc(100vh - 44px - 52px - 8px);
+    max-height: calc(100vh - 44px - 52px - 37px);
     overflow-y: auto;
     align-self: flex-start;
 
