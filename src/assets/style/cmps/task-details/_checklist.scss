@@ -7,16 +7,59 @@
     }
 
     .checklist-item-header {
-        justify-content: space-between;
+
+
+        // justify-content: space-between;
+        .header-details-wrapper {
+            button {
+                @include btn
+            }
+
+            display: flex;
+            justify-content: space-between;
+            flex-grow: 1;
+            margin-left: 10px;
+            margin-bottom: 10px;
+
+        }
     }
+}
+
+.percentage-bar {
+    display: flex;
+    align-items: center;
+
+    span {
+        padding-right: 20px;
+
+
+    }
+
 }
 
 .cl-task-wrapper {
     width: 100%;
     display: flex;
+    align-items: center;
+    height: 40px;
+    margin-top: 10px;
+
+    input[type=checkbox] {
+        width: 20px;
+        margin: 0;
+        display: inline-block;
+        padding: 0 5px;
+    }
+
+    &:last-child {
+        margin-bottom: 10px;
+    }
 
     .cl-task {
+        padding-left: 20px;
+        height: 100%;
         display: flex;
+        align-items: center;
         justify-content: space-between;
         flex-grow: 1;
     }
@@ -25,14 +68,40 @@
         display: none;
     }
 
+    svg {
+        height: 16px;
+        width: 16px;
+    }
+
     &:hover {
-        background-color: #e2e4e9ed;
+        background-color: $td-btn-hov;
 
         .cl-task-buttons {
-            display: inline-block;
+            display: flex;
+
+            .user-btn {
+                border-radius: 10px;
+            }
+
+            a {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                height: 20px;
+                width: 20px;
+                display: flex;
+                align-items: center;
+                margin-inline-end: 8px;
+                background-color: $opc-black;
+                border-radius: 50%;
+            }
+
+            .delete-btn {
+                border-radius: 3px;
+            }
 
             a:hover {
-                background-color: antiquewhite;
+                background-color: $opc-black-hov;
             }
         }
 
@@ -40,14 +109,8 @@
 
     }
 
-    input {
-        margin: 0;
-        display: inline-block;
-    }
 
-    .checklist-item-footer {
-        display: flex;
-    }
+
 
     .space {
         display: inline-block;
@@ -61,4 +124,33 @@
         margin: 0 4px;
     }
 
+}
+
+.checklist-item-footer {
+    display: flex;
+    width: 100%;
+
+
+
+    button {
+        @include btn;
+
+    }
+
+    form {
+        width: 100%;
+    }
+
+    input {
+        @include input($width: 95%);
+        margin-inline-start: 40px;
+    }
+
+    button:nth-child(1) {
+        @include btn;
+        background-color: $clr1 ;
+        color: $bg;
+        margin-inline-start: 40px;
+        margin-inline-end: 5px;
+    }
 }

@@ -68,7 +68,6 @@ export const ChecklistPreview = ({ item, saveChecklistTask, setIsDone, checklist
 
             </div>
             <div className='checklist-item-footer'>
-                <div className='space2'>000</div>
                 {!isInputOpen && <button onClick={onToggleInput}>Add an item</button>}
                 {isInputOpen && <React.Fragment>
                     <form action="" onSubmit={onSaveChecklistTask} >
