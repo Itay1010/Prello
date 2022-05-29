@@ -24,7 +24,6 @@ class _Board extends React.Component {
 
     componentDidMount() {
         this._setBoard()
-        this.getAvgColor('https://images.unsplash.com/photo-1653759588370-03395fadcbd3?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1219&q=80')
 
 
 
