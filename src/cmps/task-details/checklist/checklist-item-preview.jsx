@@ -5,6 +5,7 @@ import Box from '@mui/material/Box';
 import LinearProgress from '@mui/material/LinearProgress';
 import { IChecklist } from '../../icons/i-checklist.jsx'
 import { createTheme, ThemeProvider } from '@mui/material/styles';
+
 const theme = createTheme({
     palette: {
         primary: {
@@ -12,7 +13,6 @@ const theme = createTheme({
         },
     }
 });
-
 
 export const ChecklistItemPreview = ({ item, saveChecklistTask, setIsDone, checklistId, deleteClTask, deleteChecklist }) => {
 

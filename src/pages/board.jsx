@@ -4,6 +4,8 @@ import { connect } from 'react-redux'
 
 //libs
 import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
+import getAverageColor from 'get-average-color'
+
 
 //privet
 import { MainHeader } from "../cmps/shared cmps/header/main-header"
@@ -22,6 +24,26 @@ class _Board extends React.Component {
 
     componentDidMount() {
         this._setBoard()
+
+
+
+
+
+    }
+    // function getAvgColor(url) {
+    //     getAverageColor(url).then(rgb => {
+    //         console.log(rgb)
+    //         const color = `rgb(${rgb.r},${rgb.g}, ${rgb.b})`
+    //         console.log(color)
+    //     })
+    // }
+
+    getAvgColor = (url) => {
+        getAverageColor(url).then(rgb => {
+            console.log(rgb)
+            const color = `rgb(${rgb.r},${rgb.g}, ${rgb.b})`
+            console.log(color)
+        })
     }
 
     _setBoard = async () => {
@@ -144,3 +166,42 @@ const mapDispatchToProps = {
 }
 
 export const Board = connect(mapStateToProps, mapDispatchToProps)(_Board)
+
+
+
+const task = {
+    bgImg: 'https://images.unsplash.com/photo-1653759588370-03395fadcbd3?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1219&q=80',
+    bgColor: null
+}
+
+
+export const BoardList = (task) => {
+
+    // const { bgImg } = task
+    // async function printAverageColor() {
+    //     const color = await getAverageColor(bgImg);
+    //     console.log(color);
+    //     // document.querySelector('.main-header').style.backgroundColor = color
+    //     // const elHeader = document.querySelector('.main-header')
+    // }
+
+    // printAverageColor()
+
+    // return <div className="workspace-container">
+
+    // </div>
+}
+
+// export const BoardList = () => {
+//     // console.log(task);
+//     const { bgImg } = task
+//     const fac = new FastAverageColor()
+//     const elHeader = document.querySelector('.main-header')
+//     const color = fac.getColor(bgImg)
+
+//     console.log(color);
+
+//     return <div className="workspace-container">
+
+//     </div>
+// }
