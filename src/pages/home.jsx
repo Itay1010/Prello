@@ -7,7 +7,7 @@ export const Home = () => {
     return <section className="home">
         <nav className="flex space-between">
             <div className="logo">Logo</div>
-            <div className="auth-links"><NavLink>Log in</NavLink><NavLink>Sign up</NavLink></div>
+            <div className="auth-links"></div>
         </nav>
         <div className="hero">
             <div className="hero-content">
