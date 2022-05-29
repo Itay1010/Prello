@@ -73,8 +73,6 @@ export const TaskPreview = ({ task, groupId, idx }) => {
 }
 
 function _getStyle(style, snapshot) {
-
-
     if (snapshot.isDropAnimating) {
         console.log('dropAnimation', snapshot)
         const { moveTo, curve, duration } = snapshot.dropAnimation;
