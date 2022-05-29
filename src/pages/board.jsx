@@ -123,7 +123,7 @@ class _Board extends React.Component {
 
     render() {
         const { board } = this.props
-        // console.log('_Board - render - board', board)
+        console.log('_Board - render - board rendered')
         if (!board) return <div>loading...</div>
         const { groups } = board
         const eventHandlers = {
