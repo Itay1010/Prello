@@ -5,6 +5,9 @@ export const GroupTitle = ({ groupInfo, setGroupTitle, onArchiveGroup, onGroupCh
     if (!groupInfo) return <React.Fragment />
     return <div className="group-header flex space-between">
         <TextareaAutosize
+            onMouseDown={ev => {
+                // ev.preventDefault()
+            }}
             maxLength="521"
             value={groupInfo.txt}
             onChange={ev => {

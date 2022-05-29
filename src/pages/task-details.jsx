@@ -81,7 +81,6 @@ export const TaskDetails = ({ onArchiveTask }) => {
 
     useEffect(() => {
         onLoad()
-        console.log(modalType)
     }, [task, group, height])
 
     const handleTitleChange = ({ target }) => {
@@ -208,7 +207,6 @@ export const TaskDetails = ({ onArchiveTask }) => {
     }
 
     const DynamicModal = ({ type }) => {
-        console.log(type)
         switch (type) {
             case 'members':
                 return <Members saveMembers={saveMembers} boardMembers={board.members} task={task} closeModal={closeModal} />
@@ -233,7 +231,6 @@ export const TaskDetails = ({ onArchiveTask }) => {
     }
 
     const closeModal = (modalType) => {
-        console.log(modalType)
         setModalType(modalType)
         // loadBoard()
     }
