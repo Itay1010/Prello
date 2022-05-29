@@ -1,4 +1,5 @@
 .home {
+
     background: linear-gradient(0deg, #fff, #eae6ff 100%);
     color: #172b4d;
     width: 100%;
@@ -8,6 +9,19 @@
     padding: 0 30px;
 
 
+
+}
+
+nav {
+    a {
+        @include btn
+    }
+
+    a:nth-child(2) {
+        background-color: #0065ff;
+        color: $bg;
+        font-size: 17.5px;
+    }
 }
 
 .hero {
