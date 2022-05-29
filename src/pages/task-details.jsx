@@ -234,11 +234,6 @@ export const TaskDetails = ({ onArchiveTask }) => {
 
     const closeModal = () => {
         setModalType(null)
-<<<<<<< HEAD
-        console.log(modalType)
-        // loadBoard()
-=======
->>>>>>> 14c37b57e6e4e51e9d32e61613e4581cee70ff97
     }
 
 
