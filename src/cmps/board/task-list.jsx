@@ -43,7 +43,7 @@ export const Group = ({ group, onAddTask, onArchiveTask, onArchiveGroup, onGroup
                                 {tasks.map((task, idx) => {
                                     if (!task.archivedAt) return <TaskPreview key={task.id} task={task} groupId={group.id} idx={idx} />
                                 })}
-
+                                {snapshot.isDraggingOver && provided.placeholder}
                             </div>
                             {isTaskOpen && <AddTask
                                 // a card with the same class as the the others but with a textarea
@@ -54,7 +54,8 @@ export const Group = ({ group, onAddTask, onArchiveTask, onArchiveGroup, onGroup
                                 setNewTask={setNewTask}
                                 setIsTaskOpen={setIsTaskOpen}
                             />}
-                            {snapshot.isDraggingOver && provided.placeholder}
+
+
                             {
 
                                 // isTaskOpen || <div className="group-footer flex align-center" >
@@ -70,6 +71,7 @@ export const Group = ({ group, onAddTask, onArchiveTask, onArchiveGroup, onGroup
 
                                 </div>
                             }
+
                             {
                                 isTaskOpen && <div className="group-footer flex align-center">
                                     <button className="add-card-btn" onMouseDown={ev => {
