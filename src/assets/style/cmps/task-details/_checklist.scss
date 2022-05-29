@@ -13,11 +13,14 @@
         .icon-wrapper {
             width: 32px;
             margin-inline-end: 8px;
+            fill: $td-svg;
+
 
             svg {
                 height: 24px;
                 width: 24px;
                 margin-inline-end: 8px;
+                transform: translateY(12%);
             }
         }
 
@@ -62,6 +65,8 @@
     align-items: center;
     height: 40px;
     margin-top: 10px;
+    border-radius: 3px;
+
 
     .checkbox-wrapper {
         width: 32px;

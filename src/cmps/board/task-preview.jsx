@@ -26,6 +26,18 @@ export const TaskPreview = ({ task, groupId, idx }) => {
         const filteredMembers = members.filter(member => task.members.includes(member._id))
         setMembersToDisplay(filteredMembers)
     }
+    // console.log(task);
+    const getClStatus = (task) => {
+        let total = 0
+        let done = 0
+        task.checklist.forEach(cl => {
+            total += cl.items.length
+            cl.items.forEach(item => {
+                if (item.isDone) done++
+            })
+        })
+        return `${done}/${total}`
+    }
 
     return <Draggable type="cards" draggableId={task.id} index={idx}>
         {(provided, snapshot) => {
@@ -43,10 +55,11 @@ export const TaskPreview = ({ task, groupId, idx }) => {
                         {task.labels?.length > 0 && <div className="task-label">
                             <TaskLabels labels={task.labels} />
                         </div>}
+                        {/* {task.checklist?.length > 0 && getClStatus(task)} */}
                         <section className="task-title">{task.title}</section>
                         {(task.attachments?.length > 0 || task.members?.length > 0 || task.comments?.length > 0 || task.checklist?.length > 0 || task.description)
                             && <section className="task-status flex space-between wrap">
-                                <TaskBadges task={task} />
+                                <TaskBadges task={task} getClStatus={getClStatus} />
                                 {membersToDisplay?.length > 0 && <section className="members flex">
                                     <TaskMembers members={membersToDisplay} />
                                 </section>}

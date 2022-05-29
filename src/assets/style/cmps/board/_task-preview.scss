@@ -60,12 +60,20 @@
             .badges {
                 .badge {
                     height: 20px;
-                    width: 20px;
+                    // width: 20px;
+                    width: auto;
+                    margin-inline-end: 4px;
 
                     svg {
                         height: 16px;
                         width: 16px;
                         fill: $edit;
+                    }
+
+                    p {
+                        margin-inline-start: 2px;
+                        font-size: 12px;
+                        line-height: 16px;
                     }
                 }
             }
