@@ -4,7 +4,14 @@ import { ClItemsList } from './cl-items-list.jsx'
 import Box from '@mui/material/Box';
 import LinearProgress from '@mui/material/LinearProgress';
 import { IChecklist } from '../../icons/i-checklist.jsx'
-
+import { createTheme, ThemeProvider } from '@mui/material/styles';
+const theme = createTheme({
+    palette: {
+        primary: {
+            main: '#5BA4D0',
+        },
+    }
+});
 
 
 export const ChecklistItemPreview = ({ item, saveChecklistTask, setIsDone, checklistId, deleteClTask, deleteChecklist }) => {
@@ -62,9 +69,19 @@ export const ChecklistItemPreview = ({ item, saveChecklistTask, setIsDone, check
                 <div className='percentage-num-wrapper'>
                     <span className='percent-num'>{!donePercentage ? 0 : Math.floor(donePercentage)}%</span>
                 </div>
-                <Box sx={{ width: '100%' }}>
-                    <LinearProgress variant="determinate" value={progress} />
-                </Box>
+                <ThemeProvider theme={theme}>
+                    <Box sx={{
+                        width: '100%',
+                    }}>
+                        <LinearProgress variant="determinate" value={progress} sx={{
+                            borderRadius: 75,
+                            height: 8,
+                            width: '100%',
+                            color: "red",
+                            backgroundColor: '#091e4214'
+                        }} />
+                    </Box>
+                </ThemeProvider>
             </div>
             <div className='checklist-item-list'>
                 {items?.length > 0 && <ClItemsList checklistId={checklistId} items={items} setIsDone={setIsDone} deleteClTask={onDeleteClTask} />}
