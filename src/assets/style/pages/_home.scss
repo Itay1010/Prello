@@ -8,7 +8,11 @@
     padding: 0 30px;
 }
 
+
+
 nav {
+    display: flex;
+    align-items: center;
     margin-top: 10px;
 
     a {
@@ -23,10 +27,20 @@ nav {
     }
 
     .logo {
-        svg {
-            height: 24px;
-            width: 24px;
-            fill: red;
+        display: flex;
+        align-items: center;
+
+        img {
+            width: 25px;
+            height: 25px;
+            margin-inline-end: 8px;
+        }
+
+        h1 {
+            font-family: secular-font;
+            font-size: 30px;
+            margin: 0;
+            line-height: 1;
         }
     }
 }

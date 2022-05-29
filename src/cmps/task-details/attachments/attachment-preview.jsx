@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { Attachment } from '../dynamic-cmps/attachment'
 
-export const AttachmentPreview = ({ attachment, removeAttachment, openImgModal }) => {
+export const AttachmentPreview = ({ attachment, removeAttachment, openImgModal, saveAttachment }) => {
     const [isEditMode, setEditMode] = useState(null)
     const { url, title, createdAt, id } = attachment
     let diff = (Date.now() - createdAt) / 1000
@@ -21,7 +21,7 @@ export const AttachmentPreview = ({ attachment, removeAttachment, openImgModal }
         removeAttachment(id)
     }
 
-
+    console.log(attachment)
 
     return <div className='attachment-preview flex space-between'>
         {/* <div className='img-container' onClick={() => openImgModal(url)}>
@@ -36,7 +36,7 @@ export const AttachmentPreview = ({ attachment, removeAttachment, openImgModal }
             <h3>{title}</h3>
             <p>{dateToDisplay()}  </p>
             <div className='attachment-button'> <a onClick={onRemoveAttachment}>Remove</a><span>-</span><a onClick={() => setEditMode(true)}>Edit</a></div>
-            {isEditMode && <Attachment />}
+            {isEditMode && <div className='modal'><Attachment attachmentToUpdate={attachment} saveAttachment={saveAttachment} closeModal={() => setEditMode(false)} /></div>}
         </div>
     </div>
 }

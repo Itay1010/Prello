@@ -55,8 +55,11 @@ export const TaskDetails = ({ onArchiveTask }) => {
     const { boardId, groupId, taskId } = params
     const history = useHistory()
     const { board } = useSelector(storeState => storeState.boardModule)
+
+    const [newBoard, setNewBoard] = useState(null)
     const [group, setGroup] = useState(null)
     const [task, setTask] = useState(null)
+
     const [boardMembers, setBoardMembers] = useState(board.members)
     const [isModal, setIsModal] = useState('')
     const [modalType, setModalType] = useState(null)
@@ -72,17 +75,32 @@ export const TaskDetails = ({ onArchiveTask }) => {
         history.push(`/board/${boardId}`)
     }
 
-    async function onLoad() {
-        const groupToAdd = await board.groups.find(group => group.id === groupId)
+    function onLoad() {
+        const groupToAdd = board.groups.find(group => group.id === groupId)
         setGroup(groupToAdd)
-        const task = await groupToAdd.tasks.find(task => task.id === taskId)
+        // const task = await groupToAdd.tasks.find(task => task.id === taskId)
+        // setTask(task)
+    }
+
+    function getTask() {
+        const board = deepCloneBoard()
+        setNewBoard(board)
+        const groupToAdd = board.groups.find(group => group.id === groupId)
+        setGroup(groupToAdd)
+        const task = groupToAdd.tasks.find(task => task.id === taskId)
         setTask(task)
+        // const group = board.groups.find(group => groupId === group.id)
+        // const task = group.tasks.find(task => taskId === task.id)
+        // setTask(task)
     }
 
     useEffect(() => {
         onLoad()
         // console.log(modalType)
-    }, [task, group, height])
+    }, [group, height])
+    useEffect(() => {
+        getTask()
+    }, [])
 
     const handleTitleChange = ({ target }) => {
         height = 'auto'
@@ -159,19 +177,25 @@ export const TaskDetails = ({ onArchiveTask }) => {
     }
 
     const onSaveAttachment = (attachment) => {
-        attachment.createdAt = Date.now()
-        attachment.id = utilService.makeId()
-        if (task.attachments) {
-            task.attachments.push(attachment)
+        if (attachment.id) {
+            const requestedAttachmentIdx = task.attachments.findIndex(requestedAttachment => requestedAttachment.id === attachment.id)
+            task.attachments.splice(requestedAttachmentIdx, 1, attachment)
         } else {
-            task.attachments = [attachment]
+
+            attachment.createdAt = Date.now()
+            attachment.id = utilService.makeId()
+            if (task.attachments) {
+                task.attachments.push(attachment)
+            } else {
+                task.attachments = [attachment]
+            }
         }
         // setGroup(group)
         saveBoard()
     }
 
-    const saveBoard = () => {
-        dispatch(updateBoard(board))
+    const saveBoard = async () => {
+        await dispatch(updateBoard(newBoard))
     }
 
     const deepCloneBoard = () => {
@@ -179,7 +203,6 @@ export const TaskDetails = ({ onArchiveTask }) => {
     }
 
     const onSetIsDone = (checklistId, clTaskItem) => {
-
         saveBoard()
     }
 
@@ -197,11 +220,11 @@ export const TaskDetails = ({ onArchiveTask }) => {
 
     }
 
-    const toggleEditDescription = async () => {
+    const toggleEditDescription = () => {
         if (isDescriptionEditable) {
             setDescriptionEditable(false)
         } else {
-            await setDescriptionEditable(true)
+            setDescriptionEditable(true)
             setDescriptionValue(task.description)
             descriptionRef.current.focus()
         }
@@ -345,7 +368,7 @@ export const TaskDetails = ({ onArchiveTask }) => {
 
                     {checklist?.length > 0 && <ChecklistList checklist={checklist} saveChecklistTask={onSaveChecklistTask} setIsDone={onSetIsDone} deleteClTask={onDeleteClTask} deleteChecklist={onDeleteChecklist} />}
 
-                    {attachments?.length > 0 && <AttachmentList attachments={attachments} removeAttachment={onRemoveAttachment} openImgModal={openImgModal} />}
+                    {attachments?.length > 0 && <AttachmentList attachments={attachments} removeAttachment={onRemoveAttachment} openImgModal={openImgModal} saveAttachment={onSaveAttachment} />}
                 </div>
 
                 <div className='task-edit flex col'>
