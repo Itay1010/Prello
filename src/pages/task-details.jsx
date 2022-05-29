@@ -211,10 +211,7 @@ export const TaskDetails = ({ onArchiveTask }) => {
     }
 
     const DynamicModal = ({ type }) => {
-<<<<<<< HEAD
-=======
         // console.log(type)
->>>>>>> main
         switch (type) {
             case 'members':
                 return <Members saveMembers={saveMembers} boardMembers={board.members} task={task} closeModal={closeModal} />
