@@ -81,10 +81,7 @@ export const TaskDetails = ({ onArchiveTask }) => {
 
     useEffect(() => {
         onLoad()
-<<<<<<< HEAD
-=======
         // console.log(modalType)
->>>>>>> main
     }, [task, group, height])
 
     const handleTitleChange = ({ target }) => {
@@ -235,14 +232,9 @@ export const TaskDetails = ({ onArchiveTask }) => {
         return member[0]
     }
 
-<<<<<<< HEAD
-    const closeModal = (modalType) => {
-        setModalType(modalType)
-=======
     const closeModal = () => {
         setModalType(null)
         console.log(modalType)
->>>>>>> main
         // loadBoard()
     }
 
