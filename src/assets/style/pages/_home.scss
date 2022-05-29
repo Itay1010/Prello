@@ -3,13 +3,50 @@
     color: #172b4d;
     width: 100%;
     display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
+    flex-direction: column;
+    height: 100%;
+    padding: 0 30px;
+
 
 }
 
 .hero {
+    width: 100%;
     display: flex;
+    justify-content: space-between;
+
+    h1 {
+        font-family: secular-font;
+        font-size: 44px;
+        display: flex;
+        flex-direction: column;
+
+    }
+
+    font-family: sans-serif;
+    flex-grow: 1;
+    display: flex;
+    align-items: center;
+    gap: 40px;
+
+    img {
+        width: 445px;
+        aspect-ratio: auto 931 / 1205;
+        height: 555px;
+    }
+
+    p {
+        font-family: sans-serif;
+        font-size: 20px;
+        line-height: 1.6;
+        font-size: 1.5rem;
+    }
+
+    button {
+        @include btn;
+        background-color: #0065ff;
+        font-size: 1.25rem;
+        color: $bg;
+    }
 
 }
