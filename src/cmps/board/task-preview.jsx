@@ -33,7 +33,7 @@ export const TaskPreview = ({ task, groupId, idx }) => {
                 ref={provided.innerRef}
                 {...provided.draggableProps}
                 {...provided.dragHandleProps}
-                // style={_getStyle(provided.draggableProps.style, snapshot, provided)}
+            // style={_getStyle(provided.draggableProps.style, snapshot, provided)}
             >
                 <Link to={`/board/${boardId}/${groupId}/${task.id}`}>
                     {task.style?.bgColor && <section className="task-color"
@@ -44,7 +44,7 @@ export const TaskPreview = ({ task, groupId, idx }) => {
                             <TaskLabels labels={task.labels} />
                         </div>}
                         <section className="task-title">{task.title}</section>
-                        {(task.attachments?.length > 0 || task.members?.length > 0 || task.comments?.length > 0 || task.checklist?.length > 0)
+                        {(task.attachments?.length > 0 || task.members?.length > 0 || task.comments?.length > 0 || task.checklist?.length > 0 || task.description)
                             && <section className="task-status flex space-between wrap">
                                 <TaskBadges task={task} />
                                 {membersToDisplay?.length > 0 && <section className="members flex">
