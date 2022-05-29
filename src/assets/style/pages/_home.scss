@@ -21,6 +21,14 @@ nav {
         background-color: #0065ff;
         color: $bg;
     }
+
+    .logo {
+        svg {
+            height: 24px;
+            width: 24px;
+            fill: red;
+        }
+    }
 }
 
 .hero {

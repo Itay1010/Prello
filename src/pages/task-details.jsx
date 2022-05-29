@@ -81,7 +81,6 @@ export const TaskDetails = ({ onArchiveTask }) => {
 
     useEffect(() => {
         onLoad()
-        // console.log(modalType)
     }, [task, group, height])
 
     const handleTitleChange = ({ target }) => {
