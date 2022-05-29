@@ -13,5 +13,6 @@ export function TaskBadges({ task, getClStatus }) {
         {task.attachments?.length > 0 && <div className="badge"><IAttachment /></div>}
         {task.comments?.length > 0 && <div className="badge"><IComments /> </div>}
         {/*  {task.loaction?.length > 0 && <div className="badge">L</div>} */}
+        {/*  {task.activities?.length > 0 && <div className="badge">L</div>} */}
     </section>
 }

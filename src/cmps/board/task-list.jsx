@@ -5,6 +5,7 @@ import { TaskPreview } from "./task-preview"
 import { GroupTitle } from "./group-title"
 import { AddTask } from "./add-task"
 import { IAdd } from "../icons/i-add";
+import { draggableStyle } from "../../services/board/draggable.style";
 
 export const Group = ({ group, onAddTask, onArchiveTask, onArchiveGroup, onGroupChange, idx }) => {
     // console.log('Group - onArchiveGroup', onArchiveGroup)
@@ -24,6 +25,7 @@ export const Group = ({ group, onAddTask, onArchiveTask, onArchiveGroup, onGroup
                 ref={provided.innerRef}
                 {...provided.draggableProps}
                 {...provided.dragHandleProps}
+                style={draggableStyle.getStyle(provided.draggableProps.style, snapshot, provided)}
                 className={`group flex col`}
             >
                 <GroupTitle
@@ -35,10 +37,14 @@ export const Group = ({ group, onAddTask, onArchiveTask, onArchiveGroup, onGroup
                 />
                 <Droppable type="cards" droppableId={`${group.id}`} direction="vertical">
                     {(provided, snapshot) => {
-                        return <div className="list-task" {...provided.droppableProps} ref={provided.innerRef}>
-                            {tasks.map((task, idx) => {
-                                if (!task.archivedAt) return <TaskPreview key={task.id} task={task} groupId={group.id} idx={idx} />
-                            })}
+                        return <React.Fragment>
+
+                            <div className="list-task" {...provided.droppableProps} ref={provided.innerRef}>
+                                {tasks.map((task, idx) => {
+                                    if (!task.archivedAt) return <TaskPreview key={task.id} task={task} groupId={group.id} idx={idx} />
+                                })}
+
+                            </div>
                             {isTaskOpen && <AddTask
                                 // a card with the same class as the the others but with a textarea
                                 group={group}
@@ -80,7 +86,7 @@ export const Group = ({ group, onAddTask, onArchiveTask, onArchiveGroup, onGroup
                                     }} className="add-card-close-btn">{_getSVG()}</button>
                                 </div>
                             }
-                        </div>
+                        </React.Fragment>
 
                     }}
                 </Droppable>
