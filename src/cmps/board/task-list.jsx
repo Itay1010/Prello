@@ -37,10 +37,14 @@ export const Group = ({ group, onAddTask, onArchiveTask, onArchiveGroup, onGroup
                 />
                 <Droppable type="cards" droppableId={`${group.id}`} direction="vertical">
                     {(provided, snapshot) => {
-                        return <div className="list-task" {...provided.droppableProps} ref={provided.innerRef}>
-                            {tasks.map((task, idx) => {
-                                if (!task.archivedAt) return <TaskPreview key={task.id} task={task} groupId={group.id} idx={idx} />
-                            })}
+                        return <React.Fragment>
+
+                            <div className="list-task" {...provided.droppableProps} ref={provided.innerRef}>
+                                {tasks.map((task, idx) => {
+                                    if (!task.archivedAt) return <TaskPreview key={task.id} task={task} groupId={group.id} idx={idx} />
+                                })}
+
+                            </div>
                             {isTaskOpen && <AddTask
                                 // a card with the same class as the the others but with a textarea
                                 group={group}
@@ -82,7 +86,7 @@ export const Group = ({ group, onAddTask, onArchiveTask, onArchiveGroup, onGroup
                                     }} className="add-card-close-btn">{_getSVG()}</button>
                                 </div>
                             }
-                        </div>
+                        </React.Fragment>
 
                     }}
                 </Droppable>

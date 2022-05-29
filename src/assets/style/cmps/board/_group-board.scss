@@ -15,7 +15,7 @@
 
         textarea {
             flex-grow: 1;
-            padding: 4px;
+            padding: 4px 4px 4px 8px;
             margin-inline-end: 8px;
         }
 
@@ -62,7 +62,7 @@
 
         &::-webkit-scrollbar {
             border-radius: 10px;
-            width: 12px;
+            width: 8px;
         }
 
         &::-webkit-scrollbar-track {
@@ -79,7 +79,7 @@
 
     .group-footer {
         // height: 38px;
-        // padding: 0 8px;
+        margin: 0 8px;
         margin-bottom: 8px;
         border-radius: 3px;
 
@@ -167,6 +167,8 @@
                 fill: $td-svg;
             }
         }
+
+
 
     }
 }

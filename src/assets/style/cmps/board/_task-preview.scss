@@ -38,12 +38,18 @@
 
         .task-status {
             height: 34px;
+            // flex-wrap: wrap;
+
+            &:nth-child(2) {
+                margin: 0 auto 0 0;
+            }
 
             .members {
                 gap: 8px;
                 height: 28px;
-                margin: 0;
+                margin: 0 -2px 0 0;
                 margin-inline-start: 8px;
+
 
                 .member {
                     height: 100%;
@@ -59,9 +65,11 @@
 
             .badges {
                 .badge {
-                    height: 20px;
+                    // height: 20px;
                     // width: 20px;
-                    width: auto;
+                    // width: auto;
+                    min-width: 20px;
+                    height: 20px;
                     margin-inline-end: 4px;
 
                     svg {
@@ -83,12 +91,17 @@
     }
 
     &.add-task {
+        max-width: 254px;
+        margin: 0 8px;
+        margin-bottom: 8px;
+
         textarea {
             padding-top: 8px;
             color: $txt;
             font-family: pri-font, sans-serif;
             font-weight: 400;
             font-size: 1em;
+
 
             &:focus-visible {
                 border: none;

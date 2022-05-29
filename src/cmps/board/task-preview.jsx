@@ -56,8 +56,10 @@ export const TaskPreview = ({ task, groupId, idx }) => {
                         </div>}
                         {/* {task.checklist?.length > 0 && getClStatus(task)} */}
                         <section className="task-title">{task.title}</section>
-                        {(task.attachments?.length > 0 || task.members?.length > 0 || task.comments?.length > 0 || task.checklist?.length > 0 || task.description)
-                            && <section className="task-status flex space-between wrap">
+                        {(task.attachments?.length > 0 || task.members?.length > 0 ||
+                            task.comments?.length > 0 || task.checklist?.length > 0 ||
+                            task.description || task.members?.length > 0 || task.activities?.length > 0)
+                            && <section className="task-status flex align-center space-between">
                                 <TaskBadges task={task} getClStatus={getClStatus} />
                                 {membersToDisplay?.length > 0 && <section className="members flex">
                                     <TaskMembers members={membersToDisplay} />
