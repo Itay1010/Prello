@@ -53,6 +53,7 @@
 
                 svg {
                     fill: $td-svg;
+
                 }
 
             }
@@ -127,8 +128,8 @@
             .close-modal {
                 float: right;
                 color: $edit;
-                height: 16px;
-                width: 16px;
+                // height: 16px;
+                // width: 16px;
                 cursor: pointer;
 
                 &:hover {
@@ -137,6 +138,9 @@
 
                 svg {
                     fill: $edit;
+                    height: 16px;
+                    width: 16px;
+                    margin: 0;
 
                     &:hover {
                         fill: $txt;
@@ -212,8 +216,8 @@
             .close-modal {
                 float: right;
                 color: $edit;
-                height: 16px;
-                width: 16px;
+                // height: 16px;
+                // width: 16px;
                 cursor: pointer;
 
                 &:hover {
@@ -222,6 +226,7 @@
 
                 svg {
                     fill: $edit;
+                    margin: 0;
 
                     &:hover {
                         fill: $txt;
@@ -247,10 +252,8 @@
                         height: 16px;
                         width: 16px;
                         fill: $bg;
-                        margin-inline-end: 4px;
                         align-self: center;
-                        justify-self: right;
-                        flex-grow: 1;
+                        margin: 0 8px 0 auto;
                     }
                 }
 
@@ -264,8 +267,8 @@
             .close-modal {
                 float: right;
                 color: $edit;
-                height: 16px;
-                width: 16px;
+                // height: 16px;
+                // width: 16px;
                 cursor: pointer;
 
                 &:hover {
@@ -274,6 +277,7 @@
 
                 svg {
                     fill: $edit;
+                    margin: 0;
 
                     &:hover {
                         fill: $txt;
@@ -322,8 +326,8 @@
             .close-modal {
                 float: right;
                 color: $edit;
-                height: 16px;
-                width: 16px;
+                // height: 16px;
+                // width: 16px;
                 cursor: pointer;
 
                 &:hover {
@@ -332,6 +336,7 @@
 
                 svg {
                     fill: $edit;
+                    margin: 0;
 
                     &:hover {
                         fill: $txt;
@@ -491,6 +496,7 @@
         // height: 56px;
         padding: 8px 12px;
         color: $td-main;
+        border-radius: 3px;
 
     }
 
