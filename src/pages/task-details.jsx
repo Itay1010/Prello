@@ -9,6 +9,7 @@ import { Checklist } from '../cmps/task-details/dynamic-cmps/checklist.jsx'
 import { Dates } from '../cmps/task-details/dynamic-cmps/dates.jsx'
 import { Attachment } from '../cmps/task-details/dynamic-cmps/attachment.jsx'
 import { Location } from '../cmps/task-details/dynamic-cmps/location.jsx'
+// import { ClosedModal } from '../cmps/task-details/dynamic-cmps/location.jsx'
 
 // CMPS
 import { ChecklistList } from '../cmps/task-details/checklist/checklistList.jsx';
@@ -16,7 +17,7 @@ import { AttachmentList } from '../cmps/task-details/attachments/attachment-list
 import { TxtInputCmp } from '../cmps/shared cmps/txt-input-cmp.jsx';
 
 // ACTIONS
-import { updateBoard } from '../store/board/board.action'
+import { loadBoard, updateBoard } from '../store/board/board.action'
 
 // SERVICES
 import { utilService } from '../services/basic/util.service.js'
@@ -80,6 +81,7 @@ export const TaskDetails = ({ onArchiveTask }) => {
 
     useEffect(() => {
         onLoad()
+        console.log(modalType)
     }, [task, group, height])
 
     const handleTitleChange = ({ target }) => {
@@ -205,8 +207,9 @@ export const TaskDetails = ({ onArchiveTask }) => {
         }
     }
 
-    const DynamicModal = () => {
-        switch (modalType) {
+    const DynamicModal = ({ type }) => {
+        console.log(type)
+        switch (type) {
             case 'members':
                 return <Members saveMembers={saveMembers} boardMembers={board.members} task={task} closeModal={closeModal} />
             case 'labels':
@@ -229,8 +232,10 @@ export const TaskDetails = ({ onArchiveTask }) => {
         return member[0]
     }
 
-    const closeModal = () => {
-        setModalType('')
+    const closeModal = (modalType) => {
+        console.log(modalType)
+        setModalType(modalType)
+        // loadBoard()
     }
 
 
@@ -342,7 +347,6 @@ export const TaskDetails = ({ onArchiveTask }) => {
 
                     {checklist?.length > 0 && <ChecklistList checklist={checklist} saveChecklistTask={onSaveChecklistTask} setIsDone={onSetIsDone} deleteClTask={onDeleteClTask} deleteChecklist={onDeleteChecklist} />}
 
-
                     {attachments?.length > 0 && <AttachmentList attachments={attachments} removeAttachment={onRemoveAttachment} openImgModal={openImgModal} />}
                 </div>
 
@@ -373,7 +377,7 @@ export const TaskDetails = ({ onArchiveTask }) => {
                         {modalType === 'checklist' && <div className='action-type-modal'>
                             <div className='modal'>
                                 {/* <h3>{modalType}</h3> */}
-                                <DynamicModal />
+                                <DynamicModal type={modalType} />
                             </div>
                         </div>}
                     </div>
@@ -392,6 +396,7 @@ export const TaskDetails = ({ onArchiveTask }) => {
                     }}>
                         <svg viewBox="0 0 24 24" ><g class="st0"><path class="st1" d="M-38.3,3c-1.1,0-2,0.9-2,2v14c0,1.1,0.9,2,2,2h14c1.1,0,2-0.9,2-2v-6.8c0-0.6-0.4-1-1-1h0c-0.6,0-1,0.4-1,1 l0,5.8c0,0.6-0.4,1-1,1h-12c-0.6,0-1-0.4-1-1V6c0-0.6,0.4-1,1-1h9.8c0.6,0,1-0.4,1-1v0c0-0.6-0.4-1-1-1H-38.3z" /><path class="st1" d="M-21.6,4l-9.1,9.1c-0.3,0.3-0.7,0.3-0.9,0l-2.1-2.1c-0.4-0.4-1-0.4-1.4,0v0c-0.4,0.4-0.4,1,0,1.4l3.3,3.3 c0.4,0.4,1,0.4,1.4,0l10.3-10.3c0.4-0.4,0.4-1,0-1.4l0,0C-20.6,3.6-21.2,3.6-21.6,4z" /><path class="st2" d="M-79,24.7h-34.4c-2.1,0-3.7-1.7-3.7-3.7V-4.6h41.9V21C-75.3,23-76.9,24.7-79,24.7z" /><line class="st2" x1="-101.2" y1="5.6" x2="-91" y2="5.6" /><line class="st2" x1="-117.1" y1="-14.1" x2="-75.3" y2="-17.3" /></g><g><g><path d="M15.6,21H8.4C5.4,21,3,18.6,3,15.7V7.8H21v7.9C21,18.6,18.6,21,15.6,21z M5.3,10v5.7c0,1.7,1.4,3.1,3.1,3.1h7.3 c1.7,0,3.1-1.4,3.1-3.1V10H5.3z" /></g><g><path d="M13.9,13.8h-3.8c-0.6,0-1.1-0.5-1.1-1.1s0.5-1.1,1.1-1.1h3.8c0.6,0,1.1,0.5,1.1,1.1S14.5,13.8,13.9,13.8z" /></g><g><path d="M4.2,6.5C3.6,6.5,3.1,6,3,5.4c0-0.6,0.4-1.2,1-1.2L19.8,3C20.4,3,20.9,3.4,21,4c0,0.6-0.4,1.2-1,1.2L4.2,6.5 C4.2,6.5,4.2,6.5,4.2,6.5z" /></g></g></svg>                        <p>Archive card</p>
                     </div>
+                    {!modalType && <DynamicModal type={modalType} />}
                 </div>
             </div>
 
