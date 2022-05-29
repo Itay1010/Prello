@@ -138,16 +138,7 @@
                 {
                     "id": "Cqd8rrORDIWrD9l",
                     "title": "Make the best app",
-                    "members": [
-                        "u101",
-                        "u102",
-                        "u103"
-                    ],
-                    "labels": [
-                        "#eb5a46",
-                        "#f2d600",
-                        "#61bd4f"
-                    ],
+                    "members": [],
                     "checklist": [
                         {
                             "title": "To Do",
@@ -155,7 +146,7 @@
                                 {
                                     "txt": "Basic build",
                                     "id": "N51kpr55iiW9n6K",
-                                    "isDone": true
+                                    "isDone": false
                                 },
                                 {
                                     "txt": "Upload to heroku",
@@ -175,29 +166,7 @@
                 {
                     "id": "Z7KvoTPF8egRGV1",
                     "title": "Monitization",
-                    "description": "",
-                    "checklist": [
-                        {
-                            "title": "To Do",
-                            "items": [
-                                {
-                                    "txt": "ASAP- set meeting with Digitraff",
-                                    "id": "N51puW55iiW9n6K",
-                                    "isDone": false
-                                },
-                                {
-                                    "txt": "Banners Design",
-                                    "id": "m9nQOPuwz3mYKim",
-                                    "isDone": false
-                                }
-                            ],
-                            "id": "Clc2hVdPzYc1X8DKn"
-                        }
-                    ],
-                    "members": [
-                        "u104",
-                        "u103"
-                    ]
+                    "members": []
                 },
                 {
                     "id": "T1fl90Kk5ytxKx3",
@@ -207,115 +176,27 @@
                 {
                     "id": "FGU5WNSkRUrdjUH",
                     "title": "Integrate sockets",
-                    "members": [],
-                    "description": "Set sockets and connect to the backend",
-                    "attachments": [
-                        {
-                            "title": "Socket.io"
-                        },
-                        {
-                            "url": "https://socket.io/images/dependencies.jpg"
-                        },
-                        {
-                            "createdAt": 1653806101427
-                        }
-                    ]
+                    "members": []
                 },
                 {
                     "id": "jnY2SqOxqzlDYA7",
                     "title": "Home page",
-                    "members": [
-                        "u101"
-                    ],
-                    "labels": [
-                        "#ff9f1a"
-                    ],
-                    "checklist": [
-                        {
-                            "title": "Materials",
-                            "items": [
-                                {
-                                    "txt": "Logo",
-                                    "id": "Nx4pu23Hiix4n6K",
-                                    "isDone": true
-                                },
-                                {
-                                    "txt": "Find bg img",
-                                    "id": "m9nqbx4wz3mx4im",
-                                    "isDone": false
-                                },
-                                {
-                                    "txt": "Font - charlie display",
-                                    "id": "m9x4b2uwz3mYKx4",
-                                    "isDone": true
-                                }
-                            ],
-                            "id": "Clc2hVdPzYc1X8DKn"
-                        }
-                    ]
+                    "members": []
                 },
                 {
                     "id": "zY4IQ0tk6KG4ftR",
-                    "title": "Login system",
-                    "members": [
-                        "u103",
-                        "u101"
-                    ],
-                    "labels": [
-                        "#61bd4f"
-                    ],
-                    "checklist": [
-                        {
-                            "title": "TO DO",
-                            "items": [
-                                {
-                                    "txt": "Signup-login functions",
-                                    "id": "Nxf5S23Hiix4n6K",
-                                    "isDone": true
-                                },
-                                {
-                                    "txt": "Connecting to user service",
-                                    "id": "m9nqbx4wcbN54im",
-                                    "isDone": true
-                                },
-                                {
-                                    "txt": "Signup-login page",
-                                    "id": "m9xx22uwz3mYKx4",
-                                    "isDone": true
-                                },
-                                {
-                                    "txt": "Logout button",
-                                    "id": "mCCx22uwz3v9Kx4",
-                                    "isDone": false
-                                },
-                                {
-                                    "txt": "Show loggedin user on header",
-                                    "id": "m9xx22v1z3mYKt4",
-                                    "isDone": false
-                                }
-                            ],
-                            "id": "Clc2hVdPzYc1X8DKn"
-                        }
-                    ]
+                    "title": "Login page",
+                    "members": []
                 },
                 {
                     "id": "er8WjQTp26FGMo9",
                     "title": "Permanently delete tasks",
-                    "members": [
-                        "u102"
-                    ],
-                    "labels": [
-                        "#c377e0"
-                    ],
-                    "description": "Remove console.log prints as well"
+                    "members": []
                 },
                 {
                     "id": "P6bbGdI8Qczeoyx",
                     "title": "Change h3 to input ",
-                    "members": [
-                        "u104"
-                    ],
-                    "description": "Pay attention to margin - should not be more than 10px"
+                    "members": []
                 },
                 {
                     "id": "KkRFCGoODyFuY4v",
@@ -330,61 +211,17 @@
             "tasks": [
                 {
                     "id": "4b2iFE9LZ3flkLy",
-                    "title": "ADD DOWN HERE ALL BUGS YOU FIND",
-                    "labels": [
-                        "#61bd4f",
-                        "#c377e0",
-                        "#eb5a46",
-                        "#f2d600",
-                        "#ff9f1a",
-                        "#0079bf"
-                    ],
+                    "title": "These don't work",
+                    "members": [],
                     "attachments": [
                         {
-                            "title": "All natural",
-                            "url": "https://elevatepestcontrol.com/wp-content/uploads/2020/05/Kill-Bugs-856x571.jpeg",
-                            "createdAt": 1653806101427
+                            "title": "the father the son and the holy spirit",
+                            "url": "https://www.kindpng.com/picc/m/78-787343_html5-css-javascript-html-css-js-icon-hd.png",
+                            "createdAt": 1653743774070,
+                            "id": "QggxUeVhw9es6Bv"
                         }
-                    ]
-                },
-                {
-                    "id": "4b2iF556Z3flkLy",
-                    "title": "Enter key on task description acts as submit",
-                    "members": [
-                        "u102"
                     ],
-                    "description": "Please follow the options order",
-                    "checklist": [
-                        {
-                            "title": "Options",
-                            "items": [
-                                {
-                                    "txt": "Stack overflow",
-                                    "id": "Nxf2223Hiix4n6K",
-                                    "isDone": true
-                                },
-                                {
-                                    "txt": "material UI",
-                                    "id": "223qbx4wcbN54im",
-                                    "isDone": false
-                                },
-                                {
-                                    "txt": "With other team members",
-                                    "id": "m9xx22uwz3mYKx4",
-                                    "isDone": false
-                                }
-                            ],
-                            "id": "Clc2hVdPzYc1X8DKn"
-                        }
-                    ]
-                },
-                {
-                    "id": "4RCiF556Z3f6YLy",
-                    "title": "Support youTube videos",
-                    "members": [
-                        "u104"
-                    ],
-                    "description": "Use same function as in AppDonkey"
+                    "archivedAt": 1653768728559
                 }
             ]
         },
@@ -394,10 +231,8 @@
             "tasks": [
                 {
                     "id": "0PJ4Tz8YXrIHdKe",
-                    "title": "D&D",
-                    "members": [
-                        "u102"
-                    ],
+                    "title": "",
+                    "members": [],
                     "labels": [
                         "#61bd4f"
                     ],
@@ -405,21 +240,14 @@
                 },
                 {
                     "id": "MZ7rE7sToaHOA35",
-                    "title": "Cloudinary",
-                    "members": [
-                        "u103"
-                    ],
+                    "title": "Cloudinaryfd",
+                    "members": [],
                     "description": ""
                 },
                 {
                     "id": "4p4J9EibwH5xqaO",
-                    "title": "Checklist section in task details",
-                    "members": [
-                        "u101"
-                    ],
-                    "labels": [
-                        "#0079bf"
-                    ]
+                    "title": "new",
+                    "archivedAt": 1653756701533
                 },
                 {
                     "id": "xRA9ypsgbpilQKl",
@@ -436,9 +264,7 @@
                 {
                     "id": "C4EKu5dRlFNDQfl",
                     "title": "More CSS",
-                    "labels": [
-                        "#c377e0"
-                    ]
+                    "members": []
                 },
                 {
                     "id": "20l6C4k6NVExNOc",
@@ -448,9 +274,6 @@
                 {
                     "id": "9RzHckmTZus9XLS",
                     "title": "Changing board's name with input",
-                    "labels": [
-                        "#61bd4f"
-                    ],
                     "members": [
                         "u104"
                     ]
@@ -470,49 +293,19 @@
                     "id": "WzSlH8bNsqkeI63",
                     "title": "Creating data",
                     "members": [
-                        "u103",
-                        "u102"
+                        "u101"
                     ],
-                    "checklist": [
-                        {
-                            "title": "To do",
-                            "items": [
-                                {
-                                    "txt": "update JSON",
-                                    "id": "Nxfff23Hiix4n6K",
-                                    "isDone": true
-                                },
-                                {
-                                    "txt": "show process of coding",
-                                    "id": "223qbx4wcbN512m",
-                                    "isDone": true
-                                },
-                                {
-                                    "txt": "add more pictures",
-                                    "id": "maxc2uwz3mY9fs4",
-                                    "isDone": false
-                                }
-                            ],
-                            "id": "Clc2hVdPzYc1X8DKn"
-                        }
-                    ]
+                    "attachments": []
                 },
                 {
                     "id": "Sj7c2Hbc6AyCFcZ",
                     "title": "Crud",
-                    "members": [
-                        "u101"
-                    ],
-                    "labels": [
-                        "#f2d600"
-                    ]
+                    "members": []
                 },
                 {
                     "id": "iGSyNjxNY1p38T9",
                     "title": "Basic CSS",
-                    "members": [
-                        "u102"
-                    ]
+                    "members": []
                 }
             ]
         }
