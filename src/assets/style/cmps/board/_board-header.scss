@@ -12,11 +12,15 @@
             font-weight: 700;
         }
         .board-name {
-            font-size: 1.5em;
+            font-size: 1.28em;
+            margin: 0;
+            padding: 0;
             &:focus {
-                font-size: 1.5em;
+                margin: 0;
+                padding: 0;
+                font-size: 1.28em;
                 outline: none;
-                box-shadow: 0 0 0px 1px black;
+                box-shadow: 0 0 0px 2px #0079bf;
             }
         }
 
@@ -37,7 +41,7 @@
 
             &:focus {
                 outline: 1px solid $txt;
-                border-radius: 3px;
+                border-radius: 1px;
                 height: 32px;
                 margin-bottom: 0;
                 background-color: $bg;

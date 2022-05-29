@@ -69,8 +69,12 @@ export const Group = ({ group, onAddTask, onArchiveTask, onArchiveGroup, onGroup
                                     <button className="add-card-btn" onMouseDown={ev => {
                                         onAddTask(newTask)
                                         setNewTask({ title: '', groupId: group.id })
+                                        setTimeout(() => {
+                                            setIsTaskOpen(true)
+                                        }, 0);
+
                                     }}>Add card</button>
-                                    <button onClick={ev => {
+                                    <button onMouseDown={ev => {
                                         setIsTaskOpen(false)
                                         setNewTask({ title: '', groupId: group.id })
                                     }} className="add-card-close-btn">{_getSVG()}</button>
