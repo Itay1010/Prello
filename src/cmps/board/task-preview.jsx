@@ -33,7 +33,7 @@ export const TaskPreview = ({ task, groupId, idx }) => {
                 ref={provided.innerRef}
                 {...provided.draggableProps}
                 {...provided.dragHandleProps}
-            // style={_getStyle(provided.draggableProps.style, snapshot, provided)}
+                // style={_getStyle(provided.draggableProps.style, snapshot, provided)}
             >
                 <Link to={`/board/${boardId}/${groupId}/${task.id}`}>
                     {task.style?.bgColor && <section className="task-color"
@@ -69,13 +69,11 @@ function _getStyle(style, snapshot) {
 
     if (!snapshot.isDragging) {
         return {
-            transform: `${style.transform} skew(0deg)`,
-            ...style,
-
+            ...style
         }
     }
     const { moveTo, curve, duration } = snapshot;
-    const skew = `skew(50deg)`;
+    const skew = `rotate(5deg)`;
     return {
         ...style,
         transform: `${style.transform} ${skew}`,
