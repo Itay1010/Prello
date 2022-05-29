@@ -318,11 +318,11 @@ export const TaskDetails = ({ onArchiveTask }) => {
                             {/* {isDescriptionEditable && <textarea value={description} ref={descriptionRef} onChange={handleDescriptionChange} onKeyDown={(event) => saveTaskDescription(event)} cols="65" rows="40" placeholder='Add a more detailed description...'></textarea>} */}
                             {isDescriptionEditable && <div className='edit-description'>
                                 <TextareaAutosize
-                                    onKeyDown={(event) => {
-                                        if (event.key === 'Enter') {
-                                            saveTaskDescription(event)
-                                        }
-                                    }}
+                                    // onKeyDown={(event) => {
+                                    //     if (event.key === 'Enter') {
+                                    //         saveTaskDescription(event)
+                                    //     }
+                                    // }}
                                     onChange={handleDescriptionChange}
                                     ref={descriptionRef}
                                     onBlur={() => {
