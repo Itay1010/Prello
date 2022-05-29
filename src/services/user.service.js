@@ -55,7 +55,6 @@ function _saveLocalUser(user) {
     return user
 }
 
-
 ; (async () => {
     // await userService.signup({ _id: 'u102', firstName: 'Itay', lastName: 'Zonshine', username: 'itay', password: 'itay', imgUrl: require('../assets/imgs/members/itay.jpg') })
     // await userService.signup({ _id: 'u103', firstName: 'Offir', lastName: 'Carmi', username: 'offir', password: 'offir', imgUrl: require('../assets/imgs/members/offir.jpg') })
