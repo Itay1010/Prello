@@ -5,6 +5,7 @@ import { TaskPreview } from "./task-preview"
 import { GroupTitle } from "./group-title"
 import { AddTask } from "./add-task"
 import { IAdd } from "../icons/i-add";
+import { draggableStyle } from "../../services/board/draggable.style";
 
 export const Group = ({ group, onAddTask, onArchiveTask, onArchiveGroup, onGroupChange, idx }) => {
     // console.log('Group - onArchiveGroup', onArchiveGroup)
@@ -24,6 +25,7 @@ export const Group = ({ group, onAddTask, onArchiveTask, onArchiveGroup, onGroup
                 ref={provided.innerRef}
                 {...provided.draggableProps}
                 {...provided.dragHandleProps}
+                style={draggableStyle.getStyle(provided.draggableProps.style, snapshot, provided)}
                 className={`group flex col`}
             >
                 <GroupTitle
