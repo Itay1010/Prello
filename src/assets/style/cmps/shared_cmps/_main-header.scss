@@ -12,12 +12,13 @@
     .logo {
         height: 32px;
         cursor: pointer;
-        padding: 0 8px;
+        // padding: 0 8px;
         border-radius: 3px;
+        margin-inline-end: 4px;
 
-        &:hover {
-            background-color: $opc-black-hov;
-        }
+        // &:hover {
+        //     background-color: $opc-black-hov;
+        // }
 
         img {
             height: 15px;
