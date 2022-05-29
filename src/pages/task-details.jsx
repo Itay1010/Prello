@@ -234,8 +234,11 @@ export const TaskDetails = ({ onArchiveTask }) => {
 
     const closeModal = () => {
         setModalType(null)
+<<<<<<< HEAD
         console.log(modalType)
         // loadBoard()
+=======
+>>>>>>> 14c37b57e6e4e51e9d32e61613e4581cee70ff97
     }
 
 
@@ -318,11 +321,11 @@ export const TaskDetails = ({ onArchiveTask }) => {
                             {/* {isDescriptionEditable && <textarea value={description} ref={descriptionRef} onChange={handleDescriptionChange} onKeyDown={(event) => saveTaskDescription(event)} cols="65" rows="40" placeholder='Add a more detailed description...'></textarea>} */}
                             {isDescriptionEditable && <div className='edit-description'>
                                 <TextareaAutosize
-                                    onKeyDown={(event) => {
-                                        if (event.key === 'Enter') {
-                                            saveTaskDescription(event)
-                                        }
-                                    }}
+                                    // onKeyDown={(event) => {
+                                    //     if (event.key === 'Enter') {
+                                    //         saveTaskDescription(event)
+                                    //     }
+                                    // }}
                                     onChange={handleDescriptionChange}
                                     ref={descriptionRef}
                                     onBlur={() => {
