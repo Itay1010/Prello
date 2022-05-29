@@ -13,10 +13,15 @@ export const Attachment = ({ saveAttachment, closeModal }) => {
     // }, []);
 
     const onSaveAttachment = (ev) => {
+
         ev.preventDefault()
         const { url } = attachment
         const isUrlValid = isUrl(url)
-        if (isUrlValid) saveAttachment(attachment)
+        if (isUrlValid) {
+            saveAttachment(attachment)
+            closeModal()
+        }
+
     }
 
     function isUrl(url) {

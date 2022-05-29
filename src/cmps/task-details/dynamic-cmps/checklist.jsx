@@ -8,6 +8,7 @@ export const Checklist = ({ saveChecklist, group, closeModal }) => {
         ev.preventDefault()
         const { value } = ev.target.name
         saveChecklist(value)
+        closeModal()
     }
 
 
@@ -18,7 +19,7 @@ export const Checklist = ({ saveChecklist, group, closeModal }) => {
         <h3>Title</h3>
         <form className='flex col' onSubmit={onCreateChecklist}>
             <input autoFocus autoComplete='off' type="text" placeholder='Checklist title' name='name' />
-            <button >Save</button>
+            <button>Save</button>
         </form>
     </div>
 }
