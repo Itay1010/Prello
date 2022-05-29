@@ -5,13 +5,12 @@ import { TaskMembers } from "../task-preview/task-members"
 import { boardService } from "../../services/board/board.service"
 import { Droppable, Draggable } from 'react-beautiful-dnd';
 import { TaskBadges } from '../task-preview/task-badges';
-
+import { draggableStyle } from '../../services/board/draggable.style';
 
 
 export const TaskPreview = ({ task, groupId, idx }) => {
     const params = useParams()
     const { boardId } = params
-
     const [membersToDisplay, setMembersToDisplay] = useState(null)
 
     useEffect(() => {
@@ -45,7 +44,7 @@ export const TaskPreview = ({ task, groupId, idx }) => {
                 ref={provided.innerRef}
                 {...provided.draggableProps}
                 {...provided.dragHandleProps}
-                style={_getStyle(provided.draggableProps.style, snapshot, provided)}
+                style={draggableStyle.getStyle(provided.draggableProps.style, snapshot, provided)}
             >
                 <Link to={`/board/${boardId}/${groupId}/${task.id}`}>
                     {task.style?.bgColor && <section className="task-color"
@@ -72,32 +71,6 @@ export const TaskPreview = ({ task, groupId, idx }) => {
 
 }
 
-function _getStyle(style, snapshot) {
-    if (snapshot.isDropAnimating) {
-        console.log('dropAnimation', snapshot)
-        const { moveTo, curve, duration } = snapshot.dropAnimation;
-        const skew = `rotate(0deg)`;
-        const translate = moveTo ? `translate(${moveTo.x}px, ${moveTo.y}px)` : ''
-
-        return {
-            ...style,
-            transform: `${translate} ${skew} `,
-        }
-    }
-    else if (snapshot.isDragging) {
-        // console.log('isDragging')
-        const skew = `rotate(5deg)`;
-        return {
-            ...style,
-            transform: `${style.transform} ${skew}`,
-        }
-    }
-    else {
-        return style
-    }
-
-
-}
 
 // import React, { useEffect, useState } from 'react';
 // import { Link, useParams } from "react-router-dom"
