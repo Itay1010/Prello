@@ -30,6 +30,8 @@ export const AddTask = ({ group, onAddTask, newTask, handleChange, setNewTask, s
                     if (newTask.title) {
                         onAddTask(newTask)
                         setNewTask({ title: '', groupId: group.id })
+                        setIsTaskOpen(true)
+
                     }
                 }
             }}

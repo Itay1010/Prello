@@ -44,7 +44,7 @@ export const TaskPreview = ({ task, groupId, idx }) => {
                             <TaskLabels labels={task.labels} />
                         </div>}
                         <section className="task-title">{task.title}</section>
-                        {(task.attachments?.length > 0 || task.members?.length > 0 || task.comments?.length > 0 || task.checklist?.length > 0)
+                        {(task.attachments?.length > 0 || task.members?.length > 0 || task.comments?.length > 0 || task.checklist?.length > 0 || task.description)
                             && <section className="task-status flex space-between wrap">
                                 <TaskBadges task={task} />
                                 {membersToDisplay?.length > 0 && <section className="members flex">
@@ -63,13 +63,11 @@ function _getStyle(style, snapshot) {
 
     if (!snapshot.isDragging) {
         return {
-            transform: `${style.transform} skew(0deg)`,
-            ...style,
-
+            ...style
         }
     }
     const { moveTo, curve, duration } = snapshot;
-    const skew = `skew(50deg)`;
+    const skew = `rotate(5deg)`;
     return {
         ...style,
         transform: `${style.transform} ${skew}`,
