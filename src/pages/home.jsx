@@ -5,10 +5,13 @@ import { TaskPreview } from "../cmps/board/task-preview"
 import { ILogo } from "../cmps/icons/i-Logo"
 
 
+
 export const Home = () => {
     return <section className="home">
         <nav className="flex space-between">
-            <div className="logo"> <ILogo /> </div>
+            <div className="logo"><img src={require('../assets/imgs/logo/logo-25X25-color.png')} />
+                <h1>Prello</h1>
+            </div>
             <div className="auth-links"><NavLink to={'/auth/login'}>Log in</NavLink><NavLink to={'/auth/signup'}>Sign up</NavLink></div>
         </nav>
         <div className="hero">

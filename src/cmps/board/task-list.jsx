@@ -5,6 +5,7 @@ import { TaskPreview } from "./task-preview"
 import { GroupTitle } from "./group-title"
 import { AddTask } from "./add-task"
 import { IAdd } from "../icons/i-add";
+import { draggableStyle } from "../../services/board/draggable.style";
 
 export const Group = ({ group, onAddTask, onArchiveTask, onArchiveGroup, onGroupChange, idx }) => {
     // console.log('Group - onArchiveGroup', onArchiveGroup)
@@ -24,6 +25,7 @@ export const Group = ({ group, onAddTask, onArchiveTask, onArchiveGroup, onGroup
                 ref={provided.innerRef}
                 {...provided.draggableProps}
                 {...provided.dragHandleProps}
+                style={draggableStyle.getStyle(provided.draggableProps.style, snapshot, provided)}
                 className={`group flex col`}
             >
                 <GroupTitle
@@ -41,7 +43,7 @@ export const Group = ({ group, onAddTask, onArchiveTask, onArchiveGroup, onGroup
                                 {tasks.map((task, idx) => {
                                     if (!task.archivedAt) return <TaskPreview key={task.id} task={task} groupId={group.id} idx={idx} />
                                 })}
-
+                                {snapshot.isDraggingOver && provided.placeholder}
                             </div>
                             {isTaskOpen && <AddTask
                                 // a card with the same class as the the others but with a textarea
@@ -52,7 +54,8 @@ export const Group = ({ group, onAddTask, onArchiveTask, onArchiveGroup, onGroup
                                 setNewTask={setNewTask}
                                 setIsTaskOpen={setIsTaskOpen}
                             />}
-                            {snapshot.isDraggingOver && provided.placeholder}
+
+
                             {
 
                                 // isTaskOpen || <div className="group-footer flex align-center" >
@@ -68,6 +71,7 @@ export const Group = ({ group, onAddTask, onArchiveTask, onArchiveGroup, onGroup
 
                                 </div>
                             }
+
                             {
                                 isTaskOpen && <div className="group-footer flex align-center">
                                     <button className="add-card-btn" onMouseDown={ev => {

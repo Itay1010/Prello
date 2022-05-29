@@ -1,6 +1,5 @@
 .task-content {
     .attachments {
-        display: flex;
         width: 100%;
 
         .attachment-list {
@@ -43,6 +42,7 @@
         }
 
         .attachment-data {
+            position: relative;
             flex-grow: 1;
             padding: 8px 8px 8px 16px;
 
@@ -58,6 +58,13 @@
                 color: $td-sub;
             }
 
+            .modal {
+                left: auto;
+                right: 0;
+                transform: translate(50%, 100%);
+                // transform: translateY(100%);
+            }
+
             .attachment-button {
                 span {
                     margin: 0 8px;
@@ -68,8 +75,18 @@
                     color: $td-sub;
                     cursor: pointer;
                 }
+
             }
 
         }
+    }
+}
+
+.attachment-list {
+    position: relative;
+
+    .modal {
+        right: 0;
+        bottom: 0;
     }
 }
