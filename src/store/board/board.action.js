@@ -3,11 +3,11 @@ import { boardService } from '../../services/board/board.service'
 // import { userService } from '../../services/user.service'
 
 // Board Action Creators
-export function getActionSetBoard(board) {
+function getActionSetBoard(board) {
     return { type: 'SET_BOARD', board }
 }
 
-export function getActionRemoveBoard(boardId) {
+function getActionRemoveBoard(boardId) {
     return { type: 'CLEAR_BOARD', boardId }
 }
 

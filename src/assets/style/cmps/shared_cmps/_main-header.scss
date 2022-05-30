@@ -3,7 +3,7 @@
     height: 44px;
     width: 100vw;
     padding: 0 20px;
-    background-color: $header;
+    // background-color: $header;
 
     h1 {
         color: $bg;
@@ -12,12 +12,13 @@
     .logo {
         height: 32px;
         cursor: pointer;
-        padding: 0 8px;
+        // padding: 0 8px;
         border-radius: 3px;
+        margin-inline-end: 4px;
 
-        &:hover {
-            background-color: $opc-black-hov;
-        }
+        // &:hover {
+        //     background-color: $opc-black-hov;
+        // }
 
         img {
             height: 15px;
@@ -42,9 +43,10 @@
             background: transparent;
 
             svg {
-                height: 15px;
-                width: 15px;
+                height: 16px;
+                width: 16px;
                 fill: $bg;
+                transform: translateY(12%);
             }
         }
     }
@@ -96,9 +98,14 @@
 
     .profile {
         border-radius: 50px;
-        background-color: $clr1;
         height: 32px;
         width: 32px;
+        overflow: hidden;
+
+        img {
+            height: 100%;
+            object-fit: cover;
+        }
     }
 
 }

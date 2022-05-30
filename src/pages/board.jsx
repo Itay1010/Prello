@@ -4,8 +4,10 @@ import { connect } from 'react-redux'
 
 //libs
 import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
+import getAverageColor from 'get-average-color'
 
-//privet
+
+//private
 import { MainHeader } from "../cmps/shared cmps/header/main-header"
 import { BoardHeader } from "../cmps/board/board-header/board-header"
 import { AddGroupForm } from "../cmps/board/add-group-form"
@@ -22,6 +24,44 @@ class _Board extends React.Component {
 
     componentDidMount() {
         this._setBoard()
+    }
+
+    componentDidUpdate() {
+        this.setTheme()
+
+    }
+
+    setTheme = async () => {
+        if (this.props.board.style.background) {
+            const avgColor = await this._getAvgColor(this.props.board.style.background)
+            if (avgColor === "#ffffff") document.querySelector('.main-header').style.backgroundColor = '#00000090'
+            else if (avgColor === '#000000') document.querySelector('.main-header').style.backgroundColor = '#ffffff90'
+            else document.querySelector('.main-header').style.backgroundColor = avgColor
+
+            document.querySelector('.board').style.background = `url(${this.props.board.style.background};)`
+
+        } else {
+            document.querySelector('.main-header').style.backgroundColor = '#00000090'
+            document.querySelector('.board').style.backgroundColor = this.props.board.style.backgroundColor
+        }
+        // } else if (this.props.board.style.backgroundColor) {
+        //     document.querySelector('.main-header').style.backgroundColor = '#00000090'
+        // }
+    }
+
+    _getAvgColor = async (url) => {
+        const RGB = await getAverageColor(url)
+        const HEX = this._rgbToHex(RGB)
+        return HEX
+    }
+
+    _rgbToHex = ({ r, g, b }) => {
+        return "#" + this._componentToHex(r) + this._componentToHex(g) + this._componentToHex(b);
+    }
+
+    _componentToHex = (cmp) => {
+        const hex = cmp.toString(16)
+        return hex.length === 1 ? "0" + hex : hex
     }
 
     _setBoard = async () => {
@@ -101,8 +141,9 @@ class _Board extends React.Component {
 
     render() {
         const { board } = this.props
-        // console.log('_Board - render - board', board)
+        // console.log('_Board - render - board rendered')
         if (!board) return <div>loading...</div>
+        // console.log(board);
         const { groups } = board
         const eventHandlers = {
             onAddTask: this.onAddTask,
@@ -114,7 +155,7 @@ class _Board extends React.Component {
 
         return <React.Fragment>
             <DragDropContext onDragEnd={this.handleOnDragEnd}>
-                <MainHeader />
+                <MainHeader boardMembers={board.members} />
                 <section className="board flex col main-layout">
                     <BoardHeader board={board} saveBoardHeader={this.onSaveBoardHeader} />
                     <GroupList groups={groups} eventHandlers={eventHandlers} />
@@ -144,3 +185,42 @@ const mapDispatchToProps = {
 }
 
 export const Board = connect(mapStateToProps, mapDispatchToProps)(_Board)
+
+
+
+const task = {
+    bgImg: 'https://images.unsplash.com/photo-1653759588370-03395fadcbd3?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1219&q=80',
+    bgColor: null
+}
+
+
+export const BoardList = (task) => {
+
+    // const { bgImg } = task
+    // async function printAverageColor() {
+    //     const color = await getAverageColor(bgImg);
+    //     console.log(color);
+    //     // document.querySelector('.main-header').style.backgroundColor = color
+    //     // const elHeader = document.querySelector('.main-header')
+    // }
+
+    // printAverageColor()
+
+    // return <div className="workspace-container">
+
+    // </div>
+}
+
+// export const BoardList = () => {
+//     // console.log(task);
+//     const { bgImg } = task
+//     const fac = new FastAverageColor()
+//     const elHeader = document.querySelector('.main-header')
+//     const color = fac.getColor(bgImg)
+
+//     console.log(color);
+
+//     return <div className="workspace-container">
+
+//     </div>
+// }

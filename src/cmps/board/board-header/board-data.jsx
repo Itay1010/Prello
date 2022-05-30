@@ -17,7 +17,6 @@ export const BoardData = ({ board, saveBoardHeader }) => {
     // }, [boardTitle]);
 
     const handleBoardTitleChange = (value) => {
-        console.log('value', board.title)
         // setWidth(target.value.length)
         setBoardTitleValue(value)
         const newBoard = JSON.parse(JSON.stringify(board))
@@ -40,7 +39,7 @@ export const BoardData = ({ board, saveBoardHeader }) => {
     return <section className="board-data flex align-center">
         <button>Dashboard</button>
         {/* <textarea maxRows={1}>{board.title}</textarea> */}
-        
+
         {/* <div>{board.title}</div> */}
         {/* {!isBoardTitleEditable && <h2 onClick={toggleBoardTitleEditable}>{board.title ? board.title : 'Enter board title'}</h2>} */}
 
