@@ -3,7 +3,7 @@ import { userService } from "../user.service";
 
 export const actService = {
     activity,
-    activityIn,
+    activityTo,
     getTypes,
 }
 
@@ -11,6 +11,9 @@ export const actService = {
 function activity(type, entityType, entity, board) {
     if (!type || !entityType || !entity || !board) throw new Error('No arguments givin')
     const user = userService.getLoggedinUser()
+    const id = entity.id ? entity.id : entity._id
+    console.log('activity - entity.id', entity._id)
+    if(!id) throw new Error('Item is unknown')
     const newActivity = {
         id: utilService.makeId(),
         txt: `${user.firstName} ${type} ${entityType} ${entity.title}`,
@@ -22,12 +25,12 @@ function activity(type, entityType, entity, board) {
     return board
 }
 
-function activityIn(type, entityType, entity, board) {
-    if (!type || !entityType || !entity || !board) throw new Error('No arguments givin')
+function activityTo(type, entity, board) {
+    if (!type || !entity || !board) throw new Error('No arguments givin')
     const user = userService.getLoggedinUser()
     const newActivity = {
         id: utilService.makeId(),
-        txt: `${user.firstName} ${type} in ${entityType} ${entity.title}`,
+        txt: `${user.firstName} ${type} ${entity.title}`,
         createdAt: Date.now(),
         byMember: user,
         entity: { id: entity.id, title: entity.title }

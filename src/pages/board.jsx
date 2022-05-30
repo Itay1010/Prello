@@ -91,6 +91,7 @@ class _Board extends React.Component {
         this.props.updateBoard(newBoard)
     }
 
+
     onArchiveGroup = async (groupId) => {
         const newBoard = JSON.parse(JSON.stringify(this.props.board))
         newBoard.groups.map(group => {
@@ -130,7 +131,6 @@ class _Board extends React.Component {
             const [reorderedItem] = items.splice(result.source.index, 1)
             newBoard.groups.find(group => group.id === result.destination.droppableId).tasks.splice(result.destination.index, 0, reorderedItem)
             actService.activity('moved', 'card', reorderedItem, newBoard)
-            console.log('_Board - newBoard', newBoard.activities)
             this.props.updateBoard(newBoard)
         }
     }
