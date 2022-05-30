@@ -9,7 +9,8 @@
         "imgUrl": "/static/media/eytan.c76ba47a23dc9a524158.jpeg"
     },
     "style": {
-        "backgroundColor": "blue"
+        "backgroundColor": null,
+        "background": "https://images.unsplash.com/photo-1653419831613-56ed2a1c8ea8?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1074&q=80"
     },
     "labels": [
         {
@@ -29,28 +30,28 @@
             "firstName": "Eytan",
             "lastName": "Silberberg",
             "imgUrl": "https://res.cloudinary.com/di5o0obqy/image/upload/v1653742446/eytan_vl7skf.jpg",
-            "backgroundColor": "#44C5CB"
+            "color": "#1496BB"
         },
         {
             "_id": "u102",
             "firstName": "Itay",
             "lastName": "Zonshine",
             "imgUrl": "https://res.cloudinary.com/di5o0obqy/image/upload/v1653742446/itay_brzaf1.jpg",
-            "backgroundColor": "#FCE315"
+            "color": "#EBC944"
         },
         {
             "_id": "u103",
             "firstName": "Offir",
             "lastName": "Carmi",
             "imgUrl": "https://res.cloudinary.com/di5o0obqy/image/upload/v1653742446/offir_ixxjf7.jpg",
-            "backgroundColor": "#F53D52"
+            "color": "#C02F1D"
         },
         {
             "_id": "u104",
             "firstName": "Idan",
             "lastName": "Gez",
             "imgUrl": "https://media-exp1.licdn.com/dms/image/C4E03AQHS2IrCTjh7kQ/profile-displayphoto-shrink_800_800/0/1645011912408?e=1658966400&v=beta&t=ztcm1v1QLUsANcPVcXF8c-2icQB51oLyQ5hgK5sn-VQ",
-            "backgroundColor": "#FF9200"
+            "color": "#F26D21"
         }
     ],
     "groups": [

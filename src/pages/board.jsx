@@ -7,7 +7,7 @@ import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
 import getAverageColor from 'get-average-color'
 
 
-//privet
+//private
 import { MainHeader } from "../cmps/shared cmps/header/main-header"
 import { BoardHeader } from "../cmps/board/board-header/board-header"
 import { AddGroupForm } from "../cmps/board/add-group-form"
@@ -24,26 +24,44 @@ class _Board extends React.Component {
 
     componentDidMount() {
         this._setBoard()
+    }
 
-
-
-
+    componentDidUpdate() {
+        this.setTheme()
 
     }
-    // function getAvgColor(url) {
-    //     getAverageColor(url).then(rgb => {
-    //         console.log(rgb)
-    //         const color = `rgb(${rgb.r},${rgb.g}, ${rgb.b})`
-    //         console.log(color)
-    //     })
-    // }
 
-    getAvgColor = (url) => {
-        getAverageColor(url).then(rgb => {
-            console.log(rgb)
-            const color = `rgb(${rgb.r},${rgb.g}, ${rgb.b})`
-            console.log(color)
-        })
+    setTheme = async () => {
+        if (this.props.board.style.background) {
+            const avgColor = await this._getAvgColor(this.props.board.style.background)
+            if (avgColor === "#ffffff") document.querySelector('.main-header').style.backgroundColor = '#00000090'
+            else if (avgColor === '#000000') document.querySelector('.main-header').style.backgroundColor = '#ffffff90'
+            else document.querySelector('.main-header').style.backgroundColor = avgColor
+
+            document.querySelector('.board').style.background = `url(${this.props.board.style.background};)`
+
+        } else {
+            document.querySelector('.main-header').style.backgroundColor = '#00000090'
+            document.querySelector('.board').style.backgroundColor = this.props.board.style.backgroundColor
+        }
+        // } else if (this.props.board.style.backgroundColor) {
+        //     document.querySelector('.main-header').style.backgroundColor = '#00000090'
+        // }
+    }
+
+    _getAvgColor = async (url) => {
+        const RGB = await getAverageColor(url)
+        const HEX = this._rgbToHex(RGB)
+        return HEX
+    }
+
+    _rgbToHex = ({ r, g, b }) => {
+        return "#" + this._componentToHex(r) + this._componentToHex(g) + this._componentToHex(b);
+    }
+
+    _componentToHex = (cmp) => {
+        const hex = cmp.toString(16)
+        return hex.length === 1 ? "0" + hex : hex
     }
 
     _setBoard = async () => {
@@ -123,8 +141,9 @@ class _Board extends React.Component {
 
     render() {
         const { board } = this.props
-        console.log('_Board - render - board rendered')
+        // console.log('_Board - render - board rendered')
         if (!board) return <div>loading...</div>
+        // console.log(board);
         const { groups } = board
         const eventHandlers = {
             onAddTask: this.onAddTask,
@@ -136,7 +155,7 @@ class _Board extends React.Component {
 
         return <React.Fragment>
             <DragDropContext onDragEnd={this.handleOnDragEnd}>
-                <MainHeader />
+                <MainHeader boardMembers={board.members} />
                 <section className="board flex col main-layout">
                     <BoardHeader board={board} saveBoardHeader={this.onSaveBoardHeader} />
                     <GroupList groups={groups} eventHandlers={eventHandlers} />

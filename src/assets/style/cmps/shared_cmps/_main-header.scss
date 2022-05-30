@@ -3,7 +3,7 @@
     height: 44px;
     width: 100vw;
     padding: 0 20px;
-    background-color: $header;
+    // background-color: $header;
 
     h1 {
         color: $bg;
@@ -43,9 +43,10 @@
             background: transparent;
 
             svg {
-                height: 15px;
-                width: 15px;
+                height: 16px;
+                width: 16px;
                 fill: $bg;
+                transform: translateY(12%);
             }
         }
     }
@@ -97,9 +98,14 @@
 
     .profile {
         border-radius: 50px;
-        background-color: $clr1;
         height: 32px;
         width: 32px;
+        overflow: hidden;
+
+        img {
+            height: 100%;
+            object-fit: cover;
+        }
     }
 
 }
