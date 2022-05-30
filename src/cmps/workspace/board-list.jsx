@@ -2,31 +2,49 @@ import React from "react"
 
 import { BoardPreview } from './board-preview'
 
-export const BoardList = () => {
-    const starred = 1
-    const myBoards = 1
-    const templates = 5
+export const BoardList = ({ boards, userId, toggleStar }) => {
+
+    console.log(boards, userId)
+
+    const boardsRelated = boards.filter(board => board.usersRelated.includes(userId))
+    console.log(boardsRelated)
+    const starredBoards = boardsRelated.filter(board => board.isStarred === true)
+    console.log(starredBoards.length)
+
+
     return <div className="workspace-container">
-        {starred > 0 && <section className="board-container">
+        {starredBoards.length > 0 && <section className="board-container">
             <section className="board-preview-header">
-                <h4>Star icon</h4>
+                <div className="icon-wrapper">
+                    <h4>Star icon</h4>
+                </div>
                 <h1>Starred boards</h1>
             </section>
-            <BoardPreview count={starred} />
+            <div className="boards-wrapper">
+                {starredBoards.map(board => {
+                    return <BoardPreview board={board} toggleStar={toggleStar} />
+                })}
+            </div>
         </section>}
-        {myBoards > 0 && <section className="board-container">
+        {boardsRelated.length > 0 && <section className="board-container" >
             <section className="board-preview-header">
-                <h4>icon</h4>
+                <div className="icon-wrapper">
+                    <h4>icon</h4>
+                </div>
                 <h1>My boards</h1>
             </section>
-            <BoardPreview count={myBoards} />
+            <div className="boards-wrapper" >
+                {boardsRelated.map(board => {
+                    return <BoardPreview board={board} toggleStar={toggleStar} />
+                })}
+            </div>
         </section>}
-        {templates > 0 && <section className="board-container">
+        {/* {templates > 0 && <section className="board-container">
             <section className="board-preview-header">
                 <h4>icon</h4>
                 <h1>Templates</h1>
             </section>
             <BoardPreview count={templates} />
-        </section>}
+        </section>} */}
     </div>
 }

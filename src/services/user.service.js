@@ -10,7 +10,7 @@ const LOCAL_STORAGE_LOGGEDIN_USER = 'loggedinUser'
 export const userService = {
     getLoggedinUser,
     signup,
-    login,
+    // login,
     logout,
     // googleAuth
     // getUserById,
@@ -35,24 +35,37 @@ async function signup(userCred) {
     // return login(user)
 }
 
+// async function login(userCred) {
+//     console.log(userCred);
+//     const users = await storageService.query(LOCAL_STORAGE_USER_DB)
+//     console.log(users);
+//     const user = users.find(user => user.username === userCred.username && user.password === userCred.password)
+//     console.log(user);
+//     if (user) {
+//         // delete user._id
+//         // delete user.firstName
+//         // delete user.lastName
+//         return _saveLocalUser(user)
+//     }
+// }
 
 
-async function login(userCred) {
-    // console.log(userCred);
-    // const user = await httpService.post('auth/login', userCred)
+// async function login(userCred) {
+//     // console.log(userCred);
+//     // const user = await httpService.post('auth/login', userCred)
 
 
-    // const users = await storageService.query(LOCAL_STORAGE_USER_DB)
-    // console.log(users);
-    // const user = users.find(user => user.username === userCred.username && user.password === userCred.password)
-    // console.log(user);
-    // if (user) {
-    //     // delete user._id
-    //     // delete user.firstName
-    //     // delete user.lastName
-    //     return _saveLocalUser(user)
-    // }
-}
+//     // const users = await storageService.query(LOCAL_STORAGE_USER_DB)
+//     // console.log(users);
+//     // const user = users.find(user => user.username === userCred.username && user.password === userCred.password)
+//     // console.log(user);
+//     // if (user) {
+//     //     // delete user._id
+//     //     // delete user.firstName
+//     //     // delete user.lastName
+//     //     return _saveLocalUser(user)
+//     // }
+// }
 
 
 async function logout() {
@@ -113,10 +126,10 @@ function _saveLocalUser(user) {
 }
 
 ; (async () => {
-    // await userService.signup({ _id: 'u101', firstName: 'Eytan', lastName: 'Silberberg', username: 'eytan', password: 'eytan', email:'eytan133@gmail.com', imgUrl: 'https://res.cloudinary.com/di5o0obqy/image/upload/v1653742446/eytan_vl7skf.jpg' })
+    // await userService.signup({ _id: 'u101', firstName: 'Eytan', lastName: 'Silberberg', username: 'eytan', password: 'eytan', email: 'eytan133@gmail.com', imgUrl: 'https://res.cloudinary.com/di5o0obqy/image/upload/v1653742446/eytan_vl7skf.jpg' })
     // await userService.signup({ _id: 'u102', firstName: 'Itay', lastName: 'Zonshine', username: 'itay', password: 'itay', email: 'etay150@gmail.com', imgUrl: 'https://res.cloudinary.com/di5o0obqy/image/upload/v1653742446/itay_brzaf1.jpg' })
     // await userService.signup({ _id: 'u103', firstName: 'Offir', lastName: 'Carmi', username: 'offir', password: 'offir', email: 'offircarmi@gmail.com', imgUrl: 'https://res.cloudinary.com/di5o0obqy/image/upload/v1653742446/offir_ixxjf7.jpg' })
-    // await userService.signup({ _id: 'u104', firstName: 'Idan', lastName: 'Gez', username: 'idan', password: 'idan', email:'idan@gez.com', imgUrl: 'https://media-exp1.licdn.com/dms/image/C4E03AQHS2IrCTjh7kQ/profile-displayphoto-shrink_800_800/0/1645011912408?e=1658966400&v=beta&t=ztcm1v1QLUsANcPVcXF8c-2icQB51oLyQ5hgK5sn-VQ' })
+    // await userService.signup({ _id: 'u104', firstName: 'Idan', lastName: 'Gez', username: 'idan', password: 'idan', email: 'idan@gez.com', imgUrl: 'https://media-exp1.licdn.com/dms/image/C4E03AQHS2IrCTjh7kQ/profile-displayphoto-shrink_800_800/0/1645011912408?e=1658966400&v=beta&t=ztcm1v1QLUsANcPVcXF8c-2icQB51oLyQ5hgK5sn-VQ' })
 })()
 
 
