@@ -5,9 +5,9 @@ export const Members = ({ saveMembers, boardMembers, task, closeModal }) => {
     const [membersToDisplay, setMembersToDisplay] = useState(boardMembers)
     const [filter, setFilter] = useState('')
 
-    useEffect(() => {
-        if (!task.members) task.members = []
-    }, [])
+    // useEffect(() => {
+    //     if (!task.members) task.members = []
+    // }, [])
 
     useEffect(() => {
         if (!filter) return setMembersToDisplay(boardMembers)
