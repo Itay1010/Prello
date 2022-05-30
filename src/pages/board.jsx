@@ -102,9 +102,11 @@ class _Board extends React.Component {
 
     onGroupChange = async ({ txt, groupId }) => {
         const newBoard = JSON.parse(JSON.stringify(this.props.board))
-        newBoard.groups.map(group => {
-            if (group.id === groupId) group.title = txt
-        })
+        const groupIdx = newBoard.groups.findIndex(group => group.id === groupId)
+        if(newBoard.groups[groupIdx].title === txt) return
+        newBoard.groups[groupIdx].title = txt
+        actService.activity('changed title in','group', newBoard.groups[groupIdx], newBoard)
+        console.log('_Board - onGroupChange= - newBoard', newBoard.activities)
         this.props.updateBoard(newBoard)
     }
 
@@ -128,9 +130,14 @@ class _Board extends React.Component {
             this.props.updateBoard(newBoard)
         } else {
             const items = newBoard.groups.find(group => group.id === result.source.droppableId).tasks
-            const [reorderedItem] = items.splice(result.source.index, 1)
-            newBoard.groups.find(group => group.id === result.destination.droppableId).tasks.splice(result.destination.index, 0, reorderedItem)
-            actService.activity('moved', 'card', reorderedItem, newBoard)
+            const { droppableId: desDroppableId, index: desIdx } = result.destination
+            const { droppableId: SrcDroppableId, index: SrcIdx } = result.source
+            const [reorderedItem] = items.splice(SrcIdx, 1)
+            newBoard.groups.find(group => group.id === desDroppableId).tasks.splice(desIdx, 0, reorderedItem)
+            if (!(desDroppableId === SrcDroppableId) || !(desIdx === SrcIdx)) {
+                console.log('skip');
+                actService.activity('moved', 'card', reorderedItem, newBoard)
+            }
             this.props.updateBoard(newBoard)
         }
     }
