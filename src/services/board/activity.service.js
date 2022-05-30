@@ -3,73 +3,41 @@ import { userService } from "../user.service";
 
 export const actService = {
     activity,
-    memberToBoard,
-    memberToTask,
+    activityIn,
     getTypes,
 }
 
-function activity(newActivity, board, dispatch) {
-    if (!newActivity || !board || !dispatch) throw new Error('No arguments givin')
-    const user = userService.getLoggedinUser()
-    const { type, task } = newActivity
-    newActivity = {
-        id: utilService.makeId(),
-        type,
-        createdAt: Date.now(),
-        byMember: user,
-        task: { id: task.id, title: task.title }
-    }
-    board.activities.push(newActivity)
-    dispatch(board)
-}
 
-function memberToBoard(task, board, cb) {
-    if (!task || !board || !cb) throw new Error('No arguments givin')
+function activity(type, entityType, entity, board) {
+    if (!type || !entityType || !entity || !board) throw new Error('No arguments givin')
     const user = userService.getLoggedinUser()
-    const { id, title } = task
     const newActivity = {
         id: utilService.makeId(),
-        type: 'MEMBER_TO_BOARD',
+        txt: `${user.firstName} ${type} ${entityType} ${entity.title}`,
         createdAt: Date.now(),
         byMember: user,
-        task: { id: task.id, title: task.title }
+        entity: { id: entity.id, title: entity.title }
     }
     board.activities.push(newActivity)
-    cb(board)
+    return board
 }
 
-function memberToTask(task, board, db) {
-    if (!task || !board || !db) throw new Error('No arguments givin')
+function activityIn(type, entityType, entity, board) {
+    if (!type || !entityType || !entity || !board) throw new Error('No arguments givin')
     const user = userService.getLoggedinUser()
-    const { id, title } = task
     const newActivity = {
         id: utilService.makeId(),
-        type: 'MEMBER_TO_TASK',
+        txt: `${user.firstName} ${type} in ${entityType} ${entity.title}`,
         createdAt: Date.now(),
         byMember: user,
-        task: { id: task.id, title: task.title }
+        entity: { id: entity.id, title: entity.title }
     }
     board.activities.push(newActivity)
-    db(board)
-}
-
-function memberToTask(task, board, db) {
-    if (!task || !board || !db) throw new Error('No arguments givin')
-    const user = userService.getLoggedinUser()
-    const { id, title } = task
-    const newActivity = {
-        id: utilService.makeId(),
-        type: 'MEMBER_TO_TASK',
-        createdAt: Date.now(),
-        byMember: user,
-        task: { id: task.id, title: task.title }
-    }
-    board.activities.push(newActivity)
-    db(board)
+    return board
 }
 
 function getTypes() {
-    return ['ADD_TO_BOARD', 'MEMBER_TO_TASK']
+    return ['added', 'deleted', 'changed', 'moved', 'completed']
 }
 
 
