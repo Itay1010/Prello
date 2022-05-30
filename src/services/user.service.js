@@ -12,6 +12,7 @@ export const userService = {
     signup,
     login,
     logout,
+    googleAuth
     // getUserById,
 }
 
@@ -33,8 +34,7 @@ async function signup(userCred, onGoOn) {
     userCred.color = utilService.getRandomColor()
     const user = await storageService.post(LOCAL_STORAGE_USER_DB, userCred)
     // user._id = utilService.makeId()
-    login(user)
-    onGoOn()
+    return login(user)
 }
 
 async function login(userCred, onGoOn) {
@@ -44,9 +44,28 @@ async function login(userCred, onGoOn) {
         // delete user._id
         // delete user.firstName
         // delete user.lastName
-        _saveLocalUser(user)
-        onGoOn()
+        return _saveLocalUser(user)
     }
+}
+
+async function googleAuth(credentials) {
+    console.log(credentials)
+    const users = await storageService.query(LOCAL_STORAGE_USER_DB)
+    console.log(users)
+    const userExists = users.find(user => user.googleId === credentials.googleId || user.email === credentials.email)
+    if (userExists) {
+        return _saveLocalUser(userExists)
+    } else {
+        const newUser = {
+            email: credentials.email,
+            firstName: credentials.givenName,
+            lastName: credentials.familyName,
+            imgUrl: credentials.imageUrl,
+            googleId: credentials.googleId,
+        }
+        return signup(newUser)
+    }
+    // const user = users.find(user => user.username === userCred.username && user.password === userCred.password)
 }
 
 async function logout() {
