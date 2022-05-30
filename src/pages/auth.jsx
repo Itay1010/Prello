@@ -1,4 +1,5 @@
 import React from "react"
+import { connect } from 'react-redux'
 import { ReactDOM } from "react-dom"
 
 import { userService } from "../services/user.service"
@@ -6,26 +7,44 @@ import { userService } from "../services/user.service"
 import { SignupForm } from '../cmps/auth/signup.jsx'
 import { LoginForm } from '../cmps/auth/login.jsx'
 import FacebookLogin from 'react-facebook-login'
+import { GoogleLogin } from 'react-google-login'
+
+import { onLogin, onSignup, onGoogleAuth } from "../store/user/user.actions"
+
+import { gapi } from "gapi-script"
+const clientId = "168490950789-fil5g5m4nauiousknnut75avvh0dhsb5.apps.googleusercontent.com"
+
 
 
 // import { userAction } from '../store/user/user.actions'
 // import { useForm } from "../hooks/useForm"
 
 
-export class Auth extends React.Component {
+export class _Auth extends React.Component {
     state = {
         type: null
     }
-    responseFacebook = (response) => {
-        console.log(response);
-    }
+
     componentDidMount() {
         const { type } = this.props.match.params
         this.setState({ type })
-    }
-    // responseFacebook()
 
-    signup = (credentials) => {
+        function start() {
+            gapi.client.init({
+                clientId,
+                scope: ""
+            })
+        }
+        gapi.load('client:auth2', start)
+    }
+
+    signup = async (credentials) => {
+        await this.props.onSignup(credentials)
+        try {
+            this.onGoOn()
+        } catch (err) {
+            console.error(err)
+        }
         userService.signup(credentials, this.onGoOn)
     }
 
@@ -36,6 +55,22 @@ export class Auth extends React.Component {
     onGoOn = () => {
         this.props.history.push('/board/b101')
     }
+
+    onSuccess = async (res) => {
+        await this.props.onGoogleAuth(res.profileObj)
+        try {
+            this.onGoOn()
+            console.log("LOGIN SUCCESS! current user: ", res.profileObj)
+        } catch (res) {
+            console.log("LOGIN FAILED! ,res ", res)
+        }
+    }
+
+    onFailure = (res) => {
+        console.log("LOGIN FAILED! ,res ", res)
+    }
+
+
 
     render() {
         const { type } = this.state
@@ -48,17 +83,30 @@ export class Auth extends React.Component {
                 <div className="login-method-separator">OR</div>
                 <a>Continue with Google</a>
                 <a>Continue with FaceBook</a>
-
-                <FacebookLogin
-                    appId="1088597931155576"
-                    autoLoad={true}
-                    fields="name,email,picture"
-                    scope="public_profile,user_friends,user_actions.books"
-                    callback={this.responseFacebook}
-                    icon="fa-facebook"
-                />
-
+                <div className="google-login">
+                    <GoogleLogin
+                        clientId={clientId}
+                        buttonText="Login with Google"
+                        onSuccess={this.onSuccess}
+                        onFailure={this.onFailure}
+                        cookiePolicy={'single_host_origin'}
+                        isSignedIn={false}
+                    />
+                </div>
             </div>
         </section>
     }
 }
+
+
+const mapStateToProps = state => {
+
+}
+
+const mapDispatchToProps = {
+    onLogin,
+    onSignup,
+    onGoogleAuth
+}
+
+export const Auth = connect(mapStateToProps, mapDispatchToProps)(_Auth)

@@ -28,18 +28,20 @@ export function removeUser(userId) {
 }
 
 export function onLogin(credentials) {
-    return async (dispatch) => {
-        try {
-            const user = await userService.login(credentials)
-            dispatch({
-                type: 'SET_USER',
-                user
-            })
-        } catch (err) {
-            // showErrorMsg('Cannot login')
-            console.log('Cannot login', err)
-        }
-    }
+    console.log(credentials)
+
+    // return async (dispatch) => {
+    //     try {
+    //         const user = await userService.login(credentials)
+    //         dispatch({
+    //             type: 'SET_USER',
+    //             user
+    //         })
+    //     } catch (err) {
+    //         // showErrorMsg('Cannot login')
+    //         console.log('Cannot login', err)
+    //     }
+    // }
 }
 
 
@@ -72,6 +74,24 @@ export function onLogout() {
             console.log('Cannot logout', err)
         }
     }
+}
+
+
+export function onGoogleAuth(credentials) {
+    return async (dispatch) => {
+        const user = await userService.googleAuth(credentials)
+        try {
+            dispatch({
+                type: 'SET_USER',
+                user
+            })
+        }
+        catch (err) {
+            // showErrorMsg('Cannot logout')
+            console.log('Cannot logout', err)
+        }
+    }
+
 }
 
 export function loadAndWatchUser(userId) {
