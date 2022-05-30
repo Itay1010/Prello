@@ -10,6 +10,7 @@ import { Dates } from '../cmps/task-details/dynamic-cmps/dates.jsx'
 import { Attachment } from '../cmps/task-details/dynamic-cmps/attachment.jsx'
 import { Location } from '../cmps/task-details/dynamic-cmps/location.jsx'
 // import { ClosedModal } from '../cmps/task-details/dynamic-cmps/location.jsx'
+// import { Dates } from '../cmps/task-details/dynamic-cmps/dates.jsx'
 
 // CMPS
 import { ChecklistList } from '../cmps/task-details/checklist/checklistList.jsx';
@@ -245,6 +246,8 @@ export const TaskDetails = ({ onArchiveTask }) => {
                 return <Attachment saveAttachment={onSaveAttachment} closeModal={closeModal} />
             case 'location':
                 return <Location closeModal={closeModal} />
+            // case 'dates':
+            //     return <Dates closeModal={closeModal} />
             default:
                 break;
         }
@@ -421,6 +424,17 @@ export const TaskDetails = ({ onArchiveTask }) => {
                             </div>
                         </div>}
                     </div>
+                    {/* <div className='modal-btn btn-edit-task-key flex align-center'>
+                        <div className='flex btn-wrapper' onClick={() => setModal('dates')}>
+                            <p>Dates</p>
+                        </div>
+                        {modalType === 'dates' && <div className='action-type-modal'>
+                            <div className='modal'>
+                                {/* <h3>{modalType}</h3> */}
+                    {/* <DynamicModal type={modalType} /> */}
+                    {/* </div>
+                        </div>
+                    </div>  */}
                     <div className='modal-btn btn-edit-task-key flex align-center'>
                         <div className='flex btn-wrapper' onClick={ev => {
                             onArchiveTask({ taskId, groupId })
