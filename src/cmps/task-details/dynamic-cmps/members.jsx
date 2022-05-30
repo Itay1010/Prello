@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react'
 
 
 export const Members = ({ saveMembers, boardMembers, task, closeModal, type, saveMemberToCl }) => {
-    console.log(boardMembers)
     const [membersToDisplay, setMembersToDisplay] = useState(boardMembers)
     const [filter, setFilter] = useState('')
 

@@ -102,6 +102,8 @@
         width: 16px;
     }
 
+
+
     &:hover {
         background-color: $td-btn-hov;
 
@@ -124,6 +126,11 @@
                 margin-inline-end: 4px;
                 background-color: $opc-black;
                 border-radius: 50%;
+
+                img {
+                    height: inherit;
+                    border-radius: 50%;
+                }
             }
 
             .delete-btn {

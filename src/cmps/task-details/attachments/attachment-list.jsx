@@ -13,7 +13,6 @@ export const AttachmentList = ({ attachments, removeAttachment, openImgModal, sa
         <div className='attachment-list'>
             <h2>{(attachments.length > 1) ? 'Attachments' : 'Attachment'}</h2>
             {attachments.map(attachment => {
-                console.log(attachment)
                 return <AttachmentPreview key={attachment.id} attachment={attachment} removeAttachment={removeAttachment} openImgModal={openImgModal} saveAttachment={saveAttachment} />
             })}
         </div>
