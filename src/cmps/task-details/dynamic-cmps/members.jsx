@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 
 
-export const Members = ({ saveMembers, boardMembers, task, closeModal }) => {
+export const Members = ({ saveMembers, boardMembers, task, closeModal, type, saveMemberToCl }) => {
     console.log(boardMembers)
     const [membersToDisplay, setMembersToDisplay] = useState(boardMembers)
     const [filter, setFilter] = useState('')
@@ -19,14 +19,16 @@ export const Members = ({ saveMembers, boardMembers, task, closeModal }) => {
     }
 
     const toggleMember = (memberId) => {
-        // if (type === 'checklist') {
-        //     // const requestedUser=
-        // }
+        if (type === 'checklist') {
+            const requestedUser = boardMembers.find(member => member._id === memberId)
+            return saveMemberToCl(requestedUser)
+        }
         if (task.members.includes(memberId)) {
             const idx = task.members.findIndex(member => member === memberId)
             task.members.splice(idx, 1)
         } else task.members.push(memberId)
         saveMembers(task)
+
     }
 
     return (
