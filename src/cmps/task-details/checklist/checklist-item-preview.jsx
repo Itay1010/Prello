@@ -14,7 +14,7 @@ const theme = createTheme({
     }
 });
 
-export const ChecklistItemPreview = ({ item, saveChecklistTask, setIsDone, checklistId, deleteClTask, deleteChecklist }) => {
+export const ChecklistItemPreview = ({ item, saveChecklistTask, setIsDone, checklistId, deleteClTask, deleteChecklist, boardMembers, generalTask }) => {
 
     const { items, title } = item
     const checklistLength = items.length
@@ -84,7 +84,7 @@ export const ChecklistItemPreview = ({ item, saveChecklistTask, setIsDone, check
                 </ThemeProvider>
             </div>
             <div className='checklist-item-list'>
-                {items?.length > 0 && <ClItemsList checklistId={checklistId} items={items} setIsDone={setIsDone} deleteClTask={onDeleteClTask} />}
+                {items?.length > 0 && <ClItemsList checklistId={checklistId} items={items} setIsDone={setIsDone} deleteClTask={onDeleteClTask} boardMembers={boardMembers} generalTask={generalTask} />}
 
 
 
