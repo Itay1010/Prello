@@ -19,6 +19,9 @@ export const Members = ({ saveMembers, boardMembers, task, closeModal }) => {
     }
 
     const toggleMember = (memberId) => {
+        // if (type === 'checklist') {
+        //     // const requestedUser=
+        // }
         if (task.members.includes(memberId)) {
             const idx = task.members.findIndex(member => member === memberId)
             task.members.splice(idx, 1)
