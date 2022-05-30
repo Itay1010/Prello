@@ -3,8 +3,9 @@ import { userService } from "../user.service";
 
 export const actService = {
     activity,
-    addToBoard: memberToBoard,
-    getTypes
+    memberToBoard,
+    memberToTask,
+    getTypes,
 }
 
 function activity(newActivity, board, dispatch) {
@@ -22,8 +23,8 @@ function activity(newActivity, board, dispatch) {
     dispatch(board)
 }
 
-function memberToBoard(task, board, dispatch) {
-    if (!task || !board || !dispatch) throw new Error('No arguments givin')
+function memberToBoard(task, board, cb) {
+    if (!task || !board || !cb) throw new Error('No arguments givin')
     const user = userService.getLoggedinUser()
     const { id, title } = task
     const newActivity = {
@@ -34,26 +35,41 @@ function memberToBoard(task, board, dispatch) {
         task: { id: task.id, title: task.title }
     }
     board.activities.push(newActivity)
-    dispatch(board)
+    cb(board)
 }
 
-function memberToTask(task, board, dispatch) {
-    if (!task || !board || !dispatch) throw new Error('No arguments givin')
+function memberToTask(task, board, db) {
+    if (!task || !board || !db) throw new Error('No arguments givin')
     const user = userService.getLoggedinUser()
     const { id, title } = task
     const newActivity = {
         id: utilService.makeId(),
-        type: 'MAMBER_TO_TASK',
+        type: 'MEMBER_TO_TASK',
         createdAt: Date.now(),
         byMember: user,
         task: { id: task.id, title: task.title }
     }
     board.activities.push(newActivity)
-    dispatch(board)
+    db(board)
+}
+
+function memberToTask(task, board, db) {
+    if (!task || !board || !db) throw new Error('No arguments givin')
+    const user = userService.getLoggedinUser()
+    const { id, title } = task
+    const newActivity = {
+        id: utilService.makeId(),
+        type: 'MEMBER_TO_TASK',
+        createdAt: Date.now(),
+        byMember: user,
+        task: { id: task.id, title: task.title }
+    }
+    board.activities.push(newActivity)
+    db(board)
 }
 
 function getTypes() {
-    return ['ADD_TO_BOARD']
+    return ['ADD_TO_BOARD', 'MEMBER_TO_TASK']
 }
 
 
