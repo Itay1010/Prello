@@ -21,7 +21,7 @@ export const AttachmentPreview = ({ attachment, removeAttachment, openImgModal, 
         removeAttachment(id)
     }
 
-    console.log(attachment)
+    // console.log(attachment)
 
     return <div className='attachment-preview flex space-between'>
         {/* <div className='img-container' onClick={() => openImgModal(url)}>

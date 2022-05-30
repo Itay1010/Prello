@@ -1,10 +1,10 @@
 import { storageService } from './basic/async-storage.service'
 import { utilService } from './basic/util.service'
-import { httpService } from './basic/http.service'
+// import { httpService } from './basic/http.service'
 // import { socketService, SOCKET_EVENT_USER_UPDATED } from './socket.service'
 
 
-// const LOCAL_STORAGE_USER_DB = 'userDB'
+const LOCAL_STORAGE_USER_DB = 'userDB'
 const LOCAL_STORAGE_LOGGEDIN_USER = 'loggedinUser'
 
 export const userService = {
@@ -12,7 +12,7 @@ export const userService = {
     signup,
     login,
     logout,
-    // googleAuth
+    googleAuth
     // getUserById,
 }
 
@@ -20,6 +20,9 @@ window.userService = userService
 
 function getLoggedinUser() {
     return JSON.parse(sessionStorage.getItem(LOCAL_STORAGE_LOGGEDIN_USER) || 'null')
+    // const user = JSON.parse(sessionStorage.getItem(LOCAL_STORAGE_LOGGEDIN_USER) || 'null')
+    // console.log(user);
+    // return user
 }
 
 // function getUserById(userId) {
@@ -27,84 +30,57 @@ function getLoggedinUser() {
 //     console.log(userId);
 // }
 
-async function signup(userCred) {
-    // console.log(userCred);
+async function signup(userCred, onGoOn) {
     userCred.color = utilService.getRandomColor()
-    // const user = await httpService.post('auth/signup', userCred)
-    // console.log('user added ', user);
-    // return login(user)
+    const user = await storageService.post(LOCAL_STORAGE_USER_DB, userCred)
+    // user._id = utilService.makeId()
+    return login(user)
 }
 
+async function login(userCred, onGoOn) {
+    console.log(userCred);
+    const users = await storageService.query(LOCAL_STORAGE_USER_DB)
+    console.log(users);
+    const user = users.find(user => user.username === userCred.username && user.password === userCred.password)
+    console.log(user);
+    if (user) {
+        // delete user._id
+        // delete user.firstName
+        // delete user.lastName
+        return _saveLocalUser(user)
+    }
+}
 
+async function googleAuth(credentials) {
+    console.log(credentials)
+    const users = await storageService.query(LOCAL_STORAGE_USER_DB)
+    console.log(users)
+    const userExists = users.find(user => user.googleId === credentials.googleId || user.email === credentials.email)
+    console.log(userExists);
+    if (userExists) {
+        if (!userExists.googleId) {
+            const userToUpdate = { ...userExists, googleId: credentials.googleId }
+            storageService.put(LOCAL_STORAGE_USER_DB, userToUpdate)
+        }
+        return _saveLocalUser(userExists)
+    } else {
+        const newUser = {
+            email: credentials.email,
+            firstName: credentials.givenName,
+            lastName: credentials.familyName,
+            imgUrl: credentials.imageUrl,
+            googleId: credentials.googleId,
+        }
 
-async function login(userCred) {
-    // console.log(userCred);
-    // const user = await httpService.post('auth/login', userCred)
-
-
-    // const users = await storageService.query(LOCAL_STORAGE_USER_DB)
-    // console.log(users);
+        console.log(newUser);
+        return signup(newUser)
+    }
     // const user = users.find(user => user.username === userCred.username && user.password === userCred.password)
-    // console.log(user);
-    // if (user) {
-    //     // delete user._id
-    //     // delete user.firstName
-    //     // delete user.lastName
-    //     return _saveLocalUser(user)
-    // }
 }
-
 
 async function logout() {
     sessionStorage.removeItem(LOCAL_STORAGE_LOGGEDIN_USER)
 }
-
-// async function googleAuth(credentials) {
-//     console.log(credentials)
-//     const users = await storageService.query(LOCAL_STORAGE_USER_DB)
-//     console.log(users)
-//     const userExists = users.find(user => user.googleId === credentials.googleId || user.email === credentials.email)
-//     console.log(userExists);
-//     if (userExists) {
-//         if (!userExists.googleId) {
-//             const userToUpdate = { ...userExists, googleId: credentials.googleId }
-//             storageService.put(LOCAL_STORAGE_USER_DB, userToUpdate)
-//         }
-//         return _saveLocalUser(userExists)
-//     } else {
-//         const newUser = {
-//             email: credentials.email,
-//             firstName: credentials.givenName,
-//             lastName: credentials.familyName,
-//             imgUrl: credentials.imageUrl,
-//             googleId: credentials.googleId,
-//         }
-
-//         console.log(newUser);
-//         return signup(newUser)
-//     }
-//     // const user = users.find(user => user.username === userCred.username && user.password === userCred.password)
-// }
-
-
-
-
-// async function login(userCred, onGoOn) {
-//     console.log(userCred);
-//     const users = await storageService.query(LOCAL_STORAGE_USER_DB)
-//     console.log(users);
-//     const user = users.find(user => user.username === userCred.username && user.password === userCred.password)
-//     console.log(user);
-//     if (user) {
-//         // delete user._id
-//         // delete user.firstName
-//         // delete user.lastName
-//         return _saveLocalUser(user)
-//     }
-// }
-
-
-
 
 
 function _saveLocalUser(user) {
