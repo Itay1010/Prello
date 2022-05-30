@@ -35,8 +35,8 @@ class _Board extends React.Component {
         if (this.props.board.style.backgroundColor) {
             document.querySelector('.main-header').style.backgroundColor = '#00000090'
             document.querySelector('.board').style.backgroundColor = this.props.board.style.backgroundColor
-
-        } else if (this.props.board.style.background) {
+        } 
+         if (this.props.board.style.background) {
             const avgColor = await this._getAvgColor(this.props.board.style.background)
             if (avgColor === "#ffffff") document.querySelector('.main-header').style.backgroundColor = '#00000090'
             else if (avgColor === '#000000') document.querySelector('.main-header').style.backgroundColor = '#ffffff90'
