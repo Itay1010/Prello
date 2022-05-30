@@ -1,4 +1,7 @@
 import React, { useEffect, useState } from 'react';
+import { useSelector } from 'react-redux'
+
+
 import { Link, useParams } from "react-router-dom"
 import { TaskLabels } from "../task-preview/task-labels"
 import { TaskMembers } from "../task-preview/task-members"
@@ -12,17 +15,17 @@ export const TaskPreview = ({ task, groupId, idx }) => {
     const params = useParams()
     const { boardId } = params
     const [membersToDisplay, setMembersToDisplay] = useState(null)
+    const boardMembers = useSelector((storeState) => storeState.boardModule.board.members)
+
 
     useEffect(() => {
         getMembersToDisplay()
 
     }, [])
 
-
     const getMembersToDisplay = async () => {
-        const members = await boardService.getMembers()
         if (!task.members) task.members = []
-        const filteredMembers = members.filter(member => task.members.includes(member._id))
+        const filteredMembers = boardMembers.filter(member => task.members.includes(member._id))
         setMembersToDisplay(filteredMembers)
     }
     // console.log(task);
@@ -68,7 +71,7 @@ export const TaskPreview = ({ task, groupId, idx }) => {
                                     <TaskMembers members={membersToDisplay} />
                                 </section>}
                             </section>}
-        
+
                     </div>
                 </Link>
             </article>
@@ -77,6 +80,21 @@ export const TaskPreview = ({ task, groupId, idx }) => {
 
 }
 
+// const mapStateToProps = state => {
+//     return {
+//         board: state.boardModule.board,
+//         //   users: state.userModule.users,
+//         //   loggedInUser: state.userModule.user
+//     }
+// }
+
+// const mapDispatchToProps = {
+//     // loadBoard,
+//     // updateBoard,
+//     // removeReview
+// }
+
+// export const TaskPreview = connect(mapStateToProps, mapDispatchToProps)(_TaskPreview)
 
 // import React, { useEffect, useState } from 'react';
 // import { Link, useParams } from "react-router-dom"
