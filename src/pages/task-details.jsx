@@ -155,6 +155,8 @@ export const TaskDetails = ({ onArchiveTask }) => {
 
     }
 
+
+
     const onSaveAttachment = (attachment) => {
         if (attachment.id) {
             const requestedAttachmentIdx = task.attachments.findIndex(requestedAttachment => requestedAttachment.id === attachment.id)
@@ -188,6 +190,21 @@ export const TaskDetails = ({ onArchiveTask }) => {
     const onDeleteClTask = (clTaskId, item) => {
         const clTaskIdx = item.items.findIndex(clTask => clTask.id === clTaskId)
         item.items.splice(clTaskIdx, 1)
+        saveBoard()
+    }
+
+    const saveMemberToClTask = (member, clTaskId, checklist) => {
+
+
+        const requestedClTask = checklist.items.find(clTask => clTask.id === clTaskId)
+        if (requestedClTask.member) {
+            if (requestedClTask.member._id === member._id) {
+                requestedClTask.member = false
+            } else requestedClTask.member = member
+        } else {
+            requestedClTask.member = member
+        }
+        console.log(requestedClTask.member)
         saveBoard()
     }
 
@@ -287,7 +304,7 @@ export const TaskDetails = ({ onArchiveTask }) => {
                         {checklist.length > 0 && <ChecklistList checklists={checklist} saveChecklistTask={onSaveChecklistTask} setIsDone={onSetIsDone} deleteClTask={onDeleteClTask} deleteChecklist={onDeleteChecklist} />}
                     </div>} */}
 
-                    {checklist?.length > 0 && <ChecklistList checklist={checklist} saveChecklistTask={onSaveChecklistTask} setIsDone={onSetIsDone} deleteClTask={onDeleteClTask} deleteChecklist={onDeleteChecklist} boardMembers={newBoard.members} generalTask={task} />}
+                    {checklist?.length > 0 && <ChecklistList checklist={checklist} saveChecklistTask={onSaveChecklistTask} setIsDone={onSetIsDone} deleteClTask={onDeleteClTask} deleteChecklist={onDeleteChecklist} boardMembers={newBoard.members} generalTask={task} saveMemberToClTask={saveMemberToClTask} />}
 
                     {attachments?.length > 0 && <AttachmentList attachments={attachments} removeAttachment={onRemoveAttachment} openImgModal={openImgModal} saveAttachment={onSaveAttachment} />}
                 </div>
