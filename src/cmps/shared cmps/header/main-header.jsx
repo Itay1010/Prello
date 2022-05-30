@@ -6,7 +6,8 @@ import { Search } from './header cmps/search'
 const logo = require('../../../assets/imgs/logo/logo_20x20.png')
 
 export function MainHeader({ boardMembers }) {
-    if (!boardMembers || boardMembers.length === 0) return
+    // if (!boardMembers || boardMembers.length === 0) return
+    console.log('ppp')
     return <header className="main-header full flex align-center">
         <div className='logo flex align-center'>
             <img src={logo} alt="logo" />

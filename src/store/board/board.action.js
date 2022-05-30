@@ -39,12 +39,15 @@ export function loadBoardMinis() {
 
 //load board to state
 export function loadBoard(boardId) {
+    // console.log(boardId);
     return async dispatch => {
         try {
+            // console.log('test');
             const board = await boardService.getById(boardId)
+            // console.log(board);
             dispatch(getActionSetBoard(board))
         } catch (err) {
-            console.log('BoardActions: err in addBoard', err)
+            console.log('BoardActions: err in loadBoard', err)
             throw err
         }
     }
