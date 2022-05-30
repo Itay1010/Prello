@@ -39,8 +39,8 @@ export class _Auth extends React.Component {
     }
 
     signup = async (credentials) => {
-        await this.props.onSignup(credentials)
         try {
+            await this.props.onSignup(credentials)
             this.onGoOn()
         } catch (err) {
             console.error(err)
@@ -48,8 +48,13 @@ export class _Auth extends React.Component {
         userService.signup(credentials, this.onGoOn)
     }
 
-    login = (credentials) => {
-        userService.login(credentials, this.onGoOn)
+    login = async (credentials) => {
+        try {
+            await userService.login(credentials, this.onGoOn)
+            this.onGoOn()
+        } catch (err) {
+            console.error(err)
+        }
     }
 
     onGoOn = () => {

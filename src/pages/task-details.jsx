@@ -220,6 +220,7 @@ export const TaskDetails = ({ onArchiveTask }) => {
         setIsModal(id)
     }
 
+
     if (!group || !task) return <React.Fragment></React.Fragment>
     const { checklist, attachments } = task
     return <section onClick={onGoBack} className='task-details-shadow flex justify-center'>
@@ -246,7 +247,7 @@ export const TaskDetails = ({ onArchiveTask }) => {
                             <h3>Labels</h3>
                             <section className='task-labels flex'>
                                 {task.labels.map(label => {
-                                    return <div className='label' style={{ backgroundColor: label }} key={label}></div>
+                                    return <div className="label" style={{ backgroundColor: label }} key={label} ></div>
                                 })}
                                 <div className='add-label flex justify-center align-center' onClick={() => setModalType('labels')} ><IAdd /></div>
                             </section>

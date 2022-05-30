@@ -31,19 +31,36 @@ class _Board extends React.Component {
 
     }
 
+    setTheme = async () => {
+        if (this.props.board.style.backgroundColor) {
+            document.querySelector('.main-header').style.backgroundColor = '#00000090'
+            document.querySelector('.board').style.backgroundColor = this.props.board.style.backgroundColor
+        }
+        if (this.props.board.style.background) {
+            const avgColor = await this._getAvgColor(this.props.board.style.background)
+            if (avgColor === "#ffffff") document.querySelector('.main-header').style.backgroundColor = '#00000090'
+            else if (avgColor === '#000000') document.querySelector('.main-header').style.backgroundColor = '#ffffff90'
+            else document.querySelector('.main-header').style.backgroundColor = avgColor
+
+            document.querySelector('.board').style.background = `url(${this.props.board.style.background};)`
+        }
+        // } else if (this.props.board.style.backgroundColor) {
+        //     document.querySelector('.main-header').style.backgroundColor = '#00000090'
+        // }
+    }
     // setTheme = async () => {
-    //     // if (this.props.board.style.background) {
-    //     //     const avgColor = await this._getAvgColor(this.props.board.style.background)
-    //     //     if (avgColor === "#ffffff") document.querySelector('.main-header').style.backgroundColor = '#00000090'
-    //     //     else if (avgColor === '#000000') document.querySelector('.main-header').style.backgroundColor = '#ffffff90'
-    //     //     else document.querySelector('.main-header').style.backgroundColor = avgColor
+    //     if (this.props.board.style.background) {
+    //         const avgColor = await this._getAvgColor(this.props.board.style.background)
+    //         if (avgColor === "#ffffff") document.querySelector('.main-header').style.backgroundColor = '#00000090'
+    //         else if (avgColor === '#000000') document.querySelector('.main-header').style.backgroundColor = '#ffffff90'
+    //         else document.querySelector('.main-header').style.backgroundColor = avgColor
 
-    //     //     document.querySelector('.board').style.background = `url(${this.props.board.style.background};)`
+    //         document.querySelector('.board').style.background = `url(${this.props.board.style.background};)`
 
-    //     // } else {
-    //     //     document.querySelector('.main-header').style.backgroundColor = '#00000090'
-    //     //     document.querySelector('.board').style.backgroundColor = this.props.board.style.backgroundColor
-    //     // }
+    //     } else {
+    //         document.querySelector('.main-header').style.backgroundColor = '#00000090'
+    //         document.querySelector('.board').style.backgroundColor = this.props.board.style.backgroundColor
+    //     }
     //     // } else if (this.props.board.style.backgroundColor) {
     //     //     document.querySelector('.main-header').style.backgroundColor = '#00000090'
     //     // }
