@@ -1,7 +1,23 @@
 import React from "react"
+import { useHistory } from "react-router-dom"
 
-export const BoardPreview = ({ count }) => {
-    return <section className="board-preview-body">
-        {new Array(count).fill(<div></div>, 0)}
-    </section>
+export const BoardPreview = ({ board, toggleStar }) => {
+
+    const history = useHistory()
+    const onGoToBoard = (boardId) => {
+        history.push(`/board/${boardId}`)
+    }
+
+    console.log(board)
+    const { imgUrl } = board
+    console.log(imgUrl)
+    return <div className="board-preview-body" onClick={() => onGoToBoard(board._id)} style={{ backgroundImage: `url('${imgUrl})` }}>
+        <h1>{board.title}</h1>
+        <div className="star-wrapper" onClick={(event) => {
+            event.stopPropagation()
+            toggleStar(board)
+        }
+        }
+        >star</div>
+    </div>
 }
