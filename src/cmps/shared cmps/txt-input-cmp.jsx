@@ -1,6 +1,6 @@
 import React, { useState, useRef, useEffect } from "react";
 
-export const TxtInputCmp = ({ saveFunc, toggleContentEditable, contentInitialState, handleBoardTitleChange }) => {
+export const TxtInputCmp = ({ toggleContentEditable, contentInitialState, handleBoardTitleChange }) => {
 
 
     const [content, setBoardTitleValue] = useState('')
@@ -10,7 +10,7 @@ export const TxtInputCmp = ({ saveFunc, toggleContentEditable, contentInitialSta
     const handleContentChange = ({ target }) => {
         setWidth(target.value.length + 'ch')
         setBoardTitleValue(target.value)
-        handleBoardTitleChange(target.value)
+        // handleBoardTitleChange(target.value)
     }
 
     useEffect(() => {
@@ -18,11 +18,9 @@ export const TxtInputCmp = ({ saveFunc, toggleContentEditable, contentInitialSta
         setWidth(contentInitialState.length + 'ch')
     }, [])
 
-
-
     const onSaveBoardTitle = (ev) => {
         if (ev.key === 'Enter') {
-            saveFunc(content)
+            setBoardTitleValue(content)
         }
     }
 
@@ -34,6 +32,9 @@ export const TxtInputCmp = ({ saveFunc, toggleContentEditable, contentInitialSta
         value={content}
         placeholder='Enter board name'
         onChange={handleContentChange}
-        onBlur={handleContentChange}
+        onBlur={(() => {
+            if (!content) return
+            handleBoardTitleChange(content)
+        })}
         onKeyDown={onSaveBoardTitle} />
 }
