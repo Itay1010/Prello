@@ -38,6 +38,9 @@ export const TaskPreview = ({ task, groupId, idx }) => {
         return `${done}/${total}`
     }
 
+
+
+
     return <Draggable type="cards" draggableId={task.id} index={idx}>
         {(provided, snapshot) => {
             return <article className="task-preview"
@@ -65,6 +68,7 @@ export const TaskPreview = ({ task, groupId, idx }) => {
                                     <TaskMembers members={membersToDisplay} />
                                 </section>}
                             </section>}
+        
                     </div>
                 </Link>
             </article>

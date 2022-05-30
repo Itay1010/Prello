@@ -1,6 +1,6 @@
 .board {
 
-    padding-top: 44px;
+    // padding-top: 44px;
     // background: url(../../imgs/milad-fakurian-tUF--C9oOuE-unsplash.jpg) no-repeat center center fixed;
     // background: url(../../imgs/stockholm-paris-studio-HaAVZg3b-7o-unsplash.jpg) no-repeat center center fixed ;
     // background: url(../../imgs/debora-pilati-dOG0z4-gqp0-unsplash.jpg) no-repeat center center fixed ;
@@ -8,11 +8,12 @@
     // background: url(../../imgs/sandro-katalina-k1bO_VTiZSs-unsplash.jpg) no-repeat center center fixed ;
     // background: url(../../imgs/jj-ying-7JX0-bfiuxQ-unsplash.jpg) no-repeat center center fixed;
     // background: url('https://images.unsplash.com/photo-1491895200222-0fc4a4c35e18?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1074&q=80') no-repeat center center fixed;
-    background-repeat: no-repeat;
-    background-position: center center;
-    background-attachment: fixed;
-    background-size: cover;
-    
+    background-repeat: no-repeat !important;
+    background-position: center center !important;
+    background-attachment: fixed !important;
+    background-size: cover !important;
+    height: 100%;
+
 
 
     .board-header {

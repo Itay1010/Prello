@@ -8,7 +8,7 @@ export const Attachment = ({ attachmentToUpdate, saveAttachment, closeModal }) =
         id: attachmentToUpdate ? attachmentToUpdate.id : false,
         createdAt: attachmentToUpdate ? attachmentToUpdate.createdAt : ''
     })
-
+    console.log(closeModal)
 
     const onSaveAttachment = (ev) => {
         ev.preventDefault()

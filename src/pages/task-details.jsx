@@ -76,6 +76,11 @@ export const TaskDetails = ({ onArchiveTask }) => {
         history.push(`/board/${boardId}`)
     }
 
+    const closeModal = () => {
+        console.log(modalType)
+        setModalType(null)
+    }
+
     function onLoad() {
         const board = deepCloneBoard()
         setNewBoard(board)
@@ -215,6 +220,7 @@ export const TaskDetails = ({ onArchiveTask }) => {
         setIsModal(id)
     }
 
+
     if (!group || !task) return <React.Fragment></React.Fragment>
     const { checklist, attachments } = task
     return <section onClick={onGoBack} className='task-details-shadow flex justify-center'>
@@ -241,7 +247,7 @@ export const TaskDetails = ({ onArchiveTask }) => {
                             <h3>Labels</h3>
                             <section className='task-labels flex'>
                                 {task.labels.map(label => {
-                                    return <div className='label' style={{ backgroundColor: label }} key={label}></div>
+                                    return <div className="label" style={{ backgroundColor: label }} key={label} ></div>
                                 })}
                                 <div className='add-label flex justify-center align-center' onClick={() => setModalType('labels')} ><IAdd /></div>
                             </section>
@@ -281,12 +287,15 @@ export const TaskDetails = ({ onArchiveTask }) => {
                         {checklist.length > 0 && <ChecklistList checklists={checklist} saveChecklistTask={onSaveChecklistTask} setIsDone={onSetIsDone} deleteClTask={onDeleteClTask} deleteChecklist={onDeleteChecklist} />}
                     </div>} */}
 
-                    {checklist?.length > 0 && <ChecklistList checklist={checklist} saveChecklistTask={onSaveChecklistTask} setIsDone={onSetIsDone} deleteClTask={onDeleteClTask} deleteChecklist={onDeleteChecklist} />}
+                    {checklist?.length > 0 && <ChecklistList checklist={checklist} saveChecklistTask={onSaveChecklistTask} setIsDone={onSetIsDone} deleteClTask={onDeleteClTask} deleteChecklist={onDeleteChecklist} boardMembers={newBoard.members} generalTask={task} />}
 
                     {attachments?.length > 0 && <AttachmentList attachments={attachments} removeAttachment={onRemoveAttachment} openImgModal={openImgModal} saveAttachment={onSaveAttachment} />}
                 </div>
 
                 <TaskEdit
+                    setModalType={setModalType}
+                    modalType={modalType}
+                    closeModal={closeModal}
                     onArchiveTask={onArchiveTask}
                     task={task}
                     group={group}

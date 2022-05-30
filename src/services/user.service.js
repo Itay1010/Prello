@@ -38,8 +38,11 @@ async function signup(userCred, onGoOn) {
 }
 
 async function login(userCred, onGoOn) {
+    console.log(userCred);
     const users = await storageService.query(LOCAL_STORAGE_USER_DB)
+    console.log(users);
     const user = users.find(user => user.username === userCred.username && user.password === userCred.password)
+    console.log(user);
     if (user) {
         // delete user._id
         // delete user.firstName
@@ -53,7 +56,12 @@ async function googleAuth(credentials) {
     const users = await storageService.query(LOCAL_STORAGE_USER_DB)
     console.log(users)
     const userExists = users.find(user => user.googleId === credentials.googleId || user.email === credentials.email)
+    console.log(userExists);
     if (userExists) {
+        if (!userExists.googleId) {
+            const userToUpdate = { ...userExists, googleId: credentials.googleId }
+            storageService.put(LOCAL_STORAGE_USER_DB, userToUpdate)
+        }
         return _saveLocalUser(userExists)
     } else {
         const newUser = {
@@ -63,6 +71,8 @@ async function googleAuth(credentials) {
             imgUrl: credentials.imageUrl,
             googleId: credentials.googleId,
         }
+
+        console.log(newUser);
         return signup(newUser)
     }
     // const user = users.find(user => user.username === userCred.username && user.password === userCred.password)
@@ -79,15 +89,24 @@ function _saveLocalUser(user) {
 }
 
 ; (async () => {
-    // await userService.signup({ _id: 'u101', firstName: 'Eytan', lastName: 'Silberberg', username: 'eytan', password: 'eytan', imgUrl: 'https://res.cloudinary.com/di5o0obqy/image/upload/v1653742446/eytan_vl7skf.jpg' })
-    // await userService.signup({ _id: 'u102', firstName: 'Itay', lastName: 'Zonshine', username: 'itay', password: 'itay', imgUrl: 'https://res.cloudinary.com/di5o0obqy/image/upload/v1653742446/itay_brzaf1.jpg'})
-    // await userService.signup({ _id: 'u103', firstName: 'Offir', lastName: 'Carmi', username: 'offir', password: 'offir', imgUrl: 'https://res.cloudinary.com/di5o0obqy/image/upload/v1653742446/offir_ixxjf7.jpg' })
-    // await userService.signup({ _id: 'u104', firstName: 'Idan', lastName: 'Gez', username: 'idan', password: 'idan', imgUrl: 'https://media-exp1.licdn.com/dms/image/C4E03AQHS2IrCTjh7kQ/profile-displayphoto-shrink_800_800/0/1645011912408?e=1658966400&v=beta&t=ztcm1v1QLUsANcPVcXF8c-2icQB51oLyQ5hgK5sn-VQ' })
+    // await userService.signup({ _id: 'u101', firstName: 'Eytan', lastName: 'Silberberg', username: 'eytan', password: 'eytan', email:'eytan133@gmail.com', imgUrl: 'https://res.cloudinary.com/di5o0obqy/image/upload/v1653742446/eytan_vl7skf.jpg' })
+    // await userService.signup({ _id: 'u102', firstName: 'Itay', lastName: 'Zonshine', username: 'itay', password: 'itay', email: 'etay150@gmail.com', imgUrl: 'https://res.cloudinary.com/di5o0obqy/image/upload/v1653742446/itay_brzaf1.jpg' })
+    // await userService.signup({ _id: 'u103', firstName: 'Offir', lastName: 'Carmi', username: 'offir', password: 'offir', email: 'offircarmi@gmail.com', imgUrl: 'https://res.cloudinary.com/di5o0obqy/image/upload/v1653742446/offir_ixxjf7.jpg' })
+    // await userService.signup({ _id: 'u104', firstName: 'Idan', lastName: 'Gez', username: 'idan', password: 'idan', email:'idan@gez.com', imgUrl: 'https://media-exp1.licdn.com/dms/image/C4E03AQHS2IrCTjh7kQ/profile-displayphoto-shrink_800_800/0/1645011912408?e=1658966400&v=beta&t=ztcm1v1QLUsANcPVcXF8c-2icQB51oLyQ5hgK5sn-VQ' })
 })()
 
 
-    // This is relevant when backend is connected
-    // ;(async () => {
-        //     var user = getLoggedinUser()
-        //     if (user) socketService.emit('set-user-socket', user._id)
-        // })()
+// This is relevant when backend is connected
+// ;(async () => {
+//     var user = getLoggedinUser()
+//     if (user) socketService.emit('set-user-socket', user._id)
+// })()
+
+
+
+
+
+// await userService.signup({ _id: 'u101', firstName: 'Eytan', lastName: 'Silberberg', username: 'eytan', password: 'eytan', email:'eytan133@gmail.com', imgUrl: 'https://res.cloudinary.com/di5o0obqy/image/upload/v1653742446/eytan_vl7skf.jpg' })
+// await userService.signup({ _id: 'u102', firstName: 'Itay', lastName: 'Zonshine', username: 'itay', password: 'itay', email: 'etay150@gmail.com', imgUrl: 'https://res.cloudinary.com/di5o0obqy/image/upload/v1653742446/itay_brzaf1.jpg' })
+// await userService.signup({ _id: 'u103', firstName: 'Offir', lastName: 'Carmi', username: 'offir', password: 'offir', email: 'offircarmi@gmail.com', imgUrl: 'https://res.cloudinary.com/di5o0obqy/image/upload/v1653742446/offir_ixxjf7.jpg' })
+    // await userService.signup({ _id: 'u104', firstName: 'Idan', lastName: 'Gez', username: 'idan', password: 'idan', email:'idan@gez.com', imgUrl: 'https://media-exp1.licdn.com/dms/image/C4E03AQHS2IrCTjh7kQ/profile-displayphoto-shrink_800_800/0/1645011912408?e=1658966400&v=beta&t=ztcm1v1QLUsANcPVcXF8c-2icQB51oLyQ5hgK5sn-VQ' })
