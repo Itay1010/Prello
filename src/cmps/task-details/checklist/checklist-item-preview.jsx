@@ -14,7 +14,7 @@ const theme = createTheme({
     }
 });
 
-export const ChecklistItemPreview = ({ item, saveChecklistTask, setIsDone, checklistId, deleteClTask, deleteChecklist, boardMembers, generalTask }) => {
+export const ChecklistItemPreview = ({ item, saveChecklistTask, setIsDone, checklistId, deleteClTask, deleteChecklist, boardMembers, generalTask, saveMemberToClTask }) => {
 
     const { items, title } = item
     const checklistLength = items.length
@@ -48,6 +48,11 @@ export const ChecklistItemPreview = ({ item, saveChecklistTask, setIsDone, check
 
     const onDeleteChecklist = () => {
         deleteChecklist(checklistId)
+    }
+
+    const onSaveMemberToClTask = (member, clTaskId) => {
+        // console.log(member, clTaskId, item)
+        saveMemberToClTask(member, clTaskId, item)
     }
 
     useEffect(() => {
@@ -84,7 +89,7 @@ export const ChecklistItemPreview = ({ item, saveChecklistTask, setIsDone, check
                 </ThemeProvider>
             </div>
             <div className='checklist-item-list'>
-                {items?.length > 0 && <ClItemsList checklistId={checklistId} items={items} setIsDone={setIsDone} deleteClTask={onDeleteClTask} boardMembers={boardMembers} generalTask={generalTask} />}
+                {items?.length > 0 && <ClItemsList checklistId={checklistId} items={items} setIsDone={setIsDone} deleteClTask={onDeleteClTask} boardMembers={boardMembers} generalTask={generalTask} saveMemberToClTask={onSaveMemberToClTask} />}
 
 
 
