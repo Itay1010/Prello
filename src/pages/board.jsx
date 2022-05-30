@@ -20,6 +20,7 @@ import { Switch, Route } from 'react-router-dom'
 // Routes
 import { TaskDetails } from './task-details.jsx'
 import { GroupList } from "../cmps/board/group-list";
+import { actService } from "../services/board/activity.service";
 class _Board extends React.Component {
 
     componentDidMount() {
@@ -35,8 +36,8 @@ class _Board extends React.Component {
         if (this.props.board.style.backgroundColor) {
             document.querySelector('.main-header').style.backgroundColor = '#00000090'
             document.querySelector('.board').style.backgroundColor = this.props.board.style.backgroundColor
-        } 
-         if (this.props.board.style.background) {
+        }
+        if (this.props.board.style.background) {
             const avgColor = await this._getAvgColor(this.props.board.style.background)
             if (avgColor === "#ffffff") document.querySelector('.main-header').style.backgroundColor = '#00000090'
             else if (avgColor === '#000000') document.querySelector('.main-header').style.backgroundColor = '#ffffff90'
@@ -45,7 +46,7 @@ class _Board extends React.Component {
             document.querySelector('.board').style.background = `url(${this.props.board.style.background};)`
         }
 
-        
+
     }
 
 
@@ -90,6 +91,7 @@ class _Board extends React.Component {
         this.props.updateBoard(newBoard)
     }
 
+
     onArchiveGroup = async (groupId) => {
         const newBoard = JSON.parse(JSON.stringify(this.props.board))
         newBoard.groups.map(group => {
@@ -128,6 +130,7 @@ class _Board extends React.Component {
             const items = newBoard.groups.find(group => group.id === result.source.droppableId).tasks
             const [reorderedItem] = items.splice(result.source.index, 1)
             newBoard.groups.find(group => group.id === result.destination.droppableId).tasks.splice(result.destination.index, 0, reorderedItem)
+            actService.activity('moved', 'card', reorderedItem, newBoard)
             this.props.updateBoard(newBoard)
         }
     }

@@ -3,6 +3,7 @@ import { TxtInputCmp } from '../../shared cmps/txt-input-cmp.jsx'
 import { TextareaAutosize } from '@mui/material';
 import { useDispatch } from 'react-redux';
 import { updateBoard } from '../../../store/board/board.action.js';
+import { actService } from '../../../services/board/activity.service.js';
 
 
 export const BoardData = ({ board, saveBoardHeader }) => {
@@ -21,14 +22,15 @@ export const BoardData = ({ board, saveBoardHeader }) => {
         setBoardTitleValue(value)
         const newBoard = JSON.parse(JSON.stringify(board))
         newBoard.title = value
+        actService.activityTo('renamed this board to', newBoard, newBoard)
         dispatch(updateBoard(newBoard))
     }
 
-    const toggleBoardTitleEditable = async () => {
+    const toggleBoardTitleEditable = () => {
         if (isBoardTitleEditable) {
             setBoardTitleEditable(false)
         } else {
-            await setBoardTitleEditable(true)
+            setBoardTitleEditable(true)
             setBoardTitleValue(board.title)
         }
     }
