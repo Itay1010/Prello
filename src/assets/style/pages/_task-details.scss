@@ -81,7 +81,6 @@
 
                 .btn-edit-task-key {
                     @include btn($type: dark);
-                    cursor: pointer;
                     color: $txt;
                     width: 168px;
                     margin-bottom: 8px;

@@ -116,7 +116,7 @@ function _getEmptyBoard() {
 }
 
 
-// storageService.post(STORAGE_KEY, jsonBoard)
+storageService.post(STORAGE_KEY, jsonBoard)
 
 
 
