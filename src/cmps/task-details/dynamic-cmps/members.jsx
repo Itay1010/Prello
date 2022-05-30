@@ -14,7 +14,7 @@ export const Members = ({ saveMembers, boardMembers, task, closeModal }) => {
     }, [filter])
 
     const handleChange = ({ target }) => {
-        // console.log(target.value);
+
         setFilter(target.value)
     }
 
