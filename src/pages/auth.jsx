@@ -59,7 +59,7 @@ export class _Auth extends React.Component {
     }
 
     onGoOn = () => {
-        this.props.history.push('/board/b101')
+        this.props.history.push('/workspace')
     }
 
     onSuccess = async (res) => {
