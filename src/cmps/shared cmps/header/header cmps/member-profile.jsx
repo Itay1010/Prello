@@ -24,6 +24,7 @@ export const MemberProfile = ({ boardMembers }) => {
     }
 
     const user = userService.getLoggedinUser()
+    // console.log('userrrrrrrrrrrrrrrrrrrrrrrrrrrr', user);
 
     if (!user) return <div className='go-login' onClick={goLogin}>Login</div>
 

@@ -28,7 +28,25 @@
                 width: 40px;
                 border-radius: 3px;
                 margin: 0 4px 4px 0;
+
+                // &.expanded {
+                //     display: inline-block;
+                //     height: 16px;
+                //     max-width: 198px;
+                //     border-radius: 3px;
+                //     margin: 0 4px 4px 0;
+                // }
             }
+
+            .expanded {
+                display: inline-block;
+                height: 16px;
+                max-width: 198px;
+                border-radius: 3px;
+                margin: 0 4px 4px 0;
+            }
+
+
         }
 
         .task-title {
