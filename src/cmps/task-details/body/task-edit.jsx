@@ -25,11 +25,10 @@ import { Location } from '../dynamic-cmps/location.jsx'
 // }) => {
 export const TaskEdit = (props) => {
 
-    const [modalType, setModalType] = useState(null)
+    // const [modalType, setModalType] = useState(null)
     const history = useHistory()
-    const closeModal = () => {
-        setModalType(null)
-    }
+
+    const { modalType, setModalType } = props
 
     // const handlers = {
     //     boardMembers,
@@ -104,7 +103,6 @@ export const TaskEdit = (props) => {
 
 
 
-
 const _DynamicModal = (props) => {
     const {
         type,
@@ -115,7 +113,7 @@ const _DynamicModal = (props) => {
         saveLabels,
         saveChecklist,
         group,
-        onSaveAttachment
+        onSaveAttachment,
     } = props
 
     switch (type) {

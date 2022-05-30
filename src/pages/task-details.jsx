@@ -76,6 +76,11 @@ export const TaskDetails = ({ onArchiveTask }) => {
         history.push(`/board/${boardId}`)
     }
 
+    const closeModal = () => {
+        console.log(modalType)
+        setModalType(null)
+    }
+
     function onLoad() {
         const board = deepCloneBoard()
         setNewBoard(board)
@@ -281,12 +286,15 @@ export const TaskDetails = ({ onArchiveTask }) => {
                         {checklist.length > 0 && <ChecklistList checklists={checklist} saveChecklistTask={onSaveChecklistTask} setIsDone={onSetIsDone} deleteClTask={onDeleteClTask} deleteChecklist={onDeleteChecklist} />}
                     </div>} */}
 
-                    {checklist?.length > 0 && <ChecklistList checklist={checklist} saveChecklistTask={onSaveChecklistTask} setIsDone={onSetIsDone} deleteClTask={onDeleteClTask} deleteChecklist={onDeleteChecklist} />}
+                    {checklist?.length > 0 && <ChecklistList checklist={checklist} saveChecklistTask={onSaveChecklistTask} setIsDone={onSetIsDone} deleteClTask={onDeleteClTask} deleteChecklist={onDeleteChecklist} boardMembers={newBoard.members} />}
 
                     {attachments?.length > 0 && <AttachmentList attachments={attachments} removeAttachment={onRemoveAttachment} openImgModal={openImgModal} saveAttachment={onSaveAttachment} />}
                 </div>
 
                 <TaskEdit
+                    setModalType={setModalType}
+                    modalType={modalType}
+                    closeModal={closeModal}
                     onArchiveTask={onArchiveTask}
                     task={task}
                     group={group}
