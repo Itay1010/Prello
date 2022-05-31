@@ -30,9 +30,6 @@ import { Dashboard } from "./dashboard";
 const tinycolor = require("tinycolor2");
 
 class _Board extends React.Component {
-    state = {
-        board: null
-    }
 
     componentDidMount() {
         this._setBoard()
@@ -71,8 +68,6 @@ class _Board extends React.Component {
             utilService.setDynamicColors(isDark, avgColor)
             document.querySelector('#root').style.background = `url(${boardStyle.background};)`
         }
-
-
     }
 
     _setBoard = async () => {
@@ -108,8 +103,6 @@ class _Board extends React.Component {
         actService.activity('archived', 'card', archivedTask, newBoard)
         this.props.updateBoard(newBoard)
     }
-
-
     onArchiveGroup = async (groupId) => {
         const newBoard = JSON.parse(JSON.stringify(this.props.board))
         var archivedGroup
@@ -176,7 +169,7 @@ class _Board extends React.Component {
 
         // const { board } = this.props
         // console.log('_Board - render - board rendered')
-        const { board } = this.state
+        const { board } = this.props
         if (!board) return <div>loading...</div>
         // console.log(board);
         const { groups } = board
@@ -196,7 +189,7 @@ class _Board extends React.Component {
                     <GroupList groups={groups} eventHandlers={eventHandlers} />
                     <Switch>
                         <Route path={'/board/:boardId/:groupId/:taskId'}>
-                            <TaskDetails onArchiveTask={this.onArchiveTask} onSaveBoard={this.onSaveBoard} />
+                            <TaskDetails onArchiveTask={this.onArchiveTask} />
                         </Route>
                         <Route path={'/board/:boardId/dashboard'}>
                             <Dashboard board={this.props.board} />

@@ -146,12 +146,9 @@ export function addBoard(board) {
     return async dispatch => {
         try {
             const addedBoard = await boardService.save(board)
-
         }
         catch {
-
         }
-
     }
 }
 
@@ -162,7 +159,6 @@ export function updateMini(board) {
         dispatch(getActionUpdateMini(newMini))
     }
 }
-
 //update board in state
 export function updateBoard(newBoard) {
     return async (dispatch, getState) => {

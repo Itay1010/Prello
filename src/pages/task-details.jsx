@@ -178,13 +178,13 @@ export const TaskDetails = ({ onArchiveTask, onSaveBoard }) => {
         saveBoard()
     }
 
-    // const saveBoard = () => {
-    //     dispatch(updateBoard(newBoard))
-    // }
-
     const saveBoard = () => {
-        onSaveBoard(newBoard)
+        dispatch(updateBoard(newBoard))
     }
+
+    // const saveBoard = () => {
+    //     onSaveBoard(newBoard)
+    // }
 
     const deepCloneBoard = () => {
         return JSON.parse(JSON.stringify(board))
