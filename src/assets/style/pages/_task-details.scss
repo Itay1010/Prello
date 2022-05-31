@@ -15,7 +15,7 @@
         width: 768px;
         margin-bottom: 40px;
         padding: 16px;
-        height: fit-content;
+        min-height: 750px;
 
         .task-header {
             position: relative;
@@ -81,16 +81,19 @@
 
                 .btn-edit-task-key {
                     @include btn($type: dark);
+                    background-color: $td-input;
                     color: $txt;
                     width: 168px;
                     margin-bottom: 8px;
                     padding: 0 0 0 8px;
                     position: rel;
+                    cursor: pointer;
 
                     svg {
                         height: 16px;
                         width: 16px;
                         margin-inline-end: 8px;
+                        fill: $td-svg;
                     }
                 }
 
@@ -112,6 +115,12 @@
         .action-type-modal {
             position: absolute;
             left: 0;
+        }
+
+        .btn-wrapper {
+            svg {
+                fill: $td-svg;
+            }
         }
     }
 
