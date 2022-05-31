@@ -22,7 +22,7 @@ export const BoardData = ({ board, saveBoardHeader }) => {
         setBoardTitleValue(value)
         const newBoard = JSON.parse(JSON.stringify(board))
         newBoard.title = value
-        actService.activityTo('renamed this board to', newBoard, newBoard)
+        actService.activity('renamed',  'board', newBoard, newBoard)
         dispatch(updateBoard(newBoard))
     }
 

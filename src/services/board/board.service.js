@@ -135,11 +135,7 @@ function _lightOrDark(color) {
     // Using the HSP value, determine whether the color is light or dark
     if (hsp > 127.5) console.log('light')
     else console.log('dark')
-
 }
-
-
-
 
 
 

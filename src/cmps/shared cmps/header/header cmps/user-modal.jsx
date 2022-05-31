@@ -2,8 +2,7 @@ import React from 'react';
 import { userService } from '../../../../services/user.service'
 import { IClose } from '../../../icons/i-close'
 
-export const UserModal = ({ closeModal }) => {
-    const user = userService.getLoggedinUser()
+export const UserModal = ({ closeModal, user, goLogin }) => {
 
     return <div className="user-modal flex col">
         <div className='modal-header flex'>
@@ -23,7 +22,8 @@ export const UserModal = ({ closeModal }) => {
             </div>
         </div>
         <hr />
-        <p className='opt' onClick={() => { userService.logout(); closeModal() }}>Log out</p>
+        {user._id === 'g100' && <p className='opt' onClick={() => { goLogin(); closeModal() }}>Login</p>}
+        {user._id !== 'g100' && <p className='opt' onClick={() => { userService.logout(); closeModal() }}>Log out</p>}
     </div>
 }
 

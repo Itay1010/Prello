@@ -24,7 +24,8 @@ function activity(type, entityType, entity, board) {
     if (!id) throw new Error('Item is unknown')
     const newActivity = {
         id: utilService.makeId(),
-        txt: `${user.firstName} ${type} ${entityType} ${entity.title}`,
+        action: type,
+        receiver: entityType,
         createdAt: Date.now(),
         byMember: user,
         entity: { id: entity.id, title: entity.title }
