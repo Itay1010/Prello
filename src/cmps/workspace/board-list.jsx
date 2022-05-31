@@ -4,12 +4,9 @@ import { BoardPreview } from './board-preview'
 
 export const BoardList = ({ boards, userId, toggleStar }) => {
 
-    console.log(boards, userId)
 
     const boardsRelated = boards.filter(board => board.usersRelated.includes(userId))
-    console.log(boardsRelated)
     const starredBoards = boardsRelated.filter(board => board.isStarred === true)
-    console.log(starredBoards.length)
 
 
     return <div className="workspace-container">

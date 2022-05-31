@@ -31,6 +31,7 @@ export function loadBoardMinis() {
         try {
             const minis = await boardService.query()
             dispatch(getActionSetMinis(minis))
+            return minis
         } catch (err) {
             console.log('BoardActions: err in loadBoard', err)
         }

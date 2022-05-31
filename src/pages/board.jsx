@@ -4,8 +4,10 @@ import { connect } from 'react-redux'
 
 //libs
 import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
-import getAverageColor from 'get-average-color'
+// import getAverageColor from 'get-average-color'
 
+//services
+import { boardService } from "../services/board/board.service";
 
 //private
 import { MainHeader } from "../cmps/shared cmps/header/main-header"
@@ -21,6 +23,7 @@ import { Switch, Route } from 'react-router-dom'
 import { TaskDetails } from './task-details.jsx'
 import { GroupList } from "../cmps/board/group-list";
 import { actService } from "../services/board/activity.service";
+
 class _Board extends React.Component {
 
     componentDidMount() {
@@ -38,7 +41,7 @@ class _Board extends React.Component {
             document.querySelector('.board').style.backgroundColor = this.props.board.style.backgroundColor
         }
         if (this.props.board.style.background) {
-            const avgColor = await this._getAvgColor(this.props.board.style.background)
+            const avgColor = await boardService.getAvgColor(this.props.board.style.background)
             if (avgColor === "#ffffff") document.querySelector('.main-header').style.backgroundColor = '#00000090'
             else if (avgColor === '#000000') document.querySelector('.main-header').style.backgroundColor = '#ffffff90'
             else document.querySelector('.main-header').style.backgroundColor = avgColor
@@ -50,20 +53,20 @@ class _Board extends React.Component {
     }
 
 
-    _getAvgColor = async (url) => {
-        const RGB = await getAverageColor(url)
-        const HEX = this._rgbToHex(RGB)
-        return HEX
-    }
+    // _getAvgColor = async (url) => {
+    //     const RGB = await getAverageColor(url)
+    //     const HEX = this._rgbToHex(RGB)
+    //     return HEX
+    // }
 
-    _rgbToHex = ({ r, g, b }) => {
-        return "#" + this._componentToHex(r) + this._componentToHex(g) + this._componentToHex(b);
-    }
+    // _rgbToHex = ({ r, g, b }) => {
+    //     return "#" + this._componentToHex(r) + this._componentToHex(g) + this._componentToHex(b);
+    // }
 
-    _componentToHex = (cmp) => {
-        const hex = cmp.toString(16)
-        return hex.length === 1 ? "0" + hex : hex
-    }
+    // _componentToHex = (cmp) => {
+    //     const hex = cmp.toString(16)
+    //     return hex.length === 1 ? "0" + hex : hex
+    // }
 
     _setBoard = async () => {
         const { boardId } = this.props.match.params
@@ -105,9 +108,9 @@ class _Board extends React.Component {
     onGroupChange = async ({ txt, groupId }) => {
         const newBoard = JSON.parse(JSON.stringify(this.props.board))
         const groupIdx = newBoard.groups.findIndex(group => group.id === groupId)
-        if(newBoard.groups[groupIdx].title === txt) return
+        if (newBoard.groups[groupIdx].title === txt) return
         newBoard.groups[groupIdx].title = txt
-        actService.activity('changed title in','group', newBoard.groups[groupIdx], newBoard)
+        actService.activity('changed title in', 'group', newBoard.groups[groupIdx], newBoard)
         console.log('_Board - onGroupChange= - newBoard', newBoard.activities)
         this.props.updateBoard(newBoard)
     }

@@ -8,9 +8,7 @@ export const BoardPreview = ({ board, toggleStar }) => {
         history.push(`/board/${boardId}`)
     }
 
-    console.log(board)
     const { imgUrl } = board
-    console.log(imgUrl)
     return <div className="board-preview-body" onClick={() => onGoToBoard(board._id)} style={{ backgroundImage: `url('${imgUrl})` }}>
         <h1>{board.title}</h1>
         <div className="star-wrapper" onClick={(event) => {

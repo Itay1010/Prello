@@ -5,11 +5,12 @@
 // })
 
 
-// const BASE_URL = (process.env.NODE_ENV === 'production')
-//     ? '/api/board'
-//     : 'http://localhost:3000/api/board/'
-
 import { httpService } from '../basic/http.service'
+import getAverageColor from 'get-average-color'
+const BASE_URL = (process.env.NODE_ENV === 'production')
+    ? '/api/board'
+    : 'http://localhost:3030/api/board/'
+
 
 
 
@@ -21,10 +22,12 @@ export const boardService = {
     getTask,
     getMembers,
     getLabels,
+    getAvgColor
 }
 
 async function query() {
-    return httpService.get()
+    console.log('baseUrl', BASE_URL)
+    return httpService.get('board')
     // try {
     //     const res = await axios.get(BASE_URL, { params: filterBy })
     //     return res.data
@@ -98,10 +101,69 @@ function getLabels() {
     return ['#61bd4f', '#f2d600', '#ff9f1a', '#eb5a46', '#c377e0', '#0079bf']
 }
 
+async function getAvgColor(url) {
+    const RGB = await getAverageColor(url)
+    // _lightOrDark(RGB)
+    const HEX = _rgbToHex(RGB)
+    // _lightOrDark(HEX)
+    return HEX
+}
+
+function _rgbToHex({ r, g, b }) {
+    return "#" + _componentToHex(r) + _componentToHex(g) + _componentToHex(b);
+}
+
+function _componentToHex(cmp) {
+    const hex = cmp.toString(16)
+    return hex.length === 1 ? "0" + hex : hex
+}
 
 
+function _lightOrDark(color) {
+    // console.log(color);
 
+    // Variables for red, green, blue values
+    var { r, g, b } = color
+    var hsp
 
+    // Check the format of the color, HEX or RGB?
+    if (color.match(/^rgb/)) {
+
+        // If RGB --> store the red, green, blue values in separate variables
+        color = color.match(/^rgba?\((\d+),\s*(\d+),\s*(\d+)(?:,\s*(\d+(?:\.\d+)?))?\)$/);
+
+        r = color[1];
+        g = color[2];
+        b = color[3];
+    }
+    else {
+
+        // If hex --> Convert it to RGB: http://gist.github.com/983661
+        color = +("0x" + color.slice(1).replace(
+            color.length < 5 && /./g, '$&$&'));
+        console.log(color);
+        r = color >> 16;
+        g = color >> 8 & 255;
+        b = color & 255;
+    }
+
+    // HSP (Highly Sensitive Poo) equation from http://alienryderflex.com/hsp.html
+    hsp = Math.sqrt(
+        0.299 * (r * r) +
+        0.587 * (g * g) +
+        0.114 * (b * b)
+    );
+
+    // Using the HSP value, determine whether the color is light or dark
+    if (hsp > 127.5) {
+
+        return 'light';
+    }
+    else {
+
+        return 'dark';
+    }
+}
 
 
 
