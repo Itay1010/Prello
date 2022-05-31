@@ -176,18 +176,3 @@ export function updateBoard(newBoard) {
         }
     }
 }
-
-
-export function addBoard(board) {
-
-    console.log(board)
-    return async dispatch => {
-        try {
-            const addedBoard = await boardService.save(board)
-        }
-        catch {
-
-        }
-
-    }
-}
