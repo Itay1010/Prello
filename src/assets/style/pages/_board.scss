@@ -30,6 +30,23 @@
         &:last-child {
             padding-inline-end: 20px;
         }
+
+        &::-webkit-scrollbar {
+            border-radius: 10px;
+            height: 12px;
+        }
+
+        &::-webkit-scrollbar-track {
+            border-radius: 10px;
+            background: rgba(128, 128, 128, 0.231);
+
+        }
+
+        &::-webkit-scrollbar-thumb {
+            background: rgba(128, 128, 128, 0.231);
+            border-radius: 10px;
+        }
+
     }
 
 }

@@ -5,7 +5,7 @@
     border-radius: 3px;
     margin-inline-end: 8px;
     background-color: $group-bg;
-    max-height: calc(100vh - 44px - 52px - 37px);
+    max-height: calc(100vh - 44px - 52px - 30px);
     overflow-y: hidden;
     align-self: flex-start;
 
@@ -48,6 +48,7 @@
         margin: 8px 4px 0 4px;
         overflow: auto;
         overflow-x: hidden;
+        
 
         // &:first-child {
         //     margin-top: 4px;
@@ -57,7 +58,7 @@
         //     transform: translateX(125%);
         // }
 
-        .task-preview {
+        &>*:not(last-child) {
             margin-bottom: 8px;
         }
 

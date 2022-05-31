@@ -5,8 +5,9 @@ export const SignupForm = ({ onSignup }) => {
 
 
     return <div className="signup">
+        <h2>Sign up for free</h2>
         <Formik
-            initialValues={{ firstName: '', lastName: '', username: '', password: '' }}
+            initialValues={{ firstName: '', lastName: '', email: '', password: '' }}
             onSubmit={(values) => {
                 onSignup(values)
             }}
@@ -25,44 +26,48 @@ export const SignupForm = ({ onSignup }) => {
                 <form className='signup' onSubmit={handleSubmit}>
                     {errors.firstName && touched.firstName && errors.firstName}
                     {errors.lastName && touched.lastName && errors.lastName}
-                    {errors.username && touched.username && errors.username}
+                    {errors.email && touched.email && errors.email}
                     {errors.password && touched.password && errors.password}
-                    <label className="inputs-wrapper">
+                    <div className="inputs-wrapper">
                         <input
                             type="text"
-                            name="firstName"
+                            name="email"
                             onChange={handleChange}
                             onBlur={handleBlur}
                             value={values.name}
-                            placeholder='Your first name'
+                            placeholder='Email address'
+                            className='long-field'
                         />
-                        <input
-                            type="text"
-                            name="lastName"
-                            onChange={handleChange}
-                            onBlur={handleBlur}
-                            value={values.name}
-                            placeholder='Your last name'
-                        />
-                        <input
-                            type="text"
-                            name="username"
-                            onChange={handleChange}
-                            onBlur={handleBlur}
-                            value={values.name}
-                            placeholder='Your username'
-                        />
+                        <div className='user-name flex'>
+                            <input
+                                type="text"
+                                name="firstName"
+                                onChange={handleChange}
+                                onBlur={handleBlur}
+                                value={values.name}
+                                placeholder='First name'
+                            />
+                            <input
+                                type="text"
+                                name="lastName"
+                                onChange={handleChange}
+                                onBlur={handleBlur}
+                                value={values.name}
+                                placeholder='Last name'
+                            />
+                        </div>
                         <input
                             type="password"
                             name="password"
                             onChange={handleChange}
                             onBlur={handleBlur}
                             value={values.name}
-                            placeholder='Your password'
+                            placeholder='Password'
+                            className='long-field'
                         />
-                    </label>
+                    </div>
                     <button type="submit" disabled={isSubmitting}>
-                        continue
+                        Continue
                     </button>
                 </form>
             )}

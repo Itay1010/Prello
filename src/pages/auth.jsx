@@ -58,14 +58,14 @@ export class _Auth extends React.Component {
     }
 
     onGoOn = () => {
-        this.props.history.push('/workspace')
+        this.props.history.push('/board')
     }
 
     onSuccess = async (res) => {
-        await this.props.onGoogleAuth(res.profileObj)
         try {
+            await this.props.onGoogleAuth(res.profileObj)
             this.onGoOn()
-            console.log("LOGIN SUCCESS! current user: ", res.profileObj)
+            // console.log("LOGIN SUCCESS! current user: ", res.profileObj)
         } catch (res) {
             console.log("LOGIN FAILED! ,res ", res)
         }
@@ -82,16 +82,13 @@ export class _Auth extends React.Component {
         return <section className="auth-page">
             <h1>Prello</h1>
             <div className="form-wrapper">
-                <h2>Sign up for your account</h2>
                 {(type === 'signup') && <SignupForm onSignup={this.signup} />}
                 {(type === 'login') && <LoginForm onLogin={this.login} />}
                 <div className="login-method-separator">OR</div>
-                <a>Continue with Google</a>
-                <a>Continue with FaceBook</a>
                 <div className="google-login">
                     <GoogleLogin
                         clientId={clientId}
-                        buttonText="Login with Google"
+                        buttonText="Continue with Google"
                         onSuccess={this.onSuccess}
                         onFailure={this.onFailure}
                         cookiePolicy={'single_host_origin'}

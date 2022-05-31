@@ -77,9 +77,9 @@ export function onLogout() {
 }
 
 
-export function onGoogleAuth(credentials) {
+export function onGoogleAuth(googleData) {
     return async (dispatch) => {
-        const user = await userService.googleAuth(credentials)
+        const user = await userService.googleAuth(googleData)
         try {
             dispatch({
                 type: 'SET_USER',

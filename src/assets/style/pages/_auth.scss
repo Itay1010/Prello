@@ -10,27 +10,35 @@
     }
 
     .form-wrapper {
+        width: 400px;
+
         h2 {
             margin-bottom: 25px;
         }
 
         text-align: center;
         padding: 25px 40px;
-        width: 400px;
-        min-height: 480px;
         border-radius: 3px;
         box-shadow: rgb(0 0 0 / 10%) 0 0 10px;
+
+
+        // div.signup {
+        //     form.signup {
+        //         .inputs-warpper {
+        //             input.long-field {
+        //                 width: 100%;
+        //             }
+        //         }
+        //     }
+        // }
+
+
     }
 
     button {
         @include btn;
         width: 100%;
         background-color: #E2E4E6;
-        ;
-        // background: #E2E4E6;
-        // border: none;
-        // padding: 0.6em 1.3em;
-        // border-radius: 3px;
 
     }
 
@@ -56,5 +64,18 @@
 
     .login-method-separator {
         margin: 16px 0;
+    }
+
+    .google-login {
+        button {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 50px;
+
+            div {
+                height: 45px;
+            }
+        }
     }
 }

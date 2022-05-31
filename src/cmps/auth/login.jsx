@@ -7,8 +7,9 @@ export const LoginForm = ({ onLogin }) => {
     return <section>
 
         <div className="login">
+            <h2>Sign in</h2>
             <Formik
-                initialValues={{ username: '', password: '' }}
+                initialValues={{ email: '', password: '' }}
                 onSubmit={(values) => {
                     onLogin(values)
                 }}
@@ -27,16 +28,14 @@ export const LoginForm = ({ onLogin }) => {
                     <form className='login-form' onSubmit={handleSubmit}>
                         {errors.firstName && touched.firstName && errors.firstName}
                         {errors.lastName && touched.lastName && errors.lastName}
-                        <label className="inputs-wrapper">
-
-
+                        <label className="inputs-wrapper flex col">
                             <input
                                 type="text"
-                                name="username"
+                                name="email"
                                 onChange={handleChange}
                                 onBlur={handleBlur}
                                 value={values.name}
-                                placeholder='Your username'
+                                placeholder='Email address'
                             />
                             <input
                                 type="password"
@@ -44,7 +43,7 @@ export const LoginForm = ({ onLogin }) => {
                                 onChange={handleChange}
                                 onBlur={handleBlur}
                                 value={values.name}
-                                placeholder='Your password'
+                                placeholder='Password'
                             />
                         </label>
                         <button type="submit" disabled={isSubmitting}>
