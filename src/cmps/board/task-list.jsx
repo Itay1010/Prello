@@ -1,4 +1,4 @@
-import React, { useState } from "react"
+import React, { useState, useRef, useEffect } from "react"
 import { Droppable, Draggable } from 'react-beautiful-dnd';
 
 import { TaskPreview } from "./task-preview"

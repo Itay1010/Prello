@@ -5,7 +5,7 @@ export const AddTask = ({ group, onAddTask, newTask, handleChange, setNewTask, s
     const addTaskRef = useRef()
 
     useEffect(() => {
-        addTaskRef.current.scrollIntoView()
+        addTaskRef.current.scrollIntoView({behavior: "smooth", block: "end", inline: "nearest"})
     }, [])
 
     return <article className="task-preview add-task" ref={addTaskRef}>

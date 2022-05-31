@@ -31,7 +31,7 @@ export const MemberProfile = () => {
     if (loggedinUser.imgUrl) {
         return <React.Fragment>
             <div className='profile' onClick={() => setIsModal(true)}>
-                <img src={loggedinUser.imgUrl} alt={`${loggedinUser.firstName.charAt(0)}${loggedinUser.lastName.charAt(0)}`} />
+                <img src={loggedinUser.imgUrl} alt={`${loggedinUser.email.charAt(0)}`} />
             </div>
             {isModal && <UserModal closeModal={closeModal} user={loggedinUser} goLogin={goLogin} />}
         </React.Fragment>
@@ -42,7 +42,7 @@ export const MemberProfile = () => {
             <div className='profile' style={{ backgroundColor: loggedinUser.color }} onClick={() => {
                 setIsModal(true)
             }}>
-                <h2>{`${loggedinUser.firstName.charAt(0)}${loggedinUser.lastName.charAt(0)}`}</h2>
+                <h2>{`${loggedinUser.email.charAt(0)}`}</h2>
             </div>
         </React.Fragment>
     }

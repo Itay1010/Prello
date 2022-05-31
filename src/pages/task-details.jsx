@@ -45,7 +45,7 @@ export default function EmptyTextarea() {
 
 
 
-export const TaskDetails = ({ onArchiveTask }) => {
+export const TaskDetails = ({ onArchiveTask, onSaveBoard }) => {
     //getter hooks
     const params = useParams()
     const dispatch = useDispatch()
@@ -68,6 +68,7 @@ export const TaskDetails = ({ onArchiveTask }) => {
 
     useEffect(() => {
         onLoad()
+        console.log('hello')
         // console.log(modalType)
     }, [])
 
@@ -88,6 +89,7 @@ export const TaskDetails = ({ onArchiveTask }) => {
         setGroup(groupToAdd)
         const task = groupToAdd.tasks.find(task => task.id === taskId)
         setTask(task)
+        console.log(newBoard)
         // const group = board.groups.find(group => groupId === group.id)
         // const task = group.tasks.find(task => taskId === task.id)
         // setTask(task)
@@ -106,6 +108,7 @@ export const TaskDetails = ({ onArchiveTask }) => {
     }
 
     const saveLabels = (updatedTask) => {
+
         const group = newBoard.groups.find(group => group.id === groupId)
         const idx = group.tasks.findIndex(task => task.id === updatedTask.id)
         group.tasks[idx].members = updatedTask.members
@@ -178,6 +181,10 @@ export const TaskDetails = ({ onArchiveTask }) => {
     const saveBoard = () => {
         dispatch(updateBoard(newBoard))
     }
+
+    // const saveBoard = () => {
+    //     onSaveBoard(newBoard)
+    // }
 
     const deepCloneBoard = () => {
         return JSON.parse(JSON.stringify(board))

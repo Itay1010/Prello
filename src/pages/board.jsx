@@ -40,6 +40,22 @@ class _Board extends React.Component {
 
     }
 
+    // setTheme = async () => {
+    //     if (this.props.board.style.backgroundColor) {
+    //         document.querySelector('.main-header').style.backgroundColor = '#00000090'
+    //         document.querySelector('.board').style.backgroundColor = this.props.board.style.backgroundColor
+    //     }
+    //     if (this.props.board.style.background) {
+    //         const avgColor = await boardService.getAvgColor(this.props.board.style.background)
+    //         if (avgColor === "#ffffff") document.querySelector('.main-header').style.backgroundColor = '#00000090'
+    //         else if (avgColor === '#000000') document.querySelector('.main-header').style.backgroundColor = '#ffffff90'
+    //         else document.querySelector('.main-header').style.backgroundColor = avgColor
+
+    //         document.querySelector('.board').style.background = `url(${this.props.board.style.background};)`
+    //     }
+
+
+    // }
     setTheme = async () => {
         const boardStyle = this.props.board.style
         if (boardStyle.backgroundColor) {
@@ -52,13 +68,14 @@ class _Board extends React.Component {
             utilService.setDynamicColors(isDark, avgColor)
             document.querySelector('#root').style.background = `url(${boardStyle.background};)`
         }
-
-
     }
 
     _setBoard = async () => {
         const { boardId } = this.props.match.params
-        this.props.loadBoard(boardId)
+        console.log(boardId)
+        const board = await this.props.loadBoard(boardId)
+        console.log(board)
+        this.setState({ board })
     }
 
     onAddTask = async (newTask) => {
@@ -67,6 +84,7 @@ class _Board extends React.Component {
         const groupIdx = newBoard.groups.findIndex(group => group.id === newTask.groupId)
 
         newTask = { id: utilService.makeId(), title: newTask.title }
+        console.log(newTask)
         newBoard.groups[groupIdx].tasks.push(newTask)
         actService.activity('added', 'card,', newTask, newBoard)
         this.props.updateBoard(newBoard)
@@ -85,8 +103,6 @@ class _Board extends React.Component {
         actService.activity('archived', 'card', archivedTask, newBoard)
         this.props.updateBoard(newBoard)
     }
-
-
     onArchiveGroup = async (groupId) => {
         const newBoard = JSON.parse(JSON.stringify(this.props.board))
         var archivedGroup
@@ -150,8 +166,10 @@ class _Board extends React.Component {
     }
 
     render() {
-        const { board } = this.props
+
+        // const { board } = this.props
         // console.log('_Board - render - board rendered')
+        const { board } = this.props
         if (!board) return <div>loading...</div>
         // console.log(board);
         const { groups } = board
