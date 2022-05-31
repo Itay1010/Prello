@@ -26,6 +26,7 @@ import { actService } from "../services/board/activity.service";
 import { httpService } from "../services/basic/http.service";
 import axios from "axios";
 import { getPhoto } from "../services/basic/unsplash.service";
+import { Dashboard } from "./dashboard";
 const tinycolor = require("tinycolor2");
 
 class _Board extends React.Component {
@@ -48,12 +49,7 @@ class _Board extends React.Component {
         if (boardStyle.background) {
             const avgColor = await boardService.getAvgColor(boardStyle.background)
             const isDark = tinycolor(avgColor).isDark()
-            document.body.style.setProperty('--clr-dynamic-invert', `${isDark ? '#172b4d' : '#FAFBFC' }`)
-            document.body.style.setProperty('--clr-dynamic-faded', `${isDark ? '#fafbfc6e' : '#172b4d4d' }`)
-            document.body.style.setProperty('--clr-dynamic-faded-hover', `${isDark ? '#fafbfca3' : '#172b4d98' }`)
-            document.body.style.setProperty('--clr-dynamic-inner', `${isDark ? '#eaeaea' : '#172b4d' }`)
-            document.body.style.setProperty('--clr-dynamic', `${isDark ? '#FAFBFC' : '#172b4d'}`)
-            document.body.style.setProperty('--clr-header', `${avgColor}`)
+            utilService.setDynamicColors(isDark, avgColor)
             document.querySelector('#root').style.background = `url(${boardStyle.background};)`
         }
 
@@ -176,6 +172,9 @@ class _Board extends React.Component {
                     <Switch>
                         <Route path={'/board/:boardId/:groupId/:taskId'}>
                             <TaskDetails onArchiveTask={this.onArchiveTask} />
+                        </Route>
+                        <Route path={'/board/:boardId/dashboard'}>
+                            <Dashboard board={this.props.board} />
                         </Route>
                     </Switch>
                 </section>

@@ -14,9 +14,11 @@
         .board-name {
             font-size: 1.28em;
             margin: 0 8px 0 4px;
-            padding: 0;
+            padding: 4px;
             background-color: var(--clr-dynamic-faded);
+            color: var(--clr-dynamic-inner);
             &:focus {
+                color: var(--clr-dynamic-invert);
                 margin: 0 8px 0 4px;
                 padding: 0;
                 font-size: 1.28em;

@@ -3,6 +3,7 @@ import { Auth } from "./pages/auth";
 import { Workspace } from "./pages/workspace";
 import { Board } from "./pages/board";
 import { TaskDetails } from "./pages/task-details";
+import { Dashboard } from "./pages/dashboard";
 
 export const routes = [
     {

@@ -7,9 +7,12 @@ export const actService = {
     getTypes,
 }
 
+const LIMIT = 500
 
 function activity(type, entityType, entity, board) {
     if (!type || !entityType || !entity || !board) throw new Error('No arguments givin')
+    const id = entity.id ? entity.id : entity._id
+    if (!id) throw new Error('Item is unknown')
     const user = userService.getLoggedinUser() || {
         color: "#41C559",
         email: "eytan133@gmail.com",
@@ -20,8 +23,6 @@ function activity(type, entityType, entity, board) {
         username: "eytan",
         _id: "u101"
     }
-    const id = entity.id ? entity.id : entity._id
-    if (!id) throw new Error('Item is unknown')
     const newActivity = {
         id: utilService.makeId(),
         action: type,
@@ -30,12 +31,17 @@ function activity(type, entityType, entity, board) {
         byMember: user,
         entity: { id: entity.id, title: entity.title }
     }
+    if (board.activities.length >= LIMIT) {
+        board.activities.splice(0, 1)
+    }
     board.activities.push(newActivity)
     return board
 }
 
 function activityTo(type, entity, board) {
     if (!type || !entity || !board) throw new Error('No arguments givin')
+    const id = entity.id ? entity.id : entity._id
+    if (!id) throw new Error('Item is unknown')
     const user = userService.getLoggedinUser() || {
         color: "#41C559",
         email: "eytan133@gmail.com",
@@ -46,13 +52,15 @@ function activityTo(type, entity, board) {
         username: "eytan",
         _id: "u101"
     }
-    const id = entity.id ? entity.id : entity._id
     const newActivity = {
         id: utilService.makeId(),
         txt: `${user.firstName} ${type} ${entity.title}`,
         createdAt: Date.now(),
         byMember: user,
         entity: { id: entity.id, title: entity.title }
+    }
+    if (board.activities.length >= LIMIT) {
+        board.activities.splice(0, 1)
     }
     board.activities.push(newActivity)
     return board
@@ -61,20 +69,3 @@ function activityTo(type, entity, board) {
 function getTypes() {
     return ['added', 'deleted', 'changed', 'moved', 'completed']
 }
-
-
-// {
-//     "id": "a101",
-//     "type": "Added Task",
-//     "createdAt": 154514,
-//     "byMember": {
-//         "_id": "u104",
-//         "firstName": "Idan",
-//         "lastName": "Gez",
-//         "imgUrl": "https://media-exp1.licdn.com/dms/image/C4E03AQHS2IrCTjh7kQ/profile-displayphoto-shrink_800_800/0/1645011912408?e=1658966400&v=beta&t=ztcm1v1QLUsANcPVcXF8c-2icQB51oLyQ5hgK5sn-VQ"
-//     },
-//     "task": {
-//         "id": "c101",
-//         "title": "Replace Logo"
-//     }
-// }

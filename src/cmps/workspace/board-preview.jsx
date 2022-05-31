@@ -2,7 +2,6 @@ import React from "react"
 import { useHistory } from "react-router-dom"
 
 export const BoardPreview = ({ board, toggleStar }) => {
-    console.log(board)
     const history = useHistory()
     const onGoToBoard = (boardId) => {
         history.push(`/board/${boardId}`)
