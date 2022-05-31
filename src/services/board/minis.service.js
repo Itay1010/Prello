@@ -6,10 +6,10 @@ import { storageService } from '../basic/async-storage.service'
 
 export const minisService = {
     query,
-    remove,
-    getById,
-    save,
-    getMembers
+    // remove,
+    // getById,
+    // save,
+    // getMembers
     // subscribe,
     // unsubscribe,
 }
