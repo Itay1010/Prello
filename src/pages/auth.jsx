@@ -45,7 +45,6 @@ export class _Auth extends React.Component {
         } catch (err) {
             console.error(err)
         }
-        userService.signup(credentials, this.onGoOn)
     }
 
     login = async (credentials) => {

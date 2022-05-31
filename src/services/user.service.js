@@ -42,58 +42,32 @@ async function logout() {
 }
 
 async function googleAuth(googleData) {
-    console.log(googleData)
+    console.log(googleData);
     const users = await httpService.get('user')
-    console.log(users);
-    // const users = await storageService.query(LOCAL_STORAGE_USER_DB)
-    // console.log(users)
     const userExists = users.find(user => user.googleId === googleData.googleId || user.email === googleData.email)
-    console.log(userExists);
-    // if (userExists) {
-    //     if (!userExists.googleId) {
-    //         const userToUpdate = { ...userExists, googleId: googleData.googleId }
-    //         storageService.put(LOCAL_STORAGE_USER_DB, userToUpdate)
-    //     }
-    //     return _saveLocalUser(userExists)
-    // } else {
-    //     const newUser = {
-    //         email: googleData.email,
-    //         firstName: googleData.givenName,
-    //         lastName: googleData.familyName,
-    //         imgUrl: googleData.imageUrl,
-    //         googleId: googleData.googleId,
-    //     }
+    if (userExists) {
+        login(userExists)
+        //TODO:HANDLE ISSUE OF REGISTERED MAIL WITHOUT GOOGLEID
 
-    //     console.log(newUser);
-    //     return signup(newUser)
-    // }
+        // if (!userExists.googleId) {
+        //     const googleUserToUpdate = { ...userExists, googleId: googleData.googleId }
+        //     console.log(googleUserToUpdate);
+        // } else {
+
+        // }
+    } else {
+        const newUser = {
+            email: googleData.email,
+            firstName: googleData.givenName,
+            lastName: googleData.familyName,
+            imgUrl: googleData.imageUrl,
+            googleId: googleData.googleId,
+            color: utilService.getRandomColor()
+        }
+        const user = await httpService.post('auth/signup', newUser)
+        _saveLocalUser(user);
+    }
 }
-// async function googleAuth(googleData) {
-//     console.log(googleData)
-//     const users = await storageService.query(LOCAL_STORAGE_USER_DB)
-//     console.log(users)
-//     const userExists = users.find(user => user.googleId === googleData.googleId || user.email === credentials.email)
-//     console.log(userExists);
-//     if (userExists) {
-//         if (!userExists.googleId) {
-//             const userToUpdate = { ...userExists, googleId: googleData.googleId }
-//             storageService.put(LOCAL_STORAGE_USER_DB, userToUpdate)
-//         }
-//         return _saveLocalUser(userExists)
-//     } else {
-//         const newUser = {
-//             email: googleData.email,
-//             firstName: googleData.givenName,
-//             lastName: googleData.familyName,
-//             imgUrl: googleData.imageUrl,
-//             googleId: googleData.googleId,
-//         }
-
-//         console.log(newUser);
-//         return signup(newUser)
-//     }
-//     // const user = users.find(user => user.username === userCred.username && user.password === userCred.password)
-// }
 
 async function loginGuest() {
     const user = {
