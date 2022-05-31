@@ -3,16 +3,18 @@ import React, { useEffect, useState } from "react"
 import { userService } from "../../../../services/user.service";
 import { UserModal } from './user-modal';
 
-export const MemberProfile = ({ boardMembers }) => {
+export const MemberProfile = () => {
     const history = useHistory()
     const [isModal, setIsModal] = useState(false)
+    const [loggedinUser, setLoggedinUser] = useState(null)
     // const [mem, setMem] = useState(null)
 
-    // useEffect(() => {
-    //     setMem(boardMembers)
-    // }, [isModal])
+    useEffect(() => {
+        const user = userService.getLoggedinUser() || userService.loginGuest()
+        setLoggedinUser(user)
+        
+    }, [])
 
-    if (!boardMembers || boardMembers.length === 0) return
 
     const goLogin = () => {
         history.push(`/auth/login`)
@@ -22,23 +24,28 @@ export const MemberProfile = ({ boardMembers }) => {
         setIsModal(false)
     }
 
-    const user = userService.getLoggedinUser()
     // console.log('userrrrrrrrrrrrrrrrrrrrrrrrrrrr', user);
 
-    if (!user) return <div className='go-login' onClick={goLogin}>Login</div>
+    if (!loggedinUser) return <div className='go-login' onClick={goLogin}>Login</div>
 
-    if (user.imgUrl) {
+    if (loggedinUser.imgUrl) {
         return <React.Fragment>
             <div className='profile' onClick={() => setIsModal(true)}>
-                <img src={user.imgUrl} alt={`${user.firstName.charAt(0)}${user.lastName.charAt(0)}`} />
+                <img src={loggedinUser.imgUrl} alt={`${loggedinUser.firstName.charAt(0)}${loggedinUser.lastName.charAt(0)}`} />
             </div>
             {isModal && <UserModal closeModal={closeModal} />}
         </React.Fragment>
 
-    } else if (user.color) {
-        return <div className='profile' style={{ backgroundColor: user.color }} onClick={() => setIsModal(true)}>
-            <h2>`${user.firstName.charAt(0)}${user.lastName.charAt(0)}`</h2>
-        </div>
+    } else if (loggedinUser.color) {
+        return <React.Fragment>
+            {isModal && <UserModal closeModal={closeModal} />}
+            <div className='profile' style={{ backgroundColor: loggedinUser.color }} onClick={() => {
+                setIsModal(true)
+                console.log(isModal);
+            }}>
+                <h2>{`${loggedinUser.firstName.charAt(0)}${loggedinUser.lastName.charAt(0)}`}</h2>
+            </div>
+        </React.Fragment>
     }
 }
 

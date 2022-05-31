@@ -73,9 +73,10 @@ const boardFromService = [
 export const Workspace = () => {
     const [boards, setBoards] = useState(null)
     const dispatch = useDispatch()
-    // const { miniBoards } = useSelector(storeState => storeState.boardModule)
+    const { miniBoards } = useSelector(storeState => storeState.boardModule)
     const toggleStar = (board) => {
         board.isStarred = !board.isStarred
+        console.log(board.isStarred)
     }
 
     useEffect(() => {
@@ -85,13 +86,16 @@ export const Workspace = () => {
         const miniBoards = await dispatch(loadBoardMinis())
         console.log(miniBoards)
         setBoards([...miniBoards])
+
+
     }
 
     const user = userService.getLoggedinUser()
     const userId = user._id
     // const { userId } = user.userId
+    if (!boards) return <React.Fragment></React.Fragment>
     return <section className="workspace-wrapper">
         <MainHeader />
-        <BoardList boards={boardFromService} userId={userId} toggleStar={toggleStar} />
+        <BoardList boards={boards} userId={userId} toggleStar={toggleStar} />
     </section>
 }

@@ -7,7 +7,8 @@ const initialState = {
 export function boardReducer(state = initialState, action = {}) {
     switch (action.type) {
         case 'SET_MINIS':
-            return { ...state, miniBoards: action.miniBoards }
+            console.log(action)
+            return { ...state, miniBoards: action.minis }
         case 'ADD_MINI':
             return { ...state, miniBoards: [action.miniBoards, ...state.miniBoards] }
         case 'REMOVE_MINI':
@@ -26,4 +27,5 @@ export function boardReducer(state = initialState, action = {}) {
         default:
             return state
     }
+
 }
