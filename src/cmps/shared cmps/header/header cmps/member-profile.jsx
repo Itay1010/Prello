@@ -37,9 +37,15 @@ export const MemberProfile = () => {
         </React.Fragment>
 
     } else if (loggedinUser.color) {
-        return <div className='profile' style={{ backgroundColor: loggedinUser.color }} onClick={() => setIsModal(true)}>
-            <h2>{`${loggedinUser.firstName.charAt(0)}`}</h2>
-        </div>
+        return <React.Fragment>
+            {isModal && <UserModal closeModal={closeModal} />}
+            <div className='profile' style={{ backgroundColor: loggedinUser.color }} onClick={() => {
+                setIsModal(true)
+                console.log(isModal);
+            }}>
+                <h2>{`${loggedinUser.firstName.charAt(0)}${loggedinUser.lastName.charAt(0)}`}</h2>
+            </div>
+        </React.Fragment>
     }
 }
 

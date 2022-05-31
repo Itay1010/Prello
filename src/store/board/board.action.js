@@ -13,6 +13,7 @@ function getActionRemoveBoard(boardId) {
 
 //Minis Action Creators
 function getActionSetMinis(minis) {
+    console.log(minis)
     return { type: 'SET_MINIS', minis }
 }
 function getActionAddMini(mini) {

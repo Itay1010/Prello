@@ -2,14 +2,14 @@ import React from "react"
 import { useHistory } from "react-router-dom"
 
 export const BoardPreview = ({ board, toggleStar }) => {
-
+    console.log(board)
     const history = useHistory()
     const onGoToBoard = (boardId) => {
         history.push(`/board/${boardId}`)
     }
 
-    const { imgUrl } = board
-    return <div className="board-preview-body" onClick={() => onGoToBoard(board._id)} style={{ backgroundImage: `url('${imgUrl})` }}>
+    const background = board.style.background ? board.style.background : board.style.backgroundColor
+    return <div className="board-preview-body" onClick={() => onGoToBoard(board._id)} style={{ backgroundImage: `url('${background})` }}>
         <h1>{board.title}</h1>
         <div className="star-wrapper" onClick={(event) => {
             event.stopPropagation()
