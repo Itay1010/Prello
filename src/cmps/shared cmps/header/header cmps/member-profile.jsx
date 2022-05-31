@@ -19,7 +19,6 @@ export const MemberProfile = ({ boardMembers }) => {
     }
 
     const closeModal = () => {
-        console.log('yayyyyy');
         setIsModal(false)
     }
 
