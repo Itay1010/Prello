@@ -9,6 +9,7 @@ export const actService = {
 
 
 function activity(type, entityType, entity, board) {
+    console.log(board)
     if (!type || !entityType || !entity || !board) throw new Error('No arguments givin')
     const user = userService.getLoggedinUser() || {
         color: "#41C559",
