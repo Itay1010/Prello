@@ -23,6 +23,11 @@ import { Switch, Route } from 'react-router-dom'
 import { TaskDetails } from './task-details.jsx'
 import { GroupList } from "../cmps/board/group-list";
 import { actService } from "../services/board/activity.service";
+import { httpService } from "../services/basic/http.service";
+import axios from "axios";
+import { getPhoto } from "../services/basic/unsplash.service";
+import { Dashboard } from "./dashboard";
+const tinycolor = require("tinycolor2");
 
 class _Board extends React.Component {
     state = {
@@ -55,6 +60,7 @@ class _Board extends React.Component {
 
     // }
     setTheme = async () => {
+<<<<<<< HEAD
         if (this.state.board.style.backgroundColor) {
             document.querySelector('.main-header').style.backgroundColor = '#00000090'
             document.querySelector('.board').style.backgroundColor = this.state.board.style.backgroundColor
@@ -66,11 +72,24 @@ class _Board extends React.Component {
             else document.querySelector('.main-header').style.backgroundColor = avgColor
 
             document.querySelector('.board').style.background = `url(${this.state.board.style.background};)`
+=======
+        const boardStyle = this.props.board.style
+        if (boardStyle.backgroundColor) {
+            document.querySelector('.main-header').style.backgroundColor = '#00000090'
+            document.querySelector('.board').style.backgroundColor = boardStyle.backgroundColor
+        }
+        if (boardStyle.background) {
+            const avgColor = await boardService.getAvgColor(boardStyle.background)
+            const isDark = tinycolor(avgColor).isDark()
+            utilService.setDynamicColors(isDark, avgColor)
+            document.querySelector('#root').style.background = `url(${boardStyle.background};)`
+>>>>>>> origin/itay-syncup
         }
 
 
     }
 
+<<<<<<< HEAD
     onSaveBoard = (board) => {
         console.log(board)
         this.props.updateBoard(board)
@@ -94,6 +113,8 @@ class _Board extends React.Component {
     //     return hex.length === 1 ? "0" + hex : hex
     // }
 
+=======
+>>>>>>> origin/itay-syncup
     _setBoard = async () => {
         const { boardId } = this.props.match.params
         console.log(boardId)
@@ -130,9 +151,15 @@ class _Board extends React.Component {
 
     onArchiveGroup = async (groupId) => {
         const newBoard = JSON.parse(JSON.stringify(this.props.board))
+        var archivedGroup
         newBoard.groups.map(group => {
-            if (group.id === groupId) group.archivedAt = Date.now()
+            if (group.id === groupId) {
+                group.archivedAt = Date.now()
+                archivedGroup = group
+            }
         })
+        actService.activity('archived', 'group', archivedGroup, newBoard)
+        console.log('_Board - onArchiveGroup= - newBoard', newBoard.activities)
         this.props.updateBoard(newBoard)
     }
 
@@ -209,6 +236,9 @@ class _Board extends React.Component {
                     <Switch>
                         <Route path={'/board/:boardId/:groupId/:taskId'}>
                             <TaskDetails onArchiveTask={this.onArchiveTask} onSaveBoard={this.onSaveBoard} />
+                        </Route>
+                        <Route path={'/board/:boardId/dashboard'}>
+                            <Dashboard board={this.props.board} />
                         </Route>
                     </Switch>
                 </section>
