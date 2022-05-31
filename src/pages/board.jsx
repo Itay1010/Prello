@@ -60,19 +60,6 @@ class _Board extends React.Component {
 
     // }
     setTheme = async () => {
-<<<<<<< HEAD
-        if (this.state.board.style.backgroundColor) {
-            document.querySelector('.main-header').style.backgroundColor = '#00000090'
-            document.querySelector('.board').style.backgroundColor = this.state.board.style.backgroundColor
-        }
-        if (this.state.board.style.background) {
-            const avgColor = await boardService.getAvgColor(this.state.board.style.background)
-            if (avgColor === "#ffffff") document.querySelector('.main-header').style.backgroundColor = '#00000090'
-            else if (avgColor === '#000000') document.querySelector('.main-header').style.backgroundColor = '#ffffff90'
-            else document.querySelector('.main-header').style.backgroundColor = avgColor
-
-            document.querySelector('.board').style.background = `url(${this.state.board.style.background};)`
-=======
         const boardStyle = this.props.board.style
         if (boardStyle.backgroundColor) {
             document.querySelector('.main-header').style.backgroundColor = '#00000090'
@@ -83,38 +70,11 @@ class _Board extends React.Component {
             const isDark = tinycolor(avgColor).isDark()
             utilService.setDynamicColors(isDark, avgColor)
             document.querySelector('#root').style.background = `url(${boardStyle.background};)`
->>>>>>> origin/itay-syncup
         }
 
 
     }
 
-<<<<<<< HEAD
-    onSaveBoard = (board) => {
-        console.log(board)
-        this.props.updateBoard(board)
-        this.setState({ board })
-        // dispatch(updateBoard(newBoard))
-    }
-
-
-    // _getAvgColor = async (url) => {
-    //     const RGB = await getAverageColor(url)
-    //     const HEX = this._rgbToHex(RGB)
-    //     return HEX
-    // }
-
-    // _rgbToHex = ({ r, g, b }) => {
-    //     return "#" + this._componentToHex(r) + this._componentToHex(g) + this._componentToHex(b);
-    // }
-
-    // _componentToHex = (cmp) => {
-    //     const hex = cmp.toString(16)
-    //     return hex.length === 1 ? "0" + hex : hex
-    // }
-
-=======
->>>>>>> origin/itay-syncup
     _setBoard = async () => {
         const { boardId } = this.props.match.params
         console.log(boardId)
