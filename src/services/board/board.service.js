@@ -6,6 +6,7 @@
 
 
 import { httpService } from '../basic/http.service'
+import getAverageColor from 'get-average-color'
 const BASE_URL = (process.env.NODE_ENV === 'production')
     ? '/api/board'
     : 'http://localhost:3030/api/board/'
@@ -21,6 +22,7 @@ export const boardService = {
     getTask,
     getMembers,
     getLabels,
+    getAvgColor
 }
 
 async function query() {
@@ -99,10 +101,42 @@ function getLabels() {
     return ['#61bd4f', '#f2d600', '#ff9f1a', '#eb5a46', '#c377e0', '#0079bf']
 }
 
+async function getAvgColor(url) {
+    const RGB = await getAverageColor(url)
+    const color = [RGB.r, RGB.g, RGB.b]
+    _lightOrDark(color)
+    // let isDark = await _lightOrDark(color)
+    const HEX = _rgbToHex(RGB)
+    return HEX
+}
+
+function _rgbToHex({ r, g, b }) {
+    return "#" + _componentToHex(r) + _componentToHex(g) + _componentToHex(b);
+}
+
+function _componentToHex(cmp) {
+    const hex = cmp.toString(16)
+    return hex.length === 1 ? "0" + hex : hex
+}
 
 
+function _lightOrDark(color) {
+    const r = color[1]
+    const g = color[2]
+    const b = color[3]
 
+    // HSP (Highly Sensitive Poo) equation from http://alienryderflex.com/hsp.html
+    const hsp = Math.sqrt(
+        0.299 * (r * r) +
+        0.587 * (g * g) +
+        0.114 * (b * b)
+    )
 
+    // Using the HSP value, determine whether the color is light or dark
+    if (hsp > 127.5) console.log('light')
+    else console.log('dark')
+
+}
 
 
 
