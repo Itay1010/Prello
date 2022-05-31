@@ -10,7 +10,16 @@ export const actService = {
 
 function activity(type, entityType, entity, board) {
     if (!type || !entityType || !entity || !board) throw new Error('No arguments givin')
-    const user = userService.getLoggedinUser()
+    const user = userService.getLoggedinUser() || {
+        color: "#41C559",
+        email: "eytan133@gmail.com",
+        firstName: "Eytan",
+        imgUrl: "https://res.cloudinary.com/di5o0obqy/image/upload/v1653742446/eytan_vl7skf.jpg",
+        lastName: "Silberberg",
+        password: "eytan",
+        username: "eytan",
+        _id: "u101"
+    }
     const id = entity.id ? entity.id : entity._id
     if (!id) throw new Error('Item is unknown')
     const newActivity = {
@@ -26,7 +35,16 @@ function activity(type, entityType, entity, board) {
 
 function activityTo(type, entity, board) {
     if (!type || !entity || !board) throw new Error('No arguments givin')
-    const user = userService.getLoggedinUser()
+    const user = userService.getLoggedinUser() || {
+        color: "#41C559",
+        email: "eytan133@gmail.com",
+        firstName: "Eytan",
+        imgUrl: "https://res.cloudinary.com/di5o0obqy/image/upload/v1653742446/eytan_vl7skf.jpg",
+        lastName: "Silberberg",
+        password: "eytan",
+        username: "eytan",
+        _id: "u101"
+    }
     const id = entity.id ? entity.id : entity._id
     const newActivity = {
         id: utilService.makeId(),

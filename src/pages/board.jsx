@@ -80,19 +80,21 @@ class _Board extends React.Component {
 
         newTask = { id: utilService.makeId(), title: newTask.title }
         newBoard.groups[groupIdx].tasks.push(newTask)
-        actService.activity('added', 'card', newTask, newBoard)
-        console.log('_Board - onAddTask= - newBoard', newBoard.activities)
+        actService.activity('added', 'card,', newTask, newBoard.activities)
         this.props.updateBoard(newBoard)
     }
 
     onArchiveTask = async ({ taskId, groupId }) => {
-        console.log('_Board - onArchiveTask= - taskId, groupId', taskId, groupId)
         const newBoard = JSON.parse(JSON.stringify(this.props.board))
         const groupIdx = newBoard.groups.findIndex(group => group.id === groupId)
-
+        var archivedTask
         newBoard.groups[groupIdx].tasks.map(task => {
-            if (task.id === taskId) task.archivedAt = Date.now()
+            if (task.id === taskId) {
+                task.archivedAt = Date.now()
+                archivedTask = task
+            }
         })
+        actService.activity('archived', 'card', archivedTask, newBoard)
         this.props.updateBoard(newBoard)
     }
 
@@ -140,7 +142,6 @@ class _Board extends React.Component {
             const [reorderedItem] = items.splice(SrcIdx, 1)
             newBoard.groups.find(group => group.id === desDroppableId).tasks.splice(desIdx, 0, reorderedItem)
             if (!(desDroppableId === SrcDroppableId) || !(desIdx === SrcIdx)) {
-                console.log('skip');
                 actService.activity('moved', 'card', reorderedItem, newBoard)
             }
             this.props.updateBoard(newBoard)
