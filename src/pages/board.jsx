@@ -25,6 +25,9 @@ import { GroupList } from "../cmps/board/group-list";
 import { actService } from "../services/board/activity.service";
 
 class _Board extends React.Component {
+    state = {
+        board: null
+    }
 
     componentDidMount() {
         this._setBoard()
@@ -35,21 +38,44 @@ class _Board extends React.Component {
 
     }
 
+    // setTheme = async () => {
+    //     if (this.props.board.style.backgroundColor) {
+    //         document.querySelector('.main-header').style.backgroundColor = '#00000090'
+    //         document.querySelector('.board').style.backgroundColor = this.props.board.style.backgroundColor
+    //     }
+    //     if (this.props.board.style.background) {
+    //         const avgColor = await boardService.getAvgColor(this.props.board.style.background)
+    //         if (avgColor === "#ffffff") document.querySelector('.main-header').style.backgroundColor = '#00000090'
+    //         else if (avgColor === '#000000') document.querySelector('.main-header').style.backgroundColor = '#ffffff90'
+    //         else document.querySelector('.main-header').style.backgroundColor = avgColor
+
+    //         document.querySelector('.board').style.background = `url(${this.props.board.style.background};)`
+    //     }
+
+
+    // }
     setTheme = async () => {
-        if (this.props.board.style.backgroundColor) {
+        if (this.state.board.style.backgroundColor) {
             document.querySelector('.main-header').style.backgroundColor = '#00000090'
-            document.querySelector('.board').style.backgroundColor = this.props.board.style.backgroundColor
+            document.querySelector('.board').style.backgroundColor = this.state.board.style.backgroundColor
         }
-        if (this.props.board.style.background) {
-            const avgColor = await boardService.getAvgColor(this.props.board.style.background)
+        if (this.state.board.style.background) {
+            const avgColor = await boardService.getAvgColor(this.state.board.style.background)
             if (avgColor === "#ffffff") document.querySelector('.main-header').style.backgroundColor = '#00000090'
             else if (avgColor === '#000000') document.querySelector('.main-header').style.backgroundColor = '#ffffff90'
             else document.querySelector('.main-header').style.backgroundColor = avgColor
 
-            document.querySelector('.board').style.background = `url(${this.props.board.style.background};)`
+            document.querySelector('.board').style.background = `url(${this.state.board.style.background};)`
         }
 
 
+    }
+
+    onSaveBoard = (board) => {
+        console.log(board)
+        this.props.updateBoard(board)
+        this.setState({ board })
+        // dispatch(updateBoard(newBoard))
     }
 
 
@@ -70,7 +96,10 @@ class _Board extends React.Component {
 
     _setBoard = async () => {
         const { boardId } = this.props.match.params
-        this.props.loadBoard(boardId)
+        console.log(boardId)
+        const board = await this.props.loadBoard(boardId)
+        console.log(board)
+        this.setState({ board })
     }
 
     onAddTask = async (newTask) => {
@@ -156,8 +185,10 @@ class _Board extends React.Component {
     }
 
     render() {
-        const { board } = this.props
+
+        // const { board } = this.props
         // console.log('_Board - render - board rendered')
+        const { board } = this.state
         if (!board) return <div>loading...</div>
         // console.log(board);
         const { groups } = board
@@ -177,7 +208,7 @@ class _Board extends React.Component {
                     <GroupList groups={groups} eventHandlers={eventHandlers} />
                     <Switch>
                         <Route path={'/board/:boardId/:groupId/:taskId'}>
-                            <TaskDetails onArchiveTask={this.onArchiveTask} />
+                            <TaskDetails onArchiveTask={this.onArchiveTask} onSaveBoard={this.onSaveBoard} />
                         </Route>
                     </Switch>
                 </section>

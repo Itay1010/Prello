@@ -1,5 +1,6 @@
 // import { showSuccessMsg } from '../services/event-bus.service'
 import { boardService } from '../../services/board/board.service'
+import { minisService } from '../../services/board/minis.service'
 // import { userService } from '../../services/user.service'
 
 // Board Action Creators
@@ -17,6 +18,7 @@ function getActionSetMinis(minis) {
     return { type: 'SET_MINIS', minis }
 }
 function getActionAddMini(mini) {
+
     return { type: 'ADD_MINI', mini }
 }
 function getActionRemoveMini(mini) {
@@ -41,13 +43,14 @@ export function loadBoardMinis() {
 
 //load board to state
 export function loadBoard(boardId) {
-    // console.log(boardId);
+    console.log(boardId);
     return async dispatch => {
         try {
             // console.log('test');
             const board = await boardService.getById(boardId)
-            // console.log(board);
+            console.log(board);
             dispatch(getActionSetBoard(board))
+            return board
         } catch (err) {
             console.log('BoardActions: err in loadBoard', err)
             throw err
@@ -55,9 +58,24 @@ export function loadBoard(boardId) {
     }
 }
 
-//update mini in state
-export function updateMini(newMini) {
+export function addBoard(board) {
+    console.log(board)
     return async dispatch => {
+        try {
+            const addedBoard = await boardService.save(board)
+
+        }
+        catch {
+
+        }
+
+    }
+}
+
+//update mini in state
+export function updateMini(board) {
+    return async dispatch => {
+        const newMini = minisService.saveMiniBoard(board)
         dispatch(getActionUpdateMini(newMini))
     }
 }

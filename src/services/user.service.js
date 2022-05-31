@@ -14,7 +14,7 @@ export const userService = {
     logout,
     loginGuest
     // googleAuth
-    // getUserById,
+    // getUserById
 }
 
 window.userService = userService

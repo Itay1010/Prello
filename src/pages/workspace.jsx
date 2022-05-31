@@ -5,7 +5,8 @@ import { MainHeader } from "../cmps/shared cmps/header/main-header"
 import { BoardList } from '../cmps/workspace/board-list'
 import { boardService } from "../services/board/board.service"
 import { userService } from "../services/user.service"
-import { loadBoardMinis } from '../store/board/board.action'
+import { addBoard, loadBoardMinis, updateMini } from '../store/board/board.action'
+import { saveMiniBoard } from '../services/board/minis.service.js'
 
 const boardFromService = [
     {
@@ -74,9 +75,17 @@ export const Workspace = () => {
     const [boards, setBoards] = useState(null)
     const dispatch = useDispatch()
     const { miniBoards } = useSelector(storeState => storeState.boardModule)
+    const user = userService.getLoggedinUser()
+    const userId = user._id
     const toggleStar = (board) => {
         board.isStarred = !board.isStarred
-        console.log(board.isStarred)
+        dispatch(updateMini(board))
+    }
+
+    const onCreateNewBoard = (newBoardInfo) => {
+        newBoardInfo.lastVisit = Date.now()
+        newBoardInfo.creator = user
+        dispatch(addBoard(newBoardInfo))
     }
 
     useEffect(() => {
@@ -87,15 +96,15 @@ export const Workspace = () => {
         console.log(miniBoards)
         setBoards([...miniBoards])
 
-
     }
 
-    const user = userService.getLoggedinUser()
-    const userId = user._id
+
+
+
     // const { userId } = user.userId
     if (!boards) return <React.Fragment></React.Fragment>
     return <section className="workspace-wrapper">
         <MainHeader />
-        <BoardList boards={boards} userId={userId} toggleStar={toggleStar} />
+        <BoardList boards={boards} userId={userId} toggleStar={toggleStar} createNewBoard={onCreateNewBoard} />
     </section>
 }
