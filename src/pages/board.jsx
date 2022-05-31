@@ -68,7 +68,7 @@ class _Board extends React.Component {
 
         newTask = { id: utilService.makeId(), title: newTask.title }
         newBoard.groups[groupIdx].tasks.push(newTask)
-        actService.activity('added', 'card,', newTask, newBoard.activities)
+        actService.activity('added', 'card,', newTask, newBoard)
         this.props.updateBoard(newBoard)
     }
 
