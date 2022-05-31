@@ -10,6 +10,7 @@ export const actService = {
 const LIMIT = 500
 
 function activity(type, entityType, entity, board) {
+    console.log(board)
     if (!type || !entityType || !entity || !board) throw new Error('No arguments givin')
     const id = entity.id ? entity.id : entity._id
     if (!id) throw new Error('Item is unknown')
