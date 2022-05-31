@@ -4,9 +4,9 @@ import { BoardPreview } from './board-preview'
 
 export const BoardList = ({ boards, userId, toggleStar }) => {
 
-
-    const boardsRelated = boards.filter(board => board.usersRelated.includes(userId))
-    const starredBoards = boardsRelated.filter(board => board.isStarred === true)
+    console.log(boards)
+    // const boardsRelated = boards.filter(board => board.usersRelated.includes(userId))
+    const starredBoards = boards.filter(board => board.isStarred === true)
 
 
     return <div className="workspace-container">
@@ -23,7 +23,7 @@ export const BoardList = ({ boards, userId, toggleStar }) => {
                 })}
             </div>
         </section>}
-        {boardsRelated.length > 0 && <section className="board-container" >
+        {boards.length > 0 && <section className="board-container" >
             <section className="board-preview-header">
                 <div className="icon-wrapper">
                     <h4>icon</h4>
@@ -31,7 +31,7 @@ export const BoardList = ({ boards, userId, toggleStar }) => {
                 <h1>My boards</h1>
             </section>
             <div className="boards-wrapper" >
-                {boardsRelated.map(board => {
+                {boards.map(board => {
                     return <BoardPreview board={board} toggleStar={toggleStar} />
                 })}
             </div>
