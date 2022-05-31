@@ -14,8 +14,11 @@
         .board-name {
             font-size: 1.28em;
             margin: 0 8px 0 4px;
-            padding: 0;
+            padding: 4px;
+            background-color: var(--clr-dynamic-faded);
+            color: var(--clr-dynamic-inner);
             &:focus {
+                color: var(--clr-dynamic-invert);
                 margin: 0 8px 0 4px;
                 padding: 0;
                 font-size: 1.28em;
@@ -30,7 +33,11 @@
 
         button {
             @include btn($type: dark);
-            color: $txt;
+            color: var(--clr-dynamic-inner);
+            background-color: var(--clr-dynamic-faded);
+            &:hover {
+                background-color: var(--clr-dynamic-faded-hover);
+            }
         }
 
         input {
@@ -60,17 +67,17 @@
             line-height: 32px;
             border-radius: 3px;
             margin-inline-end: 4px;
-            background-color: $opc-black;
+            background-color: var(--clr-dynamic-faded);
             cursor: pointer;
 
             &:hover {
-                background-color: $opc-black-hov;
+                background-color: var(--clr-dynamic-faded-hover);
             }
 
             svg {
                 height: 20px;
                 width: 20px;
-                fill: $txt;
+                fill: var(--clr-dynamic-inner);
             }
 
         }
@@ -84,11 +91,17 @@
         div {
             @include btn($type: dark);
             padding: 0 12px;
-            color: $txt;
+            color: var(--clr-dynamic-inner);
+            background-color: var(--clr-dynamic-faded);
+            background-blend-mode: color;
             cursor: pointer;
+            &:hover {
+                background-color: var(--clr-dynamic-faded-hover);
+            }
 
             svg {
                 margin-inline-end: 8px;
+                fill: var(--clr-dynamic-inner);
             }
         }
     }

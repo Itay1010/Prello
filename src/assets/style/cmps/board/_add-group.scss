@@ -9,10 +9,14 @@
         display: block;
         @include btn($type: dark, $height: 40px);
         border-radius: 3px;
-        color: darkblue;
+        color: var(--clr-dynamic-inner);
+        background-color: var(--clr-dynamic-faded);
         width: 270px;
-        cursor: pointer;
         transition: background-color, 0.09zs;
+        cursor: pointer;
+        &:hover {
+            background-color: var(--clr-dynamic-faded-hover);
+        }
     }
     
     .add-list {

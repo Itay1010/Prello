@@ -4,6 +4,7 @@ import { TextareaAutosize } from '@mui/material';
 import { useDispatch } from 'react-redux';
 import { updateBoard } from '../../../store/board/board.action.js';
 import { actService } from '../../../services/board/activity.service.js';
+import { useHistory } from 'react-router-dom';
 
 
 export const BoardData = ({ board, saveBoardHeader }) => {
@@ -11,6 +12,7 @@ export const BoardData = ({ board, saveBoardHeader }) => {
 
     const [isBoardTitleEditable, setBoardTitleEditable] = useState(null)
     const [boardTitle, setBoardTitleValue] = useState(board.title)
+    const history = useHistory()
     const boardTitleRef = useRef()
     const [width, setWidth] = useState(0);
     // useEffect(() => {
@@ -39,7 +41,7 @@ export const BoardData = ({ board, saveBoardHeader }) => {
 
     // console.log(board);
     return <section className="board-data flex align-center">
-        <button>Dashboard</button>
+        <button onClick={ev => history.push(`${history.location.pathname}/dashboard`)}>Dashboard</button>
         {/* <textarea maxRows={1}>{board.title}</textarea> */}
 
         {/* <div>{board.title}</div> */}
