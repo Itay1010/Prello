@@ -26,9 +26,12 @@ export const AttachmentPreview = ({ attachment, removeAttachment, openImgModal, 
         {/* <div className='img-container' onClick={() => openImgModal(url)}>
             <img src={url} alt="" />
         </div> */}
-        <a href={attachment.url} target={'_blank'} className='img-container'>
+        <div className='img-container'>
             <img src={url} alt="" />
-        </a>
+        </div>
+        {/* <a href={attachment.url} target={'_blank'} className='img-container'>
+            <img src={url} alt="" />
+        </a> */}
         {/* <a href=""></a> */}
         {/* <div className='attachment-title-and-options'> */}
         <div className='attachment-data flex col space-between'>
