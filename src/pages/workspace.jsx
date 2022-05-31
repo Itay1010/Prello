@@ -1,8 +1,11 @@
-import React from "react"
+import React, { useEffect, useState } from "react"
+import { useSelector } from "react-redux"
+import { useDispatch } from "react-redux"
 import { MainHeader } from "../cmps/shared cmps/header/main-header"
 import { BoardList } from '../cmps/workspace/board-list'
 import { boardService } from "../services/board/board.service"
 import { userService } from "../services/user.service"
+import { loadBoardMinis } from '../store/board/board.action'
 
 const boardFromService = [
     {
@@ -63,14 +66,25 @@ const boardFromService = [
         usersRelated: ['u102', 'u101']
     },
 ]
+// console.log(boardAc)
 
 
 
 export const Workspace = () => {
-
+    const [boards, setBoards] = useState(null)
+    const dispatch = useDispatch()
+    // const { miniBoards } = useSelector(storeState => storeState.boardModule)
     const toggleStar = (board) => {
         board.isStarred = !board.isStarred
-        console.log(board.isStarred)
+    }
+
+    useEffect(() => {
+        loadMiniBoards()
+    }, [])
+    const loadMiniBoards = async () => {
+        const miniBoards = await dispatch(loadBoardMinis())
+        console.log(miniBoards)
+        setBoards([...miniBoards])
     }
 
     const user = userService.getLoggedinUser()

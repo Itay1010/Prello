@@ -5,12 +5,12 @@
 // })
 
 
-// const BASE_URL = (process.env.NODE_ENV === 'production')
-//     ? '/api/board'
-//     : 'http://localhost:3000/api/board/'
-
 import { httpService } from '../basic/http.service'
 import getAverageColor from 'get-average-color'
+const BASE_URL = (process.env.NODE_ENV === 'production')
+    ? '/api/board'
+    : 'http://localhost:3030/api/board/'
+
 
 
 
@@ -26,7 +26,8 @@ export const boardService = {
 }
 
 async function query() {
-    return httpService.get()
+    console.log('baseUrl', BASE_URL)
+    return httpService.get('board')
     // try {
     //     const res = await axios.get(BASE_URL, { params: filterBy })
     //     return res.data
@@ -102,7 +103,7 @@ function getLabels() {
 
 async function getAvgColor(url) {
     const RGB = await getAverageColor(url)
-    _lightOrDark(RGB)
+    // _lightOrDark(RGB)
     const HEX = _rgbToHex(RGB)
     // _lightOrDark(HEX)
     return HEX

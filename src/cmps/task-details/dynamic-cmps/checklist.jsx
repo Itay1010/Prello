@@ -2,7 +2,6 @@ import React from 'react'
 
 
 export const Checklist = ({ saveChecklist, group, closeModal }) => {
-    console.log(closeModal)
 
 
     const onCreateChecklist = (ev) => {
