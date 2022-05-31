@@ -33,15 +33,14 @@ export const MemberProfile = () => {
             <div className='profile' onClick={() => setIsModal(true)}>
                 <img src={loggedinUser.imgUrl} alt={`${loggedinUser.email.charAt(0)}`} />
             </div>
-            {isModal && <UserModal closeModal={closeModal} />}
+            {isModal && <UserModal closeModal={closeModal} user={loggedinUser} goLogin={goLogin} />}
         </React.Fragment>
 
     } else if (loggedinUser.color) {
         return <React.Fragment>
-            {isModal && <UserModal closeModal={closeModal} />}
+            {isModal && <UserModal closeModal={closeModal} user={loggedinUser} goLogin={goLogin} />}
             <div className='profile' style={{ backgroundColor: loggedinUser.color }} onClick={() => {
                 setIsModal(true)
-                console.log(isModal);
             }}>
                 <h2>{`${loggedinUser.email.charAt(0)}`}</h2>
             </div>

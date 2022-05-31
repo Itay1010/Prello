@@ -22,7 +22,8 @@ export const boardService = {
     getTask,
     getMembers,
     getLabels,
-    getAvgColor
+    getAvgColor,
+    // updateMini
 }
 
 async function query() {
@@ -73,6 +74,7 @@ async function save(board) {
         //     throw err
         // }
     } else {
+        console.log(board)
         return httpService.post('board', board)
 
         // try {
@@ -135,11 +137,7 @@ function _lightOrDark(color) {
     // Using the HSP value, determine whether the color is light or dark
     if (hsp > 127.5) console.log('light')
     else console.log('dark')
-
 }
-
-
-
 
 
 
