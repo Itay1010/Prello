@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState,useRef } from 'react';
 import { useSelector } from 'react-redux'
 
 
@@ -17,6 +17,11 @@ export const TaskPreview = ({ task, groupId, idx }) => {
     const [membersToDisplay, setMembersToDisplay] = useState(null)
     const boardMembers = useSelector((storeState) => storeState.boardModule.board.members)
 
+    // const taskPreviewRef = useRef()
+
+    // useEffect(() => {
+    //     taskPreviewRef.current.scrollIntoView({ behavior: "smooth", block: "end", inline: "nearest" })
+    // }, [])
 
     useEffect(() => {
         getMembersToDisplay()

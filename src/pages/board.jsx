@@ -25,7 +25,6 @@ import { GroupList } from "../cmps/board/group-list";
 import { actService } from "../services/board/activity.service";
 
 class _Board extends React.Component {
-
     componentDidMount() {
         this._setBoard()
     }
