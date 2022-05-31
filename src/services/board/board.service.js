@@ -22,11 +22,12 @@ export const boardService = {
     getTask,
     getMembers,
     getLabels,
-    getAvgColor
+    getAvgColor,
+    // updateMini
 }
 
 async function query() {
-    // console.log('baseUrl', BASE_URL)
+    console.log('baseUrl', BASE_URL)
     return httpService.get('board')
     // try {
     //     const res = await axios.get(BASE_URL, { params: filterBy })
@@ -73,6 +74,7 @@ async function save(board) {
         //     throw err
         // }
     } else {
+        console.log(board)
         return httpService.post('board', board)
 
         // try {
