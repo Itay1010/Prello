@@ -103,9 +103,10 @@ function getLabels() {
 
 async function getAvgColor(url) {
     const RGB = await getAverageColor(url)
-    // _lightOrDark(RGB)
+    const color = [RGB.r, RGB.g, RGB.b]
+    _lightOrDark(color)
+    // let isDark = await _lightOrDark(color)
     const HEX = _rgbToHex(RGB)
-    // _lightOrDark(HEX)
     return HEX
 }
 
@@ -120,49 +121,21 @@ function _componentToHex(cmp) {
 
 
 function _lightOrDark(color) {
-    // console.log(color);
-
-    // Variables for red, green, blue values
-    var { r, g, b } = color
-    var hsp
-
-    // Check the format of the color, HEX or RGB?
-    if (color.match(/^rgb/)) {
-
-        // If RGB --> store the red, green, blue values in separate variables
-        color = color.match(/^rgba?\((\d+),\s*(\d+),\s*(\d+)(?:,\s*(\d+(?:\.\d+)?))?\)$/);
-
-        r = color[1];
-        g = color[2];
-        b = color[3];
-    }
-    else {
-
-        // If hex --> Convert it to RGB: http://gist.github.com/983661
-        color = +("0x" + color.slice(1).replace(
-            color.length < 5 && /./g, '$&$&'));
-        console.log(color);
-        r = color >> 16;
-        g = color >> 8 & 255;
-        b = color & 255;
-    }
+    const r = color[1]
+    const g = color[2]
+    const b = color[3]
 
     // HSP (Highly Sensitive Poo) equation from http://alienryderflex.com/hsp.html
-    hsp = Math.sqrt(
+    const hsp = Math.sqrt(
         0.299 * (r * r) +
         0.587 * (g * g) +
         0.114 * (b * b)
-    );
+    )
 
     // Using the HSP value, determine whether the color is light or dark
-    if (hsp > 127.5) {
+    if (hsp > 127.5) console.log('light')
+    else console.log('dark')
 
-        return 'light';
-    }
-    else {
-
-        return 'dark';
-    }
 }
 
 
