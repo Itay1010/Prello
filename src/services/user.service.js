@@ -47,8 +47,8 @@ async function googleAuth(googleData) {
     console.log(users);
     // const users = await storageService.query(LOCAL_STORAGE_USER_DB)
     // console.log(users)
-    // const userExists = users.find(user => user.googleId === googleData.googleId || user.email === credentials.email)
-    // console.log(userExists);
+    const userExists = users.find(user => user.googleId === googleData.googleId || user.email === googleData.email)
+    console.log(userExists);
     // if (userExists) {
     //     if (!userExists.googleId) {
     //         const userToUpdate = { ...userExists, googleId: googleData.googleId }
