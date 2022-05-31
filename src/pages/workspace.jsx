@@ -76,6 +76,7 @@ export const Workspace = () => {
     const dispatch = useDispatch()
     const { miniBoards } = useSelector(storeState => storeState.boardModule)
     const user = userService.getLoggedinUser()
+    conmsole.log(user)
     const userId = user._id
     const toggleStar = (board) => {
         board.isStarred = !board.isStarred
