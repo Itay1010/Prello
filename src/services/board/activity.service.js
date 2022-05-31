@@ -12,8 +12,7 @@ function activity(type, entityType, entity, board) {
     if (!type || !entityType || !entity || !board) throw new Error('No arguments givin')
     const user = userService.getLoggedinUser()
     const id = entity.id ? entity.id : entity._id
-    console.log('activity - entity.id', entity._id)
-    if(!id) throw new Error('Item is unknown')
+    if (!id) throw new Error('Item is unknown')
     const newActivity = {
         id: utilService.makeId(),
         txt: `${user.firstName} ${type} ${entityType} ${entity.title}`,
@@ -28,6 +27,7 @@ function activity(type, entityType, entity, board) {
 function activityTo(type, entity, board) {
     if (!type || !entity || !board) throw new Error('No arguments givin')
     const user = userService.getLoggedinUser()
+    const id = entity.id ? entity.id : entity._id
     const newActivity = {
         id: utilService.makeId(),
         txt: `${user.firstName} ${type} ${entity.title}`,
