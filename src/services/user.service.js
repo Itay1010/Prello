@@ -12,6 +12,7 @@ export const userService = {
     signup,
     // login,
     logout,
+    loginGuest
     // googleAuth
     // getUserById,
 }
@@ -70,6 +71,21 @@ async function signup(userCred) {
 
 async function logout() {
     sessionStorage.removeItem(LOCAL_STORAGE_LOGGEDIN_USER)
+}
+
+async function loginGuest() {
+    const user = {
+        _id: "g100",
+        firstName: "Guest",
+        lastName: "Guest",
+        username: "Guest",
+        password: "123",
+        email: "Guest@gmail.com",
+        // imgUrl: "https://res.cloudinary.com/di5o0obqy/image/upload/v1653742446/eytan_vl7skf.jpg",
+        color: "#5BC0EB"
+    }
+    sessionStorage.setItem(LOCAL_STORAGE_LOGGEDIN_USER, JSON.stringify(user))
+    return user
 }
 
 // async function googleAuth(credentials) {
