@@ -1,4 +1,4 @@
-import React from 'react';
+import React from 'react'
 import { userService } from '../../../../services/user.service'
 import { IClose } from '../../../icons/i-close'
 

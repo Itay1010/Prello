@@ -15,7 +15,6 @@ export const ClTask = ({ deleteClTask, item, setIsDone, checklistId, boardMember
     }
 
     const onDeleteClTask = (clTaskId) => {
-        // deleteClTask(item.id)
         deleteClTask(clTaskId)
     }
 
@@ -23,9 +22,6 @@ export const ClTask = ({ deleteClTask, item, setIsDone, checklistId, boardMember
         saveMemberToClTask(member, item.id)
         setModal(false)
     }
-
-
-
 
     return <div className='cl-task-wrapper'>
         <div className='checkbox-wrapper'>

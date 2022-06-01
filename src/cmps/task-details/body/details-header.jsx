@@ -1,11 +1,11 @@
-import { TextareaAutosize } from '@mui/material';
-import React, { useState } from 'react';
-import { ITask } from '../../icons/i-task';
+import { TextareaAutosize } from '@mui/material'
+import React, { useState } from 'react'
+import { ITask } from '../../icons/i-task'
 
 export const DetailsHeader = ({ task, group, onGoBack, saveTaskTitle }) => {
     const [title, setTitleValue] = useState(task.title)
     let height
-    
+
     const handleTitleChange = ({ target }) => {
         height = 'auto'
         let titleHeight = target.scrollHeight

@@ -1,13 +1,10 @@
-import React, { useState } from 'react';
+import React, { useState } from 'react'
 
 export const AddGroupForm = ({ handleSubmit }) => {
     const [isEditing, setIsEditing] = useState(false)
     const [listTitle, setListTitle] = useState('')
     return <form
         className={`add-list-container ${isEditing ? 'editing' : ''}`}
-        // onBlur={ev => {
-        //     setIsEditing(false)
-        // }}
         onSubmit={ev => {
             ev.preventDefault()
             if (!listTitle) return

@@ -4,11 +4,10 @@ export const draggableStyle = {
     getStyle
 }
 
-
 function getStyle(style, snapshot) {
     if (snapshot.isDropAnimating) {
-        const { moveTo, curve, duration } = snapshot.dropAnimation;
-        const skew = `rotate(0deg)`;
+        const { moveTo, curve, duration } = snapshot.dropAnimation
+        const skew = `rotate(0deg)`
         const translate = moveTo ? `translate(${moveTo.x}px, ${moveTo.y}px)` : ''
 
         return {
@@ -18,8 +17,7 @@ function getStyle(style, snapshot) {
     }
 
     else if (snapshot.isDragging) {
-        // console.log('isDragging')
-        const skew = `rotate(3deg)`;
+        const skew = `rotate(3deg)`
         return {
             ...style,
             transform: `${style.transform} ${skew}`,

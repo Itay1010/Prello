@@ -1,24 +1,16 @@
 import React from "react"
+
 import { connect } from 'react-redux'
-import { ReactDOM } from "react-dom"
 
 import { userService } from "../services/user.service"
+import { onLogin, onSignup, onGoogleAuth } from "../store/user/user.actions"
 
 import { SignupForm } from '../cmps/auth/signup.jsx'
 import { LoginForm } from '../cmps/auth/login.jsx'
-import FacebookLogin from 'react-facebook-login'
+
 import { GoogleLogin } from 'react-google-login'
-
-import { onLogin, onSignup, onGoogleAuth } from "../store/user/user.actions"
-
 import { gapi } from "gapi-script"
 const clientId = "168490950789-fil5g5m4nauiousknnut75avvh0dhsb5.apps.googleusercontent.com"
-
-
-
-// import { userAction } from '../store/user/user.actions'
-// import { useForm } from "../hooks/useForm"
-
 
 export class _Auth extends React.Component {
     state = {
@@ -73,8 +65,6 @@ export class _Auth extends React.Component {
         console.log("LOGIN FAILED! ,res ", res)
     }
 
-
-
     render() {
         const { type } = this.state
         return <section className="auth-page">
@@ -97,7 +87,6 @@ export class _Auth extends React.Component {
         </section>
     }
 }
-
 
 const mapStateToProps = state => {
 

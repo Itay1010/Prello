@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react"
-import { useSelector } from "react-redux"
+
 import { useDispatch } from "react-redux"
 import { MainHeader } from "../cmps/shared cmps/header/main-header"
 import { BoardList } from '../cmps/workspace/board-list'
@@ -8,6 +8,7 @@ import { addBoard, loadBoardMinis, updateMini } from '../store/board/board.actio
 import { useHistory } from "react-router-dom/cjs/react-router-dom.min"
 
 export const Workspace = () => {
+
     const history = useHistory()
     const [boards, setBoards] = useState(null)
     const dispatch = useDispatch()
@@ -16,6 +17,7 @@ export const Workspace = () => {
     const toggleStar = (board) => {
         board.isStarred = !board.isStarred
         dispatch(updateMini(board))
+        loadMiniBoards()
     }
 
     const onCreateNewBoard = async (newBoardInfo) => {

@@ -1,4 +1,5 @@
 import React, { useRef, useState } from "react"
+
 import { useForm } from "../../hooks/useForm"
 import { BoardPreview } from './board-preview'
 
@@ -13,11 +14,13 @@ export const BoardList = ({ boards, userId, toggleStar, createNewBoard }) => {
     const toggleModal = () => {
         setModal(!isModalOpen)
     }
+
     const [newBoard, handleTitleChange] = useForm({
         title: '',
         isStarred: false,
         backgroundOption: img1
     })
+
     const titleRef = useRef()
 
     const onCreateNewBoard = (ev) => {
@@ -33,9 +36,7 @@ export const BoardList = ({ boards, userId, toggleStar, createNewBoard }) => {
     return <div className="workspace-container">
         <section className="board-container">
             <section className="board-preview-header">
-                <div className="icon-wrapper">
-                    <h4>Star icon</h4>
-                </div>
+
                 <h1>Starred boards</h1>
             </section>
             {starredBoards.length > 0 &&
@@ -47,9 +48,7 @@ export const BoardList = ({ boards, userId, toggleStar, createNewBoard }) => {
         </section>
         <section className="board-container" >
             <section className="board-preview-header">
-                <div className="icon-wrapper">
-                    <h4>icon</h4>
-                </div>
+
                 <h1>My boards</h1>
             </section>
             {boards.length > 0 &&
@@ -58,9 +57,10 @@ export const BoardList = ({ boards, userId, toggleStar, createNewBoard }) => {
                         return <BoardPreview key={board._id} board={board} toggleStar={toggleStar} idx={idx} boardAmount={board.length} />
                     })}
                 </div>}
+            {isModalOpen && <div onClick={toggleModal} className="clear-screen"></div>}
             <div className="new-board-btn-wrapper">
                 <div onClick={toggleModal} className="board-preview-body add-board-btn">
-                    Add new Board
+                    <p> Add new Board</p>
                 </div>
                 {isModalOpen && <div className='add-new-board-modal'>
                     <h2>Create board</h2>
