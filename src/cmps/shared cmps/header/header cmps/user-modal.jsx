@@ -1,8 +1,11 @@
 import React from 'react'
+import { useDispatch } from 'react-redux'
 import { userService } from '../../../../services/user.service'
+import { onLogout } from '../../../../store/user/user.actions'
 import { IClose } from '../../../icons/i-close'
 
 export const UserModal = ({ closeModal, user, goLogin }) => {
+    const dispatch = useDispatch()
 
     return <div className="user-modal flex col">
         <div className='modal-header flex'>
@@ -22,8 +25,16 @@ export const UserModal = ({ closeModal, user, goLogin }) => {
             </div>
         </div>
         <hr />
-        {user._id === 'g100' && <p className='opt' onClick={() => { goLogin(); closeModal() }}>Login</p>}
-        {user._id !== 'g100' && <p className='opt' onClick={() => { userService.logout(); closeModal() }}>Log out</p>}
+        {user._id === 'g100' && <p className='opt' onClick={() => {
+            goLogin()
+            closeModal()
+        }}>Login</p>}
+        {user._id !== 'g100' && <p className='opt' onClick={() => {
+            
+            dispatch(onLogout())
+            closeModal()
+        }
+        }>Log out</p>}
     </div>
 }
 

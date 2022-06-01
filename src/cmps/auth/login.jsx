@@ -9,8 +9,10 @@ export const LoginForm = ({ onLogin }) => {
             <h2>Sign in</h2>
             <Formik
                 initialValues={{ email: '', password: '' }}
-                onSubmit={(values) => {
+                onSubmit={(values, actions) => {
+                    console.log('LoginForm - values', values)
                     onLogin(values)
+                    actions.setSubmitting(false)
                 }}
                 enableReinitialize={true}
                 validateOnChange={false}
@@ -64,5 +66,5 @@ export const LoginForm = ({ onLogin }) => {
             </Formik>
         </div>
 
-    </section>
+    </section >
 }

@@ -1,19 +1,25 @@
 import React, { useEffect, useState } from "react"
+import { useSelector } from "react-redux"
+import { useDispatch } from "react-redux"
 import { useHistory } from 'react-router-dom/cjs/react-router-dom.min'
 
+import { loadGuest } from "../../../../store/user/user.actions";
 import { userService } from "../../../../services/user.service"
 import { UserModal } from './user-modal'
 
 export const MemberProfile = () => {
+    const loggedinUser = useSelector(storeState => storeState.userModule.user)
     const history = useHistory()
     const [isModal, setIsModal] = useState(false)
-    const [loggedinUser, setLoggedinUser] = useState(null)
+    // const [loggedinUser, setLoggedinUser] = useState(null)
+    const dispatch = useDispatch()
 
     useEffect(() => {
-        const user = userService.getLoggedinUser() || userService.loginGuest()
-        setLoggedinUser(user)
+        if (!loggedinUser) {
+            dispatch(loadGuest())
+        }
 
-    }, [])
+    }, [loggedinUser])
 
     const goLogin = () => {
         history.push(`/auth/login`)

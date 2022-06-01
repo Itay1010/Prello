@@ -78,6 +78,14 @@ export class _Auth extends React.Component {
             <div className="form-wrapper">
                 {(type === 'signup') && <SignupForm onSignup={this.signup} />}
                 {(type === 'login') && <LoginForm onLogin={this.login} />}
+
+                {type === 'login' && <button style={({margin: "16px 0 0"})} onClick={() => {
+                    window.location.assign('/auth/signup')
+                    this.setState((prevState) => 'signup')
+                }}>
+                    Signup
+                </button>}
+
                 <div className="login-method-separator">OR</div>
                 <div className="google-login">
                     <GoogleLogin
