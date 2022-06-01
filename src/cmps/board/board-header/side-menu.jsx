@@ -1,6 +1,6 @@
 import React from 'react'
 import { useSelector } from 'react-redux'
-import { ActivitiesList } from './activities-list.jsx'
+// import { ActivitiesList } from './activities-list.jsx'
 export const SideMenu = ({ toggleMenu, isSideMenuOpen }) => {
 
     const boardActivities = useSelector(storeState => storeState.boardModule.board.activities)
@@ -17,7 +17,7 @@ export const SideMenu = ({ toggleMenu, isSideMenuOpen }) => {
                 <button>More</button>
             </div>
             <div className='activity-wrapper'>
-                <ActivitiesList activities={boardActivities} />
+                {/* <ActivitiesList activities={boardActivities} /> */}
             </div>
         </div>
     </section>

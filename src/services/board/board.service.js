@@ -18,7 +18,6 @@ export const boardService = {
 }
 
 async function query() {
-    console.log('baseUrl', BASE_URL)
     return httpService.get('board')
 }
 

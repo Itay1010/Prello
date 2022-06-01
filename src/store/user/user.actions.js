@@ -2,15 +2,23 @@ import { userService } from "../../services/user.service";
 // import { showErrorMsg, showSuccessMsg } from '../services/event-bus.service.js'
 // import { socketService, SOCKET_EMIT_USER_WATCH, SOCKET_EVENT_USER_UPDATED } from "../services/socket.service.js";
 
-export function loadUser() {
-    return async dispatch => {
+export function loadGuest() {
+    return dispatch => {
         try {
-            let user = await userService.getUsers()
-            if(!user) user = userService.loginGuest()
-            dispatch({ type: 'SET_USER', user })
+            const guest = userService.loginGuest()
+            dispatch({ type: 'SET_USER', guest })
+            return guest
         } catch (err) {
             console.log('UserActions: err in loadUsers', err)
         }
+    }
+}
+
+export function setUser(user) {
+    return dispatch => {
+        if (!user) console.log('no user to dispatch')
+        else dispatch({ type: 'SET_USER', user })
+
     }
 }
 
@@ -26,7 +34,6 @@ export function removeUser(userId) {
 }
 
 export function onLogin(credentials) {
-    console.log(credentials)
     return async (dispatch) => {
         try {
             const user = await userService.login(credentials)
@@ -37,6 +44,7 @@ export function onLogin(credentials) {
         } catch (err) {
             // showErrorMsg('Cannot login')
             console.log('Cannot login', err)
+            throw err
         }
     }
 }
