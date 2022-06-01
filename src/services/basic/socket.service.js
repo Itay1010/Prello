@@ -3,14 +3,14 @@ import { userService } from './../user.service'
 
 export const SOCKET_EMIT_SEND_MSG = 'chat newMsg'
 export const SOCKET_EMIT_TYPING = 'chat typing'
-export const SOCKET_EMIT_USER_WATCH = 'user-watch';
-export const SOCKET_EMIT_TOPIC = 'chat topic';
+export const SOCKET_EMIT_USER_WATCH = 'user-watch'
+export const SOCKET_EMIT_TOPIC = 'chat topic'
 
-export const SOCKET_EVENT_ADD_MSG = 'chat addMsg';
-export const SOCKET_EVENT_TYPING = 'chat typing';
+export const SOCKET_EVENT_ADD_MSG = 'chat addMsg'
+export const SOCKET_EVENT_TYPING = 'chat typing'
 
-const SOCKET_EMIT_LOGIN = 'set-user-socket';
-const SOCKET_EMIT_LOGOUT = 'unset-user-socket';
+const SOCKET_EMIT_LOGIN = 'set-user-socket'
+const SOCKET_EMIT_LOGOUT = 'unset-user-socket'
 
 
 const baseUrl = (process.env.NODE_ENV === 'production') ? '' : '//localhost:3030'
@@ -24,7 +24,7 @@ socketService.setup()
 
 
 function createSocketService() {
-  var socket = null;
+  var socket = null
   const socketService = {
     setup() {
       socket = io(baseUrl)
@@ -37,7 +37,7 @@ function createSocketService() {
       socket.on(eventName, cb)
     },
     off(eventName, cb = null) {
-      if (!socket) return;
+      if (!socket) return
       if (!cb) socket.removeAllListeners(eventName)
       else socket.off(eventName, cb)
     },
@@ -91,7 +91,7 @@ function createSocketService() {
 //       this.emit('chat addMsg', { from: 'Someone', txt: 'Aha it worked!' })
 //     },
 //   }
-//   window.listenersMap = listenersMap;
+//   window.listenersMap = listenersMap
 //   return socketService
 // }
 

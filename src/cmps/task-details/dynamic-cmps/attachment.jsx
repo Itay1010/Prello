@@ -20,7 +20,7 @@ export const Attachment = ({ attachmentToUpdate, saveAttachment, closeModal }) =
     }
 
     function isUrl(url) {
-        return /^(ftp|http|https):\/\/[^ "]+$/.test(url);
+        return /^(ftp|http|https):\/\/[^ "]+$/.test(url)
     }
 
     return <div className='attachments'>

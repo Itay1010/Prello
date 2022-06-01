@@ -3,20 +3,18 @@
     .board-data {
         width: auto;
 
-        // &>*{
-        //     display: inline-block;
-        // }
-
         h2 {
             font-size: 18px;
             font-weight: 700;
         }
+
         .board-name {
             font-size: 1.28em;
             margin: 0 8px 0 4px;
             padding: 4px;
             background-color: var(--clr-dynamic-faded);
             color: var(--clr-dynamic-inner);
+
             &:focus {
                 color: var(--clr-dynamic-invert);
                 margin: 0 8px 0 4px;
@@ -35,6 +33,7 @@
             @include btn($type: dark);
             color: var(--clr-dynamic-inner);
             background-color: var(--clr-dynamic-faded);
+
             &:hover {
                 background-color: var(--clr-dynamic-faded-hover);
             }
@@ -95,6 +94,7 @@
             background-color: var(--clr-dynamic-faded);
             background-blend-mode: color;
             cursor: pointer;
+
             &:hover {
                 background-color: var(--clr-dynamic-faded-hover);
             }

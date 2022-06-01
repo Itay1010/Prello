@@ -1,10 +1,8 @@
 import React from 'react'
+
 import { Group } from './task-list'
 import { Droppable } from 'react-beautiful-dnd'
-
 import { AddGroupForm } from "./add-group-form"
-
-
 
 export const GroupList = ({ groups, eventHandlers }) => {
     const {

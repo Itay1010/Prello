@@ -1,42 +1,21 @@
-import React, { useState } from 'react';
-import { useHistory } from 'react-router-dom';
-import { IAttachment } from '../../icons/i-attachment';
-import { IChecklist } from '../../icons/i-checklist';
+
+import React, { useState } from 'react'
+import { useHistory } from 'react-router-dom'
+import { IAttachment } from '../../icons/i-attachment'
+import { IChecklist } from '../../icons/i-checklist'
 
 // DYNAMIC CMS
-import { Members } from '../dynamic-cmps/members.jsx';
+import { Members } from '../dynamic-cmps/members.jsx'
 import { Labels } from '../dynamic-cmps/labels.jsx'
 import { Checklist } from '../dynamic-cmps/checklist.jsx'
 import { Dates } from '../dynamic-cmps/dates.jsx'
 import { Attachment } from '../dynamic-cmps/attachment.jsx'
 import { Location } from '../dynamic-cmps/location.jsx'
 
-// export const TaskEdit = ({
-//     onArchiveTask,
-//     task,
-//     group,
-//     boardId,
-//     boardMembers,
-//     saveMembers,
-//     saveLabels,
-//     saveChecklist,
-//     onSaveAttachment
-
-// }) => {
 export const TaskEdit = (props) => {
 
-    // const [modalType, setModalType] = useState(null)
     const history = useHistory()
-
     const { modalType, setModalType } = props
-
-    // const handlers = {
-    //     boardMembers,
-    //     saveMembers,
-    //     saveLabels,
-    //     saveChecklist,
-    //     onSaveAttachment
-    // }
 
     return <div className='task-edit flex col'>
         <h3>Add to card</h3>
@@ -48,7 +27,6 @@ export const TaskEdit = (props) => {
             </div>
             {modalType === 'members' && <div className='action-type-modal'>
                 <div className='modal'>
-                    {/* <h3>{modalType}</h3> */}
                     <_DynamicModal type={modalType} {...props} />
                 </div>
             </div>}
@@ -60,7 +38,6 @@ export const TaskEdit = (props) => {
             </div>
             {modalType === 'labels' && <div className='action-type-modal'>
                 <div className='modal'>
-                    {/* <h3>{modalType}</h3> */}
                     <_DynamicModal type={modalType} {...props} />
                 </div>
             </div>}
@@ -72,7 +49,6 @@ export const TaskEdit = (props) => {
             </div>
             {modalType === 'checklist' && <div className='action-type-modal'>
                 <div className='modal'>
-                    {/* <h3>{modalType}</h3> */}
                     <_DynamicModal type={modalType} {...props} />
                 </div>
             </div>}
@@ -83,7 +59,6 @@ export const TaskEdit = (props) => {
             </div>
             {modalType === 'attachment' && <div className='action-type-modal'>
                 <div className='modal'>
-                    {/* <h3>{modalType}</h3> */}
                     <_DynamicModal type={modalType} {...props} />
                 </div>
             </div>}
@@ -100,8 +75,6 @@ export const TaskEdit = (props) => {
         {!modalType && <_DynamicModal type={modalType} {...props} />}
     </div>
 }
-
-
 
 const _DynamicModal = (props) => {
     const {
