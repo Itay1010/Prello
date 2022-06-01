@@ -1,4 +1,5 @@
 import React from 'react'
+
 import { ClTask } from './cl-task.jsx'
 
 export const ClItemsList = ({ items, setIsDone, checklistId, deleteClTask, boardMembers, generalTask, saveMemberToClTask }) => {

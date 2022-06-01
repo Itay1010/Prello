@@ -1,35 +1,26 @@
-import React, { useEffect, useState } from 'react';
-import { useHistory, useParams } from 'react-router-dom/cjs/react-router-dom.min';
-import { useSelector, useDispatch } from 'react-redux';
+import React, { useEffect, useState } from 'react'
 
+import { useHistory, useParams } from 'react-router-dom/cjs/react-router-dom.min'
+import { useSelector, useDispatch } from 'react-redux'
 
-// import { ClosedModal } from '../cmps/task-details/dynamic-cmps/location.jsx'
-import { MembersPreview } from "../cmps/task-details/body/members-preview";
 // CMPS
-import { ChecklistList } from '../cmps/task-details/checklist/checklistList.jsx';
+import { MembersPreview } from "../cmps/task-details/body/members-preview"
+import { ChecklistList } from '../cmps/task-details/checklist/checklistList.jsx'
 import { AttachmentList } from '../cmps/task-details/attachments/attachment-list.jsx'
-import { TxtInputCmp } from '../cmps/shared cmps/txt-input-cmp.jsx';
+import { IDescription } from '../cmps/icons/i-description'
 
 // ACTIONS
-import { loadBoard, updateBoard } from '../store/board/board.action'
+import { updateBoard } from '../store/board/board.action'
 
 // SERVICES
 import { utilService } from '../services/basic/util.service.js'
-import { userService } from '../services/user.service.js'
-import { boardService } from '../services/board/board.service.js'
-import { IAttachment } from '../cmps/icons/i-attachment.jsx'
-import { IChecklist } from '../cmps/icons/i-checklist.jsx'
 import { IAdd } from '../cmps/icons/i-add.jsx'
-import { ITask } from '../cmps/icons/i-task.jsx'
-import { IDescription } from '../cmps/icons/i-description.jsx';
 
 // LIBS
 
-import TextareaAutosize from '@mui/material/TextareaAutosize';
-// import { TaskLabels } from '../cmps/task-preview/task-labels.jsx';
-import { ModalImg } from '../cmps/task-details/modal-img.jsx';
-import { DetailsHeader } from '../cmps/task-details/body/details-header.jsx';
-import { TaskEdit } from '../cmps/task-details/body/task-edit.jsx';
+import TextareaAutosize from '@mui/material/TextareaAutosize'
+import { DetailsHeader } from '../cmps/task-details/body/details-header.jsx'
+import { TaskEdit } from '../cmps/task-details/body/task-edit.jsx'
 
 export default function EmptyTextarea() {
     return (
@@ -38,12 +29,8 @@ export default function EmptyTextarea() {
             placeholder="Empty"
             style={{ width: 200 }}
         />
-    );
+    )
 }
-
-
-
-
 
 export const TaskDetails = ({ onArchiveTask, onSaveBoard }) => {
     //getter hooks
@@ -141,7 +128,7 @@ export const TaskDetails = ({ onArchiveTask, onSaveBoard }) => {
     }
 
     const saveTaskTitle = (title) => {
-        console.log('saved');
+        console.log('saved')
         task.title = title
         setTitle(false)
         saveBoard()
@@ -153,8 +140,6 @@ export const TaskDetails = ({ onArchiveTask, onSaveBoard }) => {
         saveBoard()
 
     }
-
-
 
     const onSaveAttachment = (attachment) => {
         if (attachment.id) {
@@ -170,7 +155,6 @@ export const TaskDetails = ({ onArchiveTask, onSaveBoard }) => {
                 task.attachments = [attachment]
             }
         }
-        // setGroup(group)
         saveBoard()
     }
 
@@ -198,7 +182,6 @@ export const TaskDetails = ({ onArchiveTask, onSaveBoard }) => {
 
     const saveMemberToClTask = (member, clTaskId, checklist) => {
 
-
         const requestedClTask = checklist.items.find(clTask => clTask.id === clTaskId)
         if (requestedClTask.member) {
             if (requestedClTask.member._id === member._id) {
@@ -207,7 +190,6 @@ export const TaskDetails = ({ onArchiveTask, onSaveBoard }) => {
         } else {
             requestedClTask.member = member
         }
-        // console.log(requestedClTask.member)
         saveBoard()
     }
 
@@ -239,7 +221,6 @@ export const TaskDetails = ({ onArchiveTask, onSaveBoard }) => {
     const openImgModal = (id) => {
         setIsModal(id)
     }
-
 
     if (!group || !task) return <React.Fragment></React.Fragment>
     const { checklist, attachments } = task
@@ -297,13 +278,9 @@ export const TaskDetails = ({ onArchiveTask, onSaveBoard }) => {
                                 />
                                 <button className='btn-save'>Save</button>
                                 <button className='btn-cancel' onMouseDown={(event) => { event.preventDefault(); toggleEditDescription() }}>Cancel</button>
-                                {/* <button className='btn-cancel' onClick={toggleEditDescription}>Cancel</button> */}
                             </div>}
                         </div>
                     </div>
-                    {/* {checklist?.length > 0 && <div className='checklist'>
-                        {checklist.length > 0 && <ChecklistList checklists={checklist} saveChecklistTask={onSaveChecklistTask} setIsDone={onSetIsDone} deleteClTask={onDeleteClTask} deleteChecklist={onDeleteChecklist} />}
-                    </div>} */}
 
                     {checklist?.length > 0 && <ChecklistList checklist={checklist} saveChecklistTask={onSaveChecklistTask} setIsDone={onSetIsDone} deleteClTask={onDeleteClTask} deleteChecklist={onDeleteChecklist} boardMembers={newBoard.members} generalTask={task} saveMemberToClTask={saveMemberToClTask} />}
 

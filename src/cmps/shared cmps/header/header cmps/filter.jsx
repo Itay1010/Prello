@@ -1,5 +1,4 @@
 import React from 'react'
-// const dropdown = require('../../../../assets/imgs/icons/dropdown.svg')
 
 export const Filter = () => {
 

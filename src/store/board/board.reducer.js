@@ -1,4 +1,3 @@
-// import undoable from "redux-undo";
 const initialState = {
     miniBoards: [],
     board: null

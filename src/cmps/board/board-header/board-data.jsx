@@ -1,10 +1,9 @@
 import React, { useEffect, useRef, useState } from 'react'
 import { TxtInputCmp } from '../../shared cmps/txt-input-cmp.jsx'
-import { TextareaAutosize } from '@mui/material';
-import { useDispatch } from 'react-redux';
-import { updateBoard } from '../../../store/board/board.action.js';
-import { actService } from '../../../services/board/activity.service.js';
-import { useHistory } from 'react-router-dom';
+import { useDispatch } from 'react-redux'
+import { updateBoard } from '../../../store/board/board.action.js'
+import { actService } from '../../../services/board/activity.service.js'
+import { useHistory } from 'react-router-dom'
 
 
 export const BoardData = ({ board, saveBoardHeader }) => {
@@ -14,13 +13,9 @@ export const BoardData = ({ board, saveBoardHeader }) => {
     const [boardTitle, setBoardTitleValue] = useState(board.title)
     const history = useHistory()
     const boardTitleRef = useRef()
-    const [width, setWidth] = useState(0);
-    // useEffect(() => {
-    //     setWidth(boardTitleRef.current.offsetWidth);
-    // }, [boardTitle]);
+    const [width, setWidth] = useState(0)
 
     const handleBoardTitleChange = (value) => {
-        // setWidth(target.value.length)
         setBoardTitleValue(value)
         const newBoard = JSON.parse(JSON.stringify(board))
         newBoard.title = value
@@ -41,16 +36,6 @@ export const BoardData = ({ board, saveBoardHeader }) => {
 
     return <section className="board-data flex align-center">
         <button onClick={ev => history.push(`${history.location.pathname}/dashboard`)}>Dashboard</button>
-        {/* <textarea maxRows={1}>{board.title}</textarea> */}
-
-        {/* <div>{board.title}</div> */}
-        {/* {!isBoardTitleEditable && <h2 onClick={toggleBoardTitleEditable}>{board.title ? board.title : 'Enter board title'}</h2>} */}
-
-        {/* <TextareaAutosize
-            rows={1}
-            placeholder="Minimum 3 rows"
-            style={{ width: 200 }}
-        /> */}
         <TxtInputCmp isBoardTitleEditable={isBoardTitleEditable}
             toggleContentEditable={toggleBoardTitleEditable}
             saveFunc={saveBoardHeader}

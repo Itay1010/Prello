@@ -1,10 +1,9 @@
 import React from 'react'
+
 import { AttachmentPreview } from './attachment-preview.jsx'
 import { IAttachment } from '../../icons/i-attachment'
 
 export const AttachmentList = ({ attachments, removeAttachment, openImgModal, saveAttachment }) => {
-
-
 
     return (<div className='attachments flex'>
         <div className='section-icon'>

@@ -1,10 +1,13 @@
 import React, { useEffect, useState } from 'react'
+
 import { useForm } from '../../../hooks/useForm'
 import { ClItemsList } from './cl-items-list.jsx'
-import Box from '@mui/material/Box';
-import LinearProgress from '@mui/material/LinearProgress';
+
+import Box from '@mui/material/Box'
+import LinearProgress from '@mui/material/LinearProgress'
+
 import { IChecklist } from '../../icons/i-checklist.jsx'
-import { createTheme, ThemeProvider } from '@mui/material/styles';
+import { createTheme, ThemeProvider } from '@mui/material/styles'
 
 const theme = createTheme({
     palette: {
@@ -12,7 +15,7 @@ const theme = createTheme({
             main: '#5BA4D0',
         },
     }
-});
+})
 
 export const ChecklistItemPreview = ({ item, saveChecklistTask, setIsDone, checklistId, deleteClTask, deleteChecklist, boardMembers, generalTask, saveMemberToClTask }) => {
 
@@ -25,7 +28,7 @@ export const ChecklistItemPreview = ({ item, saveChecklistTask, setIsDone, check
 
     const donePercentage = checklistDoneLength / checklistLength * 100
 
-    const [progress, setProgress] = useState(0);
+    const [progress, setProgress] = useState(0)
     const [checklistTask, handleChange] = useForm(null)
     const [isInputOpen, setInput] = useState(false)
     const onSaveChecklistTask = () => {
@@ -55,7 +58,6 @@ export const ChecklistItemPreview = ({ item, saveChecklistTask, setIsDone, check
         setProgress(donePercentage)
     }, [checklistLength, checklistDoneLength])
 
-    // const { title, items } = item
     return <div className='checklist-item-preview'>
 
         <div className='item-content flex'>
@@ -86,8 +88,6 @@ export const ChecklistItemPreview = ({ item, saveChecklistTask, setIsDone, check
             </div>
             <div className='checklist-item-list'>
                 {items?.length > 0 && <ClItemsList checklistId={checklistId} items={items} setIsDone={setIsDone} deleteClTask={onDeleteClTask} boardMembers={boardMembers} generalTask={generalTask} saveMemberToClTask={onSaveMemberToClTask} />}
-
-
 
             </div>
             <div className='checklist-item-footer'>
