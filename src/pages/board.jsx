@@ -34,7 +34,7 @@ class _Board extends React.Component {
         this.setTheme()
     }
 
-    componentWillUpdate(nextProps, nextState) {
+    componentWillUnmount(nextProps, nextState) {
         document.querySelector('#root').style.background = 'initial'
     }
 
