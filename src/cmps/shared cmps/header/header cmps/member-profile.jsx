@@ -3,7 +3,7 @@ import { useSelector } from "react-redux"
 import { useDispatch } from "react-redux"
 import { useHistory } from 'react-router-dom/cjs/react-router-dom.min'
 
-import { loadGuest } from "../../../../store/user/user.actions";
+import { loadGuest, setUser } from "../../../../store/user/user.actions";
 import { userService } from "../../../../services/user.service"
 import { UserModal } from './user-modal'
 
@@ -15,7 +15,10 @@ export const MemberProfile = () => {
     const dispatch = useDispatch()
 
     useEffect(() => {
-        if (!loggedinUser) {
+        const userFromStorage = userService.getLoggedinUser()
+        if (!loggedinUser && userFromStorage) {
+            dispatch(setUser(userFromStorage))
+        } else if (!loggedinUser) {
             dispatch(loadGuest())
         }
 

@@ -10,7 +10,11 @@ import { LoginForm } from '../cmps/auth/login.jsx'
 
 import { GoogleLogin } from 'react-google-login'
 import { gapi } from "gapi-script"
+<<<<<<< HEAD
 import { ILogo } from "../cmps/icons/i-logo"
+=======
+import { socketService } from "../services/basic/socket.service"
+>>>>>>> 623f6ad460fefc1791308172b669219350a05444
 const clientId = "168490950789-fil5g5m4nauiousknnut75avvh0dhsb5.apps.googleusercontent.com"
 
 export class _Auth extends React.Component {
@@ -42,7 +46,7 @@ export class _Auth extends React.Component {
 
     login = async (credentials) => {
         try {
-            await this.props.onLogin(credentials)
+            const user = await this.props.onLogin(credentials)            
             this.onGoOn()
         } catch (err) {
             console.error(err)

@@ -1,11 +1,13 @@
 import io from 'socket.io-client'
 import { userService } from './../user.service'
 
+// chat emit
 export const SOCKET_EMIT_SEND_MSG = 'chat newMsg'
 export const SOCKET_EMIT_TYPING = 'chat typing'
 export const SOCKET_EMIT_USER_WATCH = 'user-watch'
 export const SOCKET_EMIT_TOPIC = 'chat topic'
 
+// chat event
 export const SOCKET_EVENT_ADD_MSG = 'chat addMsg'
 export const SOCKET_EVENT_TYPING = 'chat typing'
 
@@ -29,9 +31,10 @@ function createSocketService() {
     setup() {
       socket = io(baseUrl)
       setTimeout(() => {
-        const user = userService.getUserFromStorage()
+        const user = userService.getLoggedinUser()
+        console.log('setTimeout - user', user)
         if (user) this.login(user._id)
-      }, 500)
+      }, 1000)
     },
     on(eventName, cb) {
       socket.on(eventName, cb)
