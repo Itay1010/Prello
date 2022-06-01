@@ -1,18 +1,9 @@
-// import Axios from 'axios'
-
-// var axios = Axios.create({
-//     withCredentials: true
-// })
-
-
 import { httpService } from '../basic/http.service'
 import getAverageColor from 'get-average-color'
+
 const BASE_URL = (process.env.NODE_ENV === 'production')
     ? '/api/board'
     : 'http://localhost:3030/api/board/'
-
-
-
 
 export const boardService = {
     query,
@@ -29,62 +20,20 @@ export const boardService = {
 async function query() {
     console.log('baseUrl', BASE_URL)
     return httpService.get('board')
-    // try {
-    //     const res = await axios.get(BASE_URL, { params: filterBy })
-    //     return res.data
-    // } catch (err) {
-    //     console.log('Failed to get data \n', err)
-    //     throw err
-    // }
 }
 
-// async function getById(boardId) {
 async function getById(boardId) {
-    // console.log(boardId);
     return await httpService.get(`board/${boardId}`)
-    // try {
-    //     const res = await axios.get(BASE_URL + boardId)
-    //     return res.data
-    // } catch (err) {
-    //     console.log('Board was not found \n', err)
-    //     throw err
-    // }
+
 }
 
 async function remove(boardId) {
     return httpService.delete(`board/${boardId}`)
-    // try {
-    //     const res = await axios.delete(BASE_URL + boardId)
-    //     return res.data
-    // } catch (err) {
-    //     console.log('Remove board failed \n', err)
-    //     throw err
-    // }
 }
 
 async function save(board) {
-    if (board._id) {
-        return httpService.put(`board/${board._id}`, board)
-
-        // try {
-        //     const res = await axios.put(BASE_URL + board._id, board)
-        //     return res.data
-        // } catch (err) {
-        //     console.log('Saving board failed \n', err)
-        //     throw err
-        // }
-    } else {
-        console.log(board)
-        return httpService.post('board', board)
-
-        // try {
-        //     const res = await axios.post(BASE_URL, board)
-        //     return res.data
-        // } catch (err) {
-        //     console.log('Saving new board failed \n', err)
-        //     throw err
-        // }
-    }
+    if (board._id) return httpService.put(`board/${board._id}`, board)
+     else return httpService.post('board', board)
 }
 
 async function getTask(boardId, groupId, taskId) {
@@ -107,7 +56,6 @@ async function getAvgColor(url) {
     const RGB = await getAverageColor(url)
     const color = [RGB.r, RGB.g, RGB.b]
     _lightOrDark(color)
-    // let isDark = await _lightOrDark(color)
     const HEX = _rgbToHex(RGB)
     return HEX
 }
@@ -135,8 +83,8 @@ function _lightOrDark(color) {
     )
 
     // Using the HSP value, determine whether the color is light or dark
-    if (hsp > 127.5) console.log('light')
-    else console.log('dark')
+    // if (hsp > 127.5) console.log('light')
+    // else console.log('dark')
 }
 
 
@@ -144,18 +92,6 @@ function _lightOrDark(color) {
 
 
 
-
-
-// import { utilService } from '../../services/basic/util.service'
-// import { storageService } from '../basic/async-storage.service'
-// // import { httpService } from '../basic/http.service'
-// import { getActionSetBoard, getActionRemoveBoard } from '../../store/board/board.action'
-// import { userService } from "../../services/user.service"
-// import { useState } from 'react'
-// const emptyBoard = require('../../data/empty-board.json')
-// const jsonBoard = require('../../data/prello-boards-demo.json')
-// // import { socketService, SOCKET_EVENT_REVIEW_ADDED, SOCKET_EVENT_REVIEW_ABOUT_YOU } from './socket.service'
-// // import { showSuccessMsg } from '../services/event-bus.service'
 
 // const STORAGE_KEY = 'board'
 // // const boardChannel = new BroadcastChannel('boardChannel')
@@ -172,27 +108,6 @@ function _lightOrDark(color) {
 // //         showSuccessMsg(`New board about me ${board.txt}`)
 // //     })
 // // })()
-
-// export const boardService = {
-
-//     getTask,
-//     getMembers,
-//     getLabels,
-//     getMemberById,
-//     // subscribe,
-//     // unsubscribe,
-// }
-
-// async function getMemberById(memberId) {
-//     try {
-//         const members = await getMembers()
-//         const member = members.filter(member => member._id === memberId)
-//         return member[0]
-//     } catch (error) {
-//         throw _logError(error)
-//     }
-
-// }
 
 
 
