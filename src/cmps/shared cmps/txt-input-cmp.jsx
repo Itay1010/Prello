@@ -1,11 +1,10 @@
-import React, { useState, useRef, useEffect } from "react";
+import React, { useState, useRef, useEffect } from "react"
 
 export const TxtInputCmp = ({ toggleContentEditable, contentInitialState, handleBoardTitleChange }) => {
 
-
     const [content, setBoardTitleValue] = useState('')
     const contentRef = useRef()
-    const [width, setWidth] = useState(0);
+    const [width, setWidth] = useState(0)
 
     const handleContentChange = ({ target }) => {
         setWidth(target.value.length + 'ch')

@@ -1,6 +1,5 @@
 import React from "react"
-import { Formik } from 'formik';
-import FacebookLogin from 'react-facebook-login'
+import { Formik } from 'formik'
 
 
 export const LoginForm = ({ onLogin }) => {

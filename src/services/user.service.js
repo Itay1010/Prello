@@ -1,7 +1,8 @@
 import { httpService } from './basic/http.service'
 import { utilService } from './basic/util.service'
-// import { socketService, SOCKET_EVENT_USER_UPDATED } from './socket.service'
 
+// import { socketService, SOCKET_EVENT_USER_UPDATED } from './socket.service'
+// const LOCAL_STORAGE_USER_DB = 'userDB'
 const LOCAL_STORAGE_LOGGEDIN_USER = 'loggedinUser'
 const BASE_URL = 'auth/'
 

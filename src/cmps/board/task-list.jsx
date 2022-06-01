@@ -1,11 +1,11 @@
 import React, { useState, useRef, useEffect } from "react"
-import { Droppable, Draggable } from 'react-beautiful-dnd';
 
+import { Droppable, Draggable } from 'react-beautiful-dnd'
 import { TaskPreview } from "./task-preview"
 import { GroupTitle } from "./group-title"
 import { AddTask } from "./add-task"
-import { IAdd } from "../icons/i-add";
-import { draggableStyle } from "../../services/board/draggable.style";
+import { IAdd } from "../icons/i-add"
+import { draggableStyle } from "../../services/board/draggable.style"
 
 export const Group = ({ group, onAddTask, onArchiveTask, onArchiveGroup, onGroupChange, idx }) => {
     const { tasks } = group
@@ -57,14 +57,7 @@ export const Group = ({ group, onAddTask, onArchiveTask, onArchiveGroup, onGroup
 
                             {
 
-                                // isTaskOpen || <div className="group-footer flex align-center" >
-                                //     <div className="add-card flex align-center"><IAdd />
-                                //         <button className="add-card-open-btn" onClick={ev => setIsTaskOpen(true)
-                                //         }>Add a card</button>
-                                //     </div>
-                                // </div>
                                 isTaskOpen || <div className="group-footer flex align-center" >
-                                    {/* <div className="add-card flex align-center"> </div> */}
                                     <button className="add-card-open-btn" onClick={ev => setIsTaskOpen(true)
                                     }><IAdd /> Add a card</button>
 
@@ -78,7 +71,7 @@ export const Group = ({ group, onAddTask, onArchiveTask, onArchiveGroup, onGroup
                                         setNewTask({ title: '', groupId: group.id })
                                         setTimeout(() => {
                                             setIsTaskOpen(true)
-                                        }, 0);
+                                        }, 0)
 
                                     }}>Add card</button>
                                     <button onMouseDown={ev => {
@@ -95,7 +88,6 @@ export const Group = ({ group, onAddTask, onArchiveTask, onArchiveGroup, onGroup
         }}
 
     </Draggable >
-
 }
 
 const _getSVG = () => {

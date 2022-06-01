@@ -3,35 +3,9 @@ const BASE_URL = (process.env.NODE_ENV === 'production')
     ? '/api/workspace'
     : 'http://localhost:3030/api/workspace/'
 
-
-// import { utilService } from '../../services/basic/util.service'
-// import { storageService } from '../basic/async-storage.service'
-
-
-
-
 export const minisService = {
-    // query,
-    // remove,
-    // getById,
-    // save,
-    // getMembers,
     saveMiniBoard
-    // subscribe,
-    // unsubscribe,
 }
-
-// async function query(filterBy) {
-//     // var queryStr = (!filterBy) ? '' : `?minis=${filterBy.minis}&sort=anaAref`
-//     try {
-//         // return await httpService.get(`board${queryStr}`)
-//         const res = await storageService.query(STORAGE_KEY)
-//         console.log('query - res', res)
-//         return res
-//     } catch (error) {
-//         throw _logError(error)
-//     }
-// }
 
 async function saveMiniBoard(board) {
     if (board._id) {
@@ -47,12 +21,5 @@ async function saveMiniBoard(board) {
         console.log(board)
         return httpService.post('workspace', board)
 
-        // try {
-        //     const res = await axios.post(BASE_URL, board)
-        //     return res.data
-        // } catch (err) {
-        //     console.log('Saving new board failed \n', err)
-        //     throw err
-        // }
     }
 }

@@ -1,4 +1,4 @@
-import { Formik } from 'formik';
+import { Formik } from 'formik'
 
 
 export const SignupForm = ({ onSignup }) => {

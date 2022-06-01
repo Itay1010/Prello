@@ -1,10 +1,7 @@
 import React from "react"
+
 import { Link } from "react-router-dom"
 import { NavLink } from "react-router-dom"
-import { TaskPreview } from "../cmps/board/task-preview"
-import { ILogo } from "../cmps/icons/i-Logo"
-
-
 
 export const Home = () => {
     return <section className="home">

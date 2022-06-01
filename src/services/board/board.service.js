@@ -33,7 +33,7 @@ async function remove(boardId) {
 
 async function save(board) {
     if (board._id) return httpService.put(`board/${board._id}`, board)
-     else return httpService.post('board', board)
+    else return httpService.post('board', board)
 }
 
 async function getTask(boardId, groupId, taskId) {

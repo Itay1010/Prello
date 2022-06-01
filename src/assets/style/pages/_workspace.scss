@@ -1,8 +1,19 @@
+.clear-screen {
+    position: absolute;
+    inset: 0;
+
+    background-color: unset;
+    width: 100vw;
+    height: 100vh;
+}
+
 .workspace-wrapper {
     // display: flex;
     // flex-direction: column;
     width: 100vw;
     height: 100%;
+    font-family: secular-font;
+    font-size: 16px;
 
     header {
         background-color: $clr1 ;
@@ -22,13 +33,26 @@
             .new-board-btn-wrapper {
 
                 position: relative;
-                background-color: aqua;
+
                 display: flex;
                 height: fit-content;
                 width: fit-content;
 
 
                 text-align: center;
+
+                p {
+                    background-color: $opc-black;
+                    width: 100%;
+                    height: 100%;
+                    padding: 8px;
+
+                    &:hover {
+                        background-color: $opc-black-hov;
+                    }
+                }
+
+
 
                 h2 {
                     font-size: 14px;
@@ -59,6 +83,7 @@
                     // background-color: rgb(53, 232, 232);
                     width: 280px;
                     height: 400px;
+                    background-color: $bg;
 
                     .img-container {
                         img {
@@ -101,6 +126,11 @@
                         button {
                             @include btn;
                             width: 100%;
+
+                            &:hover {
+                                background-color: $clr1;
+                                color: $bg;
+                            }
                         }
                     }
                 }
@@ -110,16 +140,16 @@
             .board-preview-header {
                 position: relative;
                 display: flex;
+                align-items: center;
 
                 .icon-wrapper {
-                    position: absolute;
+                    // position: absolute;
                     width: 32px;
                     height: 32px;
-                    transform: translateX(-100%);
+                    // transform: translateX(-100%);
                 }
 
                 display: flex;
-                flex-direction: column;
                 margin-block-end: 20px;
 
                 &>* {
@@ -136,26 +166,29 @@
 
             .board-preview-body {
                 position: relative;
-
-
-
-                padding: 8px;
                 position: relative;
                 width: 200px;
                 height: 100px;
                 display: flex;
                 flex-direction: column;
                 justify-content: space-between;
+                padding: 8px;
 
                 .star-wrapper {
                     align-self: flex-end;
                 }
 
                 margin: 0 2% 2% 0;
+
                 background-size: cover;
                 background-repeat: no-repeat;
                 gap: 20px 8px;
                 border-radius: 3px;
+
+                &.add-board-btn {
+                    margin: 0;
+                    padding: 0;
+                }
 
                 h1 {
                     font-size: 16px;

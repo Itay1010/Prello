@@ -1,12 +1,11 @@
-import React, { useEffect, useState,useRef } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import { useSelector } from 'react-redux'
 
 
 import { Link, useParams } from "react-router-dom"
 import { TaskLabels } from "../task-preview/task-labels"
 import { TaskMembers } from "../task-preview/task-members"
-import { boardService } from "../../services/board/board.service"
-import { Droppable, Draggable } from 'react-beautiful-dnd';
+import { Draggable } from 'react-beautiful-dnd';
 import { TaskBadges } from '../task-preview/task-badges';
 import { draggableStyle } from '../../services/board/draggable.style';
 
@@ -33,7 +32,6 @@ export const TaskPreview = ({ task, groupId, idx }) => {
         const filteredMembers = boardMembers.filter(member => task.members.includes(member._id))
         setMembersToDisplay(filteredMembers)
     }
-    // console.log(task);
     const getClStatus = (task) => {
         let total = 0
         let done = 0
@@ -45,9 +43,6 @@ export const TaskPreview = ({ task, groupId, idx }) => {
         })
         return `${done}/${total}`
     }
-
-
-
 
     return <Draggable type="cards" draggableId={task.id} index={idx}>
         {(provided, snapshot) => {
@@ -65,7 +60,6 @@ export const TaskPreview = ({ task, groupId, idx }) => {
                         {task.labels?.length > 0 && <div className="task-label">
                             <TaskLabels labels={task.labels} />
                         </div>}
-                        {/* {task.checklist?.length > 0 && getClStatus(task)} */}
                         <section className="task-title">{task.title}</section>
                         {(task.attachments?.length > 0 || task.members?.length > 0 ||
                             task.comments?.length > 0 || task.checklist?.length > 0 ||
@@ -85,70 +79,4 @@ export const TaskPreview = ({ task, groupId, idx }) => {
 
 }
 
-// const mapStateToProps = state => {
-//     return {
-//         board: state.boardModule.board,
-//         //   users: state.userModule.users,
-//         //   loggedInUser: state.userModule.user
-//     }
-// }
 
-// const mapDispatchToProps = {
-//     // loadBoard,
-//     // updateBoard,
-//     // removeReview
-// }
-
-// export const TaskPreview = connect(mapStateToProps, mapDispatchToProps)(_TaskPreview)
-
-// import React, { useEffect, useState } from 'react';
-// import { Link, useParams } from "react-router-dom"
-// import { boardService } from "../../services/board/board.service"
-
-// import { TaskLabels } from "../task-preview/task-labels"
-
-
-// export const TaskPreview = ({ task, groupId, onArchiveTask }) => {
-//     const [membersToDisplay, setMembersToDisplay] = useState(null)
-
-//     useEffect(() => {
-//         setMembersToDisplay(getMembersToDisplay())
-
-//     }, [membersToDisplay])
-
-//     // console.log(task);
-//     const params = useParams()
-//     const { boardId, taskId } = params
-
-//     async function getMembersToDisplay() {
-//         const members = await boardService.getMembers()
-//         return members.filter(member => task.members.includes(member._id))
-//     }
-
-
-
-
-//     // if (!task) return <p>Loading...</p>
-//     return <article className="task-preview">
-//         <Link to={`/board/${boardId}/${groupId}/${taskId}`}>
-//             {task.style?.bgColor && <section className="task-color"
-//             // style={({ backgroundColor: task.style.bgColor })}
-//             ></section>}
-//             <div className="task-info">
-//                 {task.labels && task.labels.length > 0 && <div className="task-label">
-//                     <TaskLabels labels={task.labels} />
-//                 </div>}
-//                 <section className="task-title">{task.title}</section>
-//                 <section className="task-status flex space-between wrap">
-//                     <section className="badges">badges</section>
-//                     {/* {task.members && task.members.length > 0 && <section className="members">
-//                         <TaskPreview members={() => membersToDisplay()} />
-//                     </section>} */}
-//                     {/* {task.members && task.members.length > 0 && <section className="members">
-//                         <TaskPreview members={membersToDisplay} />
-//                     </section>} */}
-//                 </section>
-//             </div>
-//         </Link>
-//     </article>
-// }

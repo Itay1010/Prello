@@ -3,31 +3,26 @@ import React, { useState } from "react"
 import { connect } from 'react-redux'
 
 //libs
-import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
-// import getAverageColor from 'get-average-color'
+import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd'
 
 //services
-import { boardService } from "../services/board/board.service";
+import { boardService } from "../services/board/board.service"
 
 //private
 import { MainHeader } from "../cmps/shared cmps/header/main-header"
 import { BoardHeader } from "../cmps/board/board-header/board-header"
-import { AddGroupForm } from "../cmps/board/add-group-form"
 
 import { loadBoard, updateBoard } from "../store/board/board.action"
 import { utilService } from "../services/basic/util.service"
-// import { Switch } from "react-router-dom/cjs/react-router-dom.min"
 import { Switch, Route } from 'react-router-dom'
 
 // Routes
 import { TaskDetails } from './task-details.jsx'
-import { GroupList } from "../cmps/board/group-list";
-import { actService } from "../services/board/activity.service";
-import { httpService } from "../services/basic/http.service";
-import axios from "axios";
-import { getPhoto } from "../services/basic/unsplash.service";
-import { Dashboard } from "./dashboard";
-const tinycolor = require("tinycolor2");
+import { GroupList } from "../cmps/board/group-list"
+import { actService } from "../services/board/activity.service"
+import { Dashboard } from "./dashboard"
+
+const tinycolor = require("tinycolor2")
 
 class _Board extends React.Component {
 
@@ -39,7 +34,7 @@ class _Board extends React.Component {
         this.setTheme()
     }
 
-    componentWillUpdate(nextProps, nextState) {
+    componentWillUnmount(nextProps, nextState) {
         document.querySelector('#root').style.background = 'initial'
     }
 
@@ -53,7 +48,7 @@ class _Board extends React.Component {
             const avgColor = await boardService.getAvgColor(boardStyle.background)
             const isDark = tinycolor(avgColor).isDark()
             utilService.setDynamicColors(isDark, avgColor)
-            document.querySelector('#root').style.background = `url(${boardStyle.background};)`
+            document.querySelector('#root').style.background = `url(${boardStyle.background})`
         }
     }
 
@@ -150,12 +145,8 @@ class _Board extends React.Component {
     }
 
     render() {
-
-        // const { board } = this.props
-        // console.log('_Board - render - board rendered')
         const { board } = this.props
         if (!board) return <div>loading...</div>
-        // console.log(board);
         const { groups } = board
         const eventHandlers = {
             onAddTask: this.onAddTask,
@@ -188,54 +179,12 @@ class _Board extends React.Component {
 const mapStateToProps = state => {
     return {
         board: state.boardModule.board,
-        //   users: state.userModule.users,
-        //   loggedInUser: state.userModule.user
     }
 }
 
 const mapDispatchToProps = {
     loadBoard,
     updateBoard,
-    // removeReview
 }
 
 export const Board = connect(mapStateToProps, mapDispatchToProps)(_Board)
-
-
-
-const task = {
-    bgImg: 'https://images.unsplash.com/photo-1653759588370-03395fadcbd3?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1219&q=80',
-    bgColor: null
-}
-
-
-export const BoardList = (task) => {
-
-    // const { bgImg } = task
-    // async function printAverageColor() {
-    //     const color = await getAverageColor(bgImg);
-    //     console.log(color);
-    //     // document.querySelector('.main-header').style.backgroundColor = color
-    //     // const elHeader = document.querySelector('.main-header')
-    // }
-
-    // printAverageColor()
-
-    // return <div className="workspace-container">
-
-    // </div>
-}
-
-// export const BoardList = () => {
-//     // console.log(task);
-//     const { bgImg } = task
-//     const fac = new FastAverageColor()
-//     const elHeader = document.querySelector('.main-header')
-//     const color = fac.getColor(bgImg)
-
-//     console.log(color);
-
-//     return <div className="workspace-container">
-
-//     </div>
-// }

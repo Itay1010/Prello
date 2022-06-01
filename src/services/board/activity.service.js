@@ -1,5 +1,5 @@
-import { utilService } from "../basic/util.service";
-import { userService } from "../user.service";
+import { utilService } from "../basic/util.service"
+import { userService } from "../user.service"
 
 export const actService = {
     activity,
