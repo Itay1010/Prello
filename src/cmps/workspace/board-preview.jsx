@@ -8,9 +8,9 @@ export const BoardPreview = ({ board, toggleStar }) => {
         history.push(`/board/${boardId}`)
     }
 
-    // const background = board.style.background ? board.style.background : board.style.backgroundColor
-    return (<div className="board-preview-body" onClick={() => onGoToBoard(board._id)} style={{ backgroundColor: 'pink' }}>
-        {/* style={{ backgroundImage: `url('${background})` }} */}
+    const background = board.style.background ? board.style.background : board.style.backgroundColor
+    return (<div className="board-preview-body" onClick={() => onGoToBoard(board._id)} style={{ backgroundImage: `url('${background})` }}>
+
         <h1>{board.title}</h1>
         <div className="star-wrapper" onClick={(event) => {
             event.stopPropagation()
