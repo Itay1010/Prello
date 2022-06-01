@@ -15,10 +15,9 @@ export const Home = () => {
         if (!loggedinUser) {
             dispatch(loadGuest())
         }
-        else {
+        else if (loggedinUser._id[0] !== 'g') {
             dispatch(onLogin(loggedinUser))
         }
-
     }, [loggedinUser])
 
 

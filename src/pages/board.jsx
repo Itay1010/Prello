@@ -21,12 +21,16 @@ import { TaskDetails } from './task-details.jsx'
 import { GroupList } from "../cmps/board/group-list"
 import { actService } from "../services/board/activity.service"
 import { Dashboard } from "./dashboard"
+import { socketService } from "../services/basic/socket.service"
+import { useSelector } from "react-redux"
+import { loadGuest } from "../store/user/user.actions"
 
 const tinycolor = require("tinycolor2")
 
 class _Board extends React.Component {
 
     componentDidMount() {
+        this._loadUserToStore()
         this._setBoard()
     }
 
@@ -36,6 +40,13 @@ class _Board extends React.Component {
 
     componentWillUnmount(nextProps, nextState) {
         document.querySelector('#root').style.background = 'initial'
+        socketService.logout()
+    }
+
+    _loadUserToStore = () => {
+        const { loggedinUser, loadGuest } = this.props
+        if (!loggedinUser) loadGuest()
+        socketService.setup()
     }
 
     setTheme = async () => {
@@ -179,12 +190,14 @@ class _Board extends React.Component {
 const mapStateToProps = state => {
     return {
         board: state.boardModule.board,
+        loggedinUser: state.userModule.user
     }
 }
 
 const mapDispatchToProps = {
     loadBoard,
     updateBoard,
+    loadGuest
 }
 
 export const Board = connect(mapStateToProps, mapDispatchToProps)(_Board)
