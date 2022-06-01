@@ -12,12 +12,16 @@
     // flex-direction: column;
     width: 100vw;
     height: 100%;
-    font-family: secular-font;
+    font-family: pri-font;
     font-size: 16px;
+    background-color: $td-bg;
+
 
     header {
         background-color: $clr1 ;
     }
+
+
 
     .workspace-container {
         display: flex;
@@ -31,14 +35,11 @@
             flex-direction: column;
 
             .new-board-btn-wrapper {
-
+                margin-inline-end: 16px;
                 position: relative;
-
                 display: flex;
                 height: fit-content;
                 width: fit-content;
-
-
                 text-align: center;
 
                 p {
@@ -46,6 +47,7 @@
                     width: 100%;
                     height: 100%;
                     padding: 8px;
+                    align-self: center;
 
                     &:hover {
                         background-color: $opc-black-hov;
@@ -80,7 +82,6 @@
                     right: 0;
                     transform: translate(100%, -50%);
                     position: absolute;
-                    // background-color: rgb(53, 232, 232);
                     width: 280px;
                     height: 400px;
                     background-color: $bg;
@@ -139,8 +140,13 @@
 
             .board-preview-header {
                 position: relative;
-                display: flex;
-                align-items: center;
+                margin-block-end: 11px;
+                height: 24px;
+
+                h1 {
+                    font-size: 16px;
+                    font-weight: 700;
+                }
 
                 .icon-wrapper {
                     // position: absolute;
@@ -149,8 +155,12 @@
                     // transform: translateX(-100%);
                 }
 
-                display: flex;
-                margin-block-end: 20px;
+                svg {
+                    height: 100%;
+                    stroke: $txt;
+                    stroke-width: 2px;
+                    fill: none;
+                }
 
                 &>* {
                     margin: 10px 10px 10px 0;
@@ -161,21 +171,65 @@
 
                 display: flex;
                 flex-wrap: wrap;
+                margin-bottom: 60px;
+
+
 
             }
 
             .board-preview-body {
-                position: relative;
                 position: relative;
                 width: 200px;
                 height: 100px;
                 display: flex;
                 flex-direction: column;
                 justify-content: space-between;
-                padding: 8px;
+                overflow: hidden;
+                cursor: pointer;
 
-                .star-wrapper {
-                    align-self: flex-end;
+                img {
+                    height: 100%;
+                    object-fit: cover;
+
+                }
+
+                .screen {
+                    background-color: $opc-black-hov;
+                    padding: 8px;
+                    position: absolute;
+                    top: 0;
+                    width: 100%;
+                    height: 100%;
+
+                    .star-wrapper {
+                        align-self: flex-end;
+                        height: 14px;
+                        width: 14px;
+                        position: relative;
+
+                        svg {
+                            position: absolute;
+                            bottom: 0;
+                            stroke: $bg;
+                            fill: none;
+                        }
+
+
+
+                    }
+                }
+
+
+
+                &.starred {
+                    .screen {
+                        .star-wrapper {
+                            svg {
+                                stroke: none;
+                                fill: $star;
+                            }
+                        }
+                    }
                 }
 
                 margin: 0 2% 2% 0;
@@ -194,6 +248,7 @@
                     font-size: 16px;
                     font-weight: 700;
                     color: $bg;
+                    text-overflow: ellipsis;
                 }
 
             }
