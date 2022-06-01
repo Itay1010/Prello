@@ -91,7 +91,6 @@ export const TaskDetails = ({ onArchiveTask, onSaveBoard }) => {
     }
 
     const saveLabels = (updatedTask) => {
-
         const group = newBoard.groups.find(group => group.id === groupId)
         const idx = group.tasks.findIndex(task => task.id === updatedTask.id)
         group.tasks[idx].members = updatedTask.members
