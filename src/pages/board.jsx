@@ -37,25 +37,8 @@ class _Board extends React.Component {
 
     componentDidUpdate() {
         this.setTheme()
-
     }
 
-    // setTheme = async () => {
-    //     if (this.props.board.style.backgroundColor) {
-    //         document.querySelector('.main-header').style.backgroundColor = '#00000090'
-    //         document.querySelector('.board').style.backgroundColor = this.props.board.style.backgroundColor
-    //     }
-    //     if (this.props.board.style.background) {
-    //         const avgColor = await boardService.getAvgColor(this.props.board.style.background)
-    //         if (avgColor === "#ffffff") document.querySelector('.main-header').style.backgroundColor = '#00000090'
-    //         else if (avgColor === '#000000') document.querySelector('.main-header').style.backgroundColor = '#ffffff90'
-    //         else document.querySelector('.main-header').style.backgroundColor = avgColor
-
-    //         document.querySelector('.board').style.background = `url(${this.props.board.style.background};)`
-    //     }
-
-
-    // }
     setTheme = async () => {
         const boardStyle = this.props.board.style
         if (boardStyle.backgroundColor) {

@@ -18,7 +18,7 @@ export const UserModal = ({ closeModal, user, goLogin }) => {
 
             <div className='user-details flex col space-between'>
                 <h3>{user.firstName}</h3>
-                <p className='email'>offircarmi@gmail.com</p>
+                <p className='email'>{user.email}</p>
             </div>
         </div>
         <hr />

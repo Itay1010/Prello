@@ -90,9 +90,6 @@ function _lightOrDark(color) {
 
 
 
-
-
-
 // const STORAGE_KEY = 'board'
 // // const boardChannel = new BroadcastChannel('boardChannel')
 
@@ -110,14 +107,10 @@ function _lightOrDark(color) {
 // // })()
 
 
-
-
-
-
-
 // const _logError = (err) => {
 //     return err
 // }
+
 
 // function _getEmptyBoard() {
 //     return emptyBoard
@@ -125,9 +118,3 @@ function _lightOrDark(color) {
 
 
 // // storageService.post(STORAGE_KEY, jsonBoard)
-
-
-
-
-
-

@@ -44,7 +44,8 @@ async function logout() {
 async function googleAuth(googleData) {
     console.log(googleData);
     const users = await httpService.get('user')
-    const userExists = users.find(user => user.googleId === googleData.googleId || user.email === googleData.email)
+    const userExists = users.find(user => user.googleId === googleData.googleId)
+    // const userExists = users.find(user => user.googleId === googleData.googleId || user.email === googleData.email)
     if (userExists) {
         login(userExists)
         //TODO:HANDLE ISSUE OF REGISTERED MAIL WITHOUT GOOGLEID
