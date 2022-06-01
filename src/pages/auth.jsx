@@ -64,7 +64,6 @@ export class _Auth extends React.Component {
         try {
             await this.props.onGoogleAuth(res.profileObj)
             this.onGoOn()
-            // console.log("LOGIN SUCCESS! current user: ", res.profileObj)
         } catch (res) {
             console.log("LOGIN FAILED! ,res ", res)
         }

@@ -68,8 +68,6 @@ export const TaskDetails = ({ onArchiveTask, onSaveBoard }) => {
 
     useEffect(() => {
         onLoad()
-        console.log('hello')
-        // console.log(modalType)
     }, [])
 
 
@@ -78,7 +76,6 @@ export const TaskDetails = ({ onArchiveTask, onSaveBoard }) => {
     }
 
     const closeModal = () => {
-        console.log(modalType)
         setModalType(null)
     }
 
@@ -89,7 +86,6 @@ export const TaskDetails = ({ onArchiveTask, onSaveBoard }) => {
         setGroup(groupToAdd)
         const task = groupToAdd.tasks.find(task => task.id === taskId)
         setTask(task)
-        console.log(newBoard)
         // const group = board.groups.find(group => groupId === group.id)
         // const task = group.tasks.find(task => taskId === task.id)
         // setTask(task)
@@ -285,11 +281,9 @@ export const TaskDetails = ({ onArchiveTask, onSaveBoard }) => {
                         <div className="description-data flex col">
                             <h2>Description</h2>
                             {!isDescriptionEditable && <p placeholder={task.description} onClick={toggleEditDescription}>{!task.description ? 'Add a more detailed description...' : `${task.description}`}</p>}
-                            {/* {isDescriptionEditable && <textarea value={description} ref={descriptionRef} onChange={handleDescriptionChange} onKeyDown={(event) => saveTaskDescription(event)} cols="65" rows="40" placeholder='Add a more detailed description...'></textarea>} */}
                             {isDescriptionEditable && <div className='edit-description'>
                                 <TextareaAutosize
                                     onChange={handleDescriptionChange}
-                                    // ref={descriptionRef}
                                     autoFocus
                                     onBlur={() => {
                                         toggleEditDescription()
@@ -332,14 +326,6 @@ export const TaskDetails = ({ onArchiveTask, onSaveBoard }) => {
                 />
 
             </div>
-
-            {/* {modalType && <div className='action-type-modal'> */}
-            {/* <div className='modal'> */}
-            {/* <h3>{modalType}</h3> */}
-            {/* <DynamicModal type={modalType} /> */}
-            {/* </div> */}
-            {/* </div>} */}
         </section>
-        {/* {isModal && <ModalImg url={isModal} />} */}
     </section>
 }

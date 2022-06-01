@@ -3,17 +3,15 @@ import { useSelector } from "react-redux"
 import { useDispatch } from "react-redux"
 import { MainHeader } from "../cmps/shared cmps/header/main-header"
 import { BoardList } from '../cmps/workspace/board-list'
-import { boardService } from "../services/board/board.service"
 import { userService } from "../services/user.service"
 import { addBoard, loadBoardMinis, updateMini } from '../store/board/board.action'
-import { saveMiniBoard } from '../services/board/minis.service.js'
+import { useHistory } from "react-router-dom/cjs/react-router-dom.min"
 
 export const Workspace = () => {
+    const history = useHistory()
     const [boards, setBoards] = useState(null)
     const dispatch = useDispatch()
-    const { miniBoards } = useSelector(storeState => storeState.boardModule)
     const user = userService.getLoggedinUser()
-    console.log(user)
     const userId = user._id
     const toggleStar = (board) => {
         board.isStarred = !board.isStarred
@@ -24,7 +22,7 @@ export const Workspace = () => {
         newBoardInfo.lastVisit = Date.now()
         newBoardInfo.creator = user
         const newBoard = await dispatch(addBoard(newBoardInfo))
-        console.log(newBoard)
+        history.push(`/board/${newBoard[0]._id}`)
     }
 
     useEffect(() => {
@@ -33,7 +31,6 @@ export const Workspace = () => {
 
     const loadMiniBoards = async () => {
         const miniBoards = await dispatch(loadBoardMinis())
-        console.log(miniBoards)
         setBoards([...miniBoards])
     }
 

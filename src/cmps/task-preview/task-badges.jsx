@@ -7,15 +7,11 @@ import { IDescription } from "../icons/i-description"
 import { IWatch } from "../icons/i-watch"
 
 export function TaskBadges({ task, getClStatus }) {
-    // console.log(task);
 
     if (!task.checklist && !task.attachments && !task.comments && !task.loaction && !task.members) return <section className="badges"></section>
 
     const user = userService.getLoggedinUser()
     if (!user && task.members?.length > 0) return
-
-    // console.log(user);
-
 
     return <section className="badges flex align-center">
         {task.members?.length > 0 && task.members.includes(user._id) && <div className="badge"> <IWatch /> </div>}

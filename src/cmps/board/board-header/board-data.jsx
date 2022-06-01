@@ -39,7 +39,6 @@ export const BoardData = ({ board, saveBoardHeader }) => {
 
 
 
-    // console.log(board);
     return <section className="board-data flex align-center">
         <button onClick={ev => history.push(`${history.location.pathname}/dashboard`)}>Dashboard</button>
         {/* <textarea maxRows={1}>{board.title}</textarea> */}
