@@ -7,7 +7,6 @@ export const ChecklistList = ({ checklist, saveChecklistTask, setIsDone, deleteC
 
     return <div className='checklist-list'>
         {checklist.map(item => {
-            // console.log(item.id)
             return <ChecklistItemPreview checklistId={item.id} key={item.id} item={item} saveChecklistTask={saveChecklistTask} setIsDone={setIsDone} deleteClTask={deleteClTask} deleteChecklist={deleteChecklist} boardMembers={boardMembers} generalTask={generalTask} saveMemberToClTask={saveMemberToClTask} />
         })}
     </div>

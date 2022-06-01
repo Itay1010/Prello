@@ -8,7 +8,6 @@ import { IAdd } from "../icons/i-add";
 import { draggableStyle } from "../../services/board/draggable.style";
 
 export const Group = ({ group, onAddTask, onArchiveTask, onArchiveGroup, onGroupChange, idx }) => {
-    // console.log('Group - onArchiveGroup', onArchiveGroup)
     const { tasks } = group
     const [newTask, setNewTask] = useState({ title: '', groupId: group.id })
     const handleChange = ({ target }) => {

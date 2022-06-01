@@ -34,7 +34,6 @@ export const minisService = {
 // }
 
 async function saveMiniBoard(board) {
-    console.log('in the mini board service')
     if (board._id) {
         try {
             // return httpService.put(`workspace/${board._id}`, board)

@@ -1,6 +1,5 @@
 import React, { useRef, useState } from "react"
 import { useForm } from "../../hooks/useForm"
-
 import { BoardPreview } from './board-preview'
 
 export const BoardList = ({ boards, userId, toggleStar, createNewBoard }) => {
@@ -9,9 +8,6 @@ export const BoardList = ({ boards, userId, toggleStar, createNewBoard }) => {
     const img2 = 'https://images.unsplash.com/photo-1653826531670-3a0ce374c725?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwcm9maWxlLXBhZ2V8Mnx8fGVufDB8fHx8&auto=format&fit=crop&w=1200&q=60'
     const img3 = 'https://images.unsplash.com/photo-1653592328269-09c14b3628f9?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwcm9maWxlLXBhZ2V8NHx8fGVufDB8fHx8&auto=format&fit=crop&w=1200&q=60'
     const [backgroundOption, setBackgroundOption] = useState(img1)
-    // console.log(boards)
-    let backgroundImg
-    // const boardsRelated = boards.filter(board => board.usersRelated.includes(userId))
     const starredBoards = boards.filter(board => board.isStarred === true)
 
     const toggleModal = () => {
@@ -20,7 +16,7 @@ export const BoardList = ({ boards, userId, toggleStar, createNewBoard }) => {
     const [newBoard, handleTitleChange] = useForm({
         title: '',
         isStarred: false,
-        backgroundOption: null
+        backgroundOption: img1
     })
     const titleRef = useRef()
 
@@ -32,7 +28,6 @@ export const BoardList = ({ boards, userId, toggleStar, createNewBoard }) => {
     const onChooseBackground = (imgUrl) => {
         setBackgroundOption(imgUrl)
         newBoard.backgroundOption = imgUrl
-        console.log(backgroundOption)
     }
 
     return <div className="workspace-container">
@@ -77,11 +72,9 @@ export const BoardList = ({ boards, userId, toggleStar, createNewBoard }) => {
                         <div className="img-wrapper">
                             <img onClick={() => onChooseBackground(img2)} src={img2} alt="" />
                         </div >
-
                         <div className="img-wrapper">
                             <img onClick={() => onChooseBackground(img3)} src={img3} alt="" />
                         </div >
-
                     </div>
                     <form onSubmit={(event) => onCreateNewBoard(event)} action="">
                         <label htmlFor="">Board title</label>
@@ -92,12 +85,5 @@ export const BoardList = ({ boards, userId, toggleStar, createNewBoard }) => {
                 </div>}
             </div>
         </section>
-        {/* {templates > 0 && <section className="board-container">
-            <section className="board-preview-header">
-                <h4>icon</h4>
-                <h1>Templates</h1>
-            </section>
-            <BoardPreview count={templates} />
-        </section>} */}
     </div>
 }

@@ -1,4 +1,5 @@
 import React from 'react'
+import { useHistory } from 'react-router-dom/cjs/react-router-dom.min'
 
 import { Filter } from './header cmps/filter'
 import { MemberProfile } from './header cmps/member-profile'
@@ -6,10 +7,11 @@ import { Search } from './header cmps/search'
 const logo = require('../../../assets/imgs/logo/logo_20x20.png')
 
 export function MainHeader() {
+    const history = useHistory()
     return <section className='header-container'>
         <section className='header-backdrop'></section>
         <header className="main-header full flex align-center">
-            <div className='logo flex align-center'>
+            <div className='logo flex align-center' onClick={() => history.push('/workspace')}>
                 <img src={logo} alt="logo" />
                 <h1>Prello</h1>
             </div>

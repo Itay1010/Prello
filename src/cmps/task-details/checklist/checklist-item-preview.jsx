@@ -21,7 +21,6 @@ export const ChecklistItemPreview = ({ item, saveChecklistTask, setIsDone, check
     let checklistDoneLength = 0
     items.forEach(item => {
         if (item.isDone) checklistDoneLength++
-        // console.log(checklistDoneLength)
     })
 
     const donePercentage = checklistDoneLength / checklistLength * 100
@@ -29,7 +28,6 @@ export const ChecklistItemPreview = ({ item, saveChecklistTask, setIsDone, check
     const [progress, setProgress] = useState(0);
     const [checklistTask, handleChange] = useForm(null)
     const [isInputOpen, setInput] = useState(false)
-    // console.log(item.id)
     const onSaveChecklistTask = () => {
         const { txt } = checklistTask
         setInput(false)
@@ -42,7 +40,6 @@ export const ChecklistItemPreview = ({ item, saveChecklistTask, setIsDone, check
 
     const onDeleteClTask = (clTaskId) => {
         deleteClTask(clTaskId, item)
-        // console.log(clTaskId, item)
 
     }
 
@@ -51,7 +48,6 @@ export const ChecklistItemPreview = ({ item, saveChecklistTask, setIsDone, check
     }
 
     const onSaveMemberToClTask = (member, clTaskId) => {
-        // console.log(member, clTaskId, item)
         saveMemberToClTask(member, clTaskId, item)
     }
 

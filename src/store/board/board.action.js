@@ -13,7 +13,6 @@ function getActionRemoveBoard(boardId) {
 
 //Minis Action Creators
 function getActionSetMinis(minis) {
-    console.log(minis)
     return { type: 'SET_MINIS', minis }
 }
 function getActionAddMini(mini) {
@@ -42,12 +41,9 @@ export function loadBoardMinis() {
 
 //load board to state
 export function loadBoard(boardId) {
-    console.log(boardId);
     return async dispatch => {
         try {
-            // console.log('test');
             const board = await boardService.getById(boardId)
-            console.log(board);
             dispatch(getActionSetBoard(board))
             return board
         } catch (err) {
@@ -58,10 +54,10 @@ export function loadBoard(boardId) {
 }
 
 export function addBoard(board) {
-    console.log(board)
     return async dispatch => {
         try {
             const addedBoard = await boardService.save(board)
+            return addedBoard
         }
         catch {
         }
