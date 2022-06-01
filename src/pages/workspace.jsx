@@ -14,9 +14,9 @@ export const Workspace = () => {
     const dispatch = useDispatch()
     const user = userService.getLoggedinUser()
     const userId = user._id
-    const toggleStar = (board) => {
+    const toggleStar = async (board) => {
         board.isStarred = !board.isStarred
-        dispatch(updateMini(board))
+        await dispatch(updateMini(board))
         loadMiniBoards()
     }
 
