@@ -37,7 +37,10 @@ class _Board extends React.Component {
 
     componentDidUpdate() {
         this.setTheme()
+    }
 
+    componentWillUpdate(nextProps, nextState) {
+        document.querySelector('#root').style.background = 'initial'
     }
 
     // setTheme = async () => {
