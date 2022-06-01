@@ -109,19 +109,20 @@
             }
 
             .menu-content {
+                overflow-y: scroll;
                 background-color: $td-bg;
                 text-align: center;
                 width: 340px;
                 position: fixed;
                 // background-color: #0079bf;
-                height: 100%;
+                height: 130%;
                 top: 44px;
                 right: 0;
                 z-index: 10;
                 padding: 12px;
-                animation-name: close-side-menu;
-                animation-duration: 0.3s;
-                animation-fill-mode: forwards;
+                // animation-name: close-side-menu;
+                // animation-duration: 0.3s;
+                // animation-fill-mode: forwards;
                 // transform: translateX(0)
                 transform: translateX(100%);
 
@@ -163,6 +164,35 @@
                         }
                     }
                 }
+
+                .activities-list {
+
+                    .activity-wrapper {
+                        display: grid;
+                        grid-template-columns: 50px 1fr;
+                        grid-template-rows: 1fr 1fr;
+                        justify-items: start;
+
+                        img {
+                            @include img-icon;
+                            margin-inline-end: 20px;
+                            margin-bottom: 10px;
+                            grid-row: 1 /-1;
+                        }
+
+                        p {
+                            font-size: 14px;
+
+                        }
+
+                        span {
+                            font-size: 12px;
+                            color: $edit;
+                        }
+
+
+                    }
+                }
             }
 
         }
@@ -199,15 +229,15 @@
 }
 
 
-@keyframes close-side-menu {
-    from {
-        transform: translateX(0);
-    }
+// @keyframes close-side-menu {
+//     from {
+//         transform: translateX(0);
+//     }
 
-    to {
-        transform: translateX(100%);
-    }
-}
+//     to {
+//         transform: translateX(100%);
+//     }
+// }
 
 .menu-shadow.appear {
     animation-name: shadow-appearance;
