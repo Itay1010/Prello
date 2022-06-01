@@ -47,7 +47,7 @@ export const LoginForm = ({ onLogin }) => {
                             />
                         </label>
                         <button type="submit" disabled={isSubmitting}>
-                            continue
+                            Continue
                         </button>
                     </form>
                 )}
