@@ -83,7 +83,7 @@ async function logout() {
 
 async function loginGuest() {
     const user = {
-        _id: "g100",
+        _id: "g" + utilService.makeId(20),
         firstName: "Guest",
         lastName: "Guest",
         username: "Guest",

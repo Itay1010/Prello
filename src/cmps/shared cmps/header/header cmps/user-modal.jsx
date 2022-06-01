@@ -25,11 +25,11 @@ export const UserModal = ({ closeModal, user, goLogin }) => {
             </div>
         </div>
         <hr />
-        {user._id === 'g100' && <p className='opt' onClick={() => {
+        {user._id[0] === 'g' && <p className='opt' onClick={() => {
             goLogin()
             closeModal()
         }}>Login</p>}
-        {user._id !== 'g100' && <p className='opt' onClick={() => {
+        {user._id[0] !== 'g' && <p className='opt' onClick={() => {
             
             dispatch(onLogout())
             closeModal()
