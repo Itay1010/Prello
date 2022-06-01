@@ -10,7 +10,6 @@ export const LoginForm = ({ onLogin }) => {
             <Formik
                 initialValues={{ email: '', password: '' }}
                 onSubmit={(values, actions) => {
-                    console.log('LoginForm - values', values)
                     onLogin(values)
                     actions.setSubmitting(false)
                 }}
