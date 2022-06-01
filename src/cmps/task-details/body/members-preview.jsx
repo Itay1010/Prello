@@ -3,7 +3,6 @@ import React from 'react'
 import { IAdd } from '../../icons/i-add'
 
 export const MembersPreview = ({ task, setModalType, boardMembers }) => {
-
     return <div className="members flex col">
         <h3>Members</h3>
         <section className='task-members flex'>
@@ -15,7 +14,6 @@ export const MembersPreview = ({ task, setModalType, boardMembers }) => {
         </section>
     </div>
 }
-
 const getMemberById = (memberId, boardMembers) => {
     const member = boardMembers.filter(member => member._id === memberId)
     return member[0]
