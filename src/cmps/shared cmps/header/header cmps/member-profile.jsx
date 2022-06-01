@@ -42,7 +42,7 @@ export const MemberProfile = () => {
             <div className='profile flex align-center justify-center' style={{ backgroundColor: loggedinUser.color }} onClick={() => {
                 setIsModal(true)
             }}>
-                <h2>{`${loggedinUser.email.charAt(0)}`}</h2>
+                <h2>{`${loggedinUser.email.charAt(0).toUpperCase()}`}</h2>
             </div>
         </React.Fragment>
     }
