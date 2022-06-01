@@ -88,13 +88,33 @@
             margin-inline-start: 4px;
         }
 
-        .side-menu {
-            // background-color: aqua;
-            // padding: 6px;
+        .background-modal {
+
+            background-color: $td-bg;
+            text-align: center;
+            width: 340px;
+            height: 100%;
+            position: fixed;
+            z-index: 20;
+            top: 44px;
             right: 0;
-            // position: relative;
+            padding: 12px;
+
+            h1 {
+                font-size: 16px;
+                padding-bottom: 14px;
+                border-bottom: 0.2px solid $opc-black;
+                margin-bottom: 20px;
+            }
+
+        }
+
+        .side-menu {
+
+            right: 0;
             top: 0;
             overflow-x: hidden;
+
 
             .menu-screen {
 
@@ -120,10 +140,6 @@
                 right: 0;
                 z-index: 10;
                 padding: 12px;
-                // animation-name: close-side-menu;
-                // animation-duration: 0.3s;
-                // animation-fill-mode: forwards;
-                // transform: translateX(0)
                 transform: translateX(100%);
 
                 h1 {
@@ -172,11 +188,18 @@
                         grid-template-columns: 50px 1fr;
                         grid-template-rows: 1fr 1fr;
                         justify-items: start;
+                        margin: 10px 0;
+
+                        &:hover {
+                            background-color: $opc-black;
+                        }
 
                         img {
                             @include img-icon;
-                            margin-inline-end: 20px;
-                            margin-bottom: 10px;
+                            margin-inline-start: 5px;
+                            margin-top: 5px;
+
+                            margin-bottom: 5px;
                             grid-row: 1 /-1;
                         }
 
@@ -189,8 +212,6 @@
                             font-size: 12px;
                             color: $edit;
                         }
-
-
                     }
                 }
             }
