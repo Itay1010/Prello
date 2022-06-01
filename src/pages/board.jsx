@@ -59,9 +59,7 @@ class _Board extends React.Component {
 
     _setBoard = async () => {
         const { boardId } = this.props.match.params
-        console.log(boardId)
         const board = await this.props.loadBoard(boardId)
-        console.log(board)
         this.setState({ board })
     }
 
@@ -71,7 +69,6 @@ class _Board extends React.Component {
         const groupIdx = newBoard.groups.findIndex(group => group.id === newTask.groupId)
 
         newTask = { id: utilService.makeId(), title: newTask.title }
-        console.log(newTask)
         newBoard.groups[groupIdx].tasks.push(newTask)
         actService.activity('added', 'card,', newTask, newBoard)
         this.props.updateBoard(newBoard)
