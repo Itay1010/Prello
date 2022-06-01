@@ -10,6 +10,8 @@ import { LoginForm } from '../cmps/auth/login.jsx'
 
 import { GoogleLogin } from 'react-google-login'
 import { gapi } from "gapi-script"
+import { ILogo } from "../cmps/icons/i-logo"
+import { socketService } from "../services/basic/socket.service"
 const clientId = "168490950789-fil5g5m4nauiousknnut75avvh0dhsb5.apps.googleusercontent.com"
 
 export class _Auth extends React.Component {
@@ -41,7 +43,7 @@ export class _Auth extends React.Component {
 
     login = async (credentials) => {
         try {
-            await this.props.onLogin(credentials)
+            const user = await this.props.onLogin(credentials)            
             this.onGoOn()
         } catch (err) {
             console.error(err)
@@ -73,12 +75,15 @@ export class _Auth extends React.Component {
     render() {
         const { type } = this.state
         return <section className="auth-page">
-            <h1>Prello</h1>
+            <div className="auth-logo flex align-center">
+                <ILogo />
+                <h1>Prello</h1>
+            </div>
             <div className="form-wrapper">
                 {(type === 'signup') && <SignupForm onSignup={this.signup} />}
                 {(type === 'login') && <LoginForm onLogin={this.login} />}
 
-                {type === 'login' && <button style={({margin: "16px 0 0"})} onClick={() => {
+                {type === 'login' && <button style={({ margin: "16px 0 0" })} onClick={() => {
                     window.location.assign('/auth/signup')
                     this.setState((prevState) => 'signup')
                 }}>
@@ -97,6 +102,7 @@ export class _Auth extends React.Component {
                     />
                 </div>
             </div>
+
         </section>
     }
 }
