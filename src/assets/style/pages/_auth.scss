@@ -2,24 +2,40 @@
     display: flex;
     align-items: center;
     flex-direction: column;
-    width: 100vw;
     height: 100vh;
+    background-color: $td-bg;
 
-    h1 {
-        padding: 40px 0;
+    .auth-logo {
+        height: 40px;
+        margin: 30px 0;
+
+        svg {
+            height: 100%;
+            fill: $clr1;
+        }
+
+        h1 {
+            padding: 40px 0;
+            font-size: 37px;
+            transform: translateY(-1%);
+
+
+        }
     }
 
     .form-wrapper {
         width: 400px;
+        background-color: $white;
+        text-align: center;
+        padding: 40px 40px 60px;
+        border-radius: 3px;
+        box-shadow: rgb(0 0 0 / 10%) 0 0 10px;
+        align-self: center;
+
 
         h2 {
             margin-bottom: 25px;
         }
-
-        text-align: center;
-        padding: 25px 40px;
-        border-radius: 3px;
-        box-shadow: rgb(0 0 0 / 10%) 0 0 10px;
 
 
         // div.signup {
