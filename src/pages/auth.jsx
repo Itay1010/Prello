@@ -49,7 +49,7 @@ export class _Auth extends React.Component {
 
     login = async (credentials) => {
         try {
-            await userService.login(credentials)
+            await this.props.onLogin(credentials)
             this.onGoOn()
         } catch (err) {
             console.error(err)
@@ -60,20 +60,24 @@ export class _Auth extends React.Component {
         this.props.history.push('/workspace')
     }
 
-    onSuccess = async (res) => {
-        try {
-            await this.props.onGoogleAuth(res.profileObj)
-            this.onGoOn()
-        } catch (res) {
-            console.log("LOGIN FAILED! ,res ", res)
+    onGoogleAuth = (googleUser) => {
+        console.log('google user', googleUser.profileObj);
+        const { profileObj } = googleUser
+        const user = {
+            email: profileObj.email,
+            firstName: profileObj.givenName,
+            lastName: profileObj.familyName,
+            imageUrl: profileObj.imageUrl,
+            googleId: profileObj.googleId
         }
+        if (this.props.match.params.type === 'signup') this.signup(user)
+        else this.login(user)
+
     }
 
-    onFailure = (res) => {
+    onGoogleFailure = (res) => {
         console.log("LOGIN FAILED! ,res ", res)
     }
-
-
 
     render() {
         const { type } = this.state
@@ -87,8 +91,8 @@ export class _Auth extends React.Component {
                     <GoogleLogin
                         clientId={clientId}
                         buttonText="Continue with Google"
-                        onSuccess={this.onSuccess}
-                        onFailure={this.onFailure}
+                        onSuccess={this.onGoogleAuth}
+                        onFailure={this.onGoogleFailure}
                         cookiePolicy={'single_host_origin'}
                         isSignedIn={false}
                     />
@@ -106,7 +110,7 @@ const mapStateToProps = state => {
 const mapDispatchToProps = {
     onLogin,
     onSignup,
-    onGoogleAuth
+    // onGoogleAuth
 }
 
 export const Auth = connect(mapStateToProps, mapDispatchToProps)(_Auth)

@@ -11,30 +11,44 @@ export const SignupForm = ({ onSignup }) => {
             onSubmit={(values) => {
                 onSignup(values)
             }}
+            enableReinitialize={true}
+            validateOnChange={false}
+            validateOnBlur={false}
+            validate={values => {
+                const errors = {};
+                if (!values.firstName) {
+                    errors.name = 'Required';
+                }
+                if (!values.lastName) {
+                    errors.lastName = 'Required'
+                }
+                if (!values.email) {
+                    errors.email = 'Required'
+                }
+                if (!values.password) {
+                    errors.password = 'Required'
+
+                }
+                return errors;
+            }}
         >
             {({
                 values,
                 errors,
-                touched,
                 handleChange,
                 handleBlur,
                 handleSubmit,
                 isSubmitting,
-                /* and other goodies */
 
             }) => (
                 <form className='signup' onSubmit={handleSubmit}>
-                    {errors.firstName && touched.firstName && errors.firstName}
-                    {errors.lastName && touched.lastName && errors.lastName}
-                    {errors.email && touched.email && errors.email}
-                    {errors.password && touched.password && errors.password}
                     <div className="inputs-wrapper">
                         <input
                             type="text"
                             name="email"
                             onChange={handleChange}
                             onBlur={handleBlur}
-                            value={values.name}
+                            value={values.email}
                             placeholder='Email address'
                             className='long-field'
                         />
@@ -44,7 +58,7 @@ export const SignupForm = ({ onSignup }) => {
                                 name="firstName"
                                 onChange={handleChange}
                                 onBlur={handleBlur}
-                                value={values.name}
+                                value={values.firstName}
                                 placeholder='First name'
                             />
                             <input
@@ -52,7 +66,7 @@ export const SignupForm = ({ onSignup }) => {
                                 name="lastName"
                                 onChange={handleChange}
                                 onBlur={handleBlur}
-                                value={values.name}
+                                value={values.lastName}
                                 placeholder='Last name'
                             />
                         </div>
@@ -61,7 +75,7 @@ export const SignupForm = ({ onSignup }) => {
                             name="password"
                             onChange={handleChange}
                             onBlur={handleBlur}
-                            value={values.name}
+                            value={values.password}
                             placeholder='Password'
                             className='long-field'
                         />

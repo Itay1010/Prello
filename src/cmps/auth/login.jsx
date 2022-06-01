@@ -13,28 +13,39 @@ export const LoginForm = ({ onLogin }) => {
                 onSubmit={(values) => {
                     onLogin(values)
                 }}
+                enableReinitialize={true}
+                validateOnChange={false}
+                validateOnBlur={false}
+                validate={values => {
+                    const errors = {};
+                    if (!values.email) {
+                        errors.email = 'Required'
+
+                    }
+                    if (!values.password) {
+                        errors.password = 'Required'
+
+                    }
+                    return errors;
+                }}
             >
                 {({
                     values,
                     errors,
-                    touched,
                     handleChange,
                     handleBlur,
                     handleSubmit,
                     isSubmitting,
-                    /* and other goodies */
 
                 }) => (
                     <form className='login-form' onSubmit={handleSubmit}>
-                        {errors.firstName && touched.firstName && errors.firstName}
-                        {errors.lastName && touched.lastName && errors.lastName}
                         <label className="inputs-wrapper flex col">
                             <input
                                 type="text"
                                 name="email"
                                 onChange={handleChange}
                                 onBlur={handleBlur}
-                                value={values.name}
+                                value={values.email}
                                 placeholder='Email address'
                             />
                             <input
@@ -42,7 +53,7 @@ export const LoginForm = ({ onLogin }) => {
                                 name="password"
                                 onChange={handleChange}
                                 onBlur={handleBlur}
-                                value={values.name}
+                                value={values.password}
                                 placeholder='Password'
                             />
                         </label>

@@ -2,16 +2,14 @@ import { userService } from "../../services/user.service";
 // import { showErrorMsg, showSuccessMsg } from '../services/event-bus.service.js'
 // import { socketService, SOCKET_EMIT_USER_WATCH, SOCKET_EVENT_USER_UPDATED } from "../services/socket.service.js";
 
-export function loadUsers() {
+export function loadUser() {
     return async dispatch => {
         try {
-            dispatch({ type: 'LOADING_START' })
-            const users = await userService.getUsers()
-            dispatch({ type: 'SET_USERS', users })
+            let user = await userService.getUsers()
+            if(!user) user = userService.loginGuest()
+            dispatch({ type: 'SET_USER', user })
         } catch (err) {
             console.log('UserActions: err in loadUsers', err)
-        } finally {
-            dispatch({ type: 'LOADING_DONE' })
         }
     }
 }
@@ -29,23 +27,23 @@ export function removeUser(userId) {
 
 export function onLogin(credentials) {
     console.log(credentials)
-
-    // return async (dispatch) => {
-    //     try {
-    //         const user = await userService.login(credentials)
-    //         dispatch({
-    //             type: 'SET_USER',
-    //             user
-    //         })
-    //     } catch (err) {
-    //         // showErrorMsg('Cannot login')
-    //         console.log('Cannot login', err)
-    //     }
-    // }
+    return async (dispatch) => {
+        try {
+            const user = await userService.login(credentials)
+            dispatch({
+                type: 'SET_USER',
+                user
+            })
+        } catch (err) {
+            // showErrorMsg('Cannot login')
+            console.log('Cannot login', err)
+        }
+    }
 }
 
 
 export function onSignup(credentials) {
+    console.log('onSignup - credentials', credentials)
     return async (dispatch) => {
         try {
             const user = await userService.signup(credentials)
@@ -55,7 +53,7 @@ export function onSignup(credentials) {
             })
         } catch (err) {
             // showErrorMsg('Cannot signup')
-            console.log('Cannot signup', err)
+            console.error('Cannot signup', err)
         }
 
     }
@@ -75,40 +73,3 @@ export function onLogout() {
         }
     }
 }
-
-
-export function onGoogleAuth(googleData) {
-    return async (dispatch) => {
-        const user = await userService.googleAuth(googleData)
-        try {
-            dispatch({
-                type: 'SET_USER',
-                user
-            })
-        }
-        catch (err) {
-            // showErrorMsg('Cannot logout')
-            console.log('Cannot logout', err)
-        }
-    }
-
-}
-
-export function loadAndWatchUser(userId) {
-    return async (dispatch) => {
-        try {
-            const user = await userService.getById(userId);
-            dispatch({ type: 'SET_WATCHED_USER', user })
-            // socketService.emit(SOCKET_EMIT_USER_WATCH, userId)
-            // socketService.off(SOCKET_EVENT_USER_UPDATED)
-            // socketService.on(SOCKET_EVENT_USER_UPDATED, user => {
-            //     showSuccessMsg(`This user ${user.fullname} just got updated from socket, new score: ${user.score}`)
-            //     dispatch({ type: 'SET_WATCHED_USER', user })
-            // })
-        } catch (err) {
-            // showErrorMsg('Cannot load user')
-            console.log('Cannot load user', err)
-        }
-    }
-}
-
