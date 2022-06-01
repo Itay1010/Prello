@@ -60,10 +60,12 @@
 
 .filter {
     flex-grow: 1;
+
     &>* {
         @include btn($type: dark);
         margin-inline-end: 4px;
         background: transparent;
+
         svg {
             height: 16px;
             width: 16px;
@@ -123,6 +125,13 @@
     width: 32px;
     overflow: hidden;
     cursor: pointer;
+
+    h2 {
+        text-align: center;
+        color: $bg;
+        font-weight: 500;
+        line-height: 32px;
+    }
 
     img {
         height: 100%;

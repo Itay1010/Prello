@@ -12,7 +12,7 @@ export const MemberProfile = () => {
     useEffect(() => {
         const user = userService.getLoggedinUser() || userService.loginGuest()
         setLoggedinUser(user)
-        
+
     }, [])
 
 
@@ -30,7 +30,7 @@ export const MemberProfile = () => {
 
     if (loggedinUser.imgUrl) {
         return <React.Fragment>
-            <div className='profile' onClick={() => setIsModal(true)}>
+            <div className='profile flex align-center justify-center' onClick={() => setIsModal(true)}>
                 <img src={loggedinUser.imgUrl} alt={`${loggedinUser.email.charAt(0)}`} />
             </div>
             {isModal && <UserModal closeModal={closeModal} user={loggedinUser} goLogin={goLogin} />}
@@ -39,7 +39,7 @@ export const MemberProfile = () => {
     } else if (loggedinUser.color) {
         return <React.Fragment>
             {isModal && <UserModal closeModal={closeModal} user={loggedinUser} goLogin={goLogin} />}
-            <div className='profile' style={{ backgroundColor: loggedinUser.color }} onClick={() => {
+            <div className='profile flex align-center justify-center' style={{ backgroundColor: loggedinUser.color }} onClick={() => {
                 setIsModal(true)
             }}>
                 <h2>{`${loggedinUser.email.charAt(0)}`}</h2>
