@@ -1,3 +1,4 @@
+import { useSelector } from "react-redux"
 import { userService } from "../../services/user.service"
 
 import { IAttachment } from "../icons/i-attachment"
@@ -7,10 +8,9 @@ import { IDescription } from "../icons/i-description"
 import { IWatch } from "../icons/i-watch"
 
 export function TaskBadges({ task, getClStatus }) {
-
+    const { user } = useSelector((storeState) => storeState.userModule)
     if (!task.checklist && !task.attachments && !task.comments && !task.loaction && !task.members) return <section className="badges"></section>
 
-    const user = userService.getLoggedinUser()
     if (!user && task.members?.length > 0) return
 
     return <section className="badges flex align-center">

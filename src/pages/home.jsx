@@ -1,9 +1,27 @@
-import React from "react"
+import React, { useEffect } from "react"
+import { useDispatch } from "react-redux"
 
 import { Link } from "react-router-dom"
 import { NavLink } from "react-router-dom"
 
+import { userService } from "../services/user.service"
+import { loadGuest, onLogin } from "../store/user/user.actions"
+
 export const Home = () => {
+    const dispatch = useDispatch()
+    const loggedinUser = userService.getLoggedinUser()
+
+    useEffect(() => {
+        if (!loggedinUser) {
+            dispatch(loadGuest())
+        }
+        else {
+            dispatch(onLogin(loggedinUser))
+        }
+
+    }, [loggedinUser])
+
+
     return <section className="home">
         <nav className="flex space-between">
             <div className="logo"><img src={require('../assets/imgs/logo/logo-25X25-color.png')} />
