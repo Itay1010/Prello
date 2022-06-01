@@ -165,8 +165,7 @@
             }
 
             .board-preview-body {
-                position: relative;
-                position: relative;
+                // position: relative;
                 width: 200px;
                 height: 100px;
                 display: flex;
@@ -176,6 +175,23 @@
 
                 .star-wrapper {
                     align-self: flex-end;
+                    height: 14px;
+                    width: 14px;
+
+                    svg {
+                        stroke: $bg;
+                        fill: none;
+                    }
+
+
+
+                }
+
+                &.starred {
+                    svg {
+                        stroke: none;
+                        fill: $star;
+                    }
                 }
 
                 margin: 0 2% 2% 0;
