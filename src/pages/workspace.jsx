@@ -36,7 +36,7 @@ export const Workspace = () => {
         setBoards([...miniBoards])
     }
 
-    if (!boards) return <React.Fragment></React.Fragment>
+    if (!boards || !user) return <React.Fragment></React.Fragment>
     return <section className="workspace-wrapper">
         <MainHeader />
         <BoardList boards={boards} userId={userId} toggleStar={toggleStar} createNewBoard={onCreateNewBoard} />
