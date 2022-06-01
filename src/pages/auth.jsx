@@ -53,7 +53,6 @@ export class _Auth extends React.Component {
     }
 
     onGoogleAuth = (googleUser) => {
-        console.log('google user', googleUser.profileObj);
         const { profileObj } = googleUser
         const user = {
             email: profileObj.email,
