@@ -1,18 +1,16 @@
-// import { storageService } from './basic/async-storage.service'
 import { httpService } from './basic/http.service'
 import { utilService } from './basic/util.service'
 
 // import { socketService, SOCKET_EVENT_USER_UPDATED } from './socket.service'
 // const LOCAL_STORAGE_USER_DB = 'userDB'
 const LOCAL_STORAGE_LOGGEDIN_USER = 'loggedinUser'
-
+const BASE_URL = 'auth/'
 
 export const userService = {
     getLoggedinUser,
     signup,
     login,
     logout,
-    googleAuth,
     loginGuest,
     // getUserById,
 }
@@ -24,49 +22,64 @@ function getLoggedinUser() {
 }
 
 async function signup(userCred) {
-    userCred.color = utilService.getRandomColor()
-    const user = await httpService.post('auth/signup', userCred)
-    return _saveLocalUser(user)
+    try {
+        userCred.color = utilService.getRandomColor()
+        const user = await httpService.post(`${BASE_URL}signup`, userCred)
+        console.log('signup - user', user)
+        _saveLocalUser(user)
+        return user
+
+    } catch (err) {
+        console.error('error in login')
+        throw err
+    }
 }
 
 async function login(userCred) {
-    const user = await httpService.post('auth/login', userCred)
-    if (user) return _saveLocalUser(user)
+    try {
+        const user = await httpService.post(`${BASE_URL}login`, userCred)
+        return _saveLocalUser(user)
+    }
+
+    catch (err) {
+        console.error('error in login')
+        throw err
+    }
 }
 
 async function logout() {
     sessionStorage.removeItem(LOCAL_STORAGE_LOGGEDIN_USER)
-    return await httpService.post('auth/logout')
+    return await httpService.post(`${BASE_URL}logout`)
 }
 
-async function googleAuth(googleData) {
-    console.log(googleData);
-    const users = await httpService.get('user')
-    const userExists = users.find(user => user.googleId === googleData.googleId)
-    // const userExists = users.find(user => user.googleId === googleData.googleId || user.email === googleData.email)
-    if (userExists) {
-        login(userExists)
-        //TODO:HANDLE ISSUE OF REGISTERED MAIL WITHOUT GOOGLEID
+// async function googleAuth(googleData) {
+//     console.log(googleData);
+//     const users = await httpService.get('user')
+//     const userExists = users.find(user => user.googleId === googleData.googleId)
+//     // const userExists = users.find(user => user.googleId === googleData.googleId || user.email === googleData.email)
+//     if (userExists) {
+//         login(userExists)
+//         //TODO:HANDLE ISSUE OF REGISTERED MAIL WITHOUT GOOGLEID
 
-        // if (!userExists.googleId) {
-        //     const googleUserToUpdate = { ...userExists, googleId: googleData.googleId }
-        //     console.log(googleUserToUpdate);
-        // } else {
+//         // if (!userExists.googleId) {
+//         //     const googleUserToUpdate = { ...userExists, googleId: googleData.googleId }
+//         //     console.log(googleUserToUpdate);
+//         // } else {
 
-        // }
-    } else {
-        const newUser = {
-            email: googleData.email,
-            firstName: googleData.givenName,
-            lastName: googleData.familyName,
-            imgUrl: googleData.imageUrl,
-            googleId: googleData.googleId,
-            color: utilService.getRandomColor()
-        }
-        const user = await httpService.post('auth/signup', newUser)
-        _saveLocalUser(user);
-    }
-}
+//         // }
+//     } else {
+//         const newUser = {
+//             email: googleData.email,
+//             firstName: googleData.givenName,
+//             lastName: googleData.familyName,
+//             imgUrl: googleData.imageUrl,
+//             googleId: googleData.googleId,
+//             color: utilService.getRandomColor()
+//         }
+//         const user = await httpService.post(BASE_URL + 'signup', newUser)
+//         _saveLocalUser(user);
+//     }
+// }
 
 async function loginGuest() {
     const user = {
@@ -88,10 +101,10 @@ function _saveLocalUser(user) {
     return user
 }
 
-// function getUserById(userId) {
-//     const users = JSON.parse(sessionStorage.getItem(LOCAL_STORAGE_LOGGEDIN_USER)
-//     console.log(userId);
-// }
+function getUserById(userId) {
+    const users = JSON.parse(sessionStorage.getItem(LOCAL_STORAGE_LOGGEDIN_USER))
+    console.log(userId)
+}
 
 
 
