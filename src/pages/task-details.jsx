@@ -127,7 +127,6 @@ export const TaskDetails = ({ onArchiveTask, onSaveBoard }) => {
     }
 
     const saveTaskTitle = (title) => {
-        console.log('saved')
         task.title = title
         setTitle(false)
         saveBoard()

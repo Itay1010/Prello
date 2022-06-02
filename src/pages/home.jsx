@@ -31,9 +31,10 @@ export const Home = () => {
         <div className="hero">
             <div className="hero-content">
                 <h1><span>Save yourself the trouble</span><span> with Prello</span></h1>
+                <p>Engage Your day to day work with a highly equipped software</p>
                 <p>Preparation is the key name, as a freelancer to enterprises </p>
-                <p>Prello is the tool to keep yourself in ease.</p>
-                <Link to={'/workspace'}><button>Try now</button></Link>
+                <p>Prello is the tool to keep yourself at ease.</p>
+                <Link to={'/workspace'}><button>Get started</button></Link>
             </div>
             <img src="https://d2k1ftgv7pobq7.cloudfront.net/meta/p/res/images/spirit/hero/6a3ccd8e5c9a0e8ebea4235d12da6b24/hero.png" alt="" />
         </div>

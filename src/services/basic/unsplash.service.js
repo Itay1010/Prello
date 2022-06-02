@@ -12,9 +12,14 @@ export async function getPhoto(photoId = 'random') {
 }
 
 export async function getSearch(qString) {
-    const url = `https://api.unsplash.com/photos/?query=${qString}&client_id=tPOzx1nepGTnicfh8tWx4Be22XbskzoZaToa3RhwpWY`
+    if (!qString) {
+        return getPhotos()
+    }
+    // const url = `https://api.unsplash.com/photos/?query=${qString}&client_id=tPOzx1nepGTnicfh8tWx4Be22XbskzoZaToa3RhwpWY`
+    const url = `https://api.unsplash.com/search/photos?query=${qString}&client_id=tPOzx1nepGTnicfh8tWx4Be22XbskzoZaToa3RhwpWY`
     let res = await axios.get(url)
-    return res.data
+    return res.data.results
+
 }
 
 export async function getPhotos() {

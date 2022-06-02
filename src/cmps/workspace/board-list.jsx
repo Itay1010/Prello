@@ -6,10 +6,16 @@ import { BoardPreview } from './board-preview'
 
 export const BoardList = ({ boards, userId, toggleStar, createNewBoard }) => {
     const [isModalOpen, setModal] = useState(false)
-    const img1 = 'https://images.unsplash.com/photo-1653933889737-aa3b1453a450?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwcm9maWxlLXBhZ2V8MXx8fGVufDB8fHx8&auto=format&fit=crop&w=1200&q=60'
-    const img2 = 'https://images.unsplash.com/photo-1653826531670-3a0ce374c725?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwcm9maWxlLXBhZ2V8Mnx8fGVufDB8fHx8&auto=format&fit=crop&w=1200&q=60'
-    const img3 = 'https://images.unsplash.com/photo-1653592328269-09c14b3628f9?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwcm9maWxlLXBhZ2V8NHx8fGVufDB8fHx8&auto=format&fit=crop&w=1200&q=60'
-    const [backgroundOption, setBackgroundOption] = useState(img1)
+    const imgs = ['https://images.unsplash.com/photo-1549849171-09f62448709e?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=MnwzMzM2NTF8MHwxfHNlYXJjaHw1fHxzdW58ZW58MHx8fHwxNjU0MTU4OTYx&ixlib=rb-1.2.1&q=80&w=400',
+        'https://images.unsplash.com/photo-1638913659197-46040471de1d?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=MnwzMzM2NTF8MXwxfGFsbHwxfHx8fHx8Mnx8MTY1NDE3NzMxMA&ixlib=rb-1.2.1&q=80&w=400',
+        'https://images.unsplash.com/photo-1653826531670-3a0ce374c725?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwcm9maWxlLXBhZ2V8Mnx8fGVufDB8fHx8&auto=format&fit=crop&w=1200&q=60',
+        'https://images.unsplash.com/photo-1653592328269-09c14b3628f9?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwcm9maWxlLXBhZ2V8NHx8fGVufDB8fHx8&auto=format&fit=crop&w=1200&q=60',
+        'https://images.unsplash.com/photo-1439792675105-701e6a4ab6f0?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=MnwzMzM2NTF8MHwxfHNlYXJjaHw1fHxkYXJrfGVufDB8fHx8MTY1NDE4MjM2NQ&ixlib=rb-1.2.1&q=80&w=400',
+        'https://images.unsplash.com/photo-1548391350-968f58dedaed?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=MnwzMzM2NTF8MHwxfHNlYXJjaHw2fHxtb29ufGVufDB8fHx8MTY1NDE3MjU2MQ&ixlib=rb-1.2.1&q=80&w=400']
+    // const img1 = 'https://images.unsplash.com/photo-1638913659197-46040471de1d?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=MnwzMzM2NTF8MXwxfGFsbHwxfHx8fHx8Mnx8MTY1NDE3NzMxMA&ixlib=rb-1.2.1&q=80&w=400'
+    // const img2 = 'https://images.unsplash.com/photo-1653826531670-3a0ce374c725?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwcm9maWxlLXBhZ2V8Mnx8fGVufDB8fHx8&auto=format&fit=crop&w=1200&q=60'
+    // const img3 = 'https://images.unsplash.com/photo-1653592328269-09c14b3628f9?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwcm9maWxlLXBhZ2V8NHx8fGVufDB8fHx8&auto=format&fit=crop&w=1200&q=60'
+    const [backgroundOption, setBackgroundOption] = useState(imgs[0])
     const starredBoards = boards.filter(board => board.isStarred === true)
 
     const toggleModal = () => {
@@ -19,7 +25,7 @@ export const BoardList = ({ boards, userId, toggleStar, createNewBoard }) => {
     const [newBoard, handleTitleChange] = useForm({
         title: '',
         isStarred: false,
-        backgroundOption: img1
+        backgroundOption: imgs[0]
     })
 
     const titleRef = useRef()
@@ -64,15 +70,12 @@ export const BoardList = ({ boards, userId, toggleStar, createNewBoard }) => {
                             <h2>Create board</h2>
                             <div className="img-container"><img src={backgroundOption} alt="" /></div>
                             <div className="choose-background">
-                                <div className="img-wrapper">
-                                    <img onClick={() => onChooseBackground(img1)} src={img1} alt="" />
-                                </div >
-                                <div className="img-wrapper">
-                                    <img onClick={() => onChooseBackground(img2)} src={img2} alt="" />
-                                </div >
-                                <div className="img-wrapper">
-                                    <img onClick={() => onChooseBackground(img3)} src={img3} alt="" />
-                                </div >
+                                {imgs.map(img => {
+                                    return <div className="img-wrapper">
+                                        <img onClick={() => onChooseBackground(img)} src={img} alt="" />
+                                    </div >
+                                })}
+
                             </div>
                             <form onSubmit={(event) => onCreateNewBoard(event)} action="">
                                 <label htmlFor="">Board title</label>
