@@ -4,46 +4,26 @@ import { useDispatch } from 'react-redux'
 import { updateBoard } from '../../../store/board/board.action.js'
 import { actService } from '../../../services/board/activity.service.js'
 import { useHistory } from 'react-router-dom'
+import { socketService, SOCKET_EMIT_PULL } from '../../../services/basic/socket.service.js'
 
-
-export const BoardData = ({ board, saveBoardHeader }) => {
-    const dispatch = useDispatch()
-
-    const [isBoardTitleEditable, setBoardTitleEditable] = useState(null)
-    const [boardTitle, setBoardTitleValue] = useState(board.title)
+export const BoardData = ({ board, saveBoardHeader, }) => {
     const history = useHistory()
-    const boardTitleRef = useRef()
-    const [width, setWidth] = useState(0)
+
+    const [isBoardTitleEditable, setBoardTitleEditable] = useState(false)
 
     useEffect(() => {
-        console.log(board.title)
+        console.log('new title');
     }, [board.title])
 
     const handleBoardTitleChange = (value) => {
-        setBoardTitleValue(value)
-        const newBoard = JSON.parse(JSON.stringify(board))
-        newBoard.title = value
-        actService.activity('renamed', 'board', newBoard, newBoard)
-        dispatch(updateBoard(newBoard))
+        saveBoardHeader(value)
     }
-
-    const toggleBoardTitleEditable = () => {
-        if (isBoardTitleEditable) {
-            setBoardTitleEditable(false)
-        } else {
-            setBoardTitleEditable(true)
-            setBoardTitleValue(board.title)
-        }
-    }
-
 
 
     return <section className="board-data flex align-center">
         <button onClick={ev => history.push(`${history.location.pathname}/dashboard`)}>Dashboard</button>
         <TxtInputCmp isBoardTitleEditable={isBoardTitleEditable}
-            toggleContentEditable={toggleBoardTitleEditable}
-            saveFunc={saveBoardHeader}
-            contentInitialState={board.title}
+            boardTitle={board.title}
             handleBoardTitleChange={handleBoardTitleChange}
         />
         <div className='btn-stared flex align-center justify-center'>

@@ -1,39 +1,37 @@
 import React, { useState, useRef, useEffect } from "react"
 
-export const TxtInputCmp = ({ toggleContentEditable, contentInitialState, handleBoardTitleChange }) => {
+export const TxtInputCmp = ({ boardTitle, handleBoardTitleChange }) => {
 
-    const [content, setBoardTitleValue] = useState('')
+    const [boardTitleValue, setBoardTitleValue] = useState(boardTitle)
     const contentRef = useRef()
     const [width, setWidth] = useState(0)
 
     const handleContentChange = ({ target }) => {
-        setWidth(target.value.length + 'ch')
+        setWidth(target.value.length + 1 + 'ch')
         setBoardTitleValue(target.value)
-        // handleBoardTitleChange(target.value)
     }
 
     useEffect(() => {
-        setBoardTitleValue(contentInitialState)
-        setWidth(contentInitialState.length + 'ch')
-    }, [])
+        setBoardTitleValue(boardTitle)
+        setWidth(boardTitle.length + 1 + 'ch')
+    }, [boardTitle])
+
 
     const onSaveBoardTitle = (ev) => {
         if (ev.key === 'Enter') {
-            setBoardTitleValue(content)
+            setBoardTitleValue(boardTitleValue)
         }
     }
 
     return <input
         className="board-name"
-        style={{ minWidth: "2ch", width }}
-        // ref={contentRef}
+        style={{ minWidth: "5ch", width }}
+        ref={contentRef}
         type="text"
-        value={content}
-        placeholder='Enter board name'
+        value={boardTitleValue}
         onChange={handleContentChange}
         onBlur={(() => {
-            if (!content) return
-            handleBoardTitleChange(content)
+            handleBoardTitleChange(boardTitleValue)
         })}
         onKeyDown={onSaveBoardTitle} />
 }

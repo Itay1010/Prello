@@ -12,7 +12,7 @@ import { boardService } from "../services/board/board.service"
 import { MainHeader } from "../cmps/shared cmps/header/main-header"
 import { BoardHeader } from "../cmps/board/board-header/board-header"
 
-import { loadBoard, updateBoard } from "../store/board/board.action"
+import { clearBoard, loadBoard, updateBoard } from "../store/board/board.action"
 import { utilService } from "../services/basic/util.service"
 import { Switch, Route } from 'react-router-dom'
 
@@ -41,6 +41,7 @@ class _Board extends React.Component {
 
     componentWillUnmount(nextProps, nextState) {
         document.querySelector('#root').style.background = 'initial'
+        this.props.clearBoard()
         socketService.emit(SOCKET_EMIT_TOPIC, null)
     }
 
@@ -69,12 +70,13 @@ class _Board extends React.Component {
     }
 
     _updateBoard = async () => {
+        console.log('board update');
         const { boardId } = this.props.match.params
         await this.props.loadBoard(boardId)
     }
 
     setTheme = async () => {
-        const boardStyle = this.props.board.style
+        const boardStyle = this.props.board.style || null
         if (boardStyle.backgroundColor) {
             document.querySelector('.main-header').style.backgroundColor = '#00000090'
             document.querySelector('.board').style.backgroundColor = boardStyle.backgroundColor
@@ -208,7 +210,11 @@ class _Board extends React.Component {
             <DragDropContext onDragEnd={this.handleOnDragEnd}>
                 <MainHeader boardMembers={board.members} />
                 <section className="board flex col main-layout">
-                    <BoardHeader board={board} saveBoardHeader={this.onSaveBoardHeader} setBackgroundImg={this.setBackgroundImgFromUnsplash} />
+                    <BoardHeader
+                        board={board}
+                        saveBoardHeader={this.onSaveBoardHeader}
+                        setBackgroundImg={this.setBackgroundImgFromUnsplash}
+                    />
                     <GroupList groups={groups} eventHandlers={eventHandlers} />
                     <Switch>
                         <Route path={'/board/:boardId/:groupId/:taskId'}>
@@ -234,6 +240,7 @@ const mapStateToProps = state => {
 const mapDispatchToProps = {
     loadBoard,
     updateBoard,
+    clearBoard,
     loadGuest,
     setUser
 }
