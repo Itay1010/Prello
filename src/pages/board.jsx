@@ -78,7 +78,7 @@ class _Board extends React.Component {
 
     _setBoard = async () => {
         const { boardId } = this.props.match.params
-        // console.log('setting board');
+
         await this.props.loadBoard(boardId)
         this._setupSockets()
     }

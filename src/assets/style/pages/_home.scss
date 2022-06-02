@@ -61,7 +61,7 @@ nav {
     flex-grow: 1;
     display: flex;
     align-items: center;
-    gap: 40px;
+    gap: 190px;
 
     img {
         width: 445px;
@@ -76,14 +76,17 @@ nav {
         font-size: 1.5rem;
     }
 
-    p:nth-of-type(2) {
+    p:nth-of-type(3) {
         margin-bottom: 20px
     }
 
     button {
         @include btn;
         background-color: #0065ff;
+        height: unset;
         font-size: 1.25rem;
         color: $bg;
+        padding: 10px 16px;
+
     }
 }

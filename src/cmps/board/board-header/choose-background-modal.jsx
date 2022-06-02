@@ -1,5 +1,6 @@
 import React, { useRef } from 'react'
 import { useForm } from '../../../hooks/useForm'
+import { IClose } from '../../icons/i-close'
 
 
 export const ChooseBackgroundModal = ({ closeBackgroundModal, imgs, setBackgroundImg, enterBackgroundSearch }) => {
@@ -14,15 +15,17 @@ export const ChooseBackgroundModal = ({ closeBackgroundModal, imgs, setBackgroun
 
     const searchValueTyped = (ev) => {
         timeoutId = null
-        handleSearchChange(ev)
         timeoutId = setTimeout(() => {
-            enterBackgroundSearch(searchValue)
+            enterBackgroundSearch(ev.target.value)
             timeoutId = null
         }, 1000)
     }
 
     return <div className='background-modal'>
-        <h1>hello</h1>
+        <div onClick={() => closeBackgroundModal()} className='close-modal-btn-wrapper'>
+            <IClose />
+        </div>
+        <h1>Change background</h1>
         <input ref={searchRef} type="text" placeholder='Enter search' onChange={searchValueTyped} name='searchValue' />
         <div className='unsplash-imgs-wrapper'>
             {imgs.map((img, idx) => {

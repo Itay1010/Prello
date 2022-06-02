@@ -19,10 +19,11 @@ export const ActivitiesList = ({ activities }) => {
     return <div className="activities-list" >
         {reverseActivities.map((activity, idx) => {
             if (idx > 20) return
-            const { action, byMember, receiver, createdAt } = activity
+            const { action, byMember, receiver, createdAt, entity } = activity
             return <div className="activity-wrapper">
-                <img src={byMember.imgUrl} alt="" />
-                <p>{byMember.firstName} {action} {receiver}</p>
+                {byMember.firstName === 'Guest' && <div className='guest-icon' style={{ backgroundColor: `${byMember.color}` }}>G</div>}
+                {byMember.firstName !== 'Guest' && <img src={byMember.imgUrl} alt="" />}
+                <p><span className="created-by-name"> {byMember.firstName}</span> {action} {receiver} "{entity.title}"</p>
                 <span>{dateToDisplay(createdAt)}</span>
             </div>
         })}

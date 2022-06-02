@@ -4,9 +4,10 @@
     align-self: flex-start;
     background-color: transparent;
     border-radius: 3px;
-    
+
     .open-edit-btn {
-        display: block;
+        display: flex;
+        align-items: center;
         @include btn($type: dark, $height: 40px);
         border-radius: 3px;
         color: var(--clr-dynamic-inner);
@@ -14,11 +15,19 @@
         width: 270px;
         transition: background-color, 0.09zs;
         cursor: pointer;
+
         &:hover {
             background-color: var(--clr-dynamic-faded-hover);
         }
+
+        svg {
+            width: 16px;
+            height: 16px;
+            margin-inline-end: 5px;
+            fill: var(--clr-dynamic-inner);
+        }
     }
-    
+
     .add-list {
         position: absolute;
         display: none;
@@ -28,7 +37,7 @@
         width: 100%;
         top: 0;
         transition: transparency;
-        
+
         input {
             // position: absolute;
             display: block;
@@ -61,13 +70,14 @@
             display: inline-block;
             width: 32px;
             height: 32px;
-            
+
             &::before {
                 position: absolute;
                 content: url("../../../imgs/icons/add.svg");
                 transform: translate(-50%, 10%);
                 height: 20px;
             }
+
             &:hover {
                 background-color: transparent;
             }
