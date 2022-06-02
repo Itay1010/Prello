@@ -5,11 +5,15 @@ import { userService } from './../user.service'
 export const SOCKET_EMIT_SEND_MSG = 'chat newMsg'
 export const SOCKET_EMIT_TYPING = 'chat typing'
 export const SOCKET_EMIT_USER_WATCH = 'user-watch'
-export const SOCKET_EMIT_TOPIC = 'chat topic'
+export const SOCKET_EMIT_TOPIC = 'board topic'
+export const SOCKET_EMIT_PULL = 'pull board'
 
-// chat event
+// chat events
 export const SOCKET_EVENT_ADD_MSG = 'chat addMsg'
 export const SOCKET_EVENT_TYPING = 'chat typing'
+
+// board events
+export const SOCKET_EVENT_BOARD_UPDATE = 'board update'
 
 const SOCKET_EMIT_LOGIN = 'set-user-socket'
 const SOCKET_EMIT_LOGOUT = 'unset-user-socket'
@@ -20,7 +24,7 @@ export const socketService = createSocketService()
 // export const socketService = createDummySocketService()
 
 // for debugging from console
-// window.socketService = socketService
+window.socketService = socketService
 
 socketService.setup()
 

@@ -1,7 +1,7 @@
 import { httpService } from './basic/http.service'
+import { socketService } from './basic/socket.service'
 import { utilService } from './basic/util.service'
 
-// import { socketService, SOCKET_EVENT_USER_UPDATED } from './socket.service'
 // const LOCAL_STORAGE_USER_DB = 'userDB'
 const LOCAL_STORAGE_LOGGEDIN_USER = 'loggedinUser'
 const BASE_URL = 'auth/'
@@ -110,10 +110,10 @@ function getUserById(userId) {
 
 
 // This is relevant when backend is connected
-// ;(async () => {
-//     var user = getLoggedinUser()
-//     if (user) socketService.emit('set-user-socket', user._id)
-// })()
+;(async () => {
+    var user = getLoggedinUser()
+    if (user) socketService.emit('set-user-socket', user._id)
+})()
 
 
 

@@ -16,9 +16,8 @@ export function loadGuest() {
 
 export function setUser(user) {
     return dispatch => {
-        if (!user) console.log('no user to dispatch')
-        else dispatch({ type: 'SET_USER', user })
-
+        if (!user) return new Error('no user to dispatch')
+        return dispatch({ type: 'SET_USER', user })
     }
 }
 

@@ -21,8 +21,7 @@ import { TaskDetails } from './task-details.jsx'
 import { GroupList } from "../cmps/board/group-list"
 import { actService } from "../services/board/activity.service"
 import { Dashboard } from "./dashboard"
-import { socketService } from "../services/basic/socket.service"
-import { useSelector } from "react-redux"
+import { socketService, SOCKET_EMIT_TOPIC, SOCKET_EVENT_BOARD_UPDATE, SOCKET_EMIT_PULL } from "../services/basic/socket.service"
 import { loadGuest } from "../store/user/user.actions"
 
 const tinycolor = require("tinycolor2")
@@ -30,23 +29,29 @@ const tinycolor = require("tinycolor2")
 class _Board extends React.Component {
 
     componentDidMount() {
-        this._loadUserToStore()
+        this._loadUser()
         this._setBoard()
     }
 
-    componentDidUpdate() {
+    componentDidUpdate(prevProps, prevState) {
+        const { board } = this.props
         this.setTheme()
     }
 
     componentWillUnmount(nextProps, nextState) {
         document.querySelector('#root').style.background = 'initial'
-        socketService.logout()
+        socketService.emit(SOCKET_EMIT_TOPIC, null)
     }
 
-    _loadUserToStore = () => {
+    _loadUser = () => {
         const { loggedinUser, loadGuest } = this.props
         if (!loggedinUser) loadGuest()
-        socketService.setup()
+    }
+
+    _setupSockets = () => {
+        const { board } = this.props
+        socketService.emit(SOCKET_EMIT_TOPIC, board._id)
+        socketService.on(SOCKET_EVENT_BOARD_UPDATE, this._setBoard)
     }
 
     setTheme = async () => {
@@ -65,8 +70,9 @@ class _Board extends React.Component {
 
     _setBoard = async () => {
         const { boardId } = this.props.match.params
-        const board = await this.props.loadBoard(boardId)
-        this.setState({ board })
+        console.log('setting board');
+        await this.props.loadBoard(boardId)
+        this._setupSockets()
     }
 
     onAddTask = async (newTask) => {
@@ -78,6 +84,7 @@ class _Board extends React.Component {
         newBoard.groups[groupIdx].tasks.push(newTask)
         actService.activity('added', 'card,', newTask, newBoard)
         this.props.updateBoard(newBoard)
+        socketService.emit(SOCKET_EMIT_PULL, newBoard._id)
     }
 
     onArchiveTask = async ({ taskId, groupId }) => {
@@ -91,7 +98,8 @@ class _Board extends React.Component {
             }
         })
         actService.activity('archived', 'card', archivedTask, newBoard)
-        this.props.updateBoard(newBoard)
+        await this.props.updateBoard(newBoard)
+        socketService.emit(SOCKET_EMIT_PULL, newBoard._id)
     }
     onArchiveGroup = async (groupId) => {
         const newBoard = JSON.parse(JSON.stringify(this.props.board))
@@ -105,6 +113,8 @@ class _Board extends React.Component {
         actService.activity('archived', 'group', archivedGroup, newBoard)
         console.log('_Board - onArchiveGroup= - newBoard', newBoard.activities)
         this.props.updateBoard(newBoard)
+        socketService.emit(SOCKET_EMIT_PULL, newBoard._id)
+
     }
 
     onGroupChange = async ({ txt, groupId }) => {
@@ -115,6 +125,8 @@ class _Board extends React.Component {
         actService.activity('changed title in', 'group', newBoard.groups[groupIdx], newBoard)
         console.log('_Board - onGroupChange= - newBoard', newBoard.activities)
         this.props.updateBoard(newBoard)
+        socketService.emit(SOCKET_EMIT_PULL, newBoard._id)
+
     }
 
     onAddGroup = async (title) => {
@@ -122,6 +134,8 @@ class _Board extends React.Component {
         const newGroup = { id: utilService.makeId(), title, tasks: [] }
         newBoard.groups.push(newGroup)
         this.props.updateBoard(newBoard)
+        socketService.emit(SOCKET_EMIT_PULL, newBoard._id)
+
     }
 
 
@@ -135,6 +149,8 @@ class _Board extends React.Component {
             const [reorderedItem] = items.splice(result.source.index, 1)
             items.splice(result.destination.index, 0, reorderedItem)
             this.props.updateBoard(newBoard)
+            socketService.emit(SOCKET_EMIT_PULL, newBoard._id)
+
         } else {
             const items = newBoard.groups.find(group => group.id === result.source.droppableId).tasks
             const { droppableId: desDroppableId, index: desIdx } = result.destination
@@ -145,6 +161,8 @@ class _Board extends React.Component {
                 actService.activity('moved', 'card', reorderedItem, newBoard)
             }
             this.props.updateBoard(newBoard)
+            socketService.emit(SOCKET_EMIT_PULL, newBoard._id)
+
         }
     }
 
@@ -153,6 +171,8 @@ class _Board extends React.Component {
         const newBoard = JSON.parse(JSON.stringify(board))
         newBoard.title = newBoardHeader
         this.props.updateBoard(newBoard)
+        socketService.emit(SOCKET_EMIT_PULL, newBoard._id)
+
     }
 
     render() {
