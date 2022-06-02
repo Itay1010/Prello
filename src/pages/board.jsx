@@ -22,7 +22,8 @@ import { GroupList } from "../cmps/board/group-list"
 import { actService } from "../services/board/activity.service"
 import { Dashboard } from "./dashboard"
 import { socketService, SOCKET_EMIT_TOPIC, SOCKET_EVENT_BOARD_UPDATE, SOCKET_EMIT_PULL } from "../services/basic/socket.service"
-import { loadGuest } from "../store/user/user.actions"
+import { loadGuest, setUser } from "../store/user/user.actions"
+import { userService } from "../services/user.service"
 
 const tinycolor = require("tinycolor2")
 
@@ -33,15 +34,7 @@ class _Board extends React.Component {
         this._setBoard()
     }
 
-
-    deepCloneBoard = () => {
-        const { board } = this.props
-        return JSON.parse(JSON.stringify(board))
-    }
-
     componentDidUpdate(prevProps, prevState) {
-        const { board } = this.props
-
         this.setTheme()
     }
 
@@ -50,15 +43,34 @@ class _Board extends React.Component {
         socketService.emit(SOCKET_EMIT_TOPIC, null)
     }
 
+    deepCloneBoard = () => {
+        const { board } = this.props
+        return JSON.parse(JSON.stringify(board))
+    }
+
     _loadUser = () => {
-        const { loggedinUser, loadGuest } = this.props
-        if (!loggedinUser) loadGuest()
+        const { loggedinUser, loadGuest, setUser } = this.props
+        const userFromStorage = userService.getLoggedinUser() || null
+        if (!loggedinUser && !userFromStorage) loadGuest()
+        else setUser(userFromStorage)
     }
 
     _setupSockets = () => {
         const { board } = this.props
         socketService.emit(SOCKET_EMIT_TOPIC, board._id)
-        socketService.on(SOCKET_EVENT_BOARD_UPDATE, this._setBoard)
+        socketService.on(SOCKET_EVENT_BOARD_UPDATE, this._updateBoard)
+    }
+
+    _setBoard = async () => {
+        const { boardId } = this.props.match.params
+        await this.props.loadBoard(boardId)
+        this._setupSockets()
+
+    }
+
+    _updateBoard = async () => {
+        const { boardId } = this.props.match.params
+        await this.props.loadBoard(boardId)
     }
 
     setTheme = async () => {
@@ -73,13 +85,6 @@ class _Board extends React.Component {
             utilService.setDynamicColors(isDark, avgColor)
             document.querySelector('#root').style.background = `url(${boardStyle.background})`
         }
-    }
-
-    _setBoard = async () => {
-        const { boardId } = this.props.match.params
-        console.log('setting board');
-        await this.props.loadBoard(boardId)
-        this._setupSockets()
     }
 
     onAddTask = async (newTask) => {
@@ -105,9 +110,10 @@ class _Board extends React.Component {
             }
         })
         actService.activity('archived', 'card', archivedTask, newBoard)
-        await this.props.updateBoard(newBoard)
+        this.props.updateBoard(newBoard)
         socketService.emit(SOCKET_EMIT_PULL, newBoard._id)
     }
+
     onArchiveGroup = async (groupId) => {
         const newBoard = JSON.parse(JSON.stringify(this.props.board))
         var archivedGroup
@@ -118,35 +124,32 @@ class _Board extends React.Component {
             }
         })
         actService.activity('archived', 'group', archivedGroup, newBoard)
-        console.log('_Board - onArchiveGroup= - newBoard', newBoard.activities)
         this.props.updateBoard(newBoard)
         socketService.emit(SOCKET_EMIT_PULL, newBoard._id)
-
     }
 
     onGroupChange = async ({ txt, groupId }) => {
         const newBoard = JSON.parse(JSON.stringify(this.props.board))
         const groupIdx = newBoard.groups.findIndex(group => group.id === groupId)
+
         if (newBoard.groups[groupIdx].title === txt) return
+
         newBoard.groups[groupIdx].title = txt
-        actService.activity('changed title in', 'group', newBoard.groups[groupIdx], newBoard)
-        console.log('_Board - onGroupChange= - newBoard', newBoard.activities)
+        actService.activity('changed title', 'group', newBoard.groups[groupIdx], newBoard)
         this.props.updateBoard(newBoard)
         socketService.emit(SOCKET_EMIT_PULL, newBoard._id)
-
     }
 
     onAddGroup = async (title) => {
         const newBoard = JSON.parse(JSON.stringify(this.props.board))
         const newGroup = { id: utilService.makeId(), title, tasks: [] }
         newBoard.groups.push(newGroup)
-        this.props.updateBoard(newBoard)
+        await this.props.updateBoard(newBoard)
         socketService.emit(SOCKET_EMIT_PULL, newBoard._id)
-
     }
 
 
-    handleOnDragEnd = (result) => {
+    handleOnDragEnd = async (result) => {
         if (!result.destination) return
         const { board } = this.props
         const newBoard = JSON.parse(JSON.stringify(board))
@@ -155,7 +158,7 @@ class _Board extends React.Component {
             const items = newBoard.groups
             const [reorderedItem] = items.splice(result.source.index, 1)
             items.splice(result.destination.index, 0, reorderedItem)
-            this.props.updateBoard(newBoard)
+            await this.props.updateBoard(newBoard)
             socketService.emit(SOCKET_EMIT_PULL, newBoard._id)
 
         } else {
@@ -167,7 +170,7 @@ class _Board extends React.Component {
             if (!(desDroppableId === SrcDroppableId) || !(desIdx === SrcIdx)) {
                 actService.activity('moved', 'card', reorderedItem, newBoard)
             }
-            this.props.updateBoard(newBoard)
+            await this.props.updateBoard(newBoard)
             socketService.emit(SOCKET_EMIT_PULL, newBoard._id)
 
         }
@@ -179,13 +182,13 @@ class _Board extends React.Component {
         newBoard.title = newBoardHeader
         this.props.updateBoard(newBoard)
         socketService.emit(SOCKET_EMIT_PULL, newBoard._id)
-
     }
 
     setBackgroundImgFromUnsplash = (url) => {
         const newBoard = this.deepCloneBoard()
         newBoard.style.background = url
         this.props.updateBoard(newBoard)
+        socketService.emit(SOCKET_EMIT_PULL, newBoard._id)
     }
 
     render() {
@@ -230,7 +233,8 @@ const mapStateToProps = state => {
 const mapDispatchToProps = {
     loadBoard,
     updateBoard,
-    loadGuest
+    loadGuest,
+    setUser
 }
 
 export const Board = connect(mapStateToProps, mapDispatchToProps)(_Board)

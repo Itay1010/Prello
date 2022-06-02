@@ -4,7 +4,7 @@
     align-self: flex-start;
     background-color: transparent;
     border-radius: 3px;
-    
+
     .open-edit-btn {
         display: block;
         @include btn($type: dark, $height: 40px);
@@ -14,11 +14,12 @@
         width: 270px;
         transition: background-color, 0.09zs;
         cursor: pointer;
+
         &:hover {
             background-color: var(--clr-dynamic-faded-hover);
         }
     }
-    
+
     .add-list {
         position: absolute;
         display: none;
@@ -28,7 +29,7 @@
         width: 100%;
         top: 0;
         transition: transparency;
-        
+
         input {
             // position: absolute;
             display: block;
@@ -59,15 +60,17 @@
             background-color: transparent;
             position: relative;
             display: inline-block;
+            transform: rotate(45deg);
             width: 32px;
             height: 32px;
-            
+
             &::before {
                 position: absolute;
                 content: url("../../../imgs/icons/add.svg");
                 transform: translate(-50%, 10%);
                 height: 20px;
             }
+
             &:hover {
                 background-color: transparent;
             }

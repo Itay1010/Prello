@@ -7,9 +7,13 @@ import { AddTask } from "./add-task"
 import { IAdd } from "../icons/i-add"
 import { draggableStyle } from "../../services/board/draggable.style"
 
-export const Group = ({ group, onAddTask, onArchiveTask, onArchiveGroup, onGroupChange, idx }) => {
-    const { tasks } = group
+export const Group = ({ group, onAddTask, onArchiveGroup, onGroupChange, idx }) => {
     const [newTask, setNewTask] = useState({ title: '', groupId: group.id })
+    useEffect(() => {
+        setGroupTitle({ txt: group.title, groupId: group.id })
+    }, [group])
+
+    const { tasks } = group
     const handleChange = ({ target }) => {
         const { value, name } = target
         setNewTask(prevState => ({ ...prevState, [name]: value }))
@@ -56,11 +60,9 @@ export const Group = ({ group, onAddTask, onArchiveTask, onArchiveGroup, onGroup
 
 
                             {
-
                                 isTaskOpen || <div className="group-footer flex align-center" >
                                     <button className="add-card-open-btn" onClick={ev => setIsTaskOpen(true)
                                     }><IAdd /> Add a card</button>
-
                                 </div>
                             }
 
