@@ -57,6 +57,21 @@
     height: 38px;
     border-radius: 50%;
 
+
+
+}
+
+@mixin menu-modal {
+    .background-modal {
+        background-color: $td-bg;
+        text-align: center;
+        width: 340px;
+        height: 100%;
+        position: fixed;
+        z-index: 20;
+        top: 44px;
+        right: 0;
+    }
 }
 
 

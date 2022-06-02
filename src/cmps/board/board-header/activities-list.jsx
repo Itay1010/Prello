@@ -20,7 +20,6 @@ export const ActivitiesList = ({ activities }) => {
         {reverseActivities.map((activity, idx) => {
             if (idx > 20) return
             const { action, byMember, receiver, createdAt } = activity
-            console.log(byMember.imgUrl)
             return <div className="activity-wrapper">
                 <img src={byMember.imgUrl} alt="" />
                 <p>{byMember.firstName} {action} {receiver}</p>
