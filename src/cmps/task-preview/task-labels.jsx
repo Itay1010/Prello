@@ -12,7 +12,7 @@ export function TaskLabels({ labels }) {
 
     return labels.map(label => {
         return <div className={isExpand ? 'label expanded' : 'label'}
-            onClick={(event) => toggleLabelsSize(event)}
+            // onClick={(event) => toggleLabelsSize(event)}
             style={{ backgroundColor: label }} key={label}></div>
     })
 

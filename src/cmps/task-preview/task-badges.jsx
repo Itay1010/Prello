@@ -14,7 +14,7 @@ export function TaskBadges({ task, getClStatus }) {
     if (!user && task.members?.length > 0) return
 
     return <section className="badges flex align-center">
-        {task.members?.length > 0 && task.members.includes(user._id) && <div className="badge"> <IWatch /> </div>}
+        {task.members?.length > 0 && task.members.includes(user._id) && <div className="badge flex"> <IWatch /> </div>}
         {task.description && <div className="badge"> <IDescription /> </div>}
         {task.checklist?.length > 0 && <div className="badge flex"> <IChecklist /> <p>{getClStatus(task)}</p> </div>}
         {task.attachments?.length > 0 && <div className="badge"><IAttachment /></div>}
