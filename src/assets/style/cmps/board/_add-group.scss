@@ -6,7 +6,8 @@
     border-radius: 3px;
 
     .open-edit-btn {
-        display: block;
+        display: flex;
+        align-items: center;
         @include btn($type: dark, $height: 40px);
         border-radius: 3px;
         color: var(--clr-dynamic-inner);
@@ -17,6 +18,13 @@
 
         &:hover {
             background-color: var(--clr-dynamic-faded-hover);
+        }
+
+        svg {
+            width: 16px;
+            height: 16px;
+            margin-inline-end: 5px;
+            fill: var(--clr-dynamic-inner);
         }
     }
 

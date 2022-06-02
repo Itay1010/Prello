@@ -100,6 +100,23 @@
             padding: 12px;
             overflow-y: scroll;
 
+            .close-modal-btn-wrapper {
+                width: 32px;
+                height: 32px;
+                position: absolute;
+                right: 0;
+
+                svg {
+                    width: 20px;
+                }
+
+                &:hover {
+                    svg {
+                        fill: $opc-black-hov;
+                    }
+                }
+            }
+
             h1 {
                 font-size: 16px;
                 padding-bottom: 14px;
@@ -129,6 +146,22 @@
         }
 
         .side-menu {
+            .close-modal-btn-wrapper {
+                width: 32px;
+                height: 32px;
+                position: absolute;
+                right: 0;
+
+                svg {
+                    width: 20px;
+                }
+
+                &:hover {
+                    svg {
+                        fill: $opc-black-hov;
+                    }
+                }
+            }
 
             right: 0;
             top: 0;
@@ -148,13 +181,13 @@
             }
 
             .menu-content {
-                overflow-y: scroll;
+                overflow-y: auto;
                 background-color: $td-bg;
                 text-align: center;
                 width: 340px;
                 position: fixed;
                 // background-color: #0079bf;
-                height: 130%;
+                height: 95%;
                 top: 44px;
                 right: 0;
                 z-index: 10;
@@ -205,12 +238,23 @@
                     .activity-wrapper {
                         display: grid;
                         grid-template-columns: 50px 1fr;
-                        grid-template-rows: 1fr 1fr;
+                        grid-template-rows: 1fr 20px;
                         justify-items: start;
-                        margin: 10px 0;
+                        margin-bottom: 10px;
 
-                        &:hover {
-                            background-color: $opc-black;
+
+
+                        .guest-icon {
+                            @include img-icon;
+                            margin-inline-start: 5px;
+                            margin-top: 5px;
+                            display: flex;
+                            justify-content: center;
+                            align-items: center;
+                            color: $bg;
+
+                            margin-bottom: 5px;
+                            grid-row: 1 /-1;
                         }
 
                         img {
@@ -224,6 +268,17 @@
 
                         p {
                             font-size: 14px;
+                            text-align: start;
+
+                            word-break: break-word;
+
+                            .created-by-name {
+                                font-size: 14px;
+                                font-family: pri-font-bold;
+                                font-weight: 700;
+                                color: inherit;
+
+                            }
 
                         }
 

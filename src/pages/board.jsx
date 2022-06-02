@@ -24,6 +24,7 @@ import { Dashboard } from "./dashboard"
 import { socketService, SOCKET_EMIT_TOPIC, SOCKET_EVENT_BOARD_UPDATE, SOCKET_EMIT_PULL } from "../services/basic/socket.service"
 import { loadGuest, setUser } from "../store/user/user.actions"
 import { userService } from "../services/user.service"
+import { boardStatistics } from "../services/board/board-statistics"
 
 const tinycolor = require("tinycolor2")
 
@@ -65,7 +66,6 @@ class _Board extends React.Component {
         const { boardId } = this.props.match.params
         await this.props.loadBoard(boardId)
         this._setupSockets()
-
     }
 
     _updateBoard = async () => {
@@ -194,6 +194,7 @@ class _Board extends React.Component {
     render() {
         const { board } = this.props
         if (!board) return <div>loading...</div>
+        if (board) boardStatistics.getActivityStats(board)
         const { groups } = board
         const eventHandlers = {
             onAddTask: this.onAddTask,

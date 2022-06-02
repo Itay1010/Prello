@@ -31,6 +31,7 @@
 
 
         .board-container {
+            margin: 0 150px;
             display: flex;
             flex-direction: column;
 
@@ -86,6 +87,7 @@
                     width: 280px;
                     height: 400px;
                     background-color: $bg;
+                    z-index: 20;
 
                     .img-container {
                         img {
@@ -102,11 +104,15 @@
                         // height: 105px;
                         display: flex;
                         gap: 5px;
+                        flex-wrap: wrap;
+                        justify-content: center;
 
                         .img-wrapper {
 
                             img {
                                 object-fit: fill;
+                                width: 75px;
+
                             }
                         }
                     }
@@ -169,7 +175,7 @@
             }
 
             .boards-wrapper {
-
+                // margin: 50px;
                 display: flex;
                 flex-wrap: wrap;
                 margin-bottom: 60px;
@@ -250,6 +256,7 @@
                     font-weight: 700;
                     color: $bg;
                     text-overflow: ellipsis;
+                    text-shadow: 1px 1px 5px rgb(12, 12, 12);
                 }
 
             }
