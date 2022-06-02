@@ -99,12 +99,32 @@
             top: 44px;
             right: 0;
             padding: 12px;
+            overflow-y: scroll;
 
             h1 {
                 font-size: 16px;
                 padding-bottom: 14px;
                 border-bottom: 0.2px solid $opc-black;
                 margin-bottom: 20px;
+            }
+
+            input {
+                @include input
+            }
+
+            .unsplash-imgs-wrapper {
+                // overflow-y: scroll;
+                // display: flex;
+                // flex-wrap: wrap;
+                column-count: 2;
+                column-gap: 20px;
+                column-gap: 10px;
+                margin-bottom: 20px;
+            }
+
+            .unsplash-imgs-small {
+                width: 150px;
+                margin-bottom: 10px;
             }
 
         }

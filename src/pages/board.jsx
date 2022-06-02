@@ -34,6 +34,11 @@ class _Board extends React.Component {
         this._setBoard()
     }
 
+    deepCloneBoard = () => {
+        const { board } = this.props
+        return JSON.parse(JSON.stringify(board))
+    }
+
     componentDidUpdate() {
         this.setTheme()
     }
@@ -155,6 +160,12 @@ class _Board extends React.Component {
         this.props.updateBoard(newBoard)
     }
 
+    setBackgroundImgFromUnsplash = (url) => {
+        const newBoard = this.deepCloneBoard()
+        newBoard.style.background = url
+        this.props.updateBoard(newBoard)
+    }
+
     render() {
         const { board } = this.props
         if (!board) return <div>loading...</div>
@@ -171,7 +182,7 @@ class _Board extends React.Component {
             <DragDropContext onDragEnd={this.handleOnDragEnd}>
                 <MainHeader boardMembers={board.members} />
                 <section className="board flex col main-layout">
-                    <BoardHeader board={board} saveBoardHeader={this.onSaveBoardHeader} />
+                    <BoardHeader board={board} saveBoardHeader={this.onSaveBoardHeader} setBackgroundImg={this.setBackgroundImgFromUnsplash} />
                     <GroupList groups={groups} eventHandlers={eventHandlers} />
                     <Switch>
                         <Route path={'/board/:boardId/:groupId/:taskId'}>

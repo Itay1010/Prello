@@ -5,7 +5,6 @@ import { ActivitiesList } from './activities-list.jsx'
 export const SideMenu = ({ toggleMenu, isSideMenuOpen, openBackgroundModal }) => {
 
     const boardActivities = useSelector(storeState => storeState.boardModule.board.activities)
-    console.log(boardActivities)
     return <section className='side-menu'>
         {isSideMenuOpen && <div onClick={toggleMenu} className='menu-screen'></div>}
 

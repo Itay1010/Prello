@@ -1,16 +1,31 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { SideMenu } from './side-menu.jsx'
 import { ChooseBackgroundModal } from './choose-background-modal.jsx'
+import { getPhotos, getSearch } from '../../../services/basic/unsplash.service.js'
 
 
-export function BoardFeatures() {
+
+export function BoardFeatures({ setBackgroundImg }) {
     const [isSideMenuOpen, toggleSideMenu] = useState(false)
     const [isBackgroundModal, setBackgroundModal] = useState(false)
-
+    const [imgs, setImgs] = useState(null)
     const toggleBackgroundModal = () => {
         setBackgroundModal(!isBackgroundModal)
     }
 
+    useEffect(() => {
+        onLoad()
+    }, [])
+
+    const onLoad = async () => {
+        const imgs = await getPhotos()
+        setImgs(imgs)
+    }
+
+    const searchImgvalue = async ({ searchValue }) => {
+        const newImgs = await getSearch(searchValue)
+        setImgs(newImgs)
+    }
 
     return <section className="board-features flex align-center">
         <div className='btn-feature flex align-center justify-center'>
@@ -30,6 +45,6 @@ export function BoardFeatures() {
             setBackgroundModal(false)
         }
         } isSideMenuOpen={isSideMenuOpen} openBackgroundModal={toggleBackgroundModal} />
-        {isBackgroundModal && <ChooseBackgroundModal closeBackgroundModal={toggleBackgroundModal} />}
+        {isBackgroundModal && <ChooseBackgroundModal closeBackgroundModal={toggleBackgroundModal} imgs={imgs} setBackgroundImg={setBackgroundImg} enterBackgroundSearch={searchImgvalue} />}
     </section>
 }
