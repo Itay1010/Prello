@@ -13,7 +13,7 @@ export const GroupTitle = ({ groupInfo, setGroupTitle, onArchiveGroup, onGroupCh
                 setGroupTitle(prevState => ({ ...prevState, txt: ev.target.value }))
             }}
 
-            onBlur={ev => {
+            onBlur={ ev => {
                 if (!groupInfo.txt) return
                 onGroupChange(groupInfo)
             }}

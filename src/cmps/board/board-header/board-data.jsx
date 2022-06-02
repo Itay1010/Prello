@@ -15,6 +15,10 @@ export const BoardData = ({ board, saveBoardHeader }) => {
     const boardTitleRef = useRef()
     const [width, setWidth] = useState(0)
 
+    useEffect(() => {
+        console.log(board.title)
+    }, [board.title])
+
     const handleBoardTitleChange = (value) => {
         setBoardTitleValue(value)
         const newBoard = JSON.parse(JSON.stringify(board))

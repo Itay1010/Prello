@@ -36,9 +36,8 @@ function createSocketService() {
       socket = io(baseUrl)
       setTimeout(() => {
         const user = userService.getLoggedinUser()
-        // console.log('setTimeout - user', user)
         if (user) this.login(user._id)
-      }, 1000)
+      }, 500)
     },
     on(eventName, cb) {
       socket.on(eventName, cb)
