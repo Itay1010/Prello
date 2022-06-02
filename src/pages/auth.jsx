@@ -1,17 +1,16 @@
 import React from "react"
-
 import { connect } from 'react-redux'
 
-import { userService } from "../services/user.service"
-import { onLogin, onSignup, onGoogleAuth } from "../store/user/user.actions"
+import { onLogin, onSignup } from "../store/user/user.actions"
 
 import { SignupForm } from '../cmps/auth/signup.jsx'
 import { LoginForm } from '../cmps/auth/login.jsx'
 
 import { GoogleLogin } from 'react-google-login'
 import { gapi } from "gapi-script"
-import { ILogo } from "../cmps/icons/i-logo"
+import { ILogo } from "../cmps/icons/i-Logo"
 import { socketService } from "../services/basic/socket.service"
+
 const clientId = "168490950789-fil5g5m4nauiousknnut75avvh0dhsb5.apps.googleusercontent.com"
 
 export class _Auth extends React.Component {

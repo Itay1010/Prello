@@ -23,7 +23,6 @@ async function query() {
 
 async function getById(boardId) {
     return await httpService.get(`board/${boardId}`)
-
 }
 
 async function remove(boardId) {

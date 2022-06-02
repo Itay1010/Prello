@@ -22,6 +22,11 @@ export const routes = [
         isExact: true
     },
     {
+        path: '/board/:boardId/statistics',
+        component: Dashboard,
+        isExact: true
+    },
+    {
         path: '/',
         component: Home,
         isExact: true

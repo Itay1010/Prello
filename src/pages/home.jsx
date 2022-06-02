@@ -5,7 +5,7 @@ import { Link } from "react-router-dom"
 import { NavLink } from "react-router-dom"
 
 import { userService } from "../services/user.service"
-import { loadGuest, onLogin } from "../store/user/user.actions"
+import { loadGuest, onLogin, setUser } from "../store/user/user.actions"
 
 export const Home = () => {
     const dispatch = useDispatch()
@@ -15,8 +15,8 @@ export const Home = () => {
         if (!loggedinUser) {
             dispatch(loadGuest())
         }
-        else if (loggedinUser._id[0] !== 'g') {
-            dispatch(onLogin(loggedinUser))
+        else {
+            dispatch(setUser(loggedinUser))
         }
     }, [loggedinUser])
 
