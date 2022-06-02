@@ -8,6 +8,7 @@ import { TaskMembers } from "../task-preview/task-members"
 import { Draggable } from 'react-beautiful-dnd';
 import { TaskBadges } from '../task-preview/task-badges';
 import { draggableStyle } from '../../services/board/draggable.style';
+import { TaskImage } from '../task-preview/task-img';
 
 
 export const TaskPreview = ({ task, groupId, idx }) => {
@@ -57,9 +58,10 @@ export const TaskPreview = ({ task, groupId, idx }) => {
                         style={({ backgroundColor: task.style.bgColor })}
                     ></section>}
                     <div className="task-info">
-                        {task.labels?.length > 0 && <div className="task-label">
+                        {task.labels?.length && !task.attachments?.length && <div className="task-label">
                             <TaskLabels labels={task.labels} />
                         </div>}
+                        {task.attachments?.length && <TaskImage attachments={task.attachments} />}
                         <section className="task-title">{task.title}</section>
                         {(task.attachments?.length > 0 || task.members?.length > 0 ||
                             task.comments?.length > 0 || task.checklist?.length > 0 ||
