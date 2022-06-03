@@ -7,12 +7,12 @@ const LOCAL_STORAGE_LOGGEDIN_USER = 'loggedinUser'
 const BASE_URL = 'auth/'
 
 export const userService = {
+    getUsers,
     getLoggedinUser,
     signup,
     login,
     logout,
     loginGuest,
-    // getUserById,
 }
 
 // window.userService = userService
@@ -21,11 +21,20 @@ function getLoggedinUser() {
     return JSON.parse(sessionStorage.getItem(LOCAL_STORAGE_LOGGEDIN_USER) || 'null')
 }
 
+async function getUsers() {
+    try {
+        const users = await httpService.get('user')
+        console.log(users);
+    } catch (err) {
+        console.error('error getting users')
+        throw err
+    }
+}
+
 async function signup(userCred) {
     try {
         userCred.color = utilService.getRandomColor()
         const user = await httpService.post(`${BASE_URL}signup`, userCred)
-        console.log('signup - user', user)
         _saveLocalUser(user)
         return user
 
@@ -100,13 +109,6 @@ function _saveLocalUser(user) {
     sessionStorage.setItem(LOCAL_STORAGE_LOGGEDIN_USER, JSON.stringify(user))
     return user
 }
-
-function getUserById(userId) {
-    const users = JSON.parse(sessionStorage.getItem(LOCAL_STORAGE_LOGGEDIN_USER))
-    console.log(userId)
-}
-
-
 
 
 // This is relevant when backend is connected
