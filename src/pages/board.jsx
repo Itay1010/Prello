@@ -67,7 +67,7 @@ class _Board extends React.Component {
         try {
             await this.props.loadBoard(boardId)
             this._setupSockets()
-        } catch(err) {
+        } catch (err) {
             console.error('error in setting board', err)
         }
     }

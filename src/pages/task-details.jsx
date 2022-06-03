@@ -229,7 +229,7 @@ export const TaskDetails = ({ onArchiveTask, onSaveBoard }) => {
 
         const requiredAttachmentIdx = task.attachments.findIndex(attachment => attachment.id === attachmentId)
         task.attachments.splice(requiredAttachmentIdx, 1)
-        saveBoard()
+        saveBoard(newBoard)
     }
 
     const onSaveCover = () => {
