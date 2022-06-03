@@ -97,7 +97,15 @@ class _Board extends React.Component {
         const newBoard = JSON.parse(JSON.stringify(this.props.board))
         const groupIdx = newBoard.groups.findIndex(group => group.id === newTask.groupId)
 
-        newTask = { id: utilService.makeId(), title: newTask.title, style: { backgroundImg: '', bgColor: '', size: '' } }
+        newTask = {
+            id: utilService.makeId(),
+            title: newTask.title,
+            style: { backgroundImg: '', bgColor: '', size: '', },
+            members: [],
+            attachments: [],
+            labels: [],
+            checklist: []
+        }
         newBoard.groups[groupIdx].tasks.push(newTask)
         actService.activity('added', 'card,', newTask, newBoard)
         await this.props.updateBoard(newBoard)
