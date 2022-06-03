@@ -12,13 +12,11 @@ export const BoardData = ({ board, saveBoardHeader, }) => {
     const [isBoardTitleEditable, setBoardTitleEditable] = useState(false)
 
     useEffect(() => {
-        console.log('new title');
     }, [board.title])
 
     const handleBoardTitleChange = (value) => {
         saveBoardHeader(value)
     }
-
 
     return <section className="board-data flex align-center">
         <button onClick={ev => history.push(`${history.location.pathname}/dashboard`)}>Dashboard</button>
