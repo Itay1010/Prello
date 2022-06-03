@@ -3,22 +3,22 @@ import React, { useEffect, useState } from 'react'
 import { boardService } from '../../../services/board/board.service'
 
 export const Labels = ({ saveLabels, task, closeModal }) => {
-    const [taskToUpdate, setTaskToUpdate] = useState(task)
+    // const [taskToUpdate, setTaskToUpdate] = useState(task)
     const labels = boardService.getLabels()
 
     useEffect(() => {
 
-    }, [taskToUpdate.labels])
+    }, [task.labels])
 
     const toggleLabel = (label) => {
-        if (taskToUpdate.labels) {
-            if (taskToUpdate.labels.includes(label)) {
-                const idx = taskToUpdate.labels.findIndex(currLabel => currLabel === label)
-                taskToUpdate.labels.splice(idx, 1)
-            } else taskToUpdate.labels.push(label)
-        } else taskToUpdate.labels = [label]
-        setTaskToUpdate(taskToUpdate)
-        saveLabels(taskToUpdate)
+
+        if (task.labels) {
+            if (task.labels.includes(label)) {
+                const idx = task.labels.findIndex(currLabel => currLabel === label)
+                task.labels.splice(idx, 1)
+            } else task.labels.push(label)
+        } else task.labels = [label]
+        saveLabels(task)
     }
 
     return <section className='labels'>
@@ -30,7 +30,7 @@ export const Labels = ({ saveLabels, task, closeModal }) => {
         {labels.map(label => {
             return <div className='label' key={label}>
                 <div className='label-bar' style={{ backgroundColor: label }} onClick={() => toggleLabel(label)}>
-                    {taskToUpdate.labels?.includes(label) && <svg viewBox="0 0 24 24"><path d="M19,5.2L8.5,15.8c-0.3,0.3-0.8,0.3-1.1,0L5,13.3c-0.5-0.5-1.2-0.5-1.6,0l0,0c-0.5,0.5-0.5,1.2,0,1.6l3.8,3.8 c0.5,0.5,1.2,0.5,1.6,0L20.7,6.9c0.5-0.5,0.5-1.2,0-1.6l0,0C20.2,4.8,19.5,4.8,19,5.2z" /></svg>}
+                    {task.labels?.includes(label) && <svg viewBox="0 0 24 24"><path d="M19,5.2L8.5,15.8c-0.3,0.3-0.8,0.3-1.1,0L5,13.3c-0.5-0.5-1.2-0.5-1.6,0l0,0c-0.5,0.5-0.5,1.2,0,1.6l3.8,3.8 c0.5,0.5,1.2,0.5,1.6,0L20.7,6.9c0.5-0.5,0.5-1.2,0-1.6l0,0C20.2,4.8,19.5,4.8,19,5.2z" /></svg>}
                 </div>
             </div>
         })}
