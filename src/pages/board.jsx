@@ -67,7 +67,7 @@ class _Board extends React.Component {
         try {
             await this.props.loadBoard(boardId)
             this._setupSockets()
-        } catch(err) {
+        } catch (err) {
             console.error('error in setting board', err)
         }
     }
@@ -199,7 +199,7 @@ class _Board extends React.Component {
     render() {
         const { board } = this.props
         if (!board) return <div>loading...</div>
-        if (board) boardStatistics.getActivityStats(board)
+        // if (board) boardStatistics.getActivityStats(board)
         const { groups } = board
         const eventHandlers = {
             onAddTask: this.onAddTask,

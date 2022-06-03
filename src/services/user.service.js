@@ -112,7 +112,7 @@ function getUserById(userId) {
 // This is relevant when backend is connected
 ; (async () => {
     var user = getLoggedinUser()
-    console.log('; - user', user._id)
+    // console.log('; - user', user._id)
     if (user) socketService.emit('set-user-socket', user._id)
 })()
 

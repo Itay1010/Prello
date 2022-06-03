@@ -1,7 +1,11 @@
+const WEEK_TIMESTAMP = 7 * 24 * 60 * 60 * 1000 //604800000
+const DAY_TIMESTAMP = 86400000
+
 export const boardStatistics = {
     getCardsCount,
     getCardsByMember,
-    getActivityStats
+    getActivityStats,
+    getDates
 
 }
 
@@ -10,7 +14,8 @@ function getCardsCount(board) {
     const res = board.groups.reduce((acc, group) => {
         const count = {
             active: 0,
-            archived: 0
+            archived: 0,
+            groupCount: 0
         }
 
         group.tasks.forEach(task => {
@@ -23,6 +28,10 @@ function getCardsCount(board) {
 
         if (acc.archived) acc.archived += count.archived
         else acc.archived = count.archived
+
+        if (acc.groupCount) acc.groupCount++
+        else acc.groupCount = 1
+
 
         return acc
     }, {})
@@ -40,7 +49,6 @@ function getCardsByMember(board) {
                     if (count[task.members[i]]) count[task.members[i]]++
                     else count[task.members[i]] = 1
                 }
-                // } else console.log('no member assinged to: ', task.title)
             }
         })
 
@@ -52,45 +60,62 @@ function getCardsByMember(board) {
         return acc
     }, {})
 
-    console.log('res', res);
 
     const resToDisplay = []
-
     for (const id in res) {
+        console.log(res[id]);
         const member = board.members.find(member => member._id === id)
         const memberStatistics = {
             name: member.firstName,
             imgUrl: member.imgUrl,
-            tasksNum: res.id
+            tasksNum: res[id]
         }
         resToDisplay.push(memberStatistics)
     }
 
-    console.log('resToDisplay', resToDisplay);
+    return resToDisplay
 }
 
 function getActivityStats(board) {
-    // console.log(board);
     const currTimestamp = Date.now()
-    const WEEK_TIMESTAMP = 7 * 24 * 60 * 60 * 1000  //604800000
-
     const timeLimit = currTimestamp - WEEK_TIMESTAMP
 
     const lastWeekActivity = []
     board.activities.forEach(act => {
         if (act.action !== 'moved' && act.createdAt >= timeLimit) lastWeekActivity.push(act)
     })
-    // console.log('lastWeekActivity', lastWeekActivity);
 
-    const res = {}
+    const res = [0, 0, 0, 0, 0, 0, 0]
     lastWeekActivity.forEach(act => {
-        // console.log(act.createdAt)
-        const date = new Date()
-        const day = date.getDay()
-        // console.log(day);
+        const dateTimestamp = new Date(act.createdAt)
+        const day = dateTimestamp.getDay()
+        const idx = _getIndex(day)
+        res[idx]++
+
     })
+    return res
+}
+getDates()
+function getDates() {
+    const today = new Date()
+    let timestamp = today - WEEK_TIMESTAMP
 
-    // console.log(res);
+    const res = []
+    for (let i = 0; i < 7; i++) {
+        const date = new Date(timestamp)
+        const dateStr = `${date.getDate()}/${date.getMonth() + 1}`
+        res.push(dateStr)
+        timestamp += DAY_TIMESTAMP
+    }
 
+    return res
+}
 
+function _getIndex(day) {
+    const now = new Date()
+    const today = now.getDay()
+
+    if (today - day > 0) return 6 - day
+    else if (today - day < 0) return day - today - 1
+    else return 6
 }

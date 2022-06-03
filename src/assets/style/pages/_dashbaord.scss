@@ -1,9 +1,38 @@
-.dashboard {
+// .dashboard {
+//     position: absolute;
+//     background-color: $group-bg;
+//     top: 0;
+//     height: 98%;
+//     width: 100%;
+//     grid-column: 2/3;
+//     overflow-x: hidden;
+// }
+
+
+.dashboard-main {
     position: absolute;
-    background-color: $group-bg;
     top: 0;
-    height: 98%;
+    grid-column: 1/3;
+    margin-top: 52px;
+    background-color: $group-bg;
+    height: 100%;
     width: 100%;
-    grid-column: 2/3;
-    overflow-x: hidden;
+
+    header {
+        .left-tri {
+            width: 0;
+            height: 0;
+            border-top: 50px solid transparent;
+            border-right: 100px solid red;
+            border-bottom: 50px solid transparent;
+        }
+
+        .right-tri {
+            width: 0;
+            height: 0;
+            border-top: 50px solid transparent;
+            border-left: 100px solid red;
+            border-bottom: 50px solid transparent;
+        }
+    }
 }
