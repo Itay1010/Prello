@@ -41,9 +41,6 @@ export const TaskDetails = ({ onArchiveTask, onSaveBoard }) => {
     const { board } = useSelector(storeState => storeState.boardModule)
 
     //state hooks
-    const [newBoard, setNewBoard] = useState(board)
-    const [group, setGroup] = useState(null)
-    const [task, setTask] = useState(null)
     const [isModal, setIsModal] = useState('')
     const [modalType, setModalType] = useState(null)
     const [isTitleEditable, setTitle] = useState(null)
@@ -54,10 +51,6 @@ export const TaskDetails = ({ onArchiveTask, onSaveBoard }) => {
     const { boardId, groupId, taskId } = params
     const descriptionRef = React.useRef()
 
-    useEffect(() => {
-        onLoad()
-    }, [])
-
 
     const onGoBack = () => {
         history.push(`/board/${boardId}`)
@@ -67,55 +60,49 @@ export const TaskDetails = ({ onArchiveTask, onSaveBoard }) => {
         setModalType(null)
     }
 
-    function onLoad() {
-        const board = deepCloneBoard()
-        setNewBoard(board)
-        const groupToAdd = board.groups.find(group => group.id === groupId)
-        setGroup(groupToAdd)
-        const task = groupToAdd.tasks.find(task => task.id === taskId)
-        setTask(task)
-        // const group = board.groups.find(group => groupId === group.id)
-        // const task = group.tasks.find(task => taskId === task.id)
-        // setTask(task)
-    }
-
     const handleDescriptionChange = ({ target }) => {
         setDescriptionValue(target.value)
     }
 
     const saveMembers = (updatedTask) => {
-        const group = board.groups.find(group => group.id === groupId)
-        const idx = group.tasks.findIndex(task => task.id === updatedTask.id)
-        group.tasks[idx].members = updatedTask.members
-        setGroup(group)
-        saveBoard()
-    }
-
-    const saveLabels = (updatedTask) => {
+        const newBoard = deepCloneBoard()
         const group = newBoard.groups.find(group => group.id === groupId)
         const idx = group.tasks.findIndex(task => task.id === updatedTask.id)
         group.tasks[idx].members = updatedTask.members
-        setGroup(group)
-        saveBoard()
+        saveBoard(newBoard)
+    }
+
+    const saveLabels = (updatedTask) => {
+        const newBoard = deepCloneBoard()
+        const group = newBoard.groups.find(group => group.id === groupId)
+        const idx = group.tasks.findIndex(task => task.id === updatedTask.id)
+        group.tasks[idx].members = updatedTask.members
+        saveBoard(newBoard)
     }
 
     const saveChecklist = (checklistTitle) => {
+        const newBoard = deepCloneBoard()
+        const group = newBoard.groups.find(group => group.id === groupId)
+        const idx = group.tasks.findIndex(task => task.id === taskId)
+        const task = group.tasks[idx]
+
         const newChecklist = {
             title: checklistTitle,
             items: [],
             id: 'Cl' + utilService.makeId()
         }
 
-        if (task.checklist) {
-            task.checklist.push(newChecklist)
-        } else {
-            task.checklist = [newChecklist]
-        }
-        setGroup(group)
-        saveBoard()
+        if (task.checklist) task.checklist.push(newChecklist)
+        else task.checklist = [newChecklist]
+        saveBoard(newBoard)
     }
 
     const onSaveChecklistTask = (txt, clTaskId) => {
+        const newBoard = deepCloneBoard()
+        const group = newBoard.groups.find(group => group.id === groupId)
+        const idx = group.tasks.findIndex(task => task.id === taskId)
+        const task = group.tasks[idx]
+
         const newItem = {
             txt,
             id: utilService.makeId(),
@@ -124,40 +111,50 @@ export const TaskDetails = ({ onArchiveTask, onSaveBoard }) => {
 
         const checklistTask = task.checklist.find(clTask => clTask.id === clTaskId)
         checklistTask.items.push(newItem)
-        saveBoard()
+        saveBoard(newBoard)
     }
 
     const saveTaskTitle = (title) => {
-        task.title = title
+        const newBoard = deepCloneBoard()
+        const group = newBoard.groups.find(group => group.id === groupId)
+        const idx = group.tasks.findIndex(task => task.id === taskId)
+        group.tasks[idx].title = title
         setTitle(false)
-        saveBoard()
+        saveBoard(newBoard)
     }
 
     const saveTaskDescription = () => {
+        const newBoard = deepCloneBoard()
+        const group = newBoard.groups.find(group => group.id === groupId)
+        const idx = group.tasks.findIndex(task => task.id === taskId)
+        const task = group.tasks[idx]
+
         task.description = description
         setDescriptionEditable(false)
-        saveBoard()
+        saveBoard(newBoard)
 
     }
 
     const onSaveAttachment = (attachment) => {
+        const newBoard = deepCloneBoard()
+        const group = newBoard.groups.find(group => group.id === groupId)
+        const idx = group.tasks.findIndex(task => task.id === taskId)
+        const task = group.tasks[idx]
+
         if (attachment.id) {
             const requestedAttachmentIdx = task.attachments.findIndex(requestedAttachment => requestedAttachment.id === attachment.id)
             task.attachments.splice(requestedAttachmentIdx, 1, attachment)
         } else {
-
             attachment.createdAt = Date.now()
             attachment.id = utilService.makeId()
-            if (task.attachments) {
-                task.attachments.push(attachment)
-            } else {
-                task.attachments = [attachment]
-            }
+            if (task.attachments) task.attachments.push(attachment)
+            else task.attachments = [attachment]
         }
-        saveBoard()
+
+        saveBoard(newBoard)
     }
 
-    const saveBoard = async () => {
+    const saveBoard = async (newBoard) => {
         await dispatch(updateBoard(newBoard))
         socketService.emit(SOCKET_EMIT_PULL, newBoard._id)
     }
@@ -175,9 +172,11 @@ export const TaskDetails = ({ onArchiveTask, onSaveBoard }) => {
     }
 
     const onDeleteClTask = (clTaskId, item) => {
+        const newBoard = deepCloneBoard()
+
         const clTaskIdx = item.items.findIndex(clTask => clTask.id === clTaskId)
         item.items.splice(clTaskIdx, 1)
-        saveBoard()
+        saveBoard(newBoard)
     }
 
     const saveMemberToClTask = (member, clTaskId, checklist) => {
@@ -194,14 +193,24 @@ export const TaskDetails = ({ onArchiveTask, onSaveBoard }) => {
     }
 
     const onDeleteChecklist = (checklistId) => {
+        const newBoard = deepCloneBoard()
+        const group = newBoard.groups.find(group => group.id === groupId)
+        const idx = group.tasks.findIndex(task => task.id === taskId)
+        const task = group.tasks[idx]
+
         const { checklist } = task
         const requestedChecklistIdx = checklist.findIndex(checklist => checklist.id === checklistId)
         checklist.splice(requestedChecklistIdx, 1)
-        saveBoard()
+        saveBoard(newBoard)
 
     }
 
     const toggleEditDescription = () => {
+        const newBoard = deepCloneBoard()
+        const group = newBoard.groups.find(group => group.id === groupId)
+        const idx = group.tasks.findIndex(task => task.id === taskId)
+        const task = group.tasks[idx]
+
         if (isDescriptionEditable) {
             setDescriptionEditable(false)
         } else {
@@ -213,6 +222,11 @@ export const TaskDetails = ({ onArchiveTask, onSaveBoard }) => {
 
 
     const onRemoveAttachment = (attachmentId) => {
+        const newBoard = deepCloneBoard()
+        const group = newBoard.groups.find(group => group.id === groupId)
+        const idx = group.tasks.findIndex(task => task.id === taskId)
+        const task = group.tasks[idx]
+
         const requiredAttachmentIdx = task.attachments.findIndex(attachment => attachment.id === attachmentId)
         task.attachments.splice(requiredAttachmentIdx, 1)
         saveBoard()
@@ -226,7 +240,10 @@ export const TaskDetails = ({ onArchiveTask, onSaveBoard }) => {
         setIsModal(id)
     }
 
-    if (!group || !task) return <React.Fragment></React.Fragment>
+    if (!board) return <React.Fragment></React.Fragment>
+    const group = board.groups.find(group => group.id === groupId)
+    const idx = group.tasks.findIndex(task => task.id === taskId)
+    const task = group.tasks[idx]
     const { checklist, attachments } = task
     return <section onClick={onGoBack} className='task-details-shadow flex justify-center'>
         <section className='task-details flex col' onClick={(event) => event.stopPropagation()}>
@@ -245,7 +262,7 @@ export const TaskDetails = ({ onArchiveTask, onSaveBoard }) => {
                             <MembersPreview
                                 task={task}
                                 setModalType={setModalType}
-                                boardMembers={newBoard.members}
+                                boardMembers={board.members}
                             />
                         }
                         {task.labels?.length > 0 && <div className="labels flex col">
@@ -286,7 +303,7 @@ export const TaskDetails = ({ onArchiveTask, onSaveBoard }) => {
                         </div>
                     </div>
 
-                    {checklist?.length > 0 && <ChecklistList checklist={checklist} saveChecklistTask={onSaveChecklistTask} setIsDone={onSetIsDone} deleteClTask={onDeleteClTask} deleteChecklist={onDeleteChecklist} boardMembers={newBoard.members} generalTask={task} saveMemberToClTask={saveMemberToClTask} />}
+                    {checklist?.length > 0 && <ChecklistList checklist={checklist} saveChecklistTask={onSaveChecklistTask} setIsDone={onSetIsDone} deleteClTask={onDeleteClTask} deleteChecklist={onDeleteChecklist} boardMembers={board.members} generalTask={task} saveMemberToClTask={saveMemberToClTask} />}
 
                     {attachments?.length > 0 && <AttachmentList attachments={attachments} removeAttachment={onRemoveAttachment} openImgModal={openImgModal} saveAttachment={onSaveAttachment} />}
                 </div>
@@ -299,7 +316,7 @@ export const TaskDetails = ({ onArchiveTask, onSaveBoard }) => {
                     task={task}
                     group={group}
                     boardId={boardId}
-                    boardMembers={newBoard.members}
+                    boardMembers={board.members}
                     saveMembers={saveMembers}
                     saveLabels={saveLabels}
                     saveChecklist={saveChecklist}
