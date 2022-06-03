@@ -12,9 +12,14 @@
         .board-name {
             font-size: 1.28em;
             margin: 0 8px 0 4px;
-            padding: 0 5px 0;
+            padding: 5px;
             color: var(--clr-dynamic-inner);
             
+            &:hover:not(:focus) {
+                border-radius: 2px;
+                background-color: var(--clr-dynamic-faded);
+            }
+
             &:focus {
                 color: $td-main;
                 margin: 0 8px 0 4px;

@@ -1,9 +1,103 @@
 .group-modal {
     position: absolute;
     right: 0;
-    width: 100px;
-    height: 100px;
+    top: 47px;
     background-color: $bg;
+    transform: translateX(70%);
+    width: 300px;
     z-index: 100;
-    
+    border-radius: 3px;
+    box-shadow: 0 0 7px -4px black;
+    font-family: pri-font;
+    font-size: 0.9em;
+    cursor: default;
+
+    &>* {
+        margin-block-end: 6px;
+    }
+
+    .screen {
+        position: fixed;
+        left: -100vw;
+        height: 100vh;
+        width: 100vw;
+    }
+    .group-modal-header {
+        display: flex;
+        align-items: center;
+        padding: 0 10px;
+
+
+        h3 {
+            display: inline;
+            color: $edit;
+            flex-grow: 1;
+            text-align: center;
+            height: min-content;
+            padding: 10px 0;
+        }
+
+        .close-modal {
+            display: inline-block;
+            background-color: transparent;
+            border: none;
+            width: 0;
+            height: 0;
+            padding: 10px 12px 10px 8px;
+
+            svg {
+                transform: translate(-50%, -50%);
+                fill: $edit;
+            }
+        }
+
+    }
+
+    hr {
+        width: 90%;
+        margin: auto;
+        height: 1px;
+    }
+
+    .modal-body {
+
+        button {
+            border-radius: 0;
+            @include btn();
+            padding: 0 10px;
+            background-color: transparent;
+            width: 100%;
+            text-align: start;
+
+            &:hover {
+                background-color: $opc-black-hov;
+            }
+        }
+
+
+
+    }
+
+    .group-colors {
+        .close-modal {
+            cursor: pointer;
+
+        }
+
+        .color-bar {
+            height: 30px;
+            cursor: pointer;
+        }
+        
+        
+        .clear {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 30px;
+            width: 100%;
+            cursor: pointer;
+        }
+    }
+
 }

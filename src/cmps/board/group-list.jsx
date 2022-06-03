@@ -10,7 +10,8 @@ export const GroupList = ({ groups, eventHandlers }) => {
         onArchiveTask,
         onArchiveGroup,
         onGroupChange,
-        onAddGroup
+        onAddGroup,
+        onGroupColorChange
     } = eventHandlers
     return <Droppable type="groups" droppableId="groups" direction="horizontal">
         {(provided, snapshot) => {
@@ -28,6 +29,7 @@ export const GroupList = ({ groups, eventHandlers }) => {
                         onArchiveTask={onArchiveTask}
                         onArchiveGroup={onArchiveGroup}
                         onGroupChange={onGroupChange}
+                        onGroupColorChange={onGroupColorChange}
                     />
                 })}
                 {provided.placeholder}
