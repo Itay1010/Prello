@@ -40,7 +40,7 @@ class _Board extends React.Component {
     }
 
     componentWillUnmount(nextProps, nextState) {
-        document.querySelector('#root').style.background = 'initial'
+        document.querySelector('#root').style.background = null
         socketService.emit(SOCKET_EMIT_TOPIC, null)
     }
 

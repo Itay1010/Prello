@@ -185,6 +185,7 @@
         width: 100%;
     }
 
+
     input {
         @include input($width: 93%);
         margin-inline-start: 40px;
