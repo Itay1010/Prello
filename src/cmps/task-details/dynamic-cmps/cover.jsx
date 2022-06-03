@@ -14,6 +14,7 @@ export const Cover = ({ saveCover, closeModal, task }) => {
     }
     let timeoutId
     let background
+    let lineColor
     const searchValueTyped = (ev) => {
         timeoutId = null
         timeoutId = setTimeout(async () => {
@@ -53,7 +54,11 @@ export const Cover = ({ saveCover, closeModal, task }) => {
 
 
 
-    if (!background) background = 'grey'
+    if (!background) {
+        background = 'grey'
+        lineColor = '$bg'
+    }
+
     if (!photos) return <React.Fragment></React.Fragment>
     return <div className='cover'>
         <div className='header-wrapper'>
