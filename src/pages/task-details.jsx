@@ -232,7 +232,14 @@ export const TaskDetails = ({ onArchiveTask, onSaveBoard }) => {
         saveBoard(newBoard)
     }
 
-    const onSaveCover = () => {
+    const onSaveCover = (cover) => {
+        const newBoard = deepCloneBoard()
+        const group = newBoard.groups.find(group => group.id === groupId)
+        const idx = group.tasks.findIndex(task => task.id === taskId)
+        const task = group.tasks[idx]
+        console.log(task)
+        task.style = cover
+        saveBoard(newBoard)
 
     }
 
@@ -246,8 +253,11 @@ export const TaskDetails = ({ onArchiveTask, onSaveBoard }) => {
     const task = group.tasks[idx]
     const { checklist, attachments } = task
     return <section onClick={onGoBack} className='task-details-shadow flex justify-center'>
-        <section className='task-details flex col' onClick={(event) => event.stopPropagation()}>
 
+        {/* {task.style.bgColor && <div className='task-bg-color'>
+            h
+        </div>} */}
+        <section className='task-details flex col' onClick={(event) => event.stopPropagation()}>
             <DetailsHeader
                 task={task}
                 group={group}
