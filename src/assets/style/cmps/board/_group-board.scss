@@ -12,12 +12,14 @@
     .group-header {
         height: 40px;
         padding: 8px;
+        border-radius: 3px 3px 0 0;
+
 
         textarea {
             flex-grow: 1;
             padding: 4px 4px 4px 8px;
             margin-inline-end: 8px;
-            border-radius: 1;
+            border-radius: 1px;
 
             &:focus {
                 border: none;
