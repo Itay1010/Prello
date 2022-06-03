@@ -15,9 +15,10 @@ import { updateBoard } from '../store/board/board.action'
 // SERVICES
 import { utilService } from '../services/basic/util.service.js'
 import { IAdd } from '../cmps/icons/i-add.jsx'
+import { socketService, SOCKET_EMIT_PULL } from '../services/basic/socket.service'
+
 
 // LIBS
-
 import TextareaAutosize from '@mui/material/TextareaAutosize'
 import { DetailsHeader } from '../cmps/task-details/body/details-header.jsx'
 import { TaskEdit } from '../cmps/task-details/body/task-edit.jsx'
@@ -156,8 +157,9 @@ export const TaskDetails = ({ onArchiveTask, onSaveBoard }) => {
         saveBoard()
     }
 
-    const saveBoard = () => {
-        dispatch(updateBoard(newBoard))
+    const saveBoard = async () => {
+        await dispatch(updateBoard(newBoard))
+        socketService.emit(SOCKET_EMIT_PULL, newBoard._id)
     }
 
     // const saveBoard = () => {
