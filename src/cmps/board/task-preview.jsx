@@ -12,7 +12,6 @@ import { TaskImage } from '../task-preview/task-img';
 
 
 export const TaskPreview = ({ task, groupId, idx }) => {
-    console.log('TaskPreview - task', task)
     const params = useParams()
     const { boardId } = params
     const [membersToDisplay, setMembersToDisplay] = useState(null)
@@ -70,7 +69,7 @@ export const TaskPreview = ({ task, groupId, idx }) => {
                         style={({ backgroundColor: bgColor })}
                     ></section>}
                     <div className="task-info" style={task.style?.bgColor && size === 'full' ? { backgroundColor: bgColor } : {}}>
-                        {task.labels?.length && !task.attachments?.length && <div className="task-label">
+                        {task.labels?.length > 0 && !task.attachments?.length > 0 && <div className="task-label">
                             <TaskLabels labels={task.labels} />
                         </div>}
                         {backgroundImg && <TaskImage attachment={backgroundImg} />}
