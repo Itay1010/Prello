@@ -73,7 +73,7 @@
                 flex-grow: 1;
 
                 &>* {
-                    margin-bottom: 12px;
+                    margin-bottom: 40px;
                 }
 
             }
@@ -808,5 +808,9 @@
         a {
             text-decoration: underline;
         }
+    }
+
+    textarea {
+        transform: translateX(-0.5%);
     }
 }

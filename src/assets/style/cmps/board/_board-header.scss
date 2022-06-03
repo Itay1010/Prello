@@ -1,5 +1,6 @@
 .board-header {
     position: relative;
+    padding: 8px 0 12px;
 
     .board-data {
         width: auto;
@@ -11,12 +12,12 @@
 
         .board-name {
             font-size: 1.28em;
-            margin: 0 8px 0 4px;
-            padding: 5px;
+            margin: 0 4px 0 0;
+            padding: 8px;
             color: var(--clr-dynamic-inner);
-            
+
             &:hover:not(:focus) {
-                border-radius: 2px;
+                border-radius: 3px;
                 background-color: var(--clr-dynamic-faded);
             }
 
@@ -30,9 +31,9 @@
             }
         }
 
-        &>*:not(last-child) {
-            margin-inline-end: 4px;
-        }
+        // &>*:not(last-child) {
+        //     margin-inline-end: 4px;
+        // }
 
         button {
             @include btn($type: dark);
