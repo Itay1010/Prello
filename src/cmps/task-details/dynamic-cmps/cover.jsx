@@ -56,7 +56,9 @@ export const Cover = ({ saveCover, closeModal, task }) => {
 
     if (!background) {
         background = 'grey'
-        lineColor = '$bg'
+        lineColor = ''
+    } else {
+
     }
 
     if (!photos) return <React.Fragment></React.Fragment>
@@ -69,8 +71,8 @@ export const Cover = ({ saveCover, closeModal, task }) => {
             <div className='partial-cover' style={{ backgroundColor: `${background}` }}>
                 <div className='card-example-header'></div>
                 <div className='card-example-bottom'>
-                    <div className='line-1' style={background ? { backgroundColor: `${background}` } : { backgroundColor: `blue` }}></div>
-                    <div className='line-2' style={background ? { backgroundColor: `${background}` } : { backgroundColor: `blue` }}></div>
+                    <div className='line-1' style={{ backgroundColor: `${lineColor}` }}></div>
+                    <div className='line-2' style={{ backgroundColor: `${lineColor}` }}></div>
                     <div className='card-example-buttons'>
                         <div className='card-example-button'></div>
                         <div className='card-example-button'></div>
