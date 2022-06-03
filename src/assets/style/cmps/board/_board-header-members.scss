@@ -1,157 +1,41 @@
-.task-details-shadow {
-    position: fixed;
-    top: 0;
-    height: 100vh;
-    width: 100vw;
-    background-color: rgba(0, 0, 0, 0.5);
-    overflow-y: auto;
-    margin-bottom: 54px;
+.board-members-header {
+    display: flex;
+    align-items: center;
 
+    .members-preview {
+        display: flex;
+        align-items: center;
 
+        .member {
+            width: 30px;
+            height: 25px;
+            cursor: pointer;
 
-    .task-details-wrapper {
-        position: relative;
-        background-color: $td-bg;
-        margin-top: 54px;
-        width: 768px;
-        margin-bottom: 40px;
-        min-height: 750px;
-        right: 0;
-
-        .task-bgColor-header {
-            background-color: #0079bf;
-            height: 115px;
-        }
-
-        .task-details {
-            padding: 16px;
-
-        }
-
-        .task-bg-color {
-            position: absolute;
-            left: 0;
-        }
-
-        .task-header {
-            position: relative;
-            height: 72px;
-
-            .section-icon {
-                svg {
-                    fill: $td-svg;
-                    transform: translateY(12%);
-                }
+            &:not(:first-child) {
+                margin-left: -8px;
             }
 
-            h2 {
-                color: $td-main;
-                font-size: 20px;
-            }
-
-            p {
-                color: $td-sub;
-                font-size: 14px;
-            }
-
-            .close-modal {
-                position: absolute;
-                display: fixed;
-                right: 0;
-                // height: 40px;
-                // width: 40px;
-                border-radius: 100px;
-                cursor: pointer;
-
-                // &:hover {
-                //     background-color: $td-btn-hov;
-                // }
-
-                svg {
-                    fill: $td-svg;
-
-                }
-
-            }
-        }
-
-        .task-container {
-            gap: 16px;
-
-            .task-content {
-                flex-grow: 1;
-
-                &>* {
-                    margin-bottom: 40px;
-                }
-
-            }
-
-            .task-edit {
-                h3 {
-                    font-size: 14px;
-                    font-weight: 600;
-                    margin-bottom: 8px;
-
-                }
-
-                .btn-edit-task-key {
-                    @include btn($type: dark);
-                    background-color: $td-input;
-                    color: $txt;
-                    width: 168px;
-                    margin-bottom: 8px;
-                    padding: 0 0 0 8px;
-                    position: rel;
-                    cursor: pointer;
-
-                    svg {
-                        height: 16px;
-                        width: 16px;
-                        margin-inline-end: 8px;
-                        fill: $td-svg;
-                    }
-                }
-
-            }
-        }
-
-    }
-
-
-
-    .modal-btn {
-
-        position: relative;
-
-        p {
-            flex-grow: 1;
-        }
-
-        .action-type-modal {
-            position: absolute;
-            left: 0;
-        }
-
-        .btn-wrapper {
-            svg {
-                fill: $td-svg;
+            img {
+                border-radius: 50%;
             }
         }
     }
 
-    .modal {
+    button.share-board {
+        background-color: $header-workspace;
+
+        &:hover {
+            background-color: lighten($header-workspace, 5%);
+        }
+    }
+
+    .modal-header-members {
         position: absolute;
-        // left: 0;
-        // right: 50px;
-        // top: 200px;
         background-color: #f4f5f7;
         width: 300px;
-        // min-height: 300px;
         border-radius: 3px;
         padding: 12px;
         z-index: 10;
-
 
         .members {
             .close-modal {
@@ -175,7 +59,6 @@
                         fill: $txt;
                     }
                 }
-
             }
 
             h2 {
@@ -192,7 +75,6 @@
                 margin-bottom: 20px;
                 padding-inline-start: 4px;
                 cursor: context-menu;
-
             }
 
             h3 {
@@ -548,278 +430,5 @@
                 }
             }
         }
-    }
-}
-
-.task-status {
-    height: 72px;
-
-    .members {
-        margin-inline-end: 16px;
-
-        h3 {
-            font-size: 14px;
-            font-weight: 600;
-            margin-bottom: 8px;
-        }
-
-        .task-members {
-            gap: 4px;
-
-            &>* {
-                height: 32px;
-                width: 32px;
-                border-radius: 100px;
-                color: $bg;
-                font-weight: 600;
-            }
-
-            .member {
-                border-radius: 100px;
-                overflow: hidden;
-
-                .img {
-                    // width: 100%;
-                    object-fit: contain;
-                }
-            }
-
-            .add-member {
-                background-color: $opc-black;
-                cursor: pointer;
-
-                &:hover {
-                    background-color: $opc-black-hov;
-                }
-
-                svg {
-                    height: 16px;
-                    width: 16px;
-                    fill: $edit;
-                }
-
-            }
-
-            .member {
-                img {
-                    // height: 100%;
-                    object-fit: contain;
-                }
-            }
-        }
-    }
-
-    .labels {
-        h3 {
-            font-size: 14px;
-            font-weight: 600;
-            margin-bottom: 8px;
-        }
-
-        .task-labels {
-            gap: 4px;
-
-            &>* {
-                height: 32px;
-                width: 40px;
-                border-radius: 3px;
-
-            }
-
-            .add-label {
-                background-color: $opc-black;
-                cursor: pointer;
-
-                &:hover {
-                    background-color: $opc-black-hov;
-                }
-
-                svg {
-                    height: 16px;
-                    width: 16px;
-                    fill: $edit;
-                }
-
-
-            }
-        }
-
-    }
-
-
-}
-
-
-
-.description-data {
-    width: 100%;
-
-    h2 {
-        font-size: 16px;
-        font-weight: 600;
-        margin-bottom: 12px;
-    }
-
-    p {
-        background-color: $td-input;
-        // height: 56px;
-        padding: 8px 12px;
-        color: $td-main;
-        border-radius: 3px;
-
-    }
-
-    .edit-description {
-        textarea {
-            min-height: 40px;
-            background-color: $white;
-            border-radius: 3px;
-            font-weight: 400;
-            font-size: 14px;
-            padding: 8px 12px;
-            // outline: 2px solid $clr1;
-            // border: none;
-            border: 2px solid $clr1;
-            color: $td-sub;
-            height: 350px;
-        }
-
-        .btn-save {
-            @include btn($type: dark);
-            display: inline-block;
-            background-color: $clr1;
-            margin: 8px 4px 0 0;
-            // margin-inline-end: 4px;
-            width: 80px;
-            // float: left;
-
-            &:hover {
-                background-color: darken($header-workspace, 5%);
-            }
-        }
-
-        .btn-cancel {
-            @include btn($type: light);
-
-            &:hover {
-                background-color: $opc-black;
-            }
-        }
-    }
-
-}
-
-
-.attachments {
-    width: 100%;
-
-    h2 {
-        font-size: 16px;
-        font-weight: 600;
-        margin-bottom: 12px;
-    }
-
-    p {
-        // background-color: $td-input;
-        // height: 56px;
-        padding: 8px 12px;
-        color: $td-main;
-
-    }
-
-    .edit-description {
-        textarea {
-            min-height: 40px;
-            background-color: $white;
-            border-radius: 3px;
-            font-weight: 400;
-            font-size: 14px;
-            padding: 8px 12px;
-            // outline: 2px solid $clr1;
-            // border: none;
-            border: 2px solid $clr1;
-            color: $td-sub;
-            height: 350px;
-        }
-
-        .btn-save {
-            @include btn($type: dark);
-            display: inline-block;
-            background-color: $clr1;
-            margin: 8px 4px 0 0;
-            // margin-inline-end: 4px;
-            width: 80px;
-            // float: left;
-
-            &:hover {
-                background-color: darken($header-workspace, 5%);
-            }
-        }
-
-        .btn-cancel {
-            @include btn($type: light);
-
-            &:hover {
-                background-color: $opc-black;
-            }
-        }
-    }
-
-}
-
-
-.section-icon {
-    height: 32px;
-    width: 32px;
-    margin-inline-end: 8px;
-
-    svg {
-        height: 24px;
-        width: 24px;
-        margin-inline-end: 8px;
-        fill: $td-svg;
-
-
-    }
-}
-
-
-.section-data {
-    width: 650px;
-
-    .task-title {
-        width: 100%;
-        font-size: 20px;
-        padding: 4px;
-        margin-bottom: 2px;
-
-        &:focus {
-            border: none;
-            box-shadow: inset 0px 0px 0px 2px #0079bf;
-        }
-    }
-
-    input {
-        font-family: inherit;
-        font-size: 16px;
-        width: 100%;
-        // background-color: aqua;
-    }
-
-    h2 {
-        word-break: break-all;
-        font-size: 20px;
-        font-weight: 600;
-        margin-bottom: 4px;
-    }
-
-    p {
-        a {
-            text-decoration: underline;
-        }
-    }
-
-    textarea {
-        transform: translateX(-0.5%);
     }
 }

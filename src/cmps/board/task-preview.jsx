@@ -12,6 +12,7 @@ import { TaskImage } from '../task-preview/task-img';
 
 
 export const TaskPreview = ({ task, groupId, idx }) => {
+    console.log('TaskPreview - task', task)
     const params = useParams()
     const { boardId } = params
     const [membersToDisplay, setMembersToDisplay] = useState(null)
@@ -21,13 +22,13 @@ export const TaskPreview = ({ task, groupId, idx }) => {
     // const taskPreviewRef = useRef()
 
     // useEffect(() => {
-    //     taskPreviewRef.current.scrollIntoView({ behavior: "smooth", block: "end", inline: "nearest" })
+    //     // taskPreviewRef.current.scrollIntoView({ behavior: "smooth", block: "end", inline: "nearest" })
     // }, [])
 
     useEffect(() => {
         getMembersToDisplay()
         checkBackgroundImg()
-    }, [task.attachments?.length])
+    }, [task.attachments?.length, task.members.length])
     const checkBackgroundImg = () => {
         const { style, attachments } = task
         let background
@@ -54,6 +55,7 @@ export const TaskPreview = ({ task, groupId, idx }) => {
     // const size = task.style.size === 'full' ? 'full' : 'partial'
 
     const { bgColor, size } = task.style
+
 
     return <Draggable type="cards" draggableId={task.id} index={idx}>
         {(provided, snapshot) => {

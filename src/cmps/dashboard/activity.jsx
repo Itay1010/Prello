@@ -1,4 +1,4 @@
-import React from 'react';
+import React from 'react'
 import {
     Chart as ChartJS,
     CategoryScale,
@@ -8,10 +8,10 @@ import {
     Title,
     Tooltip,
     Legend,
-} from 'chart.js';
-import { Line } from 'react-chartjs-2';
-import { boardStatistics } from '../../services/board/board-statistics';
-// import faker from 'faker';
+} from 'chart.js'
+import { Line } from 'react-chartjs-2'
+
+
 
 export function Activity({ dataToDisplay, datesToDisplay }) {
     ChartJS.register(
@@ -22,10 +22,15 @@ export function Activity({ dataToDisplay, datesToDisplay }) {
         Title,
         Tooltip,
         Legend
-    );
+    )
 
     const options = {
-        responsive: true
+        responsive: true,
+        plugins: {
+            legend: {
+                display: false,
+            },
+        }
     }
 
     const labels = datesToDisplay
@@ -34,13 +39,13 @@ export function Activity({ dataToDisplay, datesToDisplay }) {
         labels,
         datasets: [
             {
-                label: 'Dataset 1',
+                label: 'Tasks actions',
                 data: dataToDisplay,
                 borderColor: '#026AA7',
                 backgroundColor: '#026ba786',
             }
         ],
-    };
+    }
     return <Line options={options} data={data} />
 
 } 

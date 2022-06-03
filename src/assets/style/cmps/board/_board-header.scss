@@ -1,5 +1,6 @@
 .board-header {
     position: relative;
+    padding: 8px 0 12px;
 
     .board-data {
         width: auto;
@@ -11,13 +12,26 @@
 
         .board-name {
             font-size: 1.28em;
-            margin: 0 8px 0 4px;
-            padding: 5px;
+            margin: 0 4px 0 0;
+            padding: 8px;
             color: var(--clr-dynamic-inner);
-            
+            font-size: rem(20px);
+            font-weight: 700;
+            margin-bottom: 4px;
+            flex-grow: 1;
+
             &:hover:not(:focus) {
-                border-radius: 2px;
+                border-radius: 3px;
                 background-color: var(--clr-dynamic-faded);
+            }
+
+            &:focus {
+                outline: 1px solid $txt;
+                border-radius: 1px;
+                height: 32px;
+                margin-bottom: 0;
+                background-color: $bg;
+                padding: 0 4px;
             }
 
             &:focus {
@@ -30,11 +44,11 @@
             }
         }
 
-        &>*:not(last-child) {
-            margin-inline-end: 4px;
-        }
+        // &>*:not(last-child) {
+        //     margin-inline-end: 4px;
+        // }
 
-        button {
+        button:not(.reset) {
             @include btn($type: dark);
             color: var(--clr-dynamic-inner);
             background-color: var(--clr-dynamic-faded);
@@ -44,21 +58,7 @@
             }
         }
 
-        input {
-            font-size: rem(20px);
-            font-weight: 700;
-            margin-bottom: 4px;
-            flex-grow: 1;
-
-            &:focus {
-                outline: 1px solid $txt;
-                border-radius: 1px;
-                height: 32px;
-                margin-bottom: 0;
-                background-color: $bg;
-                padding: 0 4px;
-            }
-        }
+        input {}
 
         // textarea {
         //     width: 100%;
@@ -93,7 +93,6 @@
         }
 
         .background-modal {
-
             background-color: $td-bg;
             text-align: center;
             width: 340px;
