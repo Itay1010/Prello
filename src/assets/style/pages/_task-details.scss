@@ -225,6 +225,130 @@
             }
         }
 
+        .cover {
+            input {
+                @include input;
+                margin-top: 10px;
+            }
+
+            h4 {
+                font-family: pri-font-bold;
+                color: $td-sub;
+                font-size: 12px;
+                font-weight: 600;
+            }
+
+            .photos-from-unsplash {
+                // display: grid;
+                // grid-template-columns: repeat(minmax(1fr, 1fr));
+                display: flex;
+                flex-wrap: wrap;
+                gap: 6px;
+
+                .img-pick-cover {
+                    img {
+                        width: 85px;
+                        height: 50px;
+                        object-fit: cover;
+                        border-radius: 3px;
+                    }
+
+                    height: 50px;
+                }
+
+            }
+
+            .size-selector {
+                width: 300px;
+                height: 70px;
+                display: flex;
+                gap: 8px;
+
+                .partial-cover,
+                .full-cover {
+                    border-radius: 3px;
+                    width: 135px;
+                    height: 60px;
+                    border: 1px solid rgba(9, 30, 66, 0.08);
+                }
+
+                .card-example-bottom {
+                    display: flex;
+                    padding: 6px 4px;
+                    background-color: #0079bf;
+                    flex-direction: column;
+                    width: 100%;
+
+                    .line-1,
+                    .line-2 {
+                        border-radius: 30px;
+                    }
+
+                    .line-1 {
+                        width: 95%;
+                        height: 4px;
+                        background-color: palevioletred;
+                    }
+
+                    .line-2 {
+                        width: 70%;
+                        height: 4px;
+                        background-color: palevioletred;
+                        margin-top: 4px
+                    }
+                }
+
+                .partial-cover {
+                    display: flex;
+                    flex-direction: column;
+                    justify-content: space-between;
+
+                    .card-example-header {
+                        height: 40%;
+                        width: 100%
+                    }
+
+                    .card-example-bottom {
+                        height: 55%;
+
+                    }
+
+                }
+
+                .full-cover {
+                    display: flex;
+                    align-items: flex-end;
+                }
+
+
+            }
+
+            button {
+                @include btn;
+                width: 100%;
+            }
+
+            .colors-wrapper {
+                display: flex;
+                flex-wrap: wrap;
+                gap: 6px;
+
+                .color {
+                    border-radius: 3px;
+                    width: 50px;
+                    height: 30px;
+                    padding: 6px 12px;
+                }
+
+            }
+
+            .header-wrapper {
+                text-align: center;
+                border-bottom: 1px solid $opc-black-hov;
+                padding-bottom: 12px;
+            }
+        }
+
         .labels {
             .close-modal {
                 float: right;
@@ -495,6 +619,8 @@
 
 }
 
+
+
 .description-data {
     width: 100%;
 
@@ -552,6 +678,7 @@
     }
 
 }
+
 
 .attachments {
     width: 100%;

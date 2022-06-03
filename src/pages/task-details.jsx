@@ -216,6 +216,10 @@ export const TaskDetails = ({ onArchiveTask, onSaveBoard }) => {
         saveBoard()
     }
 
+    const onSaveCover = () => {
+
+    }
+
     const openImgModal = (id) => {
         setIsModal(id)
     }
@@ -298,6 +302,7 @@ export const TaskDetails = ({ onArchiveTask, onSaveBoard }) => {
                     saveLabels={saveLabels}
                     saveChecklist={saveChecklist}
                     onSaveAttachment={onSaveAttachment}
+                    saveCover={onSaveCover}
                 />
 
             </div>

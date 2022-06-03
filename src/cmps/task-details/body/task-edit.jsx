@@ -11,6 +11,7 @@ import { Checklist } from '../dynamic-cmps/checklist.jsx'
 import { Dates } from '../dynamic-cmps/dates.jsx'
 import { Attachment } from '../dynamic-cmps/attachment.jsx'
 import { Location } from '../dynamic-cmps/location.jsx'
+import { Cover } from '../dynamic-cmps/cover.jsx'
 
 export const TaskEdit = (props) => {
 
@@ -64,6 +65,16 @@ export const TaskEdit = (props) => {
             </div>}
         </div>
         <div className='modal-btn btn-edit-task-key flex align-center'>
+            <div className='flex btn-wrapper flex align-center' onClick={() => setModalType('cover')}>
+                <p>Cover</p>
+            </div>
+            {modalType === 'cover' && <div className='action-type-modal'>
+                <div className='modal'>
+                    <_DynamicModal type={modalType} {...props} />
+                </div>
+            </div>}
+        </div>
+        <div className='modal-btn btn-edit-task-key flex align-center'>
             <div className='flex btn-wrapper flex align-center align-center' onClick={ev => {
                 props.onArchiveTask({ taskId: props.task.id, groupId: props.group.id })
                 history.push(`/board/${[props.boardId]}`)
@@ -87,6 +98,7 @@ const _DynamicModal = (props) => {
         saveChecklist,
         group,
         onSaveAttachment,
+        saveCover
     } = props
 
     switch (type) {
@@ -102,6 +114,8 @@ const _DynamicModal = (props) => {
             return <Attachment saveAttachment={onSaveAttachment} closeModal={closeModal} />
         case 'location':
             return <Location closeModal={closeModal} />
+        case 'cover':
+            return <Cover saveCover={saveCover} closeModal={closeModal} task={task} />
         default:
             break;
     }
