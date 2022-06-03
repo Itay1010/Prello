@@ -8,6 +8,7 @@ export const MembersPreview = ({ task, setModalType, boardMembers }) => {
         <section className='task-members flex'>
             {task.members.map(memberId => {
                 const member = getMemberById(memberId, boardMembers)
+                console.log('MembersPreview - member', member)
                 return <div className='member flex justify-center align-center' key={member._id}> <img src={member.imgUrl} alt="" /> </div>
             })}
             {setModalType && <div className='add-member flex justify-center align-center' onClick={() => setModalType('members')}> <IAdd /> </div>}

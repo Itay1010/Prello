@@ -12,23 +12,23 @@ import { TaskImage } from '../task-preview/task-img';
 
 
 export const TaskPreview = ({ task, groupId, idx }) => {
+    console.log('TaskPreview - task', task)
     const params = useParams()
     const { boardId } = params
     const [membersToDisplay, setMembersToDisplay] = useState(null)
     const [backgroundImg, setBackgroundImg] = useState(null)
     const boardMembers = useSelector((storeState) => storeState.boardModule.board.members)
-    // console.log(task)
 
     // const taskPreviewRef = useRef()
 
     // useEffect(() => {
-    //     taskPreviewRef.current.scrollIntoView({ behavior: "smooth", block: "end", inline: "nearest" })
+    //     // taskPreviewRef.current.scrollIntoView({ behavior: "smooth", block: "end", inline: "nearest" })
     // }, [])
 
     useEffect(() => {
         getMembersToDisplay()
         checkBackgroundImg()
-    }, [task.attachments?.length])
+    }, [task.attachments?.length, task.members.length])
     const checkBackgroundImg = () => {
         const { style, attachments } = task
         let background

@@ -1,0 +1,41 @@
+.members-modal {
+    position: absolute;
+    background-color: $td-bg;
+    bottom: 0;
+    transform: translate(0%, 100%);
+    width: 300px;
+    z-index: 100;
+    font-size: 0.9rem;
+
+    .members-modal-header {
+        display: flex;
+        align-items: center;
+        font-family: pri-font-bold, sans-serif;
+        font-weight: 200;
+        padding: 0 12px 4px 14px;
+        background-image: linear-gradient(to bottom, #0079BF 0%, #0079BF 100%);
+        color: $td-bg;
+
+        img {
+            width: 86px;
+            border-radius: 50%;
+            outline: 2px solid $td-bg;
+            transform: translate(0%, 30%);
+        }
+
+        .member-name {
+            display: inline;
+            vertical-align: middle;
+            margin: 0 0 0 10px;
+        }
+
+        .close-modal {
+            position: absolute;
+            border: none;
+            background-color: transparent;
+            top: 0;
+            right: 0;
+            padding: 6px;
+        }
+    }
+}
