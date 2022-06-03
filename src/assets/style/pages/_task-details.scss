@@ -9,15 +9,24 @@
 
 
 
-    .task-details {
+    .task-details-wrapper {
         position: relative;
         background-color: $td-bg;
         margin-top: 54px;
         width: 768px;
         margin-bottom: 40px;
-        padding: 16px;
         min-height: 750px;
         right: 0;
+
+        .task-bgColor-header {
+            background-color: #0079bf;
+            height: 115px;
+        }
+
+        .task-details {
+            padding: 16px;
+
+        }
 
         .task-bg-color {
             position: absolute;

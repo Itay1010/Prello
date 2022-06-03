@@ -165,6 +165,9 @@ class _Board extends React.Component {
         socketService.emit(SOCKET_EMIT_PULL, newBoard._id)
     }
 
+    getFilterInfo = (filterType) => {
+    }
+
 
     handleOnDragEnd = async (result) => {
         if (!result.destination) return
@@ -224,7 +227,7 @@ class _Board extends React.Component {
 
         return <React.Fragment>
             <DragDropContext onDragEnd={this.handleOnDragEnd}>
-                <MainHeader boardMembers={board.members} />
+                <MainHeader boardMembers={board.members} getFilterInfo={this.getFilterInfo} />
                 <section className="board flex col main-layout">
                     <BoardHeader
                         board={board}
