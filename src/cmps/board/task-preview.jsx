@@ -15,7 +15,9 @@ export const TaskPreview = ({ task, groupId, idx }) => {
     const params = useParams()
     const { boardId } = params
     const [membersToDisplay, setMembersToDisplay] = useState(null)
+    const [backgroundImg, setBackgroundImg] = useState(null)
     const boardMembers = useSelector((storeState) => storeState.boardModule.board.members)
+    console.log(task)
 
     // const taskPreviewRef = useRef()
 
@@ -25,9 +27,16 @@ export const TaskPreview = ({ task, groupId, idx }) => {
 
     useEffect(() => {
         getMembersToDisplay()
-
+        // checkBackgroundImg()
     }, [])
-
+    // const checkBackgroundImg = () => {
+    //     const { style, attachments } = task
+    //     let background
+    //     if (style.backgroundImg) background = style.backgroundImg
+    //     else if (attachments) background = attachments[0].url
+    //     console.log(background)
+    //     setBackgroundImg(background)
+    // }
     const getMembersToDisplay = async () => {
         if (!task.members) task.members = []
         const filteredMembers = boardMembers.filter(member => task.members.includes(member._id))
@@ -44,7 +53,7 @@ export const TaskPreview = ({ task, groupId, idx }) => {
         })
         return `${done}/${total}`
     }
-
+    console.log(backgroundImg)
     return <Draggable type="cards" draggableId={task.id} index={idx}>
         {(provided, snapshot) => {
             return <article className="task-preview"
@@ -61,7 +70,7 @@ export const TaskPreview = ({ task, groupId, idx }) => {
                         {task.labels?.length && !task.attachments?.length && <div className="task-label">
                             <TaskLabels labels={task.labels} />
                         </div>}
-                        {task.attachments?.length && <TaskImage attachments={task.attachments} />}
+                        {backgroundImg && <TaskImage attachment={backgroundImg} />}
                         <section className="task-title">{task.title}</section>
                         {(task.attachments?.length > 0 || task.members?.length > 0 ||
                             task.comments?.length > 0 || task.checklist?.length > 0 ||

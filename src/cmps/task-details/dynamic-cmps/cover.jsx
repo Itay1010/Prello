@@ -15,6 +15,7 @@ export const Cover = ({ saveCover, closeModal, task }) => {
     let timeoutId
     let background
     let lineColor
+    let bottomColor
     const searchValueTyped = (ev) => {
         timeoutId = null
         timeoutId = setTimeout(async () => {
@@ -47,17 +48,16 @@ export const Cover = ({ saveCover, closeModal, task }) => {
         } else {
             background = ''
         }
-        return background
+
     }
 
 
-
-
-
     if (!background) {
-        background = 'grey'
-        lineColor = ''
+        background = '#D0D3DC'
+        lineColor = '#D0D3DC'
+        bottomColor = '#FAFBFC'
     } else {
+        lineColor = '#6B778C'
 
     }
 
@@ -70,19 +70,19 @@ export const Cover = ({ saveCover, closeModal, task }) => {
         <div className='size-selector'>
             <div className='partial-cover' style={{ backgroundColor: `${background}` }}>
                 <div className='card-example-header'></div>
-                <div className='card-example-bottom'>
+                <div className='card-example-bottom' style={{ backgroundColor: `${bottomColor}` }}>
                     <div className='line-1' style={{ backgroundColor: `${lineColor}` }}></div>
                     <div className='line-2' style={{ backgroundColor: `${lineColor}` }}></div>
                     <div className='card-example-buttons'>
-                        <div className='card-example-button'></div>
-                        <div className='card-example-button'></div>
+                        <div className='card-example-button' style={{ backgroundColor: `${lineColor}` }}></div>
+                        <div className='card-example-button' style={{ backgroundColor: `${lineColor}` }}></div>
                     </div>
                 </div>
             </div>
             <div className='full-cover' style={{ backgroundColor: `${background}` }}>
-                <div className='card-example-bottom'>
-                    <div className='line-1'></div>
-                    <div className='line-2'></div>
+                <div className='card-example-bottom' style={{ backgroundColor: `${bottomColor}` }}>
+                    <div className='line-1' style={{ backgroundColor: `${lineColor}` }}></div>
+                    <div className='line-2' style={{ backgroundColor: `${lineColor}` }}></div>
                 </div>
             </div>
         </div>
