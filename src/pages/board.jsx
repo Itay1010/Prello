@@ -67,7 +67,7 @@ class _Board extends React.Component {
         try {
             await this.props.loadBoard(boardId)
             this._setupSockets()
-        } catch(err) {
+        } catch (err) {
             console.error('error in setting board', err)
         }
     }
@@ -145,6 +145,18 @@ class _Board extends React.Component {
         socketService.emit(SOCKET_EMIT_PULL, newBoard._id)
     }
 
+    onGroupColorChange = async (groupId, color) => {
+        console.log('_Board - onGroupColorChange= - groupId, color', groupId, color)
+        const newBoard = JSON.parse(JSON.stringify(this.props.board))
+        const groupIdx = newBoard.groups.findIndex(group => group.id === groupId)
+
+        newBoard.groups[groupIdx].color = color
+        actService.activity('changed color', 'group', newBoard.groups[groupIdx], newBoard)
+
+        await this.props.updateBoard(newBoard)
+        socketService.emit(SOCKET_EMIT_PULL, newBoard._id)
+    }
+
     onAddGroup = async (title) => {
         const newBoard = JSON.parse(JSON.stringify(this.props.board))
         const newGroup = { id: utilService.makeId(), title, tasks: [] }
@@ -206,7 +218,8 @@ class _Board extends React.Component {
             onArchiveTask: this.onArchiveTask,
             onGroupChange: this.onGroupChange,
             onAddGroup: this.onAddGroup,
-            onArchiveGroup: this.onArchiveGroup
+            onArchiveGroup: this.onArchiveGroup,
+            onGroupColorChange: this.onGroupColorChange
         }
 
         return <React.Fragment>

@@ -7,10 +7,10 @@ import { AddTask } from "./add-task"
 import { IAdd } from "../icons/i-add"
 import { draggableStyle } from "../../services/board/draggable.style"
 
-export const Group = ({ group, onAddTask, onArchiveGroup, onGroupChange, idx }) => {
+export const Group = ({ group, onAddTask, onArchiveGroup, onGroupChange, onGroupColorChange, idx }) => {
     const [newTask, setNewTask] = useState({ title: '', groupId: group.id })
     useEffect(() => {
-        setGroupTitle({ txt: group.title, groupId: group.id })
+        setGroupTitle({ txt: group.title, groupId: group.id, color: group.color })
     }, [group])
 
     const { tasks } = group
@@ -19,9 +19,10 @@ export const Group = ({ group, onAddTask, onArchiveGroup, onGroupChange, idx }) 
         setNewTask(prevState => ({ ...prevState, [name]: value }))
     }
 
-    const [groupTitle, setGroupTitle] = useState({ txt: group.title, groupId: group.id })
+    const [groupTitle, setGroupTitle] = useState({ txt: group.title, groupId: group.id, color: group.color })
     const [isTaskOpen, setIsTaskOpen] = useState(false)
 
+    console.log('Group - groupTitle', groupTitle.color)
     return <Draggable type="groups" draggableId={group.id} index={idx}>
         {(provided, snapshot) => {
             return <section
@@ -32,11 +33,11 @@ export const Group = ({ group, onAddTask, onArchiveGroup, onGroupChange, idx }) 
                 className={`group flex col`}
             >
                 <GroupTitle
-                    //Group header is just a textarea with two way data binding
                     groupInfo={groupTitle}
                     setGroupTitle={setGroupTitle}
                     onArchiveGroup={onArchiveGroup}
                     onGroupChange={onGroupChange}
+                    onGroupColorChange={onGroupColorChange}
                 />
                 <Droppable type="cards" droppableId={`${group.id}`} direction="vertical">
                     {(provided, snapshot) => {

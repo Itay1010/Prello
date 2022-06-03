@@ -6,17 +6,23 @@
     margin-inline-end: 8px;
     background-color: $group-bg;
     max-height: calc(100vh - 44px - 52px - 30px);
-    overflow-y: hidden;
+    overflow-y: visible;
     align-self: flex-start;
 
     .group-header {
         height: 40px;
-        padding: 10px 8px;
+        padding: 8px;
 
         textarea {
             flex-grow: 1;
             padding: 4px 4px 4px 8px;
             margin-inline-end: 8px;
+            border-radius: 1;
+
+            &:focus {
+                border: none;
+                outline: 2px solid #172b4d;
+            }
         }
 
         h2 {
@@ -48,7 +54,7 @@
         margin: 8px 4px 0 4px;
         overflow: auto;
         overflow-x: hidden;
-        
+
 
         // &:first-child {
         //     margin-top: 4px;
