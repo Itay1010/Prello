@@ -83,3 +83,9 @@ export function updateBoard(newBoard) {
         }
     }
 }
+
+export function clearBoard() {
+    return (dispatch, getState) => {
+        dispatch(getActionSetBoard(null))
+    }
+}

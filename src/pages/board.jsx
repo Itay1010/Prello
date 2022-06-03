@@ -1,9 +1,9 @@
 //basic
-import React, { useState } from "react"
+import React from "react"
 import { connect } from 'react-redux'
 
 //libs
-import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd'
+import { DragDropContext } from 'react-beautiful-dnd'
 
 //services
 import { boardService } from "../services/board/board.service"
@@ -12,7 +12,7 @@ import { boardService } from "../services/board/board.service"
 import { MainHeader } from "../cmps/shared cmps/header/main-header"
 import { BoardHeader } from "../cmps/board/board-header/board-header"
 
-import { loadBoard, updateBoard } from "../store/board/board.action"
+import { clearBoard, loadBoard, updateBoard } from "../store/board/board.action"
 import { utilService } from "../services/basic/util.service"
 import { Switch, Route } from 'react-router-dom'
 
@@ -40,8 +40,8 @@ class _Board extends React.Component {
     }
 
     componentWillUnmount(nextProps, nextState) {
-        document.querySelector('#root').style.background = null
-        socketService.emit(SOCKET_EMIT_TOPIC, null)
+        document.querySelector('#root').style.background = 'initial'
+        socketService.off(SOCKET_EVENT_BOARD_UPDATE)
     }
 
     deepCloneBoard = () => {
@@ -64,17 +64,22 @@ class _Board extends React.Component {
 
     _setBoard = async () => {
         const { boardId } = this.props.match.params
-        await this.props.loadBoard(boardId)
-        this._setupSockets()
+        try {
+            await this.props.loadBoard(boardId)
+            this._setupSockets()
+        } catch(err) {
+            console.error('error in setting board', err)
+        }
     }
 
     _updateBoard = async () => {
+        // console.log('_Board - _updateBoard= - boardId', boardId)
         const { boardId } = this.props.match.params
-        await this.props.loadBoard(boardId)
+        this.props.loadBoard(boardId)
     }
 
     setTheme = async () => {
-        const boardStyle = this.props.board.style
+        const boardStyle = this.props.board.style || null
         if (boardStyle.backgroundColor) {
             document.querySelector('.main-header').style.backgroundColor = '#00000090'
             document.querySelector('.board').style.backgroundColor = boardStyle.backgroundColor
@@ -95,7 +100,7 @@ class _Board extends React.Component {
         newTask = { id: utilService.makeId(), title: newTask.title }
         newBoard.groups[groupIdx].tasks.push(newTask)
         actService.activity('added', 'card,', newTask, newBoard)
-        this.props.updateBoard(newBoard)
+        await this.props.updateBoard(newBoard)
         socketService.emit(SOCKET_EMIT_PULL, newBoard._id)
     }
 
@@ -110,7 +115,7 @@ class _Board extends React.Component {
             }
         })
         actService.activity('archived', 'card', archivedTask, newBoard)
-        this.props.updateBoard(newBoard)
+        await this.props.updateBoard(newBoard)
         socketService.emit(SOCKET_EMIT_PULL, newBoard._id)
     }
 
@@ -124,7 +129,7 @@ class _Board extends React.Component {
             }
         })
         actService.activity('archived', 'group', archivedGroup, newBoard)
-        this.props.updateBoard(newBoard)
+        await this.props.updateBoard(newBoard)
         socketService.emit(SOCKET_EMIT_PULL, newBoard._id)
     }
 
@@ -136,7 +141,7 @@ class _Board extends React.Component {
 
         newBoard.groups[groupIdx].title = txt
         actService.activity('changed title', 'group', newBoard.groups[groupIdx], newBoard)
-        this.props.updateBoard(newBoard)
+        await this.props.updateBoard(newBoard)
         socketService.emit(SOCKET_EMIT_PULL, newBoard._id)
     }
 
@@ -176,18 +181,18 @@ class _Board extends React.Component {
         }
     }
 
-    onSaveBoardHeader = (newBoardHeader) => {
+    onSaveBoardHeader = async (newBoardHeader) => {
         const { board } = this.props
         const newBoard = JSON.parse(JSON.stringify(board))
         newBoard.title = newBoardHeader
-        this.props.updateBoard(newBoard)
+        await this.props.updateBoard(newBoard)
         socketService.emit(SOCKET_EMIT_PULL, newBoard._id)
     }
 
-    setBackgroundImgFromUnsplash = (url) => {
+    setBackgroundImgFromUnsplash = async (url) => {
         const newBoard = this.deepCloneBoard()
         newBoard.style.background = url
-        this.props.updateBoard(newBoard)
+        await this.props.updateBoard(newBoard)
         socketService.emit(SOCKET_EMIT_PULL, newBoard._id)
     }
 
@@ -208,7 +213,11 @@ class _Board extends React.Component {
             <DragDropContext onDragEnd={this.handleOnDragEnd}>
                 <MainHeader boardMembers={board.members} />
                 <section className="board flex col main-layout">
-                    <BoardHeader board={board} saveBoardHeader={this.onSaveBoardHeader} setBackgroundImg={this.setBackgroundImgFromUnsplash} />
+                    <BoardHeader
+                        board={board}
+                        saveBoardHeader={this.onSaveBoardHeader}
+                        setBackgroundImg={this.setBackgroundImgFromUnsplash}
+                    />
                     <GroupList groups={groups} eventHandlers={eventHandlers} />
                     <Switch>
                         <Route path={'/board/:boardId/:groupId/:taskId'}>
@@ -234,6 +243,7 @@ const mapStateToProps = state => {
 const mapDispatchToProps = {
     loadBoard,
     updateBoard,
+    clearBoard,
     loadGuest,
     setUser
 }

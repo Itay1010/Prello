@@ -1,9 +1,12 @@
-import React from 'react'
+import React, { useState } from 'react'
 
 import { TextareaAutosize } from '@mui/material'
 import { IMore } from '../icons/i-more'
 
 export const GroupTitle = ({ groupInfo, setGroupTitle, onArchiveGroup, onGroupChange }) => {
+
+    const [isModalOpen, setModal] = useState(false)
+
     if (!groupInfo) return <React.Fragment />
     return <div className="group-header flex space-between">
         <TextareaAutosize
@@ -13,7 +16,7 @@ export const GroupTitle = ({ groupInfo, setGroupTitle, onArchiveGroup, onGroupCh
                 setGroupTitle(prevState => ({ ...prevState, txt: ev.target.value }))
             }}
 
-            onBlur={ ev => {
+            onBlur={ev => {
                 if (!groupInfo.txt) return
                 onGroupChange(groupInfo)
             }}
@@ -28,5 +31,8 @@ export const GroupTitle = ({ groupInfo, setGroupTitle, onArchiveGroup, onGroupCh
         <div className="more flex justify-center align-center" onClick={ev => { onArchiveGroup(groupInfo.groupId) }}>
             <IMore />
         </div>
+        {/* <div className='group-modal'>
+            <button>Archive</button>
+        </div> */}
     </div>
 }
