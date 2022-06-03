@@ -10,12 +10,19 @@
 
 
     .task-details {
+        position: relative;
         background-color: $td-bg;
         margin-top: 54px;
         width: 768px;
         margin-bottom: 40px;
         padding: 16px;
         min-height: 750px;
+        right: 0;
+
+        .task-bg-color {
+            position: absolute;
+            left: 0;
+        }
 
         .task-header {
             position: relative;
@@ -343,9 +350,23 @@
             }
 
             .header-wrapper {
+                display: flex;
+                position: relative;
                 text-align: center;
+                align-items: center;
+                justify-content: center;
                 border-bottom: 1px solid $opc-black-hov;
                 padding-bottom: 12px;
+
+                div {
+                    position: absolute;
+                    right: 0;
+                    width: fit-content;
+                    height: fit-content;
+
+
+                }
+
             }
         }
 

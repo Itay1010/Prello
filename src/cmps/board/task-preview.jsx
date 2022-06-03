@@ -27,16 +27,16 @@ export const TaskPreview = ({ task, groupId, idx }) => {
 
     useEffect(() => {
         getMembersToDisplay()
-        // checkBackgroundImg()
-    }, [])
-    // const checkBackgroundImg = () => {
-    //     const { style, attachments } = task
-    //     let background
-    //     if (style.backgroundImg) background = style.backgroundImg
-    //     else if (attachments) background = attachments[0].url
-    //     console.log(background)
-    //     setBackgroundImg(background)
-    // }
+        checkBackgroundImg()
+    }, [task.attachments?.length])
+    const checkBackgroundImg = () => {
+        const { style, attachments } = task
+        let background
+        // if (style.backgroundImg) background = style.backgroundImg
+        if (attachments && attachments[0]) background = attachments[0].url
+        console.log(background)
+        setBackgroundImg(background)
+    }
     const getMembersToDisplay = async () => {
         if (!task.members) task.members = []
         const filteredMembers = boardMembers.filter(member => task.members.includes(member._id))
@@ -53,6 +53,10 @@ export const TaskPreview = ({ task, groupId, idx }) => {
         })
         return `${done}/${total}`
     }
+    // const size = task.style.size === 'full' ? 'full' : 'partial'
+
+    const { bgColor, size } = task.style
+
     console.log(backgroundImg)
     return <Draggable type="cards" draggableId={task.id} index={idx}>
         {(provided, snapshot) => {
@@ -63,10 +67,10 @@ export const TaskPreview = ({ task, groupId, idx }) => {
                 style={draggableStyle.getStyle(provided.draggableProps.style, snapshot, provided)}
             >
                 <Link to={`/board/${boardId}/${groupId}/${task.id}`}>
-                    {task.style?.bgColor && <section className="task-color"
-                        style={({ backgroundColor: task.style.bgColor })}
+                    {task.style?.bgColor && size === 'partial' && <section className="task-color"
+                        style={({ backgroundColor: bgColor })}
                     ></section>}
-                    <div className="task-info">
+                    <div className="task-info" style={task.style?.bgColor && size === 'full' ? { backgroundColor: bgColor } : {}}>
                         {task.labels?.length && !task.attachments?.length && <div className="task-label">
                             <TaskLabels labels={task.labels} />
                         </div>}
