@@ -97,7 +97,7 @@ class _Board extends React.Component {
         const newBoard = JSON.parse(JSON.stringify(this.props.board))
         const groupIdx = newBoard.groups.findIndex(group => group.id === newTask.groupId)
 
-        newTask = { id: utilService.makeId(), title: newTask.title }
+        newTask = { id: utilService.makeId(), title: newTask.title, style: { backgroundImg: '', bgColor: '', size: '' } }
         newBoard.groups[groupIdx].tasks.push(newTask)
         actService.activity('added', 'card,', newTask, newBoard)
         await this.props.updateBoard(newBoard)
@@ -141,6 +141,18 @@ class _Board extends React.Component {
 
         newBoard.groups[groupIdx].title = txt
         actService.activity('changed title', 'group', newBoard.groups[groupIdx], newBoard)
+        await this.props.updateBoard(newBoard)
+        socketService.emit(SOCKET_EMIT_PULL, newBoard._id)
+    }
+
+    onGroupColorChange = async (groupId, color) => {
+        console.log('_Board - onGroupColorChange= - groupId, color', groupId, color)
+        const newBoard = JSON.parse(JSON.stringify(this.props.board))
+        const groupIdx = newBoard.groups.findIndex(group => group.id === groupId)
+
+        newBoard.groups[groupIdx].color = color
+        actService.activity('changed color', 'group', newBoard.groups[groupIdx], newBoard)
+
         await this.props.updateBoard(newBoard)
         socketService.emit(SOCKET_EMIT_PULL, newBoard._id)
     }
@@ -206,7 +218,8 @@ class _Board extends React.Component {
             onArchiveTask: this.onArchiveTask,
             onGroupChange: this.onGroupChange,
             onAddGroup: this.onAddGroup,
-            onArchiveGroup: this.onArchiveGroup
+            onArchiveGroup: this.onArchiveGroup,
+            onGroupColorChange: this.onGroupColorChange
         }
 
         return <React.Fragment>
