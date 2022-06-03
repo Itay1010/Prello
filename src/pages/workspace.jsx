@@ -21,7 +21,7 @@ export const Workspace = () => {
     }
 
     const onCreateNewBoard = async (newBoardInfo) => {
-        newBoardInfo.lastVisit = Date.now()
+        // newBoardInfo.createdAt = Date.now()
         newBoardInfo.creator = user
         const newBoard = await dispatch(addBoard(newBoardInfo))
         history.push(`/board/${newBoard[0]._id}`)

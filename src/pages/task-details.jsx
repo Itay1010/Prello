@@ -237,7 +237,6 @@ export const TaskDetails = ({ onArchiveTask, onSaveBoard }) => {
         const group = newBoard.groups.find(group => group.id === groupId)
         const idx = group.tasks.findIndex(task => task.id === taskId)
         const task = group.tasks[idx]
-        console.log(task)
         task.style = cover
         saveBoard(newBoard)
 
@@ -254,86 +253,86 @@ export const TaskDetails = ({ onArchiveTask, onSaveBoard }) => {
     const { checklist, attachments } = task
     return <section onClick={onGoBack} className='task-details-shadow flex justify-center'>
 
-        {/* {task.style.bgColor && <div className='task-bg-color'>
-            h
-        </div>} */}
-        <section className='task-details flex col' onClick={(event) => event.stopPropagation()}>
-            <DetailsHeader
-                task={task}
-                group={group}
-                onGoBack={onGoBack}
-                saveTaskTitle={saveTaskTitle}
-            />
-            <div className='task-container flex space-between'>
-                <div className="task-content">
-                    <div className="task-status flex">
-                        <div className='section-icon'></div>
-                        {task.members?.length > 0 &&
-                            <MembersPreview
-                                task={task}
-                                setModalType={setModalType}
-                                boardMembers={board.members}
-                            />
-                        }
-                        {task.labels?.length > 0 && <div className="labels flex col">
-                            <h3>Labels</h3>
-                            <section className='task-labels flex'>
-                                {task.labels.map(label => {
-                                    return <div className="label" style={{ backgroundColor: label }} key={label} ></div>
-                                })}
-                                <div className='add-label flex justify-center align-center' onClick={() => setModalType('labels')} ><IAdd /></div>
-                            </section>
-                        </div>
-                        }
-                    </div>
-                    <div className="description flex">
-                        <div className='section-icon'>
-                            <IDescription />
-                        </div>
-                        <div className="description-data flex col">
-                            <h2>Description</h2>
-                            {!isDescriptionEditable && <p placeholder={task.description} onClick={toggleEditDescription}>{!task.description ? 'Add a more detailed description...' : `${task.description}`}</p>}
-                            {isDescriptionEditable && <div className='edit-description'>
-                                <TextareaAutosize
-                                    onChange={handleDescriptionChange}
-                                    autoFocus
-                                    onBlur={() => {
-                                        toggleEditDescription()
-                                        saveTaskDescription()
-                                    }}
-                                    maxRows={4}
-                                    aria-label="maximum height"
-                                    placeholder='Add a more detailed description...'
-                                    defaultValue={task.description ? task.description : ''}
-                                    style={{ width: '100%', minHeight: '108px' }}
-                                />
-                                <button className='btn-save'>Save</button>
-                                <button className='btn-cancel' onMouseDown={(event) => { event.preventDefault(); toggleEditDescription() }}>Cancel</button>
-                            </div>}
-                        </div>
-                    </div>
-
-                    {checklist?.length > 0 && <ChecklistList checklist={checklist} saveChecklistTask={onSaveChecklistTask} setIsDone={onSetIsDone} deleteClTask={onDeleteClTask} deleteChecklist={onDeleteChecklist} boardMembers={board.members} generalTask={task} saveMemberToClTask={saveMemberToClTask} />}
-
-                    {attachments?.length > 0 && <AttachmentList attachments={attachments} removeAttachment={onRemoveAttachment} openImgModal={openImgModal} saveAttachment={onSaveAttachment} />}
-                </div>
-
-                <TaskEdit
-                    setModalType={setModalType}
-                    modalType={modalType}
-                    closeModal={closeModal}
-                    onArchiveTask={onArchiveTask}
+        <section className='task-details-wrapper flex col' onClick={(event) => event.stopPropagation()}>
+            {task.style.bgColor && <div style={{ backgroundColor: task.style.bgColor }} className='task-bgColor-header'></div>}
+            <div className='task-details'>
+                <DetailsHeader
                     task={task}
                     group={group}
-                    boardId={boardId}
-                    boardMembers={board.members}
-                    saveMembers={saveMembers}
-                    saveLabels={saveLabels}
-                    saveChecklist={saveChecklist}
-                    onSaveAttachment={onSaveAttachment}
-                    saveCover={onSaveCover}
+                    onGoBack={onGoBack}
+                    saveTaskTitle={saveTaskTitle}
                 />
+                <div className='task-container flex space-between'>
+                    <div className="task-content">
+                        <div className="task-status flex">
+                            <div className='section-icon'></div>
+                            {task.members?.length > 0 &&
+                                <MembersPreview
+                                    task={task}
+                                    setModalType={setModalType}
+                                    boardMembers={board.members}
+                                />
+                            }
+                            {task.labels?.length > 0 && <div className="labels flex col">
+                                <h3>Labels</h3>
+                                <section className='task-labels flex'>
+                                    {task.labels.map(label => {
+                                        return <div className="label" style={{ backgroundColor: label }} key={label} ></div>
+                                    })}
+                                    <div className='add-label flex justify-center align-center' onClick={() => setModalType('labels')} ><IAdd /></div>
+                                </section>
+                            </div>
+                            }
+                        </div>
+                        <div className="description flex">
+                            <div className='section-icon'>
+                                <IDescription />
+                            </div>
+                            <div className="description-data flex col">
+                                <h2>Description</h2>
+                                {!isDescriptionEditable && <p placeholder={task.description} onClick={toggleEditDescription}>{!task.description ? 'Add a more detailed description...' : `${task.description}`}</p>}
+                                {isDescriptionEditable && <div className='edit-description'>
+                                    <TextareaAutosize
+                                        onChange={handleDescriptionChange}
+                                        autoFocus
+                                        onBlur={() => {
+                                            toggleEditDescription()
+                                            saveTaskDescription()
+                                        }}
+                                        maxRows={4}
+                                        aria-label="maximum height"
+                                        placeholder='Add a more detailed description...'
+                                        defaultValue={task.description ? task.description : ''}
+                                        style={{ width: '100%', minHeight: '108px' }}
+                                    />
+                                    <button className='btn-save'>Save</button>
+                                    <button className='btn-cancel' onMouseDown={(event) => { event.preventDefault(); toggleEditDescription() }}>Cancel</button>
+                                </div>}
+                            </div>
+                        </div>
 
+                        {checklist?.length > 0 && <ChecklistList checklist={checklist} saveChecklistTask={onSaveChecklistTask} setIsDone={onSetIsDone} deleteClTask={onDeleteClTask} deleteChecklist={onDeleteChecklist} boardMembers={board.members} generalTask={task} saveMemberToClTask={saveMemberToClTask} />}
+
+                        {attachments?.length > 0 && <AttachmentList attachments={attachments} removeAttachment={onRemoveAttachment} openImgModal={openImgModal} saveAttachment={onSaveAttachment} />}
+                    </div>
+
+                    <TaskEdit
+                        setModalType={setModalType}
+                        modalType={modalType}
+                        closeModal={closeModal}
+                        onArchiveTask={onArchiveTask}
+                        task={task}
+                        group={group}
+                        boardId={boardId}
+                        boardMembers={board.members}
+                        saveMembers={saveMembers}
+                        saveLabels={saveLabels}
+                        saveChecklist={saveChecklist}
+                        onSaveAttachment={onSaveAttachment}
+                        saveCover={onSaveCover}
+                    />
+
+                </div>
             </div>
         </section>
     </section>

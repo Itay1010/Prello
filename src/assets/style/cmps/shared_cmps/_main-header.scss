@@ -60,6 +60,7 @@
 
 .filter {
     flex-grow: 1;
+    position: relative;
 
     &>* {
         @include btn($type: dark);
@@ -73,6 +74,62 @@
             transform: translateY(12%);
         }
     }
+
+    button {}
+
+    .dynamic-filter {
+        cursor: auto;
+        position: absolute;
+        bottom: 0;
+        transform: translateY(105%);
+        display: flex;
+        flex-direction: column;
+        margin: 0;
+        margin-top: 8px;
+        background-color: $bg;
+        padding: 0 10px 10px;
+        z-index: 20;
+        color: $td-main;
+        box-shadow: 0 8px 16px -4px rgb(9 30 66 / 25%), 0 0 0 1px rgb(9 30 66 / 8%);
+
+        h3 {
+            border-bottom: 1px solid $opc-black;
+            padding: 5px 0;
+        }
+
+        li {
+
+            display: grid;
+            grid-template-columns: 45px 1fr 30px;
+            grid-template-rows: 40px;
+            align-items: center;
+
+            img {
+                width: 40px;
+                height: 32px;
+                object-fit: cover;
+            }
+
+            p {
+                text-align: start;
+                break-inside: break-word;
+            }
+
+            .star-wrapper {
+                svg {
+                    stroke: $td-main;
+                }
+
+                &.starred {
+                    svg {
+                        stroke: none;
+                        fill: $star;
+                    }
+                }
+            }
+        }
+    }
+
 }
 
 .search {
