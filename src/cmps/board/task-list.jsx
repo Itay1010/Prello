@@ -22,7 +22,7 @@ export const Group = ({ group, onAddTask, onArchiveGroup, onGroupChange, onGroup
     const [groupTitle, setGroupTitle] = useState({ txt: group.title, groupId: group.id, color: group.color })
     const [isTaskOpen, setIsTaskOpen] = useState(false)
 
-    console.log('Group - groupTitle', groupTitle.color)
+    // console.log('Group - groupTitle', groupTitle.color)
     return <Draggable type="groups" draggableId={group.id} index={idx}>
         {(provided, snapshot) => {
             return <section

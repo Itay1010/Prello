@@ -8,7 +8,7 @@ export const BoardPreview = ({ board, toggleStar }) => {
         history.push(`/board/${boardId}`)
     }
     const background = board.style.background ? board.style.background : board.style.backgroundColor
-    return (<div className={board.isStarred ? "board-preview-body starred" : "board-preview-body"} onClick={() => onGoToBoard(board._id)} >
+    return (<div className={board.isStarred ? "board-preview-body starred" : "board-preview-body not-starred"} onClick={() => onGoToBoard(board._id)} >
         <img src={background} alt="board-background" />
         <div className="screen flex col space-between">
             <h1>{board.title}</h1>

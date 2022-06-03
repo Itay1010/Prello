@@ -1,11 +1,15 @@
+import { boardService } from "./board.service"
+
 const WEEK_TIMESTAMP = 7 * 24 * 60 * 60 * 1000 //604800000
 const DAY_TIMESTAMP = 86400000
 
 export const boardStatistics = {
     getCardsCount,
     getCardsByMember,
+    getCardsByLabels,
     getActivityStats,
-    getDates
+    getDates,
+    hexToRgb
 
 }
 
@@ -63,17 +67,35 @@ function getCardsByMember(board) {
 
     const resToDisplay = []
     for (const id in res) {
-        console.log(res[id]);
         const member = board.members.find(member => member._id === id)
         const memberStatistics = {
-            name: member.firstName,
-            imgUrl: member.imgUrl,
+            firstName: member.firstName,
+            lastName: member.lastName,
+            color: member.color,
             tasksNum: res[id]
         }
         resToDisplay.push(memberStatistics)
     }
 
     return resToDisplay
+}
+
+function getCardsByLabels(board) {
+    const labels = boardService.getLabels()
+    const res = labels.reduce((acc, label) => {
+        let labelCount = 0
+        board.groups.forEach(group => {
+            group.tasks.forEach(task => {
+                if (task.archivedAt) return
+                if (task.labels?.length) {
+                    if (task.labels.includes(label)) labelCount++
+                }
+            })
+        })
+        acc[label] = labelCount
+        return acc
+    }, {})
+    return res
 }
 
 function getActivityStats(board) {
@@ -95,7 +117,7 @@ function getActivityStats(board) {
     })
     return res
 }
-getDates()
+
 function getDates() {
     const today = new Date()
     let timestamp = today - WEEK_TIMESTAMP
@@ -109,6 +131,12 @@ function getDates() {
     }
 
     return res
+}
+
+function hexToRgb(hex) {
+    const res = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
+    return `rgba(${parseInt(res[1], 16)}, ${parseInt(res[2], 16)}, ${parseInt(res[3], 16)}, 1)`
+
 }
 
 function _getIndex(day) {

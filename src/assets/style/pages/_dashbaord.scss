@@ -17,22 +17,40 @@
     background-color: $group-bg;
     height: 100%;
     width: 100%;
+    padding: 20px;
+    gap: 12px;
 
-    header {
-        .left-tri {
-            width: 0;
-            height: 0;
-            border-top: 50px solid transparent;
-            border-right: 100px solid red;
-            border-bottom: 50px solid transparent;
+    h1 {
+        font-size: 30px;
+        font-weight: 700;
+    }
+
+    h2 {
+        margin-bottom: 20px;
+
+        span {
+            color: $clr1;
+            font-weight: 700;
+            font-size: 22px;
+        }
+    }
+
+    .activity {
+        width: 75%;
+    }
+
+    .more-stat {
+        // background-color: yellow;
+
+        .cards-member {
+          
+            
         }
 
-        .right-tri {
-            width: 0;
-            height: 0;
-            border-top: 50px solid transparent;
-            border-left: 100px solid red;
-            border-bottom: 50px solid transparent;
+        .cards-labels {
+        
+         
+
         }
     }
 }

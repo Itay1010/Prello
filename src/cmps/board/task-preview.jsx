@@ -34,7 +34,7 @@ export const TaskPreview = ({ task, groupId, idx }) => {
         let background
         // if (style.backgroundImg) background = style.backgroundImg
         if (attachments && attachments[0]) background = attachments[0].url
-        console.log(background)
+        // console.log(background)
         setBackgroundImg(background)
     }
     const getMembersToDisplay = async () => {
@@ -57,7 +57,7 @@ export const TaskPreview = ({ task, groupId, idx }) => {
 
     const { bgColor, size } = task.style
 
-    console.log(backgroundImg)
+    // console.log(backgroundImg)
     return <Draggable type="cards" draggableId={task.id} index={idx}>
         {(provided, snapshot) => {
             return <article className="task-preview"

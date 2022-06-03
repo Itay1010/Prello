@@ -16,8 +16,8 @@ export const BoardData = ({ board, saveBoardHeader, }) => {
         saveBoardHeader(value)
     }
 
-    return <section className="board-data flex align-center">
-        <button onClick={ev => history.push(`${history.location.pathname}/dashboard`)}>Dashboard</button>
+    return <section className="board-data flex">
+        {/* <button onClick={ev => history.push(`${history.location.pathname}/dashboard`)}>Dashboard</button> */}
         <TxtInputCmp isBoardTitleEditable={isBoardTitleEditable}
             boardTitle={board.title}
             handleBoardTitleChange={handleBoardTitleChange}
