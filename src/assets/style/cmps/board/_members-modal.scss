@@ -11,22 +11,32 @@
         display: flex;
         align-items: center;
         font-family: pri-font-bold, sans-serif;
-        font-weight: 200;
-        padding: 0 12px 4px 14px;
+        padding: 0 12px 0 14px;
+        margin-bottom: 45px;
+        height: 80px;
         background-image: linear-gradient(to bottom, #0079BF 0%, #0079BF 100%);
         color: $td-bg;
 
         img {
-            width: 86px;
+            width: 90px;
             border-radius: 50%;
             outline: 2px solid $td-bg;
-            transform: translate(0%, 30%);
+            transform: translate(1px, 30%);
+        }
+
+        .member-info {
+            &>* {
+                display: block;
+            }
+
+            margin-left: 12px;
+            margin-top: 12px;
+
         }
 
         .member-name {
             display: inline;
             vertical-align: middle;
-            margin: 0 0 0 10px;
         }
 
         .close-modal {
@@ -36,6 +46,26 @@
             top: 0;
             right: 0;
             padding: 6px;
+            fill: $td-bg;
+        }
+    }
+
+    .members-modal-body {
+        margin: 16px 0;
+
+        .remove-member {
+            display: flex;
+            align-items: center;
+            background-color: inherit;
+            height: 0;
+            padding: 20px 12px;
+            width: 100%;
+            text-align: start;
+            border: none;
+
+            &:hover {
+                background-color: $td-btn-hov;
+            }
         }
     }
 }
