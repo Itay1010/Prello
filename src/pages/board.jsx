@@ -81,7 +81,6 @@ class _Board extends React.Component {
     setTheme = async () => {
         const boardStyle = this.props.board.style || null
         if (boardStyle.backgroundColor) {
-            document.querySelector('.main-header').style.backgroundColor = '#00000090'
             document.querySelector('.board').style.backgroundColor = boardStyle.backgroundColor
         }
         if (boardStyle.background) {
@@ -200,7 +199,6 @@ class _Board extends React.Component {
             }
             await this.props.updateBoard(newBoard)
             socketService.emit(SOCKET_EMIT_PULL, newBoard._id)
-
         }
     }
 
@@ -215,6 +213,17 @@ class _Board extends React.Component {
     setBackgroundImgFromUnsplash = async (url) => {
         const newBoard = this.deepCloneBoard()
         newBoard.style.background = url
+        await this.props.updateBoard(newBoard)
+        socketService.emit(SOCKET_EMIT_PULL, newBoard._id)
+    }
+
+    onChangeMembers = async (newUser) => {
+        const { board } = this.props
+        const newBoard = JSON.parse(JSON.stringify(board))
+        if (newBoard.members.some(member => member._id === newUser._id)) {
+            newBoard.members = newBoard.members.filter(member => member._id !== newUser._id)
+        }
+        else newBoard.members.push(newUser)
         await this.props.updateBoard(newBoard)
         socketService.emit(SOCKET_EMIT_PULL, newBoard._id)
     }
@@ -241,6 +250,7 @@ class _Board extends React.Component {
                         board={board}
                         saveBoardHeader={this.onSaveBoardHeader}
                         setBackgroundImg={this.setBackgroundImgFromUnsplash}
+                        onChangeMembers={this.onChangeMembers}
                     />
                     <GroupList groups={groups} eventHandlers={eventHandlers} />
                     <Switch>
