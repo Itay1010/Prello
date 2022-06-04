@@ -97,7 +97,15 @@ class _Board extends React.Component {
         const newBoard = JSON.parse(JSON.stringify(this.props.board))
         const groupIdx = newBoard.groups.findIndex(group => group.id === newTask.groupId)
 
-        newTask = { id: utilService.makeId(), title: newTask.title, style: { backgroundImg: '', bgColor: '', size: '' } }
+        newTask = {
+            id: utilService.makeId(),
+            title: newTask.title,
+            style: { backgroundImg: '', bgColor: '', size: '', },
+            members: [],
+            attachments: [],
+            labels: [],
+            checklist: []
+        }
         newBoard.groups[groupIdx].tasks.push(newTask)
         actService.activity('added', 'card,', newTask, newBoard)
         await this.props.updateBoard(newBoard)
@@ -165,6 +173,9 @@ class _Board extends React.Component {
         socketService.emit(SOCKET_EMIT_PULL, newBoard._id)
     }
 
+    getFilterInfo = (filterType) => {
+    }
+
 
     handleOnDragEnd = async (result) => {
         if (!result.destination) return
@@ -208,6 +219,14 @@ class _Board extends React.Component {
         socketService.emit(SOCKET_EMIT_PULL, newBoard._id)
     }
 
+    onStarBoard = async () => {
+        const newBoard = JSON.parse(JSON.stringify(this.props.board))
+        newBoard.isStarred = !newBoard.isStarred
+        console.log(newBoard.isStarred)
+        await this.props.updateBoard(newBoard)
+        socketService.emit(SOCKET_EMIT_PULL, newBoard._id)
+    }
+
     render() {
         const { board } = this.props
         if (!board) return <div>loading...</div>
@@ -224,12 +243,13 @@ class _Board extends React.Component {
 
         return <React.Fragment>
             <DragDropContext onDragEnd={this.handleOnDragEnd}>
-                <MainHeader boardMembers={board.members} />
+                <MainHeader boardMembers={board.members} getFilterInfo={this.getFilterInfo} />
                 <section className="board flex col main-layout">
                     <BoardHeader
                         board={board}
                         saveBoardHeader={this.onSaveBoardHeader}
                         setBackgroundImg={this.setBackgroundImgFromUnsplash}
+                        starBoard={this.onStarBoard}
                     />
                     <GroupList groups={groups} eventHandlers={eventHandlers} />
                     <Switch>

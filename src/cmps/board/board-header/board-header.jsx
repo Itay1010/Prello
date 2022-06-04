@@ -1,11 +1,9 @@
 import React from 'react'
 import { BoardData } from './board-data'
 import { BoardFeatures } from './board-features'
-import { BoardMembers } from './board-members'
-export function BoardHeader({ board, saveBoardHeader, setBackgroundImg }) {
+export function BoardHeader({ board, saveBoardHeader, setBackgroundImg, starBoard }) {
     return <section className="board-header flex space-between">
-        <BoardData board={board} saveBoardHeader={saveBoardHeader} />
+        <BoardData board={board} saveBoardHeader={saveBoardHeader} starBoard={starBoard} />
         <BoardFeatures board={board} setBackgroundImg={setBackgroundImg} />
-        {/* <BoardMembers board={board}/> */}
     </section>
 }

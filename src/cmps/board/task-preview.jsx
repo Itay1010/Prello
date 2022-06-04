@@ -17,24 +17,22 @@ export const TaskPreview = ({ task, groupId, idx }) => {
     const [membersToDisplay, setMembersToDisplay] = useState(null)
     const [backgroundImg, setBackgroundImg] = useState(null)
     const boardMembers = useSelector((storeState) => storeState.boardModule.board.members)
-    // console.log(task)
 
     // const taskPreviewRef = useRef()
 
     // useEffect(() => {
-    //     taskPreviewRef.current.scrollIntoView({ behavior: "smooth", block: "end", inline: "nearest" })
+    //     // taskPreviewRef.current.scrollIntoView({ behavior: "smooth", block: "end", inline: "nearest" })
     // }, [])
 
     useEffect(() => {
         getMembersToDisplay()
         checkBackgroundImg()
-    }, [task.attachments?.length])
+    }, [task.attachments?.length, task.members.length])
     const checkBackgroundImg = () => {
         const { style, attachments } = task
         let background
         // if (style.backgroundImg) background = style.backgroundImg
         if (attachments && attachments[0]) background = attachments[0].url
-        // console.log(background)
         setBackgroundImg(background)
     }
     const getMembersToDisplay = async () => {
@@ -57,7 +55,7 @@ export const TaskPreview = ({ task, groupId, idx }) => {
 
     const { bgColor, size } = task.style
 
-    // console.log(backgroundImg)
+
     return <Draggable type="cards" draggableId={task.id} index={idx}>
         {(provided, snapshot) => {
             return <article className="task-preview"
@@ -71,7 +69,7 @@ export const TaskPreview = ({ task, groupId, idx }) => {
                         style={({ backgroundColor: bgColor })}
                     ></section>}
                     <div className="task-info" style={task.style?.bgColor && size === 'full' ? { backgroundColor: bgColor } : {}}>
-                        {task.labels?.length && !task.attachments?.length && <div className="task-label">
+                        {task.labels?.length > 0 && !task.attachments?.length > 0 && <div className="task-label">
                             <TaskLabels labels={task.labels} />
                         </div>}
                         {backgroundImg && <TaskImage attachment={backgroundImg} />}

@@ -27,7 +27,6 @@ export const Cover = ({ saveCover, closeModal, task }) => {
     //     }, 1000)
     // }
 
-    console.log(task)
 
     useEffect(() => {
         // loadPhotos()
@@ -61,7 +60,6 @@ export const Cover = ({ saveCover, closeModal, task }) => {
 
     const onSetCover = (color) => {
         setColor(color)
-        console.log(color, size)
         const coverSettings = { bgColor: color, size }
         saveCover(coverSettings)
         // saveCover(color,size)
@@ -82,11 +80,10 @@ export const Cover = ({ saveCover, closeModal, task }) => {
         background = color
 
     }
-    console.log(size)
     // if (!photos) return <React.Fragment></React.Fragment>
     return <div className='cover'>
         <div className='header-wrapper'>
-            <div onClick={closeModal}>
+            <div className='' onClick={closeModal}>
                 <IClose />
             </div>
             <h1>Cover</h1>

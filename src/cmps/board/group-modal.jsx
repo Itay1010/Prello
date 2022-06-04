@@ -4,7 +4,6 @@ import { ColorSelect } from './group-color';
 
 export const GroupModal = ({ groupInfo, setModal, archiveGroup, setColorSelect, isColorSelect, titleRef, onGroupColorChange }) => {
 
-    console.log('GroupModal - groupInfo', groupInfo)
     return <div className='group-modal' >
         {/* <div className='screen'>screen</div> */}
         <section className='group-modal-header'>
