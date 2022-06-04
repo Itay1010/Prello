@@ -81,10 +81,10 @@ class _Board extends React.Component {
 
     setTheme = async () => {
         const boardStyle = this.props.board.style || null
-        if (boardStyle.backgroundColor) {
+        if (boardStyle?.backgroundColor) {
             document.querySelector('.board').style.backgroundColor = boardStyle.backgroundColor
         }
-        if (boardStyle.background) {
+        if (boardStyle?.background) {
             const avgColor = await boardService.getAvgColor(boardStyle.background)
             const isDark = tinycolor(avgColor).isDark()
             utilService.setDynamicColors(isDark, avgColor)

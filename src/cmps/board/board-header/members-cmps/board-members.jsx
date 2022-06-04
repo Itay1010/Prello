@@ -27,8 +27,8 @@ export const BoardMembers = ({ board, onChangeMembers }) => {
     return <section className='board-members-header'>
         <section className='members-preview'>
             {memberToDisplay.map(member => {
-                return <React.Fragment>
-                    <div className="member" key={member._id} onClick={ev => setUser(member)}>
+                return <React.Fragment key={member._id}>
+                    <div className="member" onClick={ev => setUser(member)}>
                         <img src={member.imgUrl} alt="" />
                     </div>
                 </React.Fragment>
