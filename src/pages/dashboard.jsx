@@ -21,13 +21,14 @@ export const Dashboard = ({ board }) => {
             <h2> <span>{summary.groupCount}</span> groups | <span>{summary.active}</span> active cards</h2>
         </div>
         <div className='activity'>
+            {/* <h1>Board's activity for last 7 days</h1> */}
             <Activity dataToDisplay={activity} datesToDisplay={datesToDisplay} />
         </div>
-        <div className="more-stat flex">
-            <div className="cards-member">
+        <div className="more-stat flex space-between">
+            <div className="cards-member flex justify-center align-center">
                 <CardsMember cardsPerMember={cardsPerMember} />
             </div>
-            <div className="cards-labels">
+            <div className="cards-labels flex justify-center align-center">
                 <CardsLabels cardsPerLabels={cardsPerLabels} />
             </div>
         </div>

@@ -89,6 +89,8 @@
     }
 
     .board-features {
+        transform: translateX(4px);
+
         &>*:not(first-child) {
             margin-inline-start: 4px;
         }
@@ -193,7 +195,7 @@
                 width: 340px;
                 position: fixed;
                 // background-color: #0079bf;
-                height: 95%;
+                // height: 95%;
                 top: 44px;
                 right: 0;
                 z-index: 10;
