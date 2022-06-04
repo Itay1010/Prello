@@ -42,12 +42,9 @@ class _Board extends React.Component {
     }
 
     componentDidUpdate(prevProps, prevState) {
-<<<<<<< HEAD
-=======
         if (prevProps.match.params.boardId !== this.props.match.params.boardId) {
             this._setBoard()
         }
->>>>>>> main
         this.setTheme()
     }
 
