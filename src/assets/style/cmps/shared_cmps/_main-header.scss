@@ -182,13 +182,14 @@
 }
 
 .profile {
-    border-radius: 3px;
+    border-radius: 50%;
     height: 32px;
     width: 32px;
     overflow: hidden;
     cursor: pointer;
 
     h2 {
+        font-size: 1.28rem;
         text-align: center;
         color: $bg;
         font-weight: 500;

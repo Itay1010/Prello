@@ -9,6 +9,10 @@ import { LoginForm } from '../cmps/auth/login.jsx'
 import { GoogleLogin } from 'react-google-login'
 import { gapi } from "gapi-script"
 import { ILogo } from "../cmps/icons/i-logo"
+import { Link } from "react-router-dom"
+
+import { ReactComponent as Img1 } from "../assets/imgs/auth-img-1.svg";
+import { ReactComponent as Img2 } from "../assets/imgs/auth-img-2.svg";
 
 const clientId = "168490950789-fil5g5m4nauiousknnut75avvh0dhsb5.apps.googleusercontent.com"
 
@@ -73,6 +77,10 @@ export class _Auth extends React.Component {
     render() {
         const { type } = this.state
         return <section className="auth-page">
+            <section className="background-container">
+                <Img1 />
+                <Img2 />
+            </section>
             <div className="auth-logo flex align-center">
                 <ILogo />
                 <h1>Prello</h1>
@@ -81,14 +89,15 @@ export class _Auth extends React.Component {
                 {(type === 'signup') && <SignupForm onSignup={this.signup} />}
                 {(type === 'login') && <LoginForm onLogin={this.login} />}
 
-                {type === 'login' && <button style={({ margin: "16px 0 0" })} onClick={() => {
+                <div className="login-method-separator">OR</div>
+
+                {type === 'login' && <button style={({ margin: "0 0 16px" })} onClick={() => {
                     window.location.assign('/auth/signup')
                     this.setState((prevState) => 'signup')
                 }}>
-                    Signup
+                    Sign up
                 </button>}
 
-                <div className="login-method-separator">OR</div>
                 <div className="google-login">
                     <GoogleLogin
                         clientId={clientId}
@@ -99,8 +108,11 @@ export class _Auth extends React.Component {
                         isSignedIn={false}
                     />
                 </div>
+                <hr />
+                <Link to="/" className="to-home reset" >Home</Link>
+                {type === 'signup' && <a href="login" className="to-login reset">Login</a>}
             </div>
-
+            <svg></svg>
         </section>
     }
 }

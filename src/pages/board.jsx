@@ -36,7 +36,6 @@ class _Board extends React.Component {
     }
 
     componentDidUpdate(prevProps, prevState) {
-
         this.setTheme()
     }
 
