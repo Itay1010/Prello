@@ -27,7 +27,7 @@ export const TaskPreview = ({ task, groupId, idx }) => {
     useEffect(() => {
         getMembersToDisplay()
         checkBackgroundImg()
-    }, [task.attachments?.length, task.members.length])
+    }, [task.attachments?.length, task.members?.length])
     const checkBackgroundImg = () => {
         const { style, attachments } = task
         let background

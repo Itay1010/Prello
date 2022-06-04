@@ -4,20 +4,20 @@ import { IStar } from '../../../icons/i-star'
 
 
 
-export const DynamicFilter = ({ boards, modalType }) => {
+export const DynamicFilter = ({ boards, modalType, toggleStar }) => {
     const history = useHistory()
-    console.log(boards)
 
     const onGoTo = (boardId) => {
         history.push(`/board/${boardId}`)
     }
     return <ul className='dynamic-filter'>
         <h3>{modalType}</h3>
+
         {boards.map(board => {
             return <li className='filter-item' onClick={() => onGoTo(board._id)}>
-                <img src={`${board.style.background}`} alt="" />
+                {board.style.background && <img src={`${board.style.background}`} alt="" />}
                 <p>{board.title}</p>
-                <div className={`star-wrapper ${board.isStarred ? 'starred' : ''}`}><IStar /></div>
+                <div onClick={toggleStar} className={`star-wrapper ${board.isStarred ? 'starred' : ''}`}><IStar /></div>
             </li>
         })}
     </ul>
