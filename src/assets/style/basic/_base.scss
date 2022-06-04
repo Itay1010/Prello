@@ -17,6 +17,7 @@ body {
     margin: 0;
     background-color: $bg;
     height: 100vh;
+    overflow-y: hidden;
 
     #root {
         height: 100%;

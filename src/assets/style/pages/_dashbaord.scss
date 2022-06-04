@@ -15,10 +15,29 @@
     grid-column: 1/3;
     margin-top: 52px;
     background-color: $group-bg;
-    height: 100%;
-    width: 100%;
-    padding: 20px;
+    height: calc(100vh - 44px - 52px);
+    width: 100vw;
+    margin: 52px 20px 20px;
     gap: 12px;
+    overflow-x: hidden;
+    transform: translateX(-20px);
+    padding: 24px 0;
+
+    &::-webkit-scrollbar {
+        border-radius: 10px;
+        width: 12px;
+    }
+
+    &::-webkit-scrollbar-track {
+        border-radius: 10px;
+        background: rgba(128, 128, 128, 0.231);
+
+    }
+
+    &::-webkit-scrollbar-thumb {
+        background: rgba(128, 128, 128, 0.231);
+        border-radius: 10px;
+    }
 
     h1 {
         font-size: 30px;
@@ -26,7 +45,7 @@
     }
 
     h2 {
-        margin-bottom: 20px;
+        margin-bottom: 40px;
 
         span {
             color: $clr1;
@@ -36,21 +55,36 @@
     }
 
     .activity {
-        width: 75%;
+        width: 80%;
+        margin-bottom: 20px;
+
+        h3 {
+            color: red;
+        }
+
+        canvas {
+            height: 200px;
+
+        }
     }
 
     .more-stat {
-        // background-color: yellow;
+        width: 80%;
 
         .cards-member {
-          
-            
+            width: 40%;
+
+            canvas {
+                height: 100px;
+            }
         }
 
         .cards-labels {
-        
-         
+            width: 40%;
 
+            canvas {
+                height: 100px;
+            }
         }
     }
 }

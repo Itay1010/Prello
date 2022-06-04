@@ -30,7 +30,8 @@ export function Activity({ dataToDisplay, datesToDisplay }) {
             legend: {
                 display: false,
             },
-        }
+        },
+        maintainAspectRatio: false
     }
 
     const labels = datesToDisplay
