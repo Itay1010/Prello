@@ -219,6 +219,14 @@ class _Board extends React.Component {
         socketService.emit(SOCKET_EMIT_PULL, newBoard._id)
     }
 
+    onStarBoard = async () => {
+        const newBoard = JSON.parse(JSON.stringify(this.props.board))
+        newBoard.isStarred = !newBoard.isStarred
+        console.log(newBoard.isStarred)
+        await this.props.updateBoard(newBoard)
+        socketService.emit(SOCKET_EMIT_PULL, newBoard._id)
+    }
+
     render() {
         const { board } = this.props
         if (!board) return <div>loading...</div>
@@ -241,6 +249,7 @@ class _Board extends React.Component {
                         board={board}
                         saveBoardHeader={this.onSaveBoardHeader}
                         setBackgroundImg={this.setBackgroundImgFromUnsplash}
+                        starBoard={this.onStarBoard}
                     />
                     <GroupList groups={groups} eventHandlers={eventHandlers} />
                     <Switch>

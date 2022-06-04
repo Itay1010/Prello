@@ -14,9 +14,15 @@ export function MainHeader({ getFilterInfo }) {
     // const minis = useSelector((storeState) => storeState.boardModule.miniBoards)
     let minis = useSelector((storeState) => storeState.boardModule.miniBoards)
     const dispatch = useDispatch()
+
     useEffect(() => {
         setBoardMinis()
+        // const starredBoard = setStarredLength()
     }, [])
+
+    const setStarredLength = () => {
+        return minis.filter(board => board.isStarred)
+    }
 
     const setBoardMinis = async () => {
         if (!minis || minis.length === 0) {
