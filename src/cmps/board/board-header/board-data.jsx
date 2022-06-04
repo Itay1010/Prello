@@ -5,7 +5,7 @@ import { BoardMembers } from './members-cmps/board-members'
 import { IStar } from '../../icons/i-star.jsx'
 
 
-export const BoardData = ({ board, saveBoardHeader, starBoard }) => {
+export const BoardData = ({ board, saveBoardHeader, starBoard, onChangeMembers }) => {
     const history = useHistory()
 
     const [isBoardTitleEditable, setBoardTitleEditable] = useState(false)
@@ -26,6 +26,6 @@ export const BoardData = ({ board, saveBoardHeader, starBoard }) => {
         <div onClick={starBoard} className={`btn-stared flex align-center justify-center ${board.isStarred ? 'is-starred' : 'not-starred'}`}>
             <IStar />
         </div>
-        <BoardMembers board={board} />
+        <BoardMembers board={board} onChangeMembers={onChangeMembers} />
     </section>
 }
