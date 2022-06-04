@@ -24,16 +24,6 @@ export function Activity({ dataToDisplay, datesToDisplay }) {
         Legend
     )
 
-    const options = {
-        responsive: true,
-        plugins: {
-            legend: {
-                display: false,
-            },
-        },
-        maintainAspectRatio: false
-    }
-
     const labels = datesToDisplay
 
     const data = {
@@ -43,10 +33,43 @@ export function Activity({ dataToDisplay, datesToDisplay }) {
                 label: 'Tasks actions',
                 data: dataToDisplay,
                 borderColor: '#026AA7',
-                backgroundColor: '#026ba786',
+                backgroundColor: '#23C552',
+                pointBorderWidth: 2
+
             }
         ],
     }
+
+    const options = {
+        responsive: true,
+        plugins: {
+            legend: {
+                display: false,
+            }
+        },
+        maintainAspectRatio: false,
+        scales: {
+            yAxes: {
+
+                gridLines: {
+                    color: 'rgb(235, 90, 70)'
+                },
+                font: {
+                    color: 'rgb(235, 90, 70)'
+                }
+
+            },
+            xAxes: [
+                {
+                    gridLines: {
+                        color: "blue"
+                    }
+                }
+            ]
+        }
+    }
+
+
     return <Line options={options} data={data} />
 
 } 

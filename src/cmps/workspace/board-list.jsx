@@ -46,7 +46,6 @@ export const BoardList = ({ boards, userId, toggleStar, createNewBoard }) => {
             {starredBoards.length > 0 &&
                 <React.Fragment>
                     <section className="board-preview-header flex align-center">
-
                         <IStar /><h1>Starred boards</h1>
                     </section>
                     <div className="boards-wrapper">
