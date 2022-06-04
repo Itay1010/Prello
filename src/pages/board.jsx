@@ -25,10 +25,16 @@ import { socketService, SOCKET_EMIT_TOPIC, SOCKET_EVENT_BOARD_UPDATE, SOCKET_EMI
 import { loadGuest, setUser } from "../store/user/user.actions"
 import { userService } from "../services/user.service"
 import { boardStatistics } from "../services/board/board-statistics"
+import { SideMenu } from "../cmps/board/board-header/side-menu"
 
 const tinycolor = require("tinycolor2")
 
 class _Board extends React.Component {
+
+    state = {
+        isSideMenuOpen: false,
+        isBackgroundModalOpen: false
+    }
 
     componentDidMount() {
         this._loadUser()
@@ -36,6 +42,12 @@ class _Board extends React.Component {
     }
 
     componentDidUpdate(prevProps, prevState) {
+<<<<<<< HEAD
+=======
+        if (prevProps.match.params.boardId !== this.props.match.params.boardId) {
+            this._setBoard()
+        }
+>>>>>>> main
         this.setTheme()
     }
 
@@ -234,8 +246,12 @@ class _Board extends React.Component {
         socketService.emit(SOCKET_EMIT_PULL, newBoard._id)
     }
 
-    onToggleStar = () => {
+    onToggleSideMenu = (state) => {
+        this.setState({ isSideMenuOpen: state })
+    }
 
+    toggleBackgroundPickerModal = (state) => {
+        this.setState({ isBackgroundModalOpen: state })
     }
 
     render() {
@@ -262,8 +278,15 @@ class _Board extends React.Component {
                         setBackgroundImg={this.setBackgroundImgFromUnsplash}
                         onChangeMembers={this.onChangeMembers}
                         starBoard={this.onStarBoard}
+                        openSideMenu={this.onToggleSideMenu}
                     />
                     <GroupList groups={groups} eventHandlers={eventHandlers} />
+                    <SideMenu
+                        isSideMenuOpen={this.state.isSideMenuOpen}
+                        closeSideMenu={this.onToggleSideMenu}
+                        openBackgroundPickerModal={this.toggleBackgroundPickerModal}
+                        setBackgroundImg={this.setBackgroundImgFromUnsplash}
+                    />
                     <Switch>
                         <Route path={'/board/:boardId/:groupId/:taskId'}>
                             <TaskDetails onArchiveTask={this.onArchiveTask} />

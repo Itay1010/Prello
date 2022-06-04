@@ -46,7 +46,17 @@ export function CardsMember({ cardsPerMember }) {
             legend: {
                 display: false,
             },
-        }
+            title: {
+                color: 'rgb(2, 106, 167)',
+                display: true,
+                text: 'Cards by members',
+                font: {
+                    weight: 'light',
+                    size: 30
+                }
+            }
+        },
+        maintainAspectRatio: false
     }
 
     return <Bar options={options} data={data} />
