@@ -1,7 +1,7 @@
 import React from 'react'
 import { BoardData } from './board-data'
 import { BoardFeatures } from './board-features'
-export function BoardHeader({ board, saveBoardHeader, setBackgroundImg, onChangeMembers, starBoard }) {
+export function BoardHeader({ board, saveBoardHeader, setBackgroundImg, onChangeMembers, starBoard, openSideMenu }) {
     return <section className="board-header flex space-between">
         <BoardData
             board={board}
@@ -9,6 +9,7 @@ export function BoardHeader({ board, saveBoardHeader, setBackgroundImg, onChange
             onChangeMembers={onChangeMembers}
             starBoard={starBoard}
         />
-        <BoardFeatures board={board} setBackgroundImg={setBackgroundImg} />
+        <BoardFeatures board={board} setBackgroundImg={setBackgroundImg} openSideMenu={openSideMenu} />
+
     </section>
 }

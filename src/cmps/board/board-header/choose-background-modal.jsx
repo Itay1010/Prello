@@ -3,7 +3,8 @@ import { useForm } from '../../../hooks/useForm'
 import { IClose } from '../../icons/i-close'
 
 
-export const ChooseBackgroundModal = ({ closeBackgroundModal, imgs, setBackgroundImg, enterBackgroundSearch }) => {
+export const ChooseBackgroundModal = ({ isModalOpen, closeBackgroundModal, imgs, setBackgroundImg, enterBackgroundSearch }) => {
+    console.log(imgs)
     const searchRef = useRef()
     const [searchValue, handleSearchChange] = useForm('')
 
@@ -11,7 +12,7 @@ export const ChooseBackgroundModal = ({ closeBackgroundModal, imgs, setBackgroun
         setBackgroundImg(imgUrl)
     }
     let timeoutId
-
+    console.log(isModalOpen)
 
     const searchValueTyped = (ev) => {
         timeoutId = null
@@ -20,9 +21,9 @@ export const ChooseBackgroundModal = ({ closeBackgroundModal, imgs, setBackgroun
             timeoutId = null
         }, 1000)
     }
-
-    return <div className='background-modal'>
-        <div onClick={() => closeBackgroundModal()} className='close-modal-btn-wrapper'>
+    if (!imgs) return
+    return <div className={`background-modal ${isModalOpen ? 'open' : ''}`}>
+        <div onClick={closeBackgroundModal} className='close-modal-btn-wrapper'>
             <IClose />
         </div>
         <h1>Change background</h1>
