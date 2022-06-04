@@ -232,6 +232,8 @@ class _Board extends React.Component {
             newBoard.members = newBoard.members.filter(member => member._id !== newUser._id)
         }
         else newBoard.members.push(newUser)
+        await this.props.updateBoard(newBoard)
+        socketService.emit(SOCKET_EMIT_PULL, newBoard._id)
     }
 
     onStarBoard = async () => {
