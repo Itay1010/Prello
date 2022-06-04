@@ -22,7 +22,17 @@
     .board-header {
         height: 52px;
         width: 100%;
+
+        .btn-stared {
+            &.is-starred {
+                svg {
+                    fill: $star;
+                    stroke: $star;
+                }
+            }
+        }
     }
+
 
     .group-container {
         overflow-x: auto;

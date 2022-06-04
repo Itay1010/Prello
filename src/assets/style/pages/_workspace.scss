@@ -11,7 +11,7 @@
     // display: flex;
     // flex-direction: column;
     width: 100vw;
-    // height: 100%;
+    height: 100vh;
     font-family: pri-font;
     font-size: 16px;
     background-color: $td-bg;
@@ -214,12 +214,7 @@
                         width: 14px;
                         position: relative;
 
-                        svg {
-                            position: absolute;
-                            bottom: 0;
-                            stroke: $bg;
-                            fill: none;
-                        }
+
 
 
 
@@ -234,6 +229,30 @@
                             svg {
                                 stroke: none;
                                 fill: $star;
+                            }
+                        }
+                    }
+                }
+
+                &.not-starred {
+                    .screen {
+                        .star-wrapper {
+                            svg {
+                                position: absolute;
+                                bottom: 0;
+                                stroke: $bg;
+                                fill: none;
+                                display: none;
+                            }
+                        }
+                    }
+
+                    &:hover {
+                        .screen {
+                            .star-wrapper {
+                                svg {
+                                    display: block;
+                                }
                             }
                         }
                     }

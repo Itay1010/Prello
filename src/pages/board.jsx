@@ -224,6 +224,12 @@ class _Board extends React.Component {
             newBoard.members = newBoard.members.filter(member => member._id !== newUser._id)
         }
         else newBoard.members.push(newUser)
+    }
+
+    onStarBoard = async () => {
+        const newBoard = JSON.parse(JSON.stringify(this.props.board))
+        newBoard.isStarred = !newBoard.isStarred
+        console.log(newBoard.isStarred)
         await this.props.updateBoard(newBoard)
         socketService.emit(SOCKET_EMIT_PULL, newBoard._id)
     }
@@ -251,6 +257,7 @@ class _Board extends React.Component {
                         saveBoardHeader={this.onSaveBoardHeader}
                         setBackgroundImg={this.setBackgroundImgFromUnsplash}
                         onChangeMembers={this.onChangeMembers}
+                        starBoard={this.onStarBoard}
                     />
                     <GroupList groups={groups} eventHandlers={eventHandlers} />
                     <Switch>
