@@ -81,7 +81,7 @@ export const SignupForm = ({ onSignup }) => {
                         />
                     </div>
                     <button type="submit" disabled={isSubmitting}>
-                        Continue
+                        Sign up
                     </button>
                 </form>
             )}

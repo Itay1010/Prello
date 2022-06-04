@@ -57,8 +57,9 @@ export const LoginForm = ({ onLogin }) => {
                                 placeholder='Password'
                             />
                         </label>
-                        <button type="submit" disabled={isSubmitting}>
-                            Continue
+
+                        <button className="login-btn" type="submit" disabled={isSubmitting}>
+                            Login
                         </button>
                     </form>
                 )}
