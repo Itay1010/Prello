@@ -30,7 +30,7 @@ export function Activity({ dataToDisplay, datesToDisplay }) {
         labels,
         datasets: [
             {
-                label: 'Tasks actions',
+                label: '',
                 data: dataToDisplay,
                 borderColor: '#026AA7',
                 backgroundColor: '#23C552',

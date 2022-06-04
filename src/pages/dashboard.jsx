@@ -17,6 +17,9 @@ export const Dashboard = ({ board }) => {
     const cardsPerMember = boardStatistics.getCardsByMember(board)
     const cardsPerLabels = boardStatistics.getCardsByLabels(board)
 
+    const totalActs = activity.reduce((acc, num) => acc + num, 0)
+    const dailyAvg = totalActs / 7
+
 
 
     return <div className='dashboard-main flex col align-center'>
@@ -35,9 +38,9 @@ export const Dashboard = ({ board }) => {
                         <Activity dataToDisplay={activity} datesToDisplay={datesToDisplay} />
                     </div>
                     <div className="activity-info">
-                        <h2>Total  of <span>{activity.reduce((acc, num) => acc + num, 0)}</span></h2>
+                        <h2>Total  of <span>{totalActs}</span></h2>
                         <h3>activities this week</h3>
-                        <h4>Daily average : {activity.reduce((acc, num) => acc + num, 0) / 7}</h4>
+                        <h4>Daily average : {dailyAvg}</h4>
                     </div>
                 </div>
             </div>
