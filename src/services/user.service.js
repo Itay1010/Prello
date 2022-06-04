@@ -24,7 +24,9 @@ function getLoggedinUser() {
 async function getUsers() {
     try {
         const users = await httpService.get('user')
+
         return users
+
     } catch (err) {
         console.error('error getting users')
         throw err

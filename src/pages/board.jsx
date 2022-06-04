@@ -36,6 +36,7 @@ class _Board extends React.Component {
     }
 
     componentDidUpdate(prevProps, prevState) {
+
         this.setTheme()
     }
 
@@ -172,8 +173,7 @@ class _Board extends React.Component {
         socketService.emit(SOCKET_EMIT_PULL, newBoard._id)
     }
 
-    getFilterInfo = (filterType) => {
-    }
+
 
 
     handleOnDragEnd = async (result) => {
@@ -229,9 +229,12 @@ class _Board extends React.Component {
     onStarBoard = async () => {
         const newBoard = JSON.parse(JSON.stringify(this.props.board))
         newBoard.isStarred = !newBoard.isStarred
-        console.log(newBoard.isStarred)
         await this.props.updateBoard(newBoard)
         socketService.emit(SOCKET_EMIT_PULL, newBoard._id)
+    }
+
+    onToggleStar = () => {
+
     }
 
     render() {
@@ -250,7 +253,7 @@ class _Board extends React.Component {
 
         return <React.Fragment>
             <DragDropContext onDragEnd={this.handleOnDragEnd}>
-                <MainHeader boardMembers={board.members} getFilterInfo={this.getFilterInfo} />
+                <MainHeader boardMembers={board.members} isBoardStarred={board.isStarred} />
                 <section className="board flex col main-layout">
                     <BoardHeader
                         board={board}
