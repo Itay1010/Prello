@@ -142,7 +142,6 @@
     background-color: $opc-white;
     border: 1px solid $opc-white-hov;
     height: 32px;
-    margin-inline-end: 4px;
     width: 250px;
 
     ::placeholder {
@@ -369,7 +368,6 @@
 
         .search {
             display: none;
-            position: absolute;
             left: 0;
             bottom: 0;
             width: 100%;
@@ -488,7 +486,7 @@
         .search {
             position: relative;
             width: 250px;
-            margin-right: 50px;
+            margin-right: 20px;
         }
 
         .more {

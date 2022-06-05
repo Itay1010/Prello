@@ -1,11 +1,12 @@
 .members-modal {
     position: absolute;
-    background-color: $td-bg;
+    background-color: $white;
     bottom: 0;
     transform: translate(0%, 100%);
     width: 300px;
     z-index: 100;
     font-size: 0.9rem;
+    box-shadow: 0 0 16px -2px #00000036;
 
     .members-modal-header {
         display: flex;
