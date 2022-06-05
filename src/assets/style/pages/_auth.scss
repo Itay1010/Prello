@@ -41,7 +41,8 @@
     }
 
     .form-wrapper {
-        width: 400px;
+        width: 100%;
+        max-width: 400px;
         background-color: $white;
         text-align: center;
         padding: 40px 40px 60px;
@@ -59,6 +60,16 @@
             margin-bottom: 25px;
         }
 
+        .inputs-wrapper {
+            .user-name {
+                flex-wrap: wrap;
+                gap: 0 10px;
+                &>* {
+                    flex-grow: 1;
+                    margin-right: 0;
+                }
+            }
+        }
 
         .long-field {
             width: 100%;
