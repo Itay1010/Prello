@@ -13,7 +13,7 @@ import { Bar } from 'react-chartjs-2';
 import { boardStatistics } from '../../services/board/board-statistics';
 
 
-export function CardsMember({ cardsPerMember, unAssignedTasks }) {
+export function ActsMembers({ actsByMember }) {
     ChartJS.register(
         CategoryScale,
         LinearScale,
@@ -23,12 +23,9 @@ export function CardsMember({ cardsPerMember, unAssignedTasks }) {
         Legend
     );
 
-    const labels = cardsPerMember.map(item => `${item.firstName} ${item.lastName}`)
-    labels.unshift('Unassigned tasks')
-    const dataToDisplay = cardsPerMember.map(item => item.tasksNum)
-    dataToDisplay.unshift(unAssignedTasks)
-    const colors = cardsPerMember.map(item => boardStatistics.hexToRgb(item.color))
-    colors.unshift('#9F9F9F')
+    const labels = actsByMember.map(item => `${item.firstName} ${item.lastName}`)
+    const dataToDisplay = actsByMember.map(item => item.count)
+    const colors = actsByMember.map(item => boardStatistics.hexToRgb(item.color))
 
 
     const data = {
@@ -51,6 +48,7 @@ export function CardsMember({ cardsPerMember, unAssignedTasks }) {
             }
         },
         maintainAspectRatio: false,
+        indexAxis: 'y',
         scales: {
             yAxis:
             {

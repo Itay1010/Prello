@@ -5,9 +5,12 @@ const DAY_TIMESTAMP = 86400000
 
 export const boardStatistics = {
     getCardsCount,
+    getMemebersCount,
     getCardsByMember,
+    getUnassignedTasksCount,
     getCardsByLabels,
     getActivityStats,
+    getActByMember,
     getDates,
     hexToRgb
 
@@ -43,6 +46,10 @@ function getCardsCount(board) {
     return res
 }
 
+function getMemebersCount(board) {
+    return board.members.length
+}
+
 function getCardsByMember(board) {
     const res = board.groups.reduce((acc, group) => {
         const count = {}
@@ -64,20 +71,47 @@ function getCardsByMember(board) {
         return acc
     }, {})
 
-
     const resToDisplay = []
     for (const id in res) {
+        if (id === 'unassigned') return
         const member = board.members.find(member => member._id === id)
         const memberStatistics = {
             firstName: member.firstName,
             lastName: member.lastName,
             color: member.color,
+            id: member._id,
             tasksNum: res[id]
         }
         resToDisplay.push(memberStatistics)
     }
 
-    return resToDisplay
+    // console.log('resToDisplay', resToDisplay);
+
+    // const membersCount = getMemebersCount()
+    // console.log('membersCount',membersCount);
+    if (resToDisplay.length === board.members.length) return resToDisplay
+    else {
+        //ADD MEMBERS WITH NO TASKS
+        return resToDisplay
+    }
+    // console.log('resToDisplay', resToDisplay);
+    // return resToDisplay
+}
+
+function getUnassignedTasksCount(board) {
+    const res = board.groups.reduce((acc, group) => {
+        let count = 0
+
+        group.tasks.forEach(task => {
+            if (task.members.length === 0 && !task.archivedAt) count++
+        })
+
+        acc += count
+        return acc
+    }, 0)
+
+    return res
+
 }
 
 function getCardsByLabels(board) {
@@ -116,6 +150,28 @@ function getActivityStats(board) {
 
     })
     return res
+}
+
+function getActByMember(board) {
+
+    const res = board.members.reduce((acc, member) => {
+        let count = 0
+        board.activities.forEach(act => {
+            if (act.byMember._id === member._id) count++
+        })
+        const actsForMember = {
+            firstName: member.firstName,
+            lastName: member.lastName,
+            color: member.color,
+            id: member._id,
+            count
+        }
+        acc.push(actsForMember)
+        return acc
+    }, [])
+
+    return res
+
 }
 
 function getDates() {

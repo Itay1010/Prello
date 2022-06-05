@@ -7,18 +7,18 @@ import { getPhotos, getSearch } from '../../../services/basic/unsplash.service.j
 
 export const SideMenu = ({ closeSideMenu, isSideMenuOpen, setBackgroundImg }) => {
     const [isBackgroundPickerOpen, setBackgroundPicker] = useState(false)
-    console.log(isSideMenuOpen)
+    // console.log(isSideMenuOpen)
     const boardActivities = useSelector(storeState => storeState.boardModule.board.activities)
-    console.log(boardActivities)
+    // console.log(boardActivities)
     const [imgs, setImgs] = useState(null)
-    console.log(isSideMenuOpen)
+    // console.log(isSideMenuOpen)
     useEffect(() => {
         onLoad()
     }, [])
 
     const onLoad = async () => {
         const imgs = await getPhotos()
-        console.log(imgs)
+        // console.log(imgs)
         setImgs(imgs)
     }
 

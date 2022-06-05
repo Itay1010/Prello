@@ -11,11 +11,10 @@ export function CardsLabels({ cardsPerLabels }) {
         labels: Object.keys(cardsPerLabels),
         datasets: [
             {
-                label: '# of Votes',
                 data: Object.values(cardsPerLabels),
                 backgroundColor,
-                borderColor: backgroundColor,
-                borderWidth: 4,
+                // borderColor: backgroundColor,
+                borderWidth: 0,
             },
         ],
     }
@@ -24,18 +23,17 @@ export function CardsLabels({ cardsPerLabels }) {
         plugins: {
             legend: {
                 display: false,
-            },
-            title: {
-                color: 'rgb(2, 106, 167)',
-                display: true,
-                text: 'Cards by labels',
-                font: {
-                    weight: 'light',
-                    size: 30
-                }
             }
         },
-        maintainAspectRatio: false
+        maintainAspectRatio: false,
+        scales: {
+            yAxis: {
+                display: false,
+            },
+            xAxis: {
+                display: false,
+            }
+        }
     }
 
     return <Pie data={data} options={options} />

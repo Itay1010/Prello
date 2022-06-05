@@ -4,7 +4,7 @@ import { IClose } from '../../icons/i-close'
 
 
 export const ChooseBackgroundModal = ({ isModalOpen, closeBackgroundModal, imgs, setBackgroundImg, enterBackgroundSearch }) => {
-    console.log(imgs)
+    // console.log(imgs)
     const searchRef = useRef()
     const [searchValue, handleSearchChange] = useForm('')
 
@@ -12,7 +12,7 @@ export const ChooseBackgroundModal = ({ isModalOpen, closeBackgroundModal, imgs,
         setBackgroundImg(imgUrl)
     }
     let timeoutId
-    console.log(isModalOpen)
+    // console.log(isModalOpen)
 
     const searchValueTyped = (ev) => {
         timeoutId = null

@@ -34,7 +34,8 @@ export function Activity({ dataToDisplay, datesToDisplay }) {
                 data: dataToDisplay,
                 borderColor: '#026AA7',
                 backgroundColor: '#23C552',
-                pointBorderWidth: 2
+                pointBorderWidth: 1,
+               
 
             }
         ],
@@ -66,7 +67,14 @@ export function Activity({ dataToDisplay, datesToDisplay }) {
                     }
                 }
             ]
-        }
+        },
+
+        
+        elements: {
+            line: {
+                tension: 0.25 
+            }
+        },
     }
 
 
