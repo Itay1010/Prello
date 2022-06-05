@@ -8,6 +8,7 @@ import {
     Title,
     Tooltip,
     Legend,
+    Filler
 } from 'chart.js'
 import { Line } from 'react-chartjs-2'
 
@@ -21,10 +22,15 @@ export function Activity({ dataToDisplay, datesToDisplay }) {
         LineElement,
         Title,
         Tooltip,
-        Legend
+        Legend,
+        Filler
     )
 
     const labels = datesToDisplay
+
+    function createGradient() {
+
+    }
 
     const data = {
         labels,
@@ -34,9 +40,11 @@ export function Activity({ dataToDisplay, datesToDisplay }) {
                 data: dataToDisplay,
                 borderColor: '#026AA7',
                 backgroundColor: '#23C552',
-                pointBorderWidth: 1,
-               
-
+                // pointBorderWidth: 1,
+                fill: {
+                    target: 'origin',
+                    above: '#026ba721',
+                }
             }
         ],
     }
@@ -50,16 +58,13 @@ export function Activity({ dataToDisplay, datesToDisplay }) {
         },
         maintainAspectRatio: false,
         scales: {
-            yAxes: {
+            yAxes: [{
 
                 gridLines: {
                     color: 'rgb(235, 90, 70)'
                 },
-                font: {
-                    color: 'rgb(235, 90, 70)'
-                }
 
-            },
+            }],
             xAxes: [
                 {
                     gridLines: {
@@ -69,10 +74,14 @@ export function Activity({ dataToDisplay, datesToDisplay }) {
             ]
         },
 
-        
+
         elements: {
             line: {
-                tension: 0.25 
+                tension: 0.1,
+            },
+            point: {
+                radius: 5,
+                hoverRadius: 7,
             }
         },
     }

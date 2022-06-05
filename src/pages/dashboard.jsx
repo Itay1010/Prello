@@ -19,6 +19,7 @@ export const Dashboard = ({ board }) => {
     const unAssignedTasks = boardStatistics.getUnassignedTasksCount(board)
     const cardsPerLabels = boardStatistics.getCardsByLabels(board)
     const actsByMember = boardStatistics.getActByMember(board)
+    const checklists = boardStatistics.getChecklistCount(board)
 
     const totalActs = activity.reduce((acc, num) => acc + num, 0)
     const dailyAvg = ((totalActs / 7) % 10 === 0) ? (totalActs / 7) : (totalActs / 7).toFixed(2)
@@ -33,7 +34,7 @@ export const Dashboard = ({ board }) => {
 
         <DashHeader board={board} />
         <div className="main-dash flex col align-center">
-            <div className="activity flex align-center">
+            <div className="activity flex align-center space-between">
                 <div className='act-data flex col justify-center'>
                     <div className='act-title'>
                         <h2 >Board's activity in the last 7 days</h2>
@@ -47,26 +48,33 @@ export const Dashboard = ({ board }) => {
                     <h4>Daily average : {dailyAvg}</h4>
                 </div>
             </div>
-            <div className="more-stat flex justify-center">
-                <div className="by-member flex col align-center">
-                    <h5>Cards by member</h5>
-                    <div className="cards-member-chart flex justify-center align-center">
-                        <CardsMember cardsPerMember={cardsPerMember} unAssignedTasks={unAssignedTasks} />
+            <div className="more-stat flex col justify-center">
+                <h2>Find out more about board's members</h2>
+                <div className="member-stat flex">
+                    <div className="acts-member flex col align-center space-between">
+                        <h5>Activities</h5>
+                        <div className="acts-member-chart flex justify-center align-center">
+                            <ActsMembers actsByMember={actsByMember} />
+                        </div>
+                    </div>
+                    <div className="by-member flex col align-center">
+                        <h5>Cards</h5>
+                        <div className="cards-member-chart flex justify-center align-center">
+                            <CardsMember cardsPerMember={cardsPerMember} unAssignedTasks={unAssignedTasks} />
+                        </div>
                     </div>
                 </div>
+                <h2>Find out more about board's cards</h2>
                 <div className="by-label flex col align-center">
                     <h5>Cards by label</h5>
                     <div className="cards-labels-chart flex justify-center align-center">
                         <CardsLabels cardsPerLabels={cardsPerLabels} />
                     </div>
                 </div>
-                <div className="acts-member flex col align-center">
-                    <h5>Members' activities</h5>
-                    <div className="cards-labels-chart flex justify-center align-center">
-                        <ActsMembers actsByMember={actsByMember} />
-                    </div>
-                </div>
             </div>
         </div>
+        <Link to={`/board/${boardId}`}>
+            <p>Go back to board</p>
+        </Link>
     </div>
 }
