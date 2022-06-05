@@ -82,7 +82,6 @@ class _Board extends React.Component {
     }
 
     _updateBoard = async () => {
-        // console.log('_Board - _updateBoard= - boardId', boardId)
         const { boardId } = this.props.match.params
         this.props.loadBoard(boardId)
     }
@@ -162,7 +161,6 @@ class _Board extends React.Component {
     }
 
     onGroupColorChange = async (groupId, color) => {
-        console.log('_Board - onGroupColorChange= - groupId, color', groupId, color)
         const newBoard = JSON.parse(JSON.stringify(this.props.board))
         const groupIdx = newBoard.groups.findIndex(group => group.id === groupId)
 

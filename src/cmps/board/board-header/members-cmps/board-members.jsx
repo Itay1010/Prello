@@ -24,7 +24,6 @@ export const BoardMembers = ({ board, onChangeMembers }) => {
 
     const memberToDisplay = board.members.slice(0, limit)
     const leftOvers = board.members.slice(limit)
-    console.log('BoardMembers - memberToDisplay', memberToDisplay)
 
     return <section className='board-members-header'>
         <section className='members-preview'>

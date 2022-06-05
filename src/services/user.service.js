@@ -63,35 +63,6 @@ async function logout() {
     return await httpService.post(`${BASE_URL}logout`)
 }
 
-// async function googleAuth(googleData) {
-//     console.log(googleData);
-//     const users = await httpService.get('user')
-//     const userExists = users.find(user => user.googleId === googleData.googleId)
-//     // const userExists = users.find(user => user.googleId === googleData.googleId || user.email === googleData.email)
-//     if (userExists) {
-//         login(userExists)
-//         //TODO:HANDLE ISSUE OF REGISTERED MAIL WITHOUT GOOGLEID
-
-//         // if (!userExists.googleId) {
-//         //     const googleUserToUpdate = { ...userExists, googleId: googleData.googleId }
-//         //     console.log(googleUserToUpdate);
-//         // } else {
-
-//         // }
-//     } else {
-//         const newUser = {
-//             email: googleData.email,
-//             firstName: googleData.givenName,
-//             lastName: googleData.familyName,
-//             imgUrl: googleData.imageUrl,
-//             googleId: googleData.googleId,
-//             color: utilService.getRandomColor()
-//         }
-//         const user = await httpService.post(BASE_URL + 'signup', newUser)
-//         _saveLocalUser(user);
-//     }
-// }
-
 async function loginGuest() {
     const user = {
         _id: "g" + utilService.makeId(20),
