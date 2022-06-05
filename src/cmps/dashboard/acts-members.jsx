@@ -53,7 +53,6 @@ export function ActsMembers({ actsByMember }) {
             yAxis:
             {
                 display: true,
-
             }
             ,
             xAxis: {

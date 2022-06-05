@@ -230,10 +230,22 @@ class _Board extends React.Component {
         const newBoard = JSON.parse(JSON.stringify(board))
         if (newBoard.members.some(member => member._id === newUser._id)) {
             newBoard.members = newBoard.members.filter(member => member._id !== newUser._id)
+            this.clearMember(newUser._id, newBoard)
         }
         else newBoard.members.push(newUser)
         await this.props.updateBoard(newBoard)
         socketService.emit(SOCKET_EMIT_PULL, newBoard._id)
+    }
+
+    clearMember = (userId, board) => {
+
+        board.groups.forEach(group => {
+            group.tasks.forEach(task => {
+                task.members.some((memberId, idx) => {
+                    if (memberId === userId) task.members.splice(idx, 1)
+                })
+            })
+        })
     }
 
     onStarBoard = async () => {

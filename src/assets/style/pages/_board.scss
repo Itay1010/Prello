@@ -227,10 +227,12 @@
     top: 0;
     right: 0;
     padding: 12px;
-    transform: translateX(100%);
+    // transform: translateX(100%);
+    display: none;
 
     &.open {
-        transform: translateX(0);
+        // transform: translateX(0);
+        display: block;
     }
 
     .close-modal-btn-wrapper {
