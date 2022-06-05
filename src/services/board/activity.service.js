@@ -7,7 +7,7 @@ export const actService = {
     getTypes,
 }
 
-const LIMIT = 50
+const LIMIT = 150
 
 function activity(type, entityType, entity, board) {
     if (!type || !entityType || !entity || !board) throw new Error('No arguments givin')
