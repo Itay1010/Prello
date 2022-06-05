@@ -24,7 +24,7 @@ export const Home = () => {
 
     return <section className="home">
         <nav className="flex space-between">
-            <div className="logo"><img src={require('../assets/imgs/logo/logo-25X25-color.png')} />
+            <div className="logo"><img src={require('../assets/imgs/logo/Prello_logo_25.png')} />
                 <h1>Prello</h1>
             </div>
             <div className="auth-links">
