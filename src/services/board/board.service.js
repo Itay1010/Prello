@@ -13,7 +13,7 @@ export const boardService = {
     getTask,
     getMembers,
     getLabels,
-    getAvgColor,
+    calcAvgColor,
     // updateMini
 }
 
@@ -41,19 +41,17 @@ async function getTask(boardId, groupId, taskId) {
     return task
 }
 
+function getLabels() {
+    return ['#61bd4f', '#f2d600', '#ff9f1a', '#eb5a46', '#c377e0', '#0079bf']
+}
+
 async function getMembers(boardId) {
     const board = await getById(boardId)
     return board.members
 }
 
-function getLabels() {
-    return ['#61bd4f', '#f2d600', '#ff9f1a', '#eb5a46', '#c377e0', '#0079bf']
-}
-
-async function getAvgColor(url) {
+async function calcAvgColor(url) {
     const RGB = await getAverageColor(url)
-    const color = [RGB.r, RGB.g, RGB.b]
-    _lightOrDark(color)
     const HEX = _rgbToHex(RGB)
     return HEX
 }
