@@ -9,7 +9,7 @@ export const DashHeader = ({ board }) => {
     const membersCount = boardStatistics.getMemebersCount(board)
     // const activity = boardStatistics.getActivityStats(board)
     const unAssignedTasks = boardStatistics.getUnassignedTasksCount(board)
-
+    const groupsCount = board.groups.length
 
     return <div className='dash-header flex col align-center justify-center'>
         <h1>{board.title}</h1>
@@ -17,6 +17,10 @@ export const DashHeader = ({ board }) => {
             <div className="box flex col justify-center">
                 <h2>{membersCount}</h2>
                 <p>members</p>
+            </div>
+            <div className="box flex col justify-center">
+                <h2>{groupsCount}</h2>
+                <p>groups</p>
             </div>
             <div className="box flex col justify-center">
                 <h2>{summary.active}</h2>

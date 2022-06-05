@@ -78,26 +78,28 @@
 
             .box {
                 // margin-bottom: 8px;
-                // background-color: $clr1-opc2;
+                background-color: $clr1-opc2;
                 // border: 1px solid $txt;
-                background: linear-gradient(180deg, rgba(2, 106, 167, 0.10379746835443038) 0%, rgba(2, 106, 167, 0.49873417721518987) 75%);
+                // background: linear-gradient(180deg, rgba(2, 106, 167, 0.10379746835443038) 0%, rgba(2, 106, 167, 0.49873417721518987) 75%);
                 text-align: center;
                 width: 180px;
                 height: 90px;
                 border-radius: 3px;
-                box-shadow: -2px 4px 5px 0px rgba(0, 0, 0, 0.15);
+                box-shadow: 0 2px 0 #091e4240;
+                // box-shadow: -2px 4px 5px 0px rgba(0, 0, 0, 0.15);
                 // border: 1px solid $txt;
 
                 h2 {
                     // color: $bg;
                     font-weight: 700;
                     font-size: 24px;
+                    color: $success;
                 }
 
                 p {
                     font-weight: 500;
                     font-size: 16px;
-                    color: $bg;
+                    // color: $bg;
 
                 }
             }
@@ -168,6 +170,8 @@
                 text-align: center;
                 color: $bg;
                 gap: 50px;
+                box-shadow: 0 2px 0 #091e4240;
+
                 // flex-basis: 30%;
 
 
@@ -196,7 +200,7 @@
         .more-stat {
             // width: 80%;
             width: 100%;
-            padding: 0 150px 25px;
+            padding: 0 150px;
             margin-bottom: 50px;
             flex-wrap: wrap;
             gap: 50px;
@@ -210,21 +214,15 @@
             }
 
             .member-stat {
-                background-color: $opc-black;
+                background-color: $td-btn;
                 border-radius: 3px;
                 padding: 25px;
                 width: 100%;
                 gap: 50px;
                 margin-bottom: 25px;
-                // &>* {
-                //     width: 200px;
-                //     flex-grow: 1;
-                // }
 
                 .acts-member {
                     flex-basis: 50%;
-                    // padding-inline-end: 50px;
-                    // flex-grow: 1;
 
                     h5 {
                         font-size: 18px;
@@ -234,12 +232,6 @@
 
                     .acts-member-chart {
                         width: 100%;
-                        // height: 250px;
-
-                        // canvas {
-                        //     // width: 100%;
-
-                        // }
 
                     }
                 }
@@ -255,27 +247,38 @@
 
                     .cards-member-chart {
                         width: 100%;
-                        // height: 250px;
 
                     }
                 }
             }
 
 
+            .cards-stat {
+                background-color: $td-btn;
+                border-radius: 3px;
+                padding: 25px;
+                width: 100%;
+                gap: 50px;
+                margin-bottom: 25px;
 
-            .by-label {
-                h5 {
-                    font-size: 18px;
-                    font-weight: 600;
-                    margin-bottom: 25px;
-                }
 
-                .cards-labels-chart {
-                    // width: 100%;
-                    height: 250px;
 
+                .by-label {
+                    h5 {
+                        font-size: 18px;
+                        font-weight: 600;
+                        margin-bottom: 25px;
+                    }
+    
+                    .cards-labels-chart {
+                        // width: 100%;
+                        height: 250px;
+    
+                    }
                 }
             }
+
+
         }
     }
 }

@@ -7,22 +7,13 @@ export const actService = {
     getTypes,
 }
 
-const LIMIT = 50
+const LIMIT = 150
 
 function activity(type, entityType, entity, board) {
     if (!type || !entityType || !entity || !board) throw new Error('No arguments givin')
     const id = entity.id ? entity.id : entity._id
     if (!id) throw new Error('Item is unknown')
-    const user = userService.getLoggedinUser() || {
-        color: "#41C559",
-        email: "eytan133@gmail.com",
-        firstName: "Eytan",
-        imgUrl: "https://res.cloudinary.com/di5o0obqy/image/upload/v1653742446/eytan_vl7skf.jpg",
-        lastName: "Silberberg",
-        password: "eytan",
-        username: "eytan",
-        _id: "u101"
-    }
+    const user = userService.getLoggedinUser() 
     const newActivity = {
         id: utilService.makeId(),
         action: type,

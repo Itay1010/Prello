@@ -65,10 +65,12 @@ export const Dashboard = ({ board }) => {
                     </div>
                 </div>
                 <h2>Find out more about board's cards</h2>
-                <div className="by-label flex col align-center">
-                    <h5>Cards by label</h5>
-                    <div className="cards-labels-chart flex justify-center align-center">
-                        <CardsLabels cardsPerLabels={cardsPerLabels} />
+                <div className='cards-stat'>
+                    <div className="by-label flex col align-center">
+                        <h5>Cards by label</h5>
+                        <div className="cards-labels-chart flex justify-center align-center">
+                            <CardsLabels cardsPerLabels={cardsPerLabels} />
+                        </div>
                     </div>
                 </div>
             </div>
