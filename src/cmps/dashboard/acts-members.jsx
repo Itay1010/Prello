@@ -56,7 +56,7 @@ export function ActsMembers({ actsByMember }) {
             }
             ,
             xAxis: {
-                display: true,
+                display: false,
             }
         }
     }

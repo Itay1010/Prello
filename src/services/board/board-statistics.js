@@ -11,6 +11,7 @@ export const boardStatistics = {
     getCardsByLabels,
     getActivityStats,
     getActByMember,
+    getChecklistCount,
     getDates,
     hexToRgb
 
@@ -85,17 +86,14 @@ function getCardsByMember(board) {
         resToDisplay.push(memberStatistics)
     }
 
-    // console.log('resToDisplay', resToDisplay);
+    resToDisplay.sort((a, b) => (a.tasksNum > b.tasksNum) ? -1 : ((b.tasksNum > a.tasksNum) ? 1 : 0))
 
-    // const membersCount = getMemebersCount()
-    // console.log('membersCount',membersCount);
     if (resToDisplay.length === board.members.length) return resToDisplay
     else {
         //ADD MEMBERS WITH NO TASKS
         return resToDisplay
     }
-    // console.log('resToDisplay', resToDisplay);
-    // return resToDisplay
+
 }
 
 function getUnassignedTasksCount(board) {
@@ -138,7 +136,8 @@ function getActivityStats(board) {
 
     const lastWeekActivity = []
     board.activities.forEach(act => {
-        if (act.action !== 'moved' && act.createdAt >= timeLimit) lastWeekActivity.push(act)
+        // if (act.action !== 'moved' && act.createdAt >= timeLimit) lastWeekActivity.push(act)
+        if (act.createdAt >= timeLimit) lastWeekActivity.push(act)
     })
 
     const res = [0, 0, 0, 0, 0, 0, 0]
@@ -170,8 +169,14 @@ function getActByMember(board) {
         return acc
     }, [])
 
+    res.sort((a, b) => (a.count > b.count) ? 1 : ((b.count > a.count) ? -1 : 0))
+
     return res
 
+}
+
+function getChecklistCount(board) {
+    // console.log(board);
 }
 
 function getDates() {

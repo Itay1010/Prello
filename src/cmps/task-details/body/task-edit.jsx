@@ -3,6 +3,7 @@ import React, { useState } from 'react'
 import { useHistory } from 'react-router-dom'
 import { IAttachment } from '../../icons/i-attachment'
 import { IChecklist } from '../../icons/i-checklist'
+import { ICover } from '../../icons/i-cover'
 
 // DYNAMIC CMS
 import { Members } from '../dynamic-cmps/members.jsx'
@@ -66,7 +67,7 @@ export const TaskEdit = (props) => {
         </div>
         <div className='modal-btn btn-edit-task-key flex align-center'>
             <div className='flex btn-wrapper flex align-center' onClick={() => setModalType('cover')}>
-                <p>Cover</p>
+                <ICover /><p>Cover</p>
             </div>
             {modalType === 'cover' && <div className='action-type-modal'>
                 <div className='modal'>

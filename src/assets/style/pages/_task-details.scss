@@ -20,11 +20,12 @@
 
         .task-bgColor-header {
             background-color: #0079bf;
-            height: 115px;
+            min-height: 115px;
         }
 
         .task-details {
             padding: 16px;
+            background-color: inherit;
 
         }
 
@@ -135,6 +136,7 @@
 
         .btn-wrapper {
             width: 100%;
+
             svg {
                 fill: $td-svg;
             }

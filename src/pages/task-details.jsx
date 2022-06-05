@@ -167,21 +167,42 @@ export const TaskDetails = ({ onArchiveTask, onSaveBoard }) => {
         return JSON.parse(JSON.stringify(board))
     }
 
-    const onSetIsDone = (checklistId, clTaskItem) => {
-        saveBoard()
+    const onSetIsDone = (clTaskId, item) => {
+        const newBoard = deepCloneBoard()
+        const groupIdx = newBoard.groups.findIndex(group => group.id === groupId)
+        const group = board.groups[groupIdx]
+        const idx = group.tasks.findIndex(task => task.id === taskId)
+        const task = group.tasks[idx]
+        const requestedChecklistIdx = task.checklist.findIndex(checklist => checklist.id === clTaskId)
+        const requestedChecklist = task.checklist[requestedChecklistIdx]
+
+        const clItemIdx = requestedChecklist.items.findIndex(clItem => clItem.id === item.id)
+        const clTask = requestedChecklist.items[clItemIdx]
+        clTask.isDone = !clTask.isDone
+        saveBoard(newBoard)
     }
 
     const onDeleteClTask = (clTaskId, item) => {
         const newBoard = deepCloneBoard()
-
-        const clTaskIdx = item.items.findIndex(clTask => clTask.id === clTaskId)
-        item.items.splice(clTaskIdx, 1)
+        const group = newBoard.groups.find(group => group.id === groupId)
+        const idx = group.tasks.findIndex(task => task.id === taskId)
+        const task = group.tasks[idx]
+        const requestedChecklist = task.checklist.find(checklist => checklist.id === item.id)
+        const clTaskIdx = requestedChecklist.items.findIndex(clTask => clTask.id === clTaskId)
+        requestedChecklist.items.splice(clTaskIdx, 1)
         saveBoard(newBoard)
     }
 
     const saveMemberToClTask = (member, clTaskId, checklist) => {
-
-        const requestedClTask = checklist.items.find(clTask => clTask.id === clTaskId)
+        const newBoard = deepCloneBoard()
+        const groupIdx = newBoard.groups.findIndex(group => group.id === groupId)
+        const group = board.groups[groupIdx]
+        const idx = group.tasks.findIndex(task => task.id === taskId)
+        const task = group.tasks[idx]
+        const requestedChecklistIdx = task.checklist.findIndex(reqChecklist => reqChecklist.id === checklist.id)
+        const requestedChecklist = task.checklist[requestedChecklistIdx]
+        const requestedClTaskIdx = requestedChecklist.items.findIndex(clTask => clTask.id === clTaskId)
+        const requestedClTask = requestedChecklist.items[requestedClTaskIdx]
         if (requestedClTask.member) {
             if (requestedClTask.member._id === member._id) {
                 requestedClTask.member = false

@@ -59,7 +59,7 @@ export function CardsMember({ cardsPerMember, unAssignedTasks }) {
             }
             ,
             xAxis: {
-                display: true,
+                display: false,
             }
         }
     }

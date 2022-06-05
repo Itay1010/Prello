@@ -78,16 +78,18 @@
 
             .box {
                 // margin-bottom: 8px;
-                background-color: $clr1-opc2;
+                // background-color: $clr1-opc2;
                 // border: 1px solid $txt;
+                background: linear-gradient(180deg, rgba(2, 106, 167, 0.10379746835443038) 0%, rgba(2, 106, 167, 0.49873417721518987) 75%);
                 text-align: center;
                 width: 180px;
                 height: 90px;
                 border-radius: 3px;
-                box-shadow: 0 1px 0 #091e4240;
+                box-shadow: -2px 4px 5px 0px rgba(0, 0, 0, 0.15);
+                // border: 1px solid $txt;
 
                 h2 {
-                    color: $success;
+                    // color: $bg;
                     font-weight: 700;
                     font-size: 24px;
                 }
@@ -95,6 +97,8 @@
                 p {
                     font-weight: 500;
                     font-size: 16px;
+                    color: $bg;
+
                 }
             }
         }
@@ -125,7 +129,7 @@
             width: 100%;
             padding: 50px 150px;
             background-color: $txt;
-            margin-bottom: 25px;
+            margin-bottom: 50px;
             gap: 50px;
 
             .act-title {
@@ -183,6 +187,8 @@
                 h4 {
                     color: $star;
                     font-size: 18px;
+                    font-weight: 400;
+
                 }
             }
         }
@@ -190,32 +196,72 @@
         .more-stat {
             // width: 80%;
             width: 100%;
-            padding: 25px 50px;
+            padding: 0 150px 25px;
             margin-bottom: 50px;
             flex-wrap: wrap;
             gap: 50px;
 
-            &>* {
+            h2 {
+                font-weight: 600;
+                text-align: center;
+                color: $clr1;
+                font-size: 25px;
+                margin-bottom: -25px;
+            }
+
+            .member-stat {
                 background-color: $opc-black;
                 border-radius: 3px;
                 padding: 25px;
-                width: 300px;
-                flex-grow: 1;
-            }
+                width: 100%;
+                gap: 50px;
+                margin-bottom: 25px;
+                // &>* {
+                //     width: 200px;
+                //     flex-grow: 1;
+                // }
 
-            .by-member {
-                h5 {
-                    font-size: 18px;
-                    font-weight: 600;
-                    margin-bottom: 25px;
+                .acts-member {
+                    flex-basis: 50%;
+                    // padding-inline-end: 50px;
+                    // flex-grow: 1;
+
+                    h5 {
+                        font-size: 18px;
+                        font-weight: 500;
+                        margin-bottom: 25px;
+                    }
+
+                    .acts-member-chart {
+                        width: 100%;
+                        // height: 250px;
+
+                        // canvas {
+                        //     // width: 100%;
+
+                        // }
+
+                    }
                 }
 
-                .cards-member-chart {
-                    // width: 100%;
-                    height: 250px;
+                .by-member {
+                    flex-basis: 50%;
 
+                    h5 {
+                        font-size: 18px;
+                        font-weight: 500;
+                        margin-bottom: 25px;
+                    }
+
+                    .cards-member-chart {
+                        width: 100%;
+                        // height: 250px;
+
+                    }
                 }
             }
+
+
 
             .by-label {
                 h5 {
