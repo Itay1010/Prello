@@ -18,72 +18,150 @@
     height: calc(100vh - 44px - 52px);
     width: 100vw;
     margin: 52px 20px 20px;
-    gap: 12px;
-    overflow-x: hidden;
+    // gap: 12px;
+    overflow: hidden;
     transform: translateX(-20px);
-    padding: 24px 0;
+    // padding: 12px 0;
 
-    &::-webkit-scrollbar {
-        border-radius: 10px;
-        width: 12px;
+
+
+    .close-modal {
+        position: absolute;
+        display: fixed;
+        right: 20px;
+        top: 12px;
+        border-radius: 100px;
+        cursor: pointer;
+
+        svg {
+            fill: $td-svg;
+
+        }
+
     }
 
-    &::-webkit-scrollbar-track {
-        border-radius: 10px;
-        background: rgba(128, 128, 128, 0.231);
+    .dash-header {
+        padding: 12px 0;
+        background-color: $header-board;
+        width: 100%;
 
-    }
-
-    &::-webkit-scrollbar-thumb {
-        background: rgba(128, 128, 128, 0.231);
-        border-radius: 10px;
-    }
-
-    h1 {
-        font-size: 30px;
-        font-weight: 700;
-    }
-
-    h2 {
-        margin-bottom: 40px;
-
-        span {
-            color: $clr1;
+        h1 {
+            font-size: 30px;
             font-weight: 700;
-            font-size: 22px;
+        }
+
+        h2 {
+            margin-bottom: 8px;
+
+            span {
+                color: $clr1;
+                font-weight: 700;
+                font-size: 22px;
+            }
         }
     }
 
-    .activity {
-        width: 80%;
-        margin-bottom: 20px;
 
-        h3 {
-            color: red;
+    .main-dash {
+        width: 100%;
+        overflow-y: auto;
+        padding: 0 0 50px;
+
+        // transform: translateY(100px);
+
+
+        &::-webkit-scrollbar {
+            border-radius: 10px;
+            width: 20px;
         }
 
-        canvas {
-            height: 200px;
+        &::-webkit-scrollbar-track {
+            border-radius: 10px;
+            background: rgba(128, 128, 128, 0.231);
 
         }
-    }
 
-    .more-stat {
-        width: 80%;
+        &::-webkit-scrollbar-thumb {
+            background: rgba(128, 128, 128, 0.231);
+            border-radius: 10px;
+        }
 
-        .cards-member {
-            width: 40%;
+        .activity {
+            width: 100%;
+            padding: 50px 250px;
+            background-color: $txt;
 
-            canvas {
-                height: 100px;
+            h2.act-title {
+                color: $bg;
+                margin-bottom: 24px;
+                font-weight: 400;
+                width: 100%;
+                // padding: 0 150px;
+                text-align: left;
+                font-size: 20px;
+            }
+
+            .act-data {
+                width: 100%;
+                gap: 50px;
+                // padding: 0 150px;
+
+                .activity-chart {
+                    width: 70%;
+                    margin-bottom: 20px;
+
+                    canvas {
+                        height: 200px;
+
+                    }
+                }
+
+                .activity-info {
+                    width: 30%;
+                    border-radius: 3px;
+                    background-color: $clr1-opc;
+                    padding: 40px;
+                    align-self: center;
+                    transform: translateY(-28px);
+                    color: $bg;
+                    text-align: center;
+
+                    span {
+                        color: $success;
+                        font-size: 30px;
+                        font-weight: 900;
+                        margin: 0 4px;
+                    }
+
+                    h3 {
+                        margin-bottom: 24px;
+                    }
+
+                    h4 {
+                        color: $star;
+                        font-size: 18px;
+                    }
+                }
             }
         }
 
-        .cards-labels {
-            width: 40%;
+        .more-stat {
+            width: 80%;
 
-            canvas {
-                height: 100px;
+            .cards-member {
+                width: 40%;
+
+                canvas {
+                    height: 100px;
+                }
+            }
+
+            .cards-labels {
+                width: 40%;
+
+                canvas {
+                    height: 100px;
+                }
             }
         }
     }

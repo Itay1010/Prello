@@ -7,6 +7,8 @@ export const draggableStyle = {
 function getStyle(style, snapshot) {
     if (snapshot.isDropAnimating) {
         const { moveTo, curve, duration } = snapshot.dropAnimation
+        console.log('getStyle - snapshot.dropAnimation', curve)
+        
         const skew = `rotate(0deg)`
         const translate = moveTo ? `translate(${moveTo.x}px, ${moveTo.y}px)` : ''
 

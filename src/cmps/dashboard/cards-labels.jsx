@@ -25,7 +25,18 @@ export function CardsLabels({ cardsPerLabels }) {
             legend: {
                 display: false,
             },
-        }
+            title: {
+                color: 'rgb(2, 106, 167)',
+                display: true,
+                text: 'Cards by labels',
+                font: {
+                    weight: 'light',
+                    size: 30
+                }
+            }
+        },
+        maintainAspectRatio: false
     }
+
     return <Pie data={data} options={options} />
 }

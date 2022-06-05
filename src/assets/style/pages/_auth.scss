@@ -5,6 +5,23 @@
     height: 100vh;
     background-color: $td-bg;
 
+
+    .background-container {
+        position: fixed;
+        display: flex;
+        align-items: flex-end;
+        justify-content: space-between;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+
+        svg {
+            width: 400px;
+            height: 390px;
+        }
+    }
+
     .auth-logo {
         height: 40px;
         margin: 30px 0;
@@ -31,24 +48,21 @@
         border-radius: 3px;
         box-shadow: rgb(0 0 0 / 10%) 0 0 10px;
         align-self: center;
+        z-index: 100;
 
+        .login-btn {
+            background-color: $login-btn;
+            color: $bg;
+        }
 
         h2 {
             margin-bottom: 25px;
         }
 
 
-        // div.signup {
-        //     form.signup {
-        //         .inputs-warpper {
-        //             input.long-field {
-        //                 width: 100%;
-        //             }
-        //         }
-        //     }
-        // }
-
-
+        .long-field {
+            width: 100%;
+        }
     }
 
     button {
@@ -58,7 +72,7 @@
 
     }
 
-    a {
+    a:not(.reset) {
         display: inline-block;
         width: 100%;
         height: 32px;
@@ -84,6 +98,7 @@
 
     .google-login {
         button {
+            box-shadow: 0 0 6px 0px #0000002a !important;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -93,5 +108,22 @@
                 height: 45px;
             }
         }
+    }
+
+    hr {
+        margin-top: 30px;
+        width: 100%;
+        color: black;
+        height: 2px;
+    }
+
+    a.to-home {
+        text-align: start;
+        text-decoration: underline;
+    }
+    
+    a.to-login {
+        text-decoration: underline;
+        margin-left: 20%;
     }
 }
