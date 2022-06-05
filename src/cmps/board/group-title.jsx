@@ -3,13 +3,14 @@ import React, { useRef, useState } from 'react'
 import { TextareaAutosize } from '@mui/material'
 import { IMore } from '../icons/i-more'
 import { GroupModal } from './group-modal'
+import { ILoader } from '../icons/i-loader'
 
 export const GroupTitle = ({ groupInfo, setGroupTitle, onArchiveGroup, onGroupChange, onGroupColorChange }) => {
 
     const [isModalOpen, setModal] = useState(false)
     const [isColorSelect, setColorSelect] = useState(false)
     const titleRef = useRef()
-    if (!groupInfo) return <React.Fragment />
+    if (!groupInfo) return <ILoader />
     return <div className={`group-header flex space-between`} style={({ backgroundColor: groupInfo.color })}>
         <TextareaAutosize
             maxLength="521"

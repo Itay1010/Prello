@@ -176,7 +176,22 @@ function getActByMember(board) {
 }
 
 function getChecklistCount(board) {
-    // console.log(board);
+    let todos = 0
+    let done = 0
+    board.groups.forEach(group => {
+        group.tasks.forEach(task => {
+            if (task.checklist?.length) {
+                task.checklist.forEach(cl => {
+                    cl.items.forEach(item => {
+                        todos++
+                        if (item.isDone) done++
+                    })
+                })
+            }
+        })
+    })
+    const res = { todos, done }
+    return res
 }
 
 function getDates() {

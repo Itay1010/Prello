@@ -24,11 +24,11 @@ export function CardsMember({ cardsPerMember, unAssignedTasks }) {
     );
 
     const labels = cardsPerMember.map(item => `${item.firstName} ${item.lastName}`)
-    labels.unshift('Unassigned tasks')
+    labels.push('Unassigned tasks')
     const dataToDisplay = cardsPerMember.map(item => item.tasksNum)
-    dataToDisplay.unshift(unAssignedTasks)
+    dataToDisplay.push(unAssignedTasks)
     const colors = cardsPerMember.map(item => boardStatistics.hexToRgb(item.color))
-    colors.unshift('#9F9F9F')
+    colors.push('#9F9F9F')
 
 
     const data = {

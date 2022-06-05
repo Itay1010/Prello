@@ -3,6 +3,7 @@ import { Link, useParams } from "react-router-dom"
 
 import { Activity } from '../cmps/dashboard/activity';
 import { ActsMembers } from '../cmps/dashboard/acts-members';
+import { CardsChecklist } from '../cmps/dashboard/cards-checklist';
 import { CardsLabels } from '../cmps/dashboard/cards-labels';
 import { CardsMember } from '../cmps/dashboard/cards-members';
 import { DashHeader } from '../cmps/dashboard/dash-header';
@@ -65,18 +66,32 @@ export const Dashboard = ({ board }) => {
                     </div>
                 </div>
                 <h2>Find out more about board's cards</h2>
-                <div className='cards-stat'>
-                    <div className="by-label flex col align-center">
-                        <h5>Cards by label</h5>
+                <div className='cards-stat flex'>
+                    <div className="by-checklist flex col align-center space-between">
+                        <h5>Checklists' tasks</h5>
+                        <h6>Total:{checklists.todos}  Done: <span>{checklists.done}</span></h6>
+                        <div className="cards-checklist-chart flex justify-center align-center">
+                            <CardsChecklist checklists={checklists} />
+                        </div>
+                    </div>
+                    <div className="by-label flex col align-center space-between">
+                        <h5>Labels</h5>
                         <div className="cards-labels-chart flex justify-center align-center">
                             <CardsLabels cardsPerLabels={cardsPerLabels} />
                         </div>
                     </div>
+
+                    {/* <div className="by-checklist flex col align-center">
+                        <h5>Cards by checklist</h5>
+                        <div className="cards-checklist-chart flex justify-center align-center">
+                            <CardsChecklist checklists={checklists} />
+                        </div>
+                    </div> */}
                 </div>
             </div>
         </div>
-        <Link to={`/board/${boardId}`}>
+        {/* <Link to={`/board/${boardId}`}>
             <p>Go back to board</p>
-        </Link>
+        </Link> */}
     </div>
 }

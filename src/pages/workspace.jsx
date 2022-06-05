@@ -6,6 +6,7 @@ import { BoardList } from '../cmps/workspace/board-list'
 import { userService } from "../services/user.service"
 import { addBoard, loadBoardMinis, updateMini } from '../store/board/board.action'
 import { useHistory } from "react-router-dom/cjs/react-router-dom.min"
+import { ILoader } from "../cmps/icons/i-loader"
 
 export const Workspace = () => {
 
@@ -36,7 +37,7 @@ export const Workspace = () => {
         setBoards([...miniBoards])
     }
 
-    if (!boards || !user) return <React.Fragment></React.Fragment>
+    if (!boards || !user) return <ILoader />
     return <section className="workspace-wrapper">
         <MainHeader />
         <BoardList boards={boards} userId={userId} toggleStar={toggleStar} createNewBoard={onCreateNewBoard} />

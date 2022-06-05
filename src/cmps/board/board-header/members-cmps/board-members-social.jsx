@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { boardService } from "../../../../services/board/board.service";
+import { ILoader } from '../../../icons/i-loader';
 export const BoardMembersSocial = ({ setSocial, users, currentMembers, onChangeMembers }) => {
     const [membersToDisplay, setMembersToDisplay] = useState(users)
     const [filter, setFilter] = useState('')
@@ -18,7 +19,7 @@ export const BoardMembersSocial = ({ setSocial, users, currentMembers, onChangeM
         setFilter(target.value)
     }
 
-    if (!users) return <React.Fragment />
+    if (!users) return <ILoader/>
     return <section className='board-social-modal' onClick={ev => ev.stopPropagation()}>
         <section className='modal-header'>
             <h3>Share board</h3>

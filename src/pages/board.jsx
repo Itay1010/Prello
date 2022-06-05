@@ -26,6 +26,7 @@ import { loadGuest, setUser } from "../store/user/user.actions"
 import { userService } from "../services/user.service"
 import { boardStatistics } from "../services/board/board-statistics"
 import { SideMenu } from "../cmps/board/board-header/side-menu"
+import { ILoader } from "../cmps/icons/i-loader"
 
 const tinycolor = require("tinycolor2")
 
@@ -263,7 +264,7 @@ class _Board extends React.Component {
 
     render() {
         const { board } = this.props
-        if (!board) return <div>loading...</div>
+        if (!board) return <ILoader />
         // if (board) boardStatistics.getActivityStats(board)
         const { groups } = board
         const eventHandlers = {

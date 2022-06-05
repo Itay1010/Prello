@@ -1,18 +1,19 @@
 import React from 'react'
 import { Chart as ChartJS, ArcElement, Tooltip, Legend } from 'chart.js'
-import { Pie } from 'react-chartjs-2'
-import { boardStatistics } from '../../services/board/board-statistics'
+import { Doughnut } from 'react-chartjs-2'
 
 ChartJS.register(ArcElement, Tooltip, Legend)
 
-export function CardsLabels({ cardsPerLabels }) {
-    const backgroundColor = Object.keys(cardsPerLabels).map(color => boardStatistics.hexToRgb(color))
+export function CardsChecklist({ checklists }) {
+
+    const DataToDisplay = [checklists.done, checklists.todos - checklists.done]
+
     const data = {
-        labels: Object.keys(cardsPerLabels),
+        labels: Object.keys(checklists),
         datasets: [
             {
-                data: Object.values(cardsPerLabels),
-                backgroundColor,
+                data: DataToDisplay,
+                backgroundColor: ['#23C552', '#026ba721'],
                 // borderColor: backgroundColor,
                 borderWidth: 0,
             },
@@ -31,5 +32,5 @@ export function CardsLabels({ cardsPerLabels }) {
         maintainAspectRatio: false,
     }
 
-    return <Pie data={data} options={options} />
+    return <Doughnut data={data} options={options} />
 }

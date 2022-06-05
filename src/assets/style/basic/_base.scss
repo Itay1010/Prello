@@ -65,6 +65,11 @@ input {
 
 }
 
+#loader {
+    align-self: center;
+    justify-self: center;
+    transform: translateY(100%);
+}
 
 
 textarea {
