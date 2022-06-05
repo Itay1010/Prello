@@ -22,6 +22,7 @@ import { socketService, SOCKET_EMIT_PULL } from '../services/basic/socket.servic
 import TextareaAutosize from '@mui/material/TextareaAutosize'
 import { DetailsHeader } from '../cmps/task-details/body/details-header.jsx'
 import { TaskEdit } from '../cmps/task-details/body/task-edit.jsx'
+import { ILoader } from '../cmps/icons/i-loader'
 
 export default function EmptyTextarea() {
     return (
@@ -267,7 +268,7 @@ export const TaskDetails = ({ onArchiveTask, onSaveBoard }) => {
         setIsModal(id)
     }
 
-    if (!board) return <React.Fragment></React.Fragment>
+    if (!board) return <ILoader/>
     const group = board.groups.find(group => group.id === groupId)
     const idx = group.tasks.findIndex(task => task.id === taskId)
     const task = group.tasks[idx]
