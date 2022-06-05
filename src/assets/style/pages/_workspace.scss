@@ -27,6 +27,7 @@
         display: flex;
         flex-direction: column;
         margin: 40px auto;
+        overflow: auto;
         // padding: 20px 50px;
         height: 100%;
         max-width: 1000px;
@@ -36,6 +37,7 @@
         .board-container {
             display: flex;
             flex-direction: column;
+
 
             .new-board-btn-wrapper {
                 margin-inline-end: 16px;
@@ -304,12 +306,14 @@
     @include narrow-layout {
         .workspace-container {
             margin: auto;
+
             .board-container {
                 align-items: center;
-                margin-top: 50px;
+                margin-top: 80px;
 
                 .boards-wrapper {
                     justify-content: center;
+
                     &>* {
                         margin: 5px;
                     }
@@ -324,9 +328,10 @@
                 align-items: flex-start;
                 margin-top: 50px;
                 margin-inline: 150px;
+
                 .boards-wrapper {
                     justify-content: flex-start;
-                    
+
                 }
 
             }

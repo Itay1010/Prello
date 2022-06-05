@@ -1,9 +1,17 @@
 .board-header {
     position: relative;
-    padding: 8px 0 12px;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 10px 0;
+
+    &>* {
+        flex-wrap: nowrap;
+    }
 
     .board-data {
         width: auto;
+        align-items: center;
+        flex-wrap: wrap;
 
         h2 {
             font-size: 18px;
@@ -88,6 +96,8 @@
     }
 
     .board-features {
+        flex-wrap: wrap;
+        gap: 10px 0;
 
         &>*:not(first-child) {
             margin-inline-start: 4px;
