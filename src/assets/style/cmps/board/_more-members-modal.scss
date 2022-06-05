@@ -2,18 +2,41 @@
     position: absolute;
     background-color: $white;
     right: 0;
-    top: 0;
+    bottom: 0;
     width: 300px;
-    height: 200px;
-    transform: translate(100%, 100%);
+    // height: 200px;
+    transform: translate(100%, 105%);
     z-index: 100;
+    box-shadow: 0 0 11px #0000001f;
+
+    .more-members-header {
+        padding: 5px;
+
+        h1 {
+            font-size: 1.3em;
+            text-align: center;
+        }
+    }
 
     .members-modal-body {
         .member {
             display: flex;
-            justify-content: space-between;
-            margin: 0 !important;
+            align-items: center;
+            width: 100%;
+            margin: 0 0 20px 10px !important;
 
+            img {
+                width: 30px;
+                margin-right: 10px;
+            }
+
+            .member-info {
+                display: flex;
+                flex-direction: column;
+                flex-grow: 1;
+            }
         }
+
+
     }
 }
