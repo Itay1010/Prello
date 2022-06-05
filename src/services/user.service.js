@@ -36,6 +36,11 @@ async function getUsers() {
 async function signup(userCred) {
     try {
         userCred.color = utilService.getRandomColor()
+        if (!userCred.imgUrl) {
+            const colorHex = userCred.color.slice(1)
+            userCred.imgUrl = `https://ui-avatars.com/api/?background=${colorHex}`
+
+        }
         const user = await httpService.post(`${BASE_URL}signup`, userCred)
         _saveLocalUser(user)
         return user

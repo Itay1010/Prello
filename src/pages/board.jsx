@@ -93,11 +93,18 @@ class _Board extends React.Component {
             document.querySelector('.board').style.backgroundColor = boardStyle.backgroundColor
         }
         if (boardStyle?.background) {
-            const avgColor = await boardService.getAvgColor(boardStyle.background)
+            const avgColor = await boardService.calcAvgColor(boardStyle.background)
             const isDark = tinycolor(avgColor).isDark()
             utilService.setDynamicColors(isDark, avgColor)
             document.querySelector('#root').style.background = `url(${boardStyle.background})`
         }
+    }
+    
+    setBackgroundImgFromUnsplash = async (url) => {
+        const newBoard = this.deepCloneBoard()
+        newBoard.style.background = url
+        await this.props.updateBoard(newBoard)
+        socketService.emit(SOCKET_EMIT_PULL, newBoard._id)
     }
 
     onAddTask = async (newTask) => {
@@ -180,9 +187,6 @@ class _Board extends React.Component {
         socketService.emit(SOCKET_EMIT_PULL, newBoard._id)
     }
 
-
-
-
     handleOnDragEnd = async (result) => {
         if (!result.destination) return
         const { board } = this.props
@@ -213,13 +217,6 @@ class _Board extends React.Component {
         const { board } = this.props
         const newBoard = JSON.parse(JSON.stringify(board))
         newBoard.title = newBoardHeader
-        await this.props.updateBoard(newBoard)
-        socketService.emit(SOCKET_EMIT_PULL, newBoard._id)
-    }
-
-    setBackgroundImgFromUnsplash = async (url) => {
-        const newBoard = this.deepCloneBoard()
-        newBoard.style.background = url
         await this.props.updateBoard(newBoard)
         socketService.emit(SOCKET_EMIT_PULL, newBoard._id)
     }

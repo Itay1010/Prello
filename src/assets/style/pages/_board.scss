@@ -63,6 +63,7 @@
 
     @include mobile-layout {
         margin-top: 50px;
+        height: 90%;
     }
     @include narrow-layout {
         margin-top: 50px;
