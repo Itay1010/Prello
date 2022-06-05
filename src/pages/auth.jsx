@@ -82,7 +82,7 @@ export class _Auth extends React.Component {
                 <Img2 />
             </section>
             <div className="auth-logo flex align-center">
-                <ILogo />
+                <img className="logo-img" src={require('../assets/imgs/logo/Prello_logo_40.png')} />
                 <h1>Prello</h1>
             </div>
             <div className="form-wrapper">
