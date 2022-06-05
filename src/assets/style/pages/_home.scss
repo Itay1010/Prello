@@ -11,17 +11,93 @@
         padding: 0 30px;
 
     }
+
+    @include mobile-layout {
+        &>*:not(:first-child) {
+            padding: 5px;
+        }
+
+        .text-container {
+            width: 100%;
+        }
+
+        nav {
+            width: 100%;
+
+        }
+
+        .hero {
+            flex-direction: column-reverse;
+            gap: 30px;
+
+            img {
+                width: 300px;
+                height: 250px;
+            }
+
+            .hero-content {
+                text-align: center;
+            }
+        }
+
+        .home-body {
+            img {
+                width: 100%;
+                height: 500px;
+                margin-top: 5px;
+            }
+        }
+    }
+
+
+    @include narrow-layout {
+        .hero {
+            flex-direction: column-reverse;
+            gap: 10px;
+
+            &>*:not(:first-child) {
+                padding: 5px;
+            }
+
+            img {
+                width: 400px;
+                height: 350px;
+            }
+        }
+        .home-body {
+            img {
+                width: 100%;
+                height: 500px;
+                margin-top: 5px;
+            }
+        }
+    }
+
+    @include wide-layout {
+        .hero {
+            flex-direction: row;
+            gap: 190px;
+
+            img {
+                width: 350px;
+                height: 450px;
+            }
+
+            .hero-content {
+                text-align: start;
+            }
+        }
+    }
 }
 
 
-
 nav {
+    position: absolute;
     top: 0;
     left: 0;
-    width: 100%;
+    width: calc(100% - 17px);
     background-color: $bg;
     transition: box-shadow 0.5s;
-    margin-bottom: 60px;
 
     &:hover {
         box-shadow: rgba(9, 30, 66, 0.106) 0px 6px 16px 0px;
@@ -58,10 +134,11 @@ nav {
             width: 25px;
             height: 25px;
             margin-inline-end: 8px;
+
         }
 
         h1 {
-            font-family: secular-font;
+            font-family: nunito;
             font-size: 30px;
             margin: 0;
             line-height: 1;
@@ -72,8 +149,14 @@ nav {
 .hero {
     width: 100%;
     display: flex;
+    flex-direction: row;
     justify-content: center;
-    margin-bottom: 60px;
+    align-items: center;
+    margin-top: 120px;
+    margin-bottom: 70px;
+    font-family: sans-serif;
+    flex-grow: 1;
+    gap: 190px;
 
     h1 {
         font-family: nunito;
@@ -83,17 +166,11 @@ nav {
         flex-direction: column;
     }
 
-    font-family: sans-serif;
-    flex-grow: 1;
-    display: flex;
-    align-items: center;
-    gap: 190px;
-
-    img {
-        width: 445px;
-        aspect-ratio: auto 931 / 1205;
-        height: 555px;
-    }
+    // img {
+    //     width: 445px;
+    //     aspect-ratio: auto 931 / 1205;
+    //     height: 555px;
+    // }
 
     p {
         font-family: pri-font;
@@ -117,14 +194,16 @@ nav {
     }
 }
 
+
 .home-body {
     text-align: center;
 
     h1 {
-        font-family: nunito;
-        font-weight: 600;
-        font-size: 44px;
-        line-height: 1.7;
+        font-family: charlie-text;
+        font-weight: 700;
+        font-size: 36px;
+        font-weight: 900;
+        line-height: 1.2;
         display: flex;
         flex-direction: column;
     }
@@ -134,7 +213,6 @@ nav {
         aspect-ratio: auto 931 / 1205;
         height: 777px;
         margin-top: 20px;
-
     }
 
     p {

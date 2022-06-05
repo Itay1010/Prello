@@ -46,7 +46,7 @@ export const Home = () => {
             <section className="text-container">
                 <h1>It's more than work. It's a way of working together.</h1>
                 <p>
-                    Start with a Trello board, lists, and cards.
+                    Start with a Prello board, lists, and cards.
                     Customize and expand with more features as your teamwork grows.
                 </p>
                 <p>

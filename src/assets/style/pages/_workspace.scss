@@ -26,12 +26,14 @@
     .workspace-container {
         display: flex;
         flex-direction: column;
-        margin: 40px 80px;
+        margin: 40px auto;
+        // padding: 20px 50px;
+        height: 100%;
+        max-width: 1000px;
 
 
 
         .board-container {
-            margin: 0 150px;
             display: flex;
             flex-direction: column;
 
@@ -276,6 +278,55 @@
                     color: $bg;
                     text-overflow: ellipsis;
                     text-shadow: 1px 1px 5px rgb(12, 12, 12);
+                }
+
+            }
+        }
+    }
+
+    @include mobile-layout {
+        .workspace-container {
+            .board-container {
+                margin: auto;
+                align-items: center;
+
+                .boards-wrapper {
+                    justify-content: center;
+
+                    &>* {
+                        margin: 5px 0;
+                    }
+                }
+            }
+        }
+    }
+
+    @include narrow-layout {
+        .workspace-container {
+            margin: auto;
+            .board-container {
+                align-items: center;
+                margin-top: 50px;
+
+                .boards-wrapper {
+                    justify-content: center;
+                    &>* {
+                        margin: 5px;
+                    }
+                }
+            }
+        }
+    }
+
+    @include normal-layout {
+        .workspace-container {
+            .board-container {
+                align-items: flex-start;
+                margin-top: 50px;
+                margin-inline: 150px;
+                .boards-wrapper {
+                    justify-content: flex-start;
+                    
                 }
 
             }
