@@ -42,7 +42,6 @@ export const ChecklistItemPreview = ({ item, saveChecklistTask, setIsDone, check
     }
 
     const onDeleteClTask = (clTaskId) => {
-        console.log(clTaskId)
         deleteClTask(clTaskId, item)
 
     }

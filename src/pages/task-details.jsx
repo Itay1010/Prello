@@ -183,14 +183,11 @@ export const TaskDetails = ({ onArchiveTask, onSaveBoard }) => {
     }
 
     const onDeleteClTask = (clTaskId, item) => {
-        console.log(clTaskId)
         const newBoard = deepCloneBoard()
         const group = newBoard.groups.find(group => group.id === groupId)
         const idx = group.tasks.findIndex(task => task.id === taskId)
         const task = group.tasks[idx]
-        console.log(task)
         const requestedChecklist = task.checklist.find(checklist => checklist.id === item.id)
-        console.log(requestedChecklist)
         const clTaskIdx = requestedChecklist.items.findIndex(clTask => clTask.id === clTaskId)
         requestedChecklist.items.splice(clTaskIdx, 1)
         saveBoard(newBoard)
