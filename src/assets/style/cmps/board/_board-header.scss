@@ -20,12 +20,10 @@
 
         .board-name {
             font-size: 1.28em;
-            margin: 0 4px 0 0;
             padding: 8px;
             color: var(--clr-dynamic-inner);
             font-size: rem(20px);
             font-weight: 700;
-            margin-bottom: 4px;
             flex-grow: 1;
 
             &:hover:not(:focus) {
