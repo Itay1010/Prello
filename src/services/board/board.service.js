@@ -14,7 +14,7 @@ export const boardService = {
     getMembers,
     getLabels,
     calcAvgColor,
-    // updateMini
+    checkDark
 }
 
 async function query() {
@@ -66,7 +66,7 @@ function _componentToHex(cmp) {
 }
 
 
-function _lightOrDark(color) {
+function checkDark(color) {
     const r = color[1]
     const g = color[2]
     const b = color[3]
@@ -79,8 +79,8 @@ function _lightOrDark(color) {
     )
 
     // Using the HSP value, determine whether the color is light or dark
-    // if (hsp > 127.5) console.log('light')
-    // else console.log('dark')
+    if (hsp > 127.5) return false
+    else return true
 }
 
 

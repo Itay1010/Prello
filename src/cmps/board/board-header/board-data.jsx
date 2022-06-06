@@ -19,10 +19,11 @@ export const BoardData = ({ board, saveBoardHeader, starBoard, onChangeMembers }
 
     return <section className='board-data flex'>
         {/* <button onClick={ev => history.push(`${history.location.pathname}/dashboard`)}>Dashboard</button> */}
-        <TxtInputCmp isBoardTitleEditable={isBoardTitleEditable}
+        {/* <TxtInputCmp isBoardTitleEditable={isBoardTitleEditable}
             boardTitle={board.title}
             handleBoardTitleChange={handleBoardTitleChange}
-        />
+        /> */}
+        <h3 className='board-name'>{board.title}</h3>
         <div onClick={starBoard} className={`btn-stared flex align-center justify-center ${board.isStarred ? 'is-starred' : 'not-starred'}`}>
             <IStar />
         </div>

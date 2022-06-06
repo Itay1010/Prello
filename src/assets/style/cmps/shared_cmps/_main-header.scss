@@ -321,6 +321,11 @@
 }
 
 @include mobile-layout {
+    
+    .header-backdrop {
+        height: 44px;
+    }
+
     .main-header {
         position: fixed;
 
@@ -398,6 +403,10 @@
 
 
 @include narrow-layout {
+    .header-backdrop {
+        height: 44px;
+    }
+
     .main-header {
         position: fixed;
 

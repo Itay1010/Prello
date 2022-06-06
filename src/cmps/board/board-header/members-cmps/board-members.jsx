@@ -26,7 +26,7 @@ export const BoardMembers = ({ board, onChangeMembers }) => {
     const leftOvers = board.members.slice(limit)
 
     return <section className='board-members-header'>
-        <section className='members-preview'>
+        <section className='members-list'>
             {memberToDisplay.map(member => {
                 return <React.Fragment key={member._id}>
                     <div className='member' onClick={ev => setUser(member)}>
