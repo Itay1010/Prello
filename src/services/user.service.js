@@ -85,6 +85,10 @@ async function loginGuest() {
     return user
 }
 
+async function getUserById(id) {
+    
+}
+
 function _saveLocalUser(user) {
     sessionStorage.setItem(LOCAL_STORAGE_LOGGEDIN_USER, JSON.stringify(user))
     return user
