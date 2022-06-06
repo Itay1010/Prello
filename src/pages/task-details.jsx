@@ -4,7 +4,7 @@ import { useHistory, useParams } from 'react-router-dom/cjs/react-router-dom.min
 import { useSelector, useDispatch } from 'react-redux'
 
 // CMPS
-import { MembersPreview } from "../cmps/task-details/body/members-preview"
+import { MembersPreview } from '../cmps/task-details/body/members-preview'
 import { ChecklistList } from '../cmps/task-details/checklist/checklistList.jsx'
 import { AttachmentList } from '../cmps/task-details/attachments/attachment-list.jsx'
 import { IDescription } from '../cmps/icons/i-description'
@@ -27,8 +27,8 @@ import { ILoader } from '../cmps/icons/i-loader'
 export default function EmptyTextarea() {
     return (
         <TextareaAutosize
-            aria-label="empty textarea"
-            placeholder="Empty"
+            aria-label='empty textarea'
+            placeholder='Empty'
             style={{ width: 200 }}
         />
     )
@@ -283,8 +283,8 @@ export const TaskDetails = ({ onArchiveTask, onSaveBoard }) => {
                     saveTaskTitle={saveTaskTitle}
                 />
                 <div className='task-container flex space-between'>
-                    <div className="task-content">
-                        <div className="task-status flex">
+                    <div className='task-content'>
+                        <div className='task-status flex'>
                             <div className='section-icon'></div>
                             {task.members?.length > 0 &&
                                 <MembersPreview
@@ -293,22 +293,22 @@ export const TaskDetails = ({ onArchiveTask, onSaveBoard }) => {
                                     boardMembers={board.members}
                                 />
                             }
-                            {task.labels?.length > 0 && <div className="labels flex col">
+                            {task.labels?.length > 0 && <div className='labels flex col'>
                                 <h3>Labels</h3>
                                 <section className='task-labels flex'>
                                     {task.labels.map(label => {
-                                        return <div className="label" style={{ backgroundColor: label }} key={label} ></div>
+                                        return <div className='label' style={{ backgroundColor: label }} key={label} ></div>
                                     })}
                                     <div className='add-label flex justify-center align-center' onClick={() => setModalType('labels')} ><IAdd /></div>
                                 </section>
                             </div>
                             }
                         </div>
-                        <div className="description flex">
+                        <div className='description flex'>
                             <div className='section-icon'>
                                 <IDescription />
                             </div>
-                            <div className="description-data flex col">
+                            <div className='description-data flex col'>
                                 <h2>Description</h2>
                                 {!isDescriptionEditable && <p placeholder={task.description} onClick={toggleEditDescription}>{!task.description ? 'Add a more detailed description...' : `${task.description}`}</p>}
                                 {isDescriptionEditable && <div className='edit-description'>
@@ -320,7 +320,7 @@ export const TaskDetails = ({ onArchiveTask, onSaveBoard }) => {
                                             saveTaskDescription()
                                         }}
                                         maxRows={4}
-                                        aria-label="maximum height"
+                                        aria-label='maximum height'
                                         placeholder='Add a more detailed description...'
                                         defaultValue={task.description ? task.description : ''}
                                         style={{ width: '100%', minHeight: '108px' }}

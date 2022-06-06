@@ -123,9 +123,9 @@ export const Cover = ({ saveCover, closeModal, task }) => {
         {/* <div className='photos-from-unsplash'>
             {photos.map((photo, idx) => {
                 if (idx > 8) return
-                return <div className='img-pick-cover'> <img src={photo.urls.small} alt="" /></div>
+                return <div className='img-pick-cover'> <img src={photo.urls.small} alt='' /></div>
             })}
-            <input type="text" ref={unsplashRef} onChange={searchValueTyped} placeholder='Search Unsplash' />
+            <input type='text' ref={unsplashRef} onChange={searchValueTyped} placeholder='Search Unsplash' />
         </div> */}
 
 
