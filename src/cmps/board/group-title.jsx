@@ -11,7 +11,7 @@ export const GroupTitle = ({ groupInfo, setGroupTitle, onArchiveGroup, onGroupCh
     const [isColorSelect, setColorSelect] = useState(false)
     const titleRef = useRef()
     if (!groupInfo) return <ILoader />
-    return <div className={`group-header flex space-between`} style={({ backgroundColor: groupInfo.color })}>
+    return <div className={`group-header flex space-between`} >
         <TextareaAutosize
             maxLength='521'
             value={groupInfo.txt}

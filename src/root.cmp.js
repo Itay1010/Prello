@@ -7,6 +7,5 @@ export default function App() {
     <Switch>
       {routes.map(route => <Route key={route.path} component={route.component} path={route.path} />)}
     </Switch>
-
   </div>
 }

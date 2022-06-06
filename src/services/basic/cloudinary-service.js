@@ -1,15 +1,15 @@
 
 // FETCH
 export const getCloudUrl = (url, hight = 100) => {
-    const CLOUD_NAME = 'duajnavtn' // Insert yours
+    const CLOUD_NAME = 'di5o0obqy' // Insert yours
     const FETCH_URL = `https://res.cloudinary.com/${CLOUD_NAME}/image/fetch/h_${hight},c_limit/e_improve/${url}`
     return FETCH_URL
 }
 
-const uploadImg = async (ev) => {
+export const uploadImg = async (ev) => {
     // Defining our variables
-    const UPLOAD_PRESET = 'toy_proj' // Insert yours
-    const CLOUD_NAME = 'duajnavtn' // Insert yours
+    const UPLOAD_PRESET = 'jbxr9ubh' // Insert yours
+    const CLOUD_NAME = 'di5o0obqy' // Insert yours
     const UPLOAD_URL = `https://api.cloudinary.com/v1_1/${CLOUD_NAME}/image/upload`
     const FORM_DATA = new FormData();
     // Building the request body
@@ -21,10 +21,9 @@ const uploadImg = async (ev) => {
             method: 'POST',
             body: FORM_DATA
         })
-        const elImg = document.createElement('img');
         const { url } = await res.json()
-        elImg.src = url;
-        return elImg
+        return url;
+        // return elImg
     } catch (err) {
         console.error('ERROR!', err)
     }

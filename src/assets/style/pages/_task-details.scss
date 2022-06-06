@@ -6,6 +6,7 @@
     background-color: rgba(0, 0, 0, 0.5);
     overflow-y: auto;
     margin-bottom: 54px;
+    z-index: 500;
 
 
 
@@ -556,10 +557,21 @@
                 justify-content: flex-start;
                 align-items: center;
 
-                .input-file {
+                label {
                     @include btn;
-                    outline: none;
-                    margin: 0;
+                    background-color: $td-btn;
+                    margin-inline-start: 10px;
+                    cursor: pointer;
+
+                    &:hover {
+                        background-color: $td-btn-hov;
+                    }
+
+                    .input-file {
+                        @include btn;
+                        outline: none;
+                        margin: 0;
+                    }
                 }
             }
         }

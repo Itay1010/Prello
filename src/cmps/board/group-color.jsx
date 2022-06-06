@@ -18,6 +18,6 @@ export const ColorSelect = ({ changColor, groupInfo, closeModal }) => {
                 </div>
             </div>
         })}
-        <h3 className='clear' onClick={() => changColor(groupInfo.groupId, 'transparent')}>Clear</h3>
+        <h3 className='clear' onClick={() => changColor(groupInfo.groupId, '')}>Clear</h3>
     </section >
 }
