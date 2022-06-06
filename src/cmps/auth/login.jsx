@@ -1,11 +1,11 @@
-import React from "react"
+import React from 'react'
 import { Formik } from 'formik'
 
 
 export const LoginForm = ({ onLogin }) => {
     return <section>
 
-        <div className="login">
+        <div className='login'>
             <h2>Sign in</h2>
             <Formik
                 initialValues={{ email: '', password: '' }}
@@ -39,18 +39,18 @@ export const LoginForm = ({ onLogin }) => {
 
                 }) => (
                     <form className='login-form' onSubmit={handleSubmit}>
-                        <label className="inputs-wrapper flex col">
+                        <label className='inputs-wrapper flex col'>
                             <input
-                                type="text"
-                                name="email"
+                                type='text'
+                                name='email'
                                 onChange={handleChange}
                                 onBlur={handleBlur}
                                 value={values.email}
                                 placeholder='Email address'
                             />
                             <input
-                                type="password"
-                                name="password"
+                                type='password'
+                                name='password'
                                 onChange={handleChange}
                                 onBlur={handleBlur}
                                 value={values.password}
@@ -58,7 +58,7 @@ export const LoginForm = ({ onLogin }) => {
                             />
                         </label>
 
-                        <button className="login-btn" type="submit" disabled={isSubmitting}>
+                        <button className='login-btn' type='submit' disabled={isSubmitting}>
                             Login
                         </button>
                     </form>
