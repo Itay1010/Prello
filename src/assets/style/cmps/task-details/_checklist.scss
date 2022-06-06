@@ -107,7 +107,43 @@
 
     .cl-task-buttons {
         display: none;
+
         // position: relative;
+        .user-btn {
+            border-radius: 10px;
+        }
+
+        a {
+            fill: $td-svg;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 24px;
+            min-width: 24px;
+            display: flex;
+            align-items: center;
+            margin-inline-end: 4px;
+            background-color: $opc-black;
+            border-radius: 50%;
+
+            img {
+                height: inherit;
+                border-radius: 50%;
+            }
+        }
+
+        .delete-btn {
+            border-radius: 3px;
+        }
+
+        a:hover {
+            background-color: $opc-black-hov;
+        }
+
+    }
+
+    .cl-task-buttons.open {
+        display: flex;
     }
 
     svg {
@@ -122,37 +158,6 @@
 
         .cl-task-buttons {
             display: flex;
-
-            .user-btn {
-                border-radius: 10px;
-            }
-
-            a {
-                fill: $td-svg;
-                display: flex;
-                justify-content: center;
-                align-items: center;
-                height: 24px;
-                min-width: 24px;
-                display: flex;
-                align-items: center;
-                margin-inline-end: 4px;
-                background-color: $opc-black;
-                border-radius: 50%;
-
-                img {
-                    height: inherit;
-                    border-radius: 50%;
-                }
-            }
-
-            .delete-btn {
-                border-radius: 3px;
-            }
-
-            a:hover {
-                background-color: $opc-black-hov;
-            }
         }
     }
 

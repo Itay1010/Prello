@@ -1,10 +1,11 @@
+import React from 'react'
 import { Formik } from 'formik'
 
 
 export const SignupForm = ({ onSignup }) => {
 
 
-    return <div className="signup">
+    return <div className='signup'>
         <h2>Sign up for free</h2>
         <Formik
             initialValues={{ firstName: '', lastName: '', email: '', password: '' }}
@@ -42,10 +43,10 @@ export const SignupForm = ({ onSignup }) => {
 
             }) => (
                 <form className='signup' onSubmit={handleSubmit}>
-                    <div className="inputs-wrapper">
+                    <div className='inputs-wrapper'>
                         <input
-                            type="text"
-                            name="email"
+                            type='text'
+                            name='email'
                             onChange={handleChange}
                             onBlur={handleBlur}
                             value={values.email}
@@ -54,16 +55,16 @@ export const SignupForm = ({ onSignup }) => {
                         />
                         <div className='user-name flex'>
                             <input
-                                type="text"
-                                name="firstName"
+                                type='text'
+                                name='firstName'
                                 onChange={handleChange}
                                 onBlur={handleBlur}
                                 value={values.firstName}
                                 placeholder='First name'
                             />
                             <input
-                                type="text"
-                                name="lastName"
+                                type='text'
+                                name='lastName'
                                 onChange={handleChange}
                                 onBlur={handleBlur}
                                 value={values.lastName}
@@ -71,8 +72,8 @@ export const SignupForm = ({ onSignup }) => {
                             />
                         </div>
                         <input
-                            type="password"
-                            name="password"
+                            type='password'
+                            name='password'
                             onChange={handleChange}
                             onBlur={handleBlur}
                             value={values.password}
@@ -80,7 +81,7 @@ export const SignupForm = ({ onSignup }) => {
                             className='long-field'
                         />
                     </div>
-                    <button type="submit" disabled={isSubmitting}>
+                    <button type='submit' disabled={isSubmitting}>
                         Sign up
                     </button>
                 </form>
