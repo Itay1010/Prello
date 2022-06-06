@@ -13,7 +13,7 @@ export function CardsChecklist({ checklists }) {
         datasets: [
             {
                 data: DataToDisplay,
-                backgroundColor: ['#23C552', '#026ba721'],
+                backgroundColor: ['#23C552', '#091e420a'],
                 // borderColor: backgroundColor,
                 borderWidth: 0,
             },

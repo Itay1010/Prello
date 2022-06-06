@@ -178,9 +178,9 @@
             }
 
             .member-stat {
-                background-color: $td-btn;
+                border: 1px solid $opc-black-hov;
                 border-radius: 3px;
-                padding: 25px;
+                padding: 50px;
                 width: 100%;
                 gap: 50px;
                 margin-bottom: 25px;
@@ -221,15 +221,17 @@
                 // background-color: $td-btn;
                 width: 100%;
                 border-radius: 3px;
-                border: 1px solid $txt;
-                padding: 25px;
+                background-color: $td-btn;
+                padding: 50px;
                 width: 100%;
-                gap: 50px;
+                // gap: 50px;
                 margin-bottom: 25px;
+                justify-content: space-evenly;
+               
 
 
                 .by-checklist {
-                    width: 50%;
+                    max-width: 50%;
 
                     h5 {
                         font-size: 18px;
@@ -249,13 +251,13 @@
 
                     .cards-checklist-chart {
                         // width: 100%;
-                        height: 250px;
+                        height: 200px;
 
                     }
                 }
 
                 .by-label {
-                    width: 50%;
+                    max-width: 50%;
 
                     h5 {
                         font-size: 18px;
@@ -265,7 +267,7 @@
 
                     .cards-labels-chart {
                         // width: 100%;
-                        height: 250px;
+                        height: 200px;
 
                     }
                 }

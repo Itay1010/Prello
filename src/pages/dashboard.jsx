@@ -51,8 +51,10 @@ export const Dashboard = ({ board }) => {
             </div>
             <div className='more-stat flex col justify-center'>
                 <h2>Find out more about board's members</h2>
-                <div className='member-stat flex'>
+
+                <div className='member-stat flex justify-center'>
                     <div className='acts-member flex col align-center space-between'>
+
                         <h5>Activities</h5>
                         <div className='acts-member-chart flex justify-center align-center'>
                             <ActsMembers actsByMember={actsByMember} />
