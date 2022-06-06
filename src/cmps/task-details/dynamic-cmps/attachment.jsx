@@ -1,7 +1,9 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useRef } from 'react'
 import { useForm } from '../../../hooks/useForm'
 
 export const Attachment = ({ attachmentToUpdate, saveAttachment, closeModal }) => {
+
+    let fileRef = useRef()
     let [attachment, handleChange] = useForm({
         title: attachmentToUpdate ? attachmentToUpdate.title : '',
         url: attachmentToUpdate ? attachmentToUpdate.url : '',
@@ -19,6 +21,9 @@ export const Attachment = ({ attachmentToUpdate, saveAttachment, closeModal }) =
         }
     }
 
+    const handleFileChange = (ev) => {
+
+    }
     function isUrl(url) {
         return /^(ftp|http|https):\/\/[^ ']+$/.test(url)
     }
@@ -35,7 +40,13 @@ export const Attachment = ({ attachmentToUpdate, saveAttachment, closeModal }) =
             <input value={attachment.title} autoComplete='off' type='text' placeholder='Enter title' name='title' onChange={handleChange} />
             <h3>URL</h3>
             <input value={attachment.url} autoComplete='off' type='text' placeholder='Enter url' name='url' onChange={handleChange} />
-            <button>Save</button>
+            <div className='button-wrapper'>
+                <button>Save</button>
+                <label htmlFor="inputFile">
+                    choose img
+                    <input onChange={handleFileChange} ref={fileRef} id='inputFile' style={{ display: 'none' }} className='input-file' type="file" />
+                </label>
+            </div>
         </form>
     </div>
 }

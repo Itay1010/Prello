@@ -128,6 +128,8 @@
                             @include input
                         }
 
+
+
                         display: flex;
                         flex-direction: column;
                         width: 100%;
@@ -142,6 +144,10 @@
                             }
                         }
                     }
+
+                    // .input-file {
+                    //     background-color: rgb(181, 113, 23) !important;
+                    // }
                 }
             }
 
@@ -149,6 +155,7 @@
             .board-preview-header {
                 position: relative;
                 margin-block-end: 11px;
+                margin-inline-start: 4px;
                 height: 24px;
 
                 h1 {
@@ -267,6 +274,12 @@
                 border-radius: 3px;
 
                 &.add-board-btn {
+                    p {
+                        display: flex;
+                        justify-content: center;
+                        align-items: center;
+                    }
+
                     margin: 0;
                     padding: 0;
                 }
@@ -276,7 +289,7 @@
                     font-weight: 700;
                     color: $bg;
                     text-overflow: ellipsis;
-                    text-shadow: 1px 1px 5px rgb(12, 12, 12);
+                    text-shadow: 0px 1px 4px rgb(12, 12, 12);
                 }
 
             }
