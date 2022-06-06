@@ -12,6 +12,7 @@ export const boardStatistics = {
     getActivityStats,
     getActByMember,
     getChecklistCount,
+    getAttachsCount,
     getDates,
     hexToRgb
 
@@ -192,6 +193,10 @@ function getChecklistCount(board) {
     })
     const res = { todos, done }
     return res
+}
+
+function getAttachsCount(board){
+    console.log(board);
 }
 
 function getDates() {

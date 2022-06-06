@@ -551,6 +551,18 @@
                     background-color: darken($header-workspace, 5%);
                 }
             }
+
+            .button-wrapper {
+                display: flex;
+                justify-content: flex-start;
+                align-items: center;
+
+                .input-file {
+                    @include btn;
+                    outline: none;
+                    margin: 0;
+                }
+            }
         }
     }
 }
