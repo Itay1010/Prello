@@ -24,7 +24,7 @@ export const AttachmentPreview = ({ attachment, removeAttachment, openImgModal, 
     return <div className='attachment-preview flex space-between' key={attachment.id}>
 
         <div className='img-container'>
-            <img src={url} alt="" />
+            <img src={url} alt='' />
         </div>
 
         <div className='attachment-data flex col space-between'>

@@ -1,20 +1,19 @@
-import React from "react"
+import React from 'react'
 import { connect } from 'react-redux'
 
-import { onLogin, onSignup } from "../store/user/user.actions"
+import { onLogin, onSignup } from '../store/user/user.actions'
 
 import { SignupForm } from '../cmps/auth/signup.jsx'
 import { LoginForm } from '../cmps/auth/login.jsx'
 
 import { GoogleLogin } from 'react-google-login'
-import { gapi } from "gapi-script"
-import { ILogo } from "../cmps/icons/i-logo"
-import { Link } from "react-router-dom"
+import { gapi } from 'gapi-script'
+import { Link } from 'react-router-dom'
 
-import { ReactComponent as Img1 } from "../assets/imgs/auth-img-1.svg";
-import { ReactComponent as Img2 } from "../assets/imgs/auth-img-2.svg";
+import { ReactComponent as Img1 } from '../assets/imgs/auth-img-1.svg';
+import { ReactComponent as Img2 } from '../assets/imgs/auth-img-2.svg';
 
-const clientId = "168490950789-fil5g5m4nauiousknnut75avvh0dhsb5.apps.googleusercontent.com"
+const clientId = '168490950789-fil5g5m4nauiousknnut75avvh0dhsb5.apps.googleusercontent.com'
 
 export class _Auth extends React.Component {
     state = {
@@ -28,7 +27,7 @@ export class _Auth extends React.Component {
         function start() {
             gapi.client.init({
                 clientId,
-                scope: ""
+                scope: ''
             })
         }
         gapi.load('client:auth2', start)
@@ -71,37 +70,37 @@ export class _Auth extends React.Component {
     }
 
     onGoogleFailure = (res) => {
-        console.log("LOGIN FAILED! ,res ", res)
+        console.log('LOGIN FAILED! ,res ', res)
     }
 
     render() {
         const { type } = this.state
-        return <section className="auth-page">
-            <section className="background-container">
+        return <section className='auth-page'>
+            <section className='background-container'>
                 <Img1 />
                 <Img2 />
             </section>
-            <div className="auth-logo flex align-center">
-                <img className="logo-img" src={require('../assets/imgs/logo/Prello_logo_40.png')} />
+            <div className='auth-logo flex align-center'>
+                <img className='logo-img' src={require('../assets/imgs/logo/Prello_logo_40.png')} />
                 <h1>Prello</h1>
             </div>
-            <div className="form-wrapper">
+            <div className='form-wrapper'>
                 {(type === 'signup') && <SignupForm onSignup={this.signup} />}
                 {(type === 'login') && <LoginForm onLogin={this.login} />}
 
-                <div className="login-method-separator">OR</div>
+                <div className='login-method-separator'>OR</div>
 
-                {type === 'login' && <button style={({ margin: "0 0 16px" })} onClick={() => {
+                {type === 'login' && <button style={({ margin: '0 0 16px' })} onClick={() => {
                     window.location.assign('/auth/signup')
                     this.setState((prevState) => 'signup')
                 }}>
                     Sign up
                 </button>}
 
-                <div className="google-login">
+                <div className='google-login'>
                     <GoogleLogin
                         clientId={clientId}
-                        buttonText="Continue with Google"
+                        buttonText='Continue with Google'
                         onSuccess={this.onGoogleAuth}
                         onFailure={this.onGoogleFailure}
                         cookiePolicy={'single_host_origin'}
@@ -109,8 +108,8 @@ export class _Auth extends React.Component {
                     />
                 </div>
                 <hr />
-                <Link to="/" className="to-home reset" >Home</Link>
-                {type === 'signup' && <a href="login" className="to-login reset">Login</a>}
+                <Link to='/' className='to-home reset' >Home</Link>
+                {type === 'signup' && <a href='login' className='to-login reset'>Login</a>}
             </div>
             <svg></svg>
         </section>

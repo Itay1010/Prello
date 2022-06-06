@@ -1,4 +1,4 @@
-import { boardService } from "./board.service"
+import { boardService } from './board.service'
 
 const WEEK_TIMESTAMP = 7 * 24 * 60 * 60 * 1000 //604800000
 const DAY_TIMESTAMP = 86400000

@@ -13,7 +13,7 @@ export const GroupTitle = ({ groupInfo, setGroupTitle, onArchiveGroup, onGroupCh
     if (!groupInfo) return <ILoader />
     return <div className={`group-header flex space-between`} style={({ backgroundColor: groupInfo.color })}>
         <TextareaAutosize
-            maxLength="521"
+            maxLength='521'
             value={groupInfo.txt}
             ref={titleRef}
             onChange={ev => {
@@ -25,13 +25,13 @@ export const GroupTitle = ({ groupInfo, setGroupTitle, onArchiveGroup, onGroupCh
             }}
 
             onKeyDown={ev => {
-                if (ev.key === "Enter") {
+                if (ev.key === 'Enter') {
                     ev.preventDefault()
                     ev.target.blur()
                 }
 
             }}></TextareaAutosize>
-        <div className="more flex justify-center align-center" onClick={ev => { setModal(prevState => !prevState) }}>
+        <div className='more flex justify-center align-center' onClick={ev => { setModal(prevState => !prevState) }}>
             <IMore />
         </div>
         {isModalOpen && <GroupModal

@@ -1,34 +1,34 @@
 //basic
-import React from "react"
+import React from 'react'
 import { connect } from 'react-redux'
 
 //libs
 import { DragDropContext } from 'react-beautiful-dnd'
 
 //services
-import { boardService } from "../services/board/board.service"
+import { boardService } from '../services/board/board.service'
 
 //private
-import { MainHeader } from "../cmps/shared cmps/header/main-header"
-import { BoardHeader } from "../cmps/board/board-header/board-header"
+import { MainHeader } from '../cmps/shared cmps/header/main-header'
+import { BoardHeader } from '../cmps/board/board-header/board-header'
 
-import { clearBoard, loadBoard, updateBoard } from "../store/board/board.action"
-import { utilService } from "../services/basic/util.service"
+import { clearBoard, loadBoard, updateBoard } from '../store/board/board.action'
+import { utilService } from '../services/basic/util.service'
 import { Switch, Route } from 'react-router-dom'
 
 // Routes
 import { TaskDetails } from './task-details.jsx'
-import { GroupList } from "../cmps/board/group-list"
-import { actService } from "../services/board/activity.service"
-import { Dashboard } from "./dashboard"
-import { socketService, SOCKET_EMIT_TOPIC, SOCKET_EVENT_BOARD_UPDATE, SOCKET_EMIT_PULL } from "../services/basic/socket.service"
-import { loadGuest, setUser } from "../store/user/user.actions"
-import { userService } from "../services/user.service"
-import { boardStatistics } from "../services/board/board-statistics"
-import { SideMenu } from "../cmps/board/board-header/side-menu"
-import { ILoader } from "../cmps/icons/i-loader"
+import { GroupList } from '../cmps/board/group-list'
+import { actService } from '../services/board/activity.service'
+import { Dashboard } from './dashboard'
+import { socketService, SOCKET_EMIT_TOPIC, SOCKET_EVENT_BOARD_UPDATE, SOCKET_EMIT_PULL } from '../services/basic/socket.service'
+import { loadGuest, setUser } from '../store/user/user.actions'
+import { userService } from '../services/user.service'
+import { boardStatistics } from '../services/board/board-statistics'
+import { SideMenu } from '../cmps/board/board-header/side-menu'
+import { ILoader } from '../cmps/icons/i-loader'
 
-const tinycolor = require("tinycolor2")
+const tinycolor = require('tinycolor2')
 
 class _Board extends React.Component {
 
@@ -99,7 +99,7 @@ class _Board extends React.Component {
             document.querySelector('#root').style.background = `url(${boardStyle.background})`
         }
     }
-    
+
     setBackgroundImgFromUnsplash = async (url) => {
         const newBoard = this.deepCloneBoard()
         newBoard.style.background = url
@@ -276,7 +276,7 @@ class _Board extends React.Component {
         return <React.Fragment>
             <DragDropContext onDragEnd={this.handleOnDragEnd}>
                 <MainHeader boardMembers={board.members} isBoardStarred={board.isStarred} />
-                <section className="board flex col main-layout">
+                <section className='board flex col main-layout'>
                     <BoardHeader
                         board={board}
                         saveBoardHeader={this.onSaveBoardHeader}

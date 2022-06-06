@@ -1,10 +1,10 @@
-import React, { useEffect, useState } from "react"
-import { useSelector } from "react-redux"
-import { useDispatch } from "react-redux"
+import React, { useEffect, useState } from 'react'
+import { useSelector } from 'react-redux'
+import { useDispatch } from 'react-redux'
 import { useHistory } from 'react-router-dom/cjs/react-router-dom.min'
 
-import { loadGuest, setUser } from "../../../../store/user/user.actions";
-import { userService } from "../../../../services/user.service"
+import { loadGuest, setUser } from '../../../../store/user/user.actions';
+import { userService } from '../../../../services/user.service'
 import { UserModal } from './user-modal'
 
 export const MemberProfile = () => {

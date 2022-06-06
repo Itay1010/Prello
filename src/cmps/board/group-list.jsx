@@ -2,7 +2,7 @@ import React from 'react'
 
 import { Group } from './task-list'
 import { Droppable } from 'react-beautiful-dnd'
-import { AddGroupForm } from "./add-group-form"
+import { AddGroupForm } from './add-group-form'
 
 export const GroupList = ({ groups, eventHandlers }) => {
     const {
@@ -13,10 +13,10 @@ export const GroupList = ({ groups, eventHandlers }) => {
         onAddGroup,
         onGroupColorChange
     } = eventHandlers
-    return <Droppable type="groups" droppableId="groups" direction="horizontal">
+    return <Droppable type='groups' droppableId='groups' direction='horizontal'>
         {(provided, snapshot) => {
             return <section
-                className="group-container flex groups"
+                className='group-container flex groups'
                 {...provided.droppableProps}
                 ref={provided.innerRef}>
                 {groups.map((group, idx) => {

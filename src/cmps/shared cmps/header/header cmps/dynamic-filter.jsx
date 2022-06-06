@@ -15,7 +15,7 @@ export const DynamicFilter = ({ boards, modalType, toggleStar }) => {
 
         {boards.map(board => {
             return <li key={board._id} className='filter-item' onClick={() => onGoTo(board._id)}>
-                {board.style.background && <img src={`${board.style.background}`} alt="" />}
+                {board.style.background && <img src={`${board.style.background}`} alt='' />}
                 <p>{board.title}</p>
                 <div onClick={toggleStar} className={`star-wrapper ${board.isStarred ? 'starred' : ''}`}><IStar /></div>
             </li>

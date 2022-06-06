@@ -1,5 +1,5 @@
-import axios from "axios"
-import { utilService } from "./util.service"
+import axios from 'axios'
+import { utilService } from './util.service'
 
 const UNSPLASH_KEY = 'tPOzx1nepGTnicfh8tWx4Be22XbskzoZaToa3RhwpWY'
 
