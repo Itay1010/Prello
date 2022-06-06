@@ -8,7 +8,6 @@ import { LoginForm } from '../cmps/auth/login.jsx'
 
 import { GoogleLogin } from 'react-google-login'
 import { gapi } from 'gapi-script'
-import { ILogo } from '../cmps/icons/i-logo'
 import { Link } from 'react-router-dom'
 
 import { ReactComponent as Img1 } from '../assets/imgs/auth-img-1.svg';
