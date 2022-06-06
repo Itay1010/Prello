@@ -9,8 +9,8 @@ export const MoreMembersModal = ({ members }) => {
         <hr />
         <section className='members-modal-body'>
             {members.map(member => {
-                return <div className="member" key={member._id} >
-                    <img src={member.imgUrl} alt="" />
+                return <div className='member' key={member._id} >
+                    <img src={member.imgUrl} alt='' />
                     <section className='member-info'>
                         <span className='full-name'>{`${member.firstName} ${member.lastName ? member.lastName : ''}`}</span>
                         <span className='email'>{`${member.email}`}</span>

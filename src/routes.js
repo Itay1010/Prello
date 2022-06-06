@@ -1,8 +1,8 @@
-import { Home } from "./pages/home";
-import { Auth } from "./pages/auth";
-import { Workspace } from "./pages/workspace";
-import { Board } from "./pages/board";
-import { TaskDetails } from "./pages/task-details";
+import { Home } from './pages/home';
+import { Auth } from './pages/auth';
+import { Workspace } from './pages/workspace';
+import { Board } from './pages/board';
+import { TaskDetails } from './pages/task-details';
 
 export const routes = [
     {

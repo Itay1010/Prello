@@ -1,12 +1,12 @@
-import React, { useEffect, useState } from "react"
+import React, { useEffect, useState } from 'react'
 
-import { useDispatch } from "react-redux"
-import { MainHeader } from "../cmps/shared cmps/header/main-header"
+import { useDispatch } from 'react-redux'
+import { MainHeader } from '../cmps/shared cmps/header/main-header'
 import { BoardList } from '../cmps/workspace/board-list'
-import { userService } from "../services/user.service"
+import { userService } from '../services/user.service'
 import { addBoard, loadBoardMinis, updateMini } from '../store/board/board.action'
-import { useHistory } from "react-router-dom/cjs/react-router-dom.min"
-import { ILoader } from "../cmps/icons/i-loader"
+import { useHistory } from 'react-router-dom/cjs/react-router-dom.min'
+import { ILoader } from '../cmps/icons/i-loader'
 
 export const Workspace = () => {
 
@@ -38,7 +38,7 @@ export const Workspace = () => {
     }
 
     if (!boards || !user) return <ILoader />
-    return <section className="workspace-wrapper">
+    return <section className='workspace-wrapper'>
         <MainHeader />
         <BoardList boards={boards} userId={userId} toggleStar={toggleStar} createNewBoard={onCreateNewBoard} />
     </section>

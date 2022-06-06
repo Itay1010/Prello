@@ -1,7 +1,7 @@
-import React, { useRef, useState } from "react"
+import React, { useRef, useState } from 'react'
 
-import { useForm } from "../../hooks/useForm"
-import { IStar } from "../icons/i-star"
+import { useForm } from '../../hooks/useForm'
+import { IStar } from '../icons/i-star'
 import { BoardPreview } from './board-preview'
 
 export const BoardList = ({ boards, userId, toggleStar, createNewBoard }) => {
@@ -40,45 +40,45 @@ export const BoardList = ({ boards, userId, toggleStar, createNewBoard }) => {
         newBoard.backgroundOption = imgUrl
     }
 
-    return <div className="workspace-container">
-        <section className="board-container">
+    return <div className='workspace-container'>
+        <section className='board-container'>
 
             {starredBoards.length > 0 &&
                 <React.Fragment>
-                    <section className="board-preview-header flex align-center">
+                    <section className='board-preview-header flex align-center'>
                         <IStar /><h1>Starred boards</h1>
                     </section>
-                    <div className="boards-wrapper">
+                    <div className='boards-wrapper'>
                         {starredBoards.map(board => {
                             return <BoardPreview key={board._id} board={board} toggleStar={toggleStar} />
                         })}
                     </div>
                 </React.Fragment>}
         </section>
-        <section className="board-container" >
-            <section className="board-preview-header flex align-center">
+        <section className='board-container' >
+            <section className='board-preview-header flex align-center'>
                 <h1>My boards</h1>
             </section>
             {boards.length > 0 &&
-                <div className="boards-wrapper" >
-                    <div className="new-board-btn-wrapper">
-                        <div onClick={toggleModal} className="board-preview-body add-board-btn">
+                <div className='boards-wrapper' >
+                    <div className='new-board-btn-wrapper'>
+                        <div onClick={toggleModal} className='board-preview-body add-board-btn'>
                             <p> Add new Board</p>
                         </div>
                         {isModalOpen && <div className='add-new-board-modal'>
                             <h2>Create board</h2>
-                            <div className="img-container"><img src={backgroundOption} alt="" /></div>
-                            <div className="choose-background">
+                            <div className='img-container'><img src={backgroundOption} alt='' /></div>
+                            <div className='choose-background'>
                                 {imgs.map(img => {
-                                    return <div className="img-wrapper">
-                                        <img onClick={() => onChooseBackground(img)} src={img} alt="" />
+                                    return <div className='img-wrapper'>
+                                        <img onClick={() => onChooseBackground(img)} src={img} alt='' />
                                     </div >
                                 })}
 
                             </div>
-                            <form onSubmit={(event) => onCreateNewBoard(event)} action="">
-                                <label htmlFor="">Board title</label>
-                                <input value={newBoard.title} ref={titleRef} type="text" name="title" onChange={handleTitleChange} />
+                            <form onSubmit={(event) => onCreateNewBoard(event)} action=''>
+                                <label htmlFor=''>Board title</label>
+                                <input value={newBoard.title} ref={titleRef} type='text' name='title' onChange={handleTitleChange} />
                                 <button> Create</button>
                             </form>
                         </div>}
@@ -87,7 +87,7 @@ export const BoardList = ({ boards, userId, toggleStar, createNewBoard }) => {
                         if (!board.isStarred) return <BoardPreview key={board._id} board={board} toggleStar={toggleStar} idx={idx} boardAmount={board.length} />
                     })}
                 </div>}
-            {isModalOpen && <div onClick={toggleModal} className="clear-screen"></div>}
+            {isModalOpen && <div onClick={toggleModal} className='clear-screen'></div>}
         </section>
     </div>
 }

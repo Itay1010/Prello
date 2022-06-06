@@ -58,7 +58,7 @@ export const ChecklistPreview = ({ item, saveChecklistTask, setIsDone, checklist
             <div>
 
                 <Box sx={{ width: '100%' }}>
-                    <LinearProgress variant="determinate" value={progress} />
+                    <LinearProgress variant='determinate' value={progress} />
                 </Box>
             </div>
             <div className='checklist-item-list'>
@@ -70,8 +70,8 @@ export const ChecklistPreview = ({ item, saveChecklistTask, setIsDone, checklist
             <div className='checklist-item-footer'>
                 {!isInputOpen && <button onClick={onToggleInput}>Add an item</button>}
                 {isInputOpen && <React.Fragment>
-                    <form action="" onSubmit={onSaveChecklistTask} >
-                        <input autoComplete='off' onChange={handleChange} onBlur={onToggleInput} type="text" placeholder='Add an item' name='txt' />
+                    <form action='' onSubmit={onSaveChecklistTask} >
+                        <input autoComplete='off' onChange={handleChange} onBlur={onToggleInput} type='text' placeholder='Add an item' name='txt' />
                         <div className='toggle-modal-buttons'>
                             <button onMouseDown={onSaveChecklistTask}>Add item</button>
                             <button onMouseDown={onToggleInput}>Cancel</button>
