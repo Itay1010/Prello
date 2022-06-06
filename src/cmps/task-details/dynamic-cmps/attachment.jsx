@@ -1,8 +1,10 @@
-import React, { useEffect, useRef } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import { useForm } from '../../../hooks/useForm'
+import { uploadImg } from '../../../services/basic/cloudinary-service'
 
 export const Attachment = ({ attachmentToUpdate, saveAttachment, closeModal }) => {
 
+    const [imgFromUpload, setImgFromUpload] = useState(null)
     let fileRef = useRef()
     let [attachment, handleChange] = useForm({
         title: attachmentToUpdate ? attachmentToUpdate.title : '',
@@ -10,7 +12,6 @@ export const Attachment = ({ attachmentToUpdate, saveAttachment, closeModal }) =
         id: attachmentToUpdate ? attachmentToUpdate.id : false,
         createdAt: attachmentToUpdate ? attachmentToUpdate.createdAt : ''
     })
-
     const onSaveAttachment = (ev) => {
         ev.preventDefault()
         const { url } = attachment
@@ -20,14 +21,20 @@ export const Attachment = ({ attachmentToUpdate, saveAttachment, closeModal }) =
             closeModal()
         }
     }
+    useEffect(() => {
 
-    const handleFileChange = (ev) => {
+    }, [attachment.url])
 
+    const handleFileChange = async (ev) => {
+        const imgUrl = await uploadImg(ev)
+        attachment.url = imgUrl
+        handleChange({ target: { name: 'url', value: imgUrl } })
     }
     function isUrl(url) {
         return /^(ftp|http|https):\/\/[^ ']+$/.test(url)
     }
 
+    console.log('hello')
     return <div className='attachments'>
         <div className='close-modal flex justify-center align-center' onClick={(event) => {
             event.stopPropagation()
@@ -43,7 +50,7 @@ export const Attachment = ({ attachmentToUpdate, saveAttachment, closeModal }) =
             <div className='button-wrapper'>
                 <button>Save</button>
                 <label htmlFor="inputFile">
-                    choose img
+                    Upload image
                     <input onChange={handleFileChange} ref={fileRef} id='inputFile' style={{ display: 'none' }} className='input-file' type="file" />
                 </label>
             </div>
