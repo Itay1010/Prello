@@ -1,9 +1,14 @@
 import React, { useEffect, useState } from 'react';
+import { useLocation } from 'react-router-dom';
 import { boardService } from '../../../../services/board/board.service';
 import { ILoader } from '../../../icons/i-loader';
+
+const QRcode = require('qrcode')
+
 export const BoardMembersSocial = ({ setSocial, users, currentMembers, onChangeMembers }) => {
     const [membersToDisplay, setMembersToDisplay] = useState(users)
     const [filter, setFilter] = useState('')
+    const [isQR, setQR] = useState(false)
 
 
     useEffect(() => {
@@ -19,6 +24,16 @@ export const BoardMembersSocial = ({ setSocial, users, currentMembers, onChangeM
         setFilter(target.value)
     }
 
+    const generateQR = async text => {
+        try {
+            const canvas = document.querySelector('#QRcanvas')
+            const res = await QRcode.toCanvas(canvas, text)
+            console.log(res)
+        } catch (err) {
+            console.error(err)
+        }
+    }
+
     if (!users) return <ILoader />
     return <section className='board-social-modal' onClick={ev => ev.stopPropagation()}>
         <section className='modal-header'>
@@ -26,9 +41,14 @@ export const BoardMembersSocial = ({ setSocial, users, currentMembers, onChangeM
             <button className='close-modal reset' onClick={ev => setSocial(false)}>
                 <svg width='20' height='20' viewBox='0 0 24 24' ><path fillRule='evenodd' clipRule='evenodd' d='M10.5858 12L5.29289 6.70711C4.90237 6.31658 4.90237 5.68342 5.29289 5.29289C5.68342 4.90237 6.31658 4.90237 6.70711 5.29289L12 10.5858L17.2929 5.29289C17.6834 4.90237 18.3166 4.90237 18.7071 5.29289C19.0976 5.68342 19.0976 6.31658 18.7071 6.70711L13.4142 12L18.7071 17.2929C19.0976 17.6834 19.0976 18.3166 18.7071 18.7071C18.3166 19.0976 17.6834 19.0976 17.2929 18.7071L12 13.4142L6.70711 18.7071C6.31658 19.0976 5.68342 19.0976 5.29289 18.7071C4.90237 18.3166 4.90237 17.6834 5.29289 17.2929L10.5858 12Z' /></svg>
             </button>
+
         </section>
         <section className='modal-body'>
             <input type='text' className='search-member' value={filter} onChange={ev => setFilter(ev.target.value)} />
+            <a className='invite-qr' onClick={async ev => {
+                await setQR(prevState => !prevState)
+                generateQR(window.location.href)
+            }}>Board QR</a>
             <section className='user-list'>
                 {membersToDisplay.map(user => {
                     return <div className='member' key={user._id} >
@@ -47,8 +67,8 @@ export const BoardMembersSocial = ({ setSocial, users, currentMembers, onChangeM
                         }
                     </div>
                 })}
-
             </section>
+            {isQR && <canvas id="QRcanvas"></canvas>}
         </section>
     </section>
 }
