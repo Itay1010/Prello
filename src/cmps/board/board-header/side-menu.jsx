@@ -41,7 +41,7 @@ export const SideMenu = ({ closeSideMenu, isSideMenuOpen, setBackgroundImg }) =>
                 <button>More</button>
             </div>
             {!isBackgroundPickerOpen && <ActivitiesList activities={boardActivities} />}
-            <ChooseBackgroundModal isModalOpen={isBackgroundPickerOpen} closeBackgroundModal={() => setBackgroundPicker(false)} imgs={imgs} enterBackgroundSearch={searchImgvalue} setBackgroundImg={setBackgroundImg} />
+            {isSideMenuOpen && <ChooseBackgroundModal isSideMenuOpen={isSideMenuOpen} isModalOpen={isBackgroundPickerOpen} closeBackgroundModal={() => setBackgroundPicker(false)} imgs={imgs} enterBackgroundSearch={searchImgvalue} setBackgroundImg={setBackgroundImg} />}
         </div>
     </section>
 }

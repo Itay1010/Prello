@@ -65,9 +65,11 @@
         margin-top: 50px;
         height: 90%;
     }
+
     @include narrow-layout {
         margin-top: 50px;
     }
+
     @include normal-layout {
         margin-top: 0;
     }
@@ -305,4 +307,12 @@
     animation-fill-mode: forwards;
     display: block;
     opacity: 1;
+}
+
+.show-menu-clear-screen {
+    width: 100vw;
+    height: 100vh;
+    // background-color: aqua;
+    position: absolute;
+    z-index: 5;
 }

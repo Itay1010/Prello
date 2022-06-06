@@ -292,6 +292,7 @@ class _Board extends React.Component {
                         openBackgroundPickerModal={this.toggleBackgroundPickerModal}
                         setBackgroundImg={this.setBackgroundImgFromUnsplash}
                     />
+                    {this.state.isSideMenuOpen && <div onClick={() => this.setState({ isSideMenuOpen: false })} className='show-menu-clear-screen'></div>}
                     <Switch>
                         <Route path={'/board/:boardId/:groupId/:taskId'}>
                             <TaskDetails onArchiveTask={this.onArchiveTask} />
