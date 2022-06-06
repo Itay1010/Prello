@@ -77,7 +77,7 @@ async function loginGuest() {
         password: "123",
         email: "Guest@gmail.com",
         // imgUrl: "https://res.cloudinary.com/di5o0obqy/image/upload/v1653742446/eytan_vl7skf.jpg",
-        color: "#5BC0EB"
+        color: "#0E1856"
     }
     sessionStorage.setItem(LOCAL_STORAGE_LOGGEDIN_USER, JSON.stringify(user))
     return user
