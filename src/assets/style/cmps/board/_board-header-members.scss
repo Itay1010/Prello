@@ -4,13 +4,14 @@
     margin: 0 4px;
 
     &>* {
-        margin: 0 4px;
+        margin: 0 6px;
     }
 
-    .members-preview {
+    .members-list {
         display: flex;
         align-items: center;
         position: relative;
+        margin-right: 10px;
 
         .member {
             width: 28px;
