@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect } from "react"
+import React, { useState, useRef, useEffect } from 'react'
 
 export const TxtInputCmp = ({ boardTitle, handleBoardTitleChange }) => {
 
@@ -24,10 +24,10 @@ export const TxtInputCmp = ({ boardTitle, handleBoardTitleChange }) => {
     }
 
     return <input
-        className="board-name"
-        style={{ minWidth: "5ch", width }}
+        className='board-name'
+        style={{ minWidth: '5ch', width }}
         ref={contentRef}
-        type="text"
+        type='text'
         value={boardTitleValue}
         onChange={handleContentChange}
         onBlur={(() => {

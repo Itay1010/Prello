@@ -5,27 +5,27 @@ export const AddTask = ({ group, onAddTask, newTask, handleChange, setNewTask, s
     const addTaskRef = useRef()
 
     useEffect(() => {
-        addTaskRef.current.scrollIntoView({behavior: "smooth", block: "end", inline: "nearest"})
+        addTaskRef.current.scrollIntoView({ behavior: 'smooth', block: 'end', inline: 'nearest' })
     }, [])
 
-    return <article className="task-preview add-task" ref={addTaskRef}>
+    return <article className='task-preview add-task' ref={addTaskRef}>
         <TextareaAutosize
-            minRows="3.5"
-            maxRows="10"
-            type="text"
-            autoComplete="off"
-            className="task-title"
-            name="title"
+            minRows='3.5'
+            maxRows='10'
+            type='text'
+            autoComplete='off'
+            className='task-title'
+            name='title'
             autoFocus
             onBlur={ev => {
                 setIsTaskOpen(false)
             }}
             style={({ width: '100%' })}
             value={newTask.title}
-            placeholder="Enter a title for this card..."
+            placeholder='Enter a title for this card...'
             onChange={handleChange}
             onKeyDown={ev => {
-                if (ev.key === "Enter") {
+                if (ev.key === 'Enter') {
                     ev.preventDefault()
                     if (newTask.title) {
                         onAddTask(newTask)

@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react"
+import { useEffect, useState } from 'react'
 import { useEffectUpdate } from './useEffectUpdate';
 
 export const useForm = (initialFields, cb) => {

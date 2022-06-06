@@ -68,7 +68,7 @@ export function Activity({ dataToDisplay, datesToDisplay }) {
             xAxes: [
                 {
                     gridLines: {
-                        color: "blue"
+                        color: 'blue'
                     }
                 }
             ]
