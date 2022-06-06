@@ -202,11 +202,15 @@ class _Board extends React.Component {
         } else {
             const items = newBoard.groups.find(group => group.id === result.source.droppableId).tasks
             const { droppableId: desDroppableId, index: desIdx } = result.destination
-            const { droppableId: SrcDroppableId, index: SrcIdx } = result.source
+            const { droppableId: srcDroppableId, index: SrcIdx } = result.source
             const [reorderedItem] = items.splice(SrcIdx, 1)
-            newBoard.groups.find(group => group.id === desDroppableId).tasks.splice(desIdx, 0, reorderedItem)
-            if (!(desDroppableId === SrcDroppableId) || !(desIdx === SrcIdx)) {
-                actService.activity('moved', 'card', reorderedItem, newBoard)
+
+            const desGroup = newBoard.groups.find(group => group.id === desDroppableId)
+            const srcGroup = newBoard.groups.find(group => group.id === srcDroppableId)
+
+            desGroup.tasks.splice(desIdx, 0, reorderedItem)
+            if (!(desDroppableId === srcDroppableId) || !(desIdx === SrcIdx)) {
+                actService.activity('moved', 'card', reorderedItem, newBoard, desGroup)
             }
             await this.props.updateBoard(newBoard)
             socketService.emit(SOCKET_EMIT_PULL, newBoard._id)

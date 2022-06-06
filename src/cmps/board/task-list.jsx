@@ -29,7 +29,7 @@ export const Group = ({ group, onAddTask, onArchiveGroup, onGroupChange, onGroup
                 ref={provided.innerRef}
                 {...provided.draggableProps}
                 {...provided.dragHandleProps}
-                style={draggableStyle.getStyle(provided.draggableProps.style, snapshot, provided)}
+                style={draggableStyle.getStyle(provided.draggableProps.style, snapshot, provided, group.color)}
                 className={`group flex col`}
             >
                 <GroupTitle
