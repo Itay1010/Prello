@@ -160,10 +160,6 @@ export const TaskDetails = ({ onArchiveTask, onSaveBoard }) => {
         socketService.emit(SOCKET_EMIT_PULL, newBoard._id)
     }
 
-    // const saveBoard = () => {
-    //     onSaveBoard(newBoard)
-    // }
-
     const deepCloneBoard = () => {
         return JSON.parse(JSON.stringify(board))
     }
@@ -195,9 +191,9 @@ export const TaskDetails = ({ onArchiveTask, onSaveBoard }) => {
     }
 
     const saveMemberToClTask = (member, clTaskId, checklist) => {
+
         const newBoard = deepCloneBoard()
-        const groupIdx = newBoard.groups.findIndex(group => group.id === groupId)
-        const group = board.groups[groupIdx]
+        const group = newBoard.groups.find(group => group.id === groupId)
         const idx = group.tasks.findIndex(task => task.id === taskId)
         const task = group.tasks[idx]
         const requestedChecklistIdx = task.checklist.findIndex(reqChecklist => reqChecklist.id === checklist.id)
@@ -211,7 +207,9 @@ export const TaskDetails = ({ onArchiveTask, onSaveBoard }) => {
         } else {
             requestedClTask.member = member
         }
-        saveBoard()
+        console.log(requestedClTask.member)
+        saveBoard(newBoard)
+
     }
 
     const onDeleteChecklist = (checklistId) => {
@@ -268,7 +266,7 @@ export const TaskDetails = ({ onArchiveTask, onSaveBoard }) => {
         setIsModal(id)
     }
 
-    if (!board) return <ILoader/>
+    if (!board) return <ILoader />
     const group = board.groups.find(group => group.id === groupId)
     const idx = group.tasks.findIndex(task => task.id === taskId)
     const task = group.tasks[idx]
