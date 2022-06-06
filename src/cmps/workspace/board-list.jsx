@@ -63,7 +63,7 @@ export const BoardList = ({ boards, userId, toggleStar, createNewBoard }) => {
                 <div className='boards-wrapper' >
                     <div className='new-board-btn-wrapper'>
                         <div onClick={toggleModal} className='board-preview-body add-board-btn'>
-                            <p> Add new Board</p>
+                            <p>Add new Board</p>
                         </div>
                         {isModalOpen && <div className='add-new-board-modal'>
                             <h2>Create board</h2>
