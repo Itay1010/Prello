@@ -1,6 +1,5 @@
 import React from 'react'
 import { Switch, Route } from 'react-router-dom'
-import { TaskDetails } from './pages/task-details'
 import { routes } from './routes'
 
 export default function App() {
