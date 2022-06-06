@@ -9,7 +9,7 @@ export const actService = {
 
 const LIMIT = 150
 
-function activity(type, entityType, entity, board) {
+function activity(type, entityType, entity, board, desEntity) {
     if (!type || !entityType || !entity || !board) throw new Error('No arguments givin')
     const id = entity.id ? entity.id : entity._id
     if (!id) throw new Error('Item is unknown')
@@ -18,6 +18,7 @@ function activity(type, entityType, entity, board) {
         id: utilService.makeId(),
         action: type,
         receiver: entityType,
+        destination: {id: desEntity.id, title: desEntity.title},
         createdAt: Date.now(),
         byMember: user,
         entity: { id: entity.id, title: entity.title }
