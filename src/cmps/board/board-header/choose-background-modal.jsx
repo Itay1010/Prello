@@ -1,4 +1,4 @@
-import React, { useRef } from 'react'
+import React, { useRef, useEffect } from 'react'
 import { useForm } from '../../../hooks/useForm'
 import { IClose } from '../../icons/i-close'
 
@@ -14,6 +14,9 @@ export const ChooseBackgroundModal = ({ isModalOpen, closeBackgroundModal, imgs,
     let timeoutId
     // console.log(isModalOpen)
 
+    useEffect(() => {
+        return closeBackgroundModal()
+    }, [])
     const searchValueTyped = (ev) => {
         timeoutId = null
         timeoutId = setTimeout(() => {
