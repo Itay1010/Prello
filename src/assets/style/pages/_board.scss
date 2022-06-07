@@ -169,7 +169,7 @@
                 display: flex;
                 align-items: center;
                 margin: 5px 0;
-                padding: 0 10px;
+                padding: 5px 10px;
                 text-align: start;
                 background-color: unset;
                 width: 100%;
@@ -214,7 +214,6 @@
         }
 
         .activities-list {
-
             .activity-wrapper {
                 display: grid;
                 grid-template-columns: 50px 1fr;
