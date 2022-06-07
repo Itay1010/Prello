@@ -4,9 +4,11 @@
     bottom: 0;
     transform: translate(0%, 100%);
     width: 300px;
-    z-index: 100;
     font-size: 0.9rem;
     box-shadow: 0 0 16px -2px #00000036;
+    border-radius: 3px;
+    z-index: 100;
+
 
     .members-modal-header {
         display: flex;
@@ -17,6 +19,8 @@
         height: 80px;
         background-image: linear-gradient(to bottom, #0079BF 0%, #0079BF 100%);
         color: $td-bg;
+        border-radius: 3px 3px 0 0;
+
 
         img {
             width: 90px;
@@ -44,8 +48,8 @@
             position: absolute;
             border: none;
             background-color: transparent;
-            top: 0;
-            right: 0;
+            top: 5px;
+            right: 5px;
             padding: 6px;
             fill: $td-bg;
         }

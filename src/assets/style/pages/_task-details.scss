@@ -681,20 +681,42 @@
 .description-data {
     width: 100%;
 
-    h2 {
-        font-size: 16px;
-        font-weight: 600;
+    .util {
         margin-bottom: 12px;
+        display: flex;
+        h2 {
+            display: flex;
+            font-size: 16px;
+            font-weight: 600;
+            margin-right: 10px;
+            width: fit-content;
+            transform: translate(0px, 2px);
+        }
+
+        .btn-edit {
+            @include btn($type: dark);
+            background-color: $opc-black;
+            display: inline;
+            color: $txt;
+            width: fit-content;
+            height: 30px;
+
+            &:hover {
+                // background-color: $opc-black;
+            }
+        }
     }
 
     p {
         background-color: $td-input;
         // height: 56px;
+        display: inline;
         padding: 8px 12px;
         color: $td-main;
         border-radius: 3px;
 
     }
+
 
     .edit-description {
         textarea {

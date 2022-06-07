@@ -8,7 +8,7 @@ import { getPhotos, getSearch } from '../../../services/basic/unsplash.service.j
 export const SideMenu = ({ closeSideMenu, isSideMenuOpen, setBackgroundImg }) => {
     const [isBackgroundPickerOpen, setBackgroundPicker] = useState(false)
     // console.log(isSideMenuOpen)
-    const boardActivities = useSelector(storeState => storeState.boardModule.board.activities)
+    const { activities: boardActivities, style } = useSelector(storeState => storeState.boardModule.board)
     // console.log(boardActivities)
     const [imgs, setImgs] = useState(null)
     // console.log(isSideMenuOpen)
@@ -36,7 +36,10 @@ export const SideMenu = ({ closeSideMenu, isSideMenuOpen, setBackgroundImg }) =>
             </div>
             <h1>Menu</h1>
             <div className='header-features-buttons-wrapper'>
-                <button onClick={() => setBackgroundPicker(true)}>Choose background</button>
+                <button className='background-select-btn' onClick={() => setBackgroundPicker(true)}>
+                    <img src={style.background} alt="" />
+                    <span>Choose background</span>
+                </button>
             </div>
             <div className='activity-header-wrapper'>
                 <div className='activity-logo-wrapper'>

@@ -96,7 +96,7 @@
   }
   
   @mixin wide-layout {
-    @media (min-width: 824px) {
+    @media (min-width: 830px) {
       @content;
     }
   }
