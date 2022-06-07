@@ -111,6 +111,10 @@
         grid-template-rows: 40px;
         align-items: center;
 
+        &:first-of-type {
+            padding-top: 10px;
+        }
+
         img {
             width: 40px;
             height: 32px;
@@ -321,7 +325,7 @@
 }
 
 @include mobile-layout {
-    
+
     .header-backdrop {
         height: 44px;
     }
@@ -456,7 +460,7 @@
 
         .profile {
             position: absolute;
-            right: 10px;
+            // right: 10px;
         }
 
         .search {
@@ -496,7 +500,7 @@
         .search {
             position: relative;
             width: 250px;
-            margin-right: 20px;
+            margin-right: 10px;
         }
 
         .more {

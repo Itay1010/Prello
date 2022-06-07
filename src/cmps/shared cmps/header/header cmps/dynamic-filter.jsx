@@ -11,7 +11,7 @@ export const DynamicFilter = ({ boards, modalType, toggleStar }) => {
         history.push(`/board/${boardId}`)
     }
     return <ul className='dynamic-filter'>
-        <h3>{modalType}</h3>
+        <h3>{modalType === 'starred' ? 'Starred boards' : 'Recent boards'}</h3>
 
         {boards.map(board => {
             return <li key={board._id} className='filter-item' onClick={() => onGoTo(board._id)}>
