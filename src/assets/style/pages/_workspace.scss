@@ -34,7 +34,9 @@
         .board-container {
             display: flex;
             flex-direction: column;
-
+            &:not(:first-child) {
+                margin-top: 0px;
+            }
             .new-board-btn-wrapper {
                 margin-inline-end: 16px;
                 position: relative;
@@ -300,6 +302,7 @@
             .board-container {
                 margin: auto;
                 align-items: center;
+                margin-top: 45px;
 
                 .boards-wrapper {
                     justify-content: center;
