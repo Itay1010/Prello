@@ -19,11 +19,15 @@ export const ActivitiesList = ({ activities }) => {
     return <div className='activities-list' >
         {reverseActivities.map((activity, idx) => {
             if (idx > 20) return
-            const { action, byMember, receiver, createdAt, entity } = activity
+            const { action, byMember, receiver, createdAt, entity, destination } = activity
             return <div key={activity.id} className='activity-wrapper'>
                 {byMember.firstName === 'Guest' && <div className='guest-icon' style={{ backgroundColor: `${byMember.color}` }}>G</div>}
                 {byMember.firstName !== 'Guest' && <img src={byMember.imgUrl} alt='' />}
-                <p><span className='created-by-name'> {byMember.firstName}</span> {action} {receiver} '{entity.title}'</p>
+                {action === 'added' && <p><span className='created-by-name'> {byMember.firstName}</span> {action} {receiver} "{entity.title}" to group "{destination.title}"</p>}
+                {action === 'archived' && <p><span className='created-by-name'> {byMember.firstName}</span> {action} {receiver} '{entity.title}' of group '{destination.title}'</p>}
+                {action === 'changed title' && <p><span className='created-by-name'> {byMember.firstName}</span> {action} of {receiver} to "{entity.title}"</p>}
+                {action === 'changed color' && <p><span className='created-by-name'> {byMember.firstName}</span> {action} of {receiver} "{entity.title}" </p>}
+                {action === 'moved' && <p><span className='created-by-name'> {byMember.firstName}</span> {action} {receiver} "{entity.title}" to group "{destination.title}"</p>}
                 <span>{dateToDisplay(createdAt)}</span>
             </div>
         })}
