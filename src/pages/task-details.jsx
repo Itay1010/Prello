@@ -23,6 +23,7 @@ import TextareaAutosize from '@mui/material/TextareaAutosize'
 import { DetailsHeader } from '../cmps/task-details/body/details-header.jsx'
 import { TaskEdit } from '../cmps/task-details/body/task-edit.jsx'
 import { ILoader } from '../cmps/icons/i-loader'
+import { actService } from '../services/board/activity.service'
 
 export default function EmptyTextarea() {
     return (
@@ -120,6 +121,7 @@ export const TaskDetails = ({ onArchiveTask, onSaveBoard }) => {
         const group = newBoard.groups.find(group => group.id === groupId)
         const idx = group.tasks.findIndex(task => task.id === taskId)
         group.tasks[idx].title = title
+        actService.activity('change title', 'card', group.tasks[idx].title, newBoard, group)
         setTitle(false)
         saveBoard(newBoard)
     }
