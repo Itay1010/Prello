@@ -34,7 +34,7 @@ export const ChooseBackgroundModal = ({ isModalOpen, closeBackgroundModal, imgs,
         <div className='unsplash-imgs-wrapper'>
             {imgs.map((img, idx) => {
                 if (idx > 8) return
-                return <div onClick={() => onSetBackgroundImg(img.urls.regular)} className='unsplash-imgs-small'>
+                return <div key={idx} onClick={() => onSetBackgroundImg(img.urls.regular)} className='unsplash-imgs-small'>
                     <img src={img.urls.small} alt='' />
                 </div>
             })}
