@@ -42,7 +42,6 @@ export const Group = ({ group, onAddTask, onArchiveGroup, onGroupChange, onGroup
                 <Droppable type='cards' droppableId={`${group.id}`} direction='vertical'>
                     {(provided, snapshot) => {
                         return <React.Fragment>
-
                             <div className='list-task' {...provided.droppableProps} ref={provided.innerRef}>
                                 {tasks.map((task, idx) => {
                                     if (!task.archivedAt) return <TaskPreview key={task.id} task={task} groupId={group.id} idx={idx} />
@@ -58,15 +57,12 @@ export const Group = ({ group, onAddTask, onArchiveGroup, onGroupChange, onGroup
                                 setNewTask={setNewTask}
                                 setIsTaskOpen={setIsTaskOpen}
                             />}
-
-
                             {
                                 isTaskOpen || <div className='group-footer flex align-center' >
                                     <button className='add-card-open-btn' onClick={ev => setIsTaskOpen(true)
                                     }><IAdd /> Add a card</button>
                                 </div>
                             }
-
                             {
                                 isTaskOpen && <div className='group-footer flex align-center'>
                                     <button className='add-card-btn' onMouseDown={ev => {
@@ -75,7 +71,6 @@ export const Group = ({ group, onAddTask, onArchiveGroup, onGroupChange, onGroup
                                         setTimeout(() => {
                                             setIsTaskOpen(true)
                                         }, 0)
-
                                     }}>Add card</button>
                                     <button onMouseDown={ev => {
                                         setIsTaskOpen(false)
@@ -84,7 +79,6 @@ export const Group = ({ group, onAddTask, onArchiveGroup, onGroupChange, onGroup
                                 </div>
                             }
                         </React.Fragment>
-
                     }}
                 </Droppable>
             </section >
