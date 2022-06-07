@@ -9,7 +9,6 @@
 
     &>*:not(:first-child) {
         padding: 0 30px;
-
     }
 
     @include mobile-layout {
@@ -41,7 +40,11 @@
         }
 
         .home-body {
-            img {
+            h1 {
+                margin-bottom: 10px;
+            }
+
+            .image-container {
                 width: 100%;
                 height: 500px;
                 margin-top: 5px;
@@ -66,10 +69,15 @@
         }
 
         .home-body {
-            img {
-                width: 100%;
+
+            h1 {
+                margin-bottom: 10px;
+            }
+
+            .image-container {
+                width: 90%;
                 height: 500px;
-                margin-top: 5px;
+                margin-top: 20px;
             }
         }
     }
@@ -86,6 +94,23 @@
 
             .hero-content {
                 text-align: start;
+            }
+        }
+
+        .home-body {
+
+
+            h1 {
+                margin-bottom: 20px;
+            }
+
+            .image-container {
+                display: flex;
+                max-width: 1000px;
+                height: 777px;
+                margin: auto;
+                margin-top: 60px;
+                margin-bottom: 60px;
             }
         }
     }
@@ -168,12 +193,6 @@ nav {
         flex-direction: column;
     }
 
-    // img {
-    //     width: 445px;
-    //     aspect-ratio: auto 931 / 1205;
-    //     height: 555px;
-    // }
-
     p {
         font-family: pri-font;
         font-size: 20px;
@@ -210,13 +229,6 @@ nav {
         flex-direction: column;
     }
 
-    img {
-        width: 100%;
-        aspect-ratio: auto 931 / 1205;
-        height: 777px;
-        margin-top: 20px;
-    }
-
     p {
         font-family: pri-font;
         font-size: 20px;
@@ -227,5 +239,16 @@ nav {
     .text-container {
         width: 80%;
         margin: auto;
+    }
+
+    .image-container {
+        align-items: flex-start;
+        position: relative;
+
+        img {
+            position: relative;
+            border-radius: 3px;
+            box-shadow: 0px 3px 27px -6px #00000029;
+        }
     }
 }
