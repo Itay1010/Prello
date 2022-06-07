@@ -4,6 +4,7 @@ import { ActivitiesList } from './activities-list.jsx'
 import { IClose } from '../../icons/i-close.jsx'
 import { ChooseBackgroundModal } from './choose-background-modal.jsx'
 import { getPhotos, getSearch } from '../../../services/basic/unsplash.service.js'
+import { IActivity } from '../../icons/i-activity.jsx'
 
 export const SideMenu = ({ closeSideMenu, isSideMenuOpen, setBackgroundImg }) => {
     const [isBackgroundPickerOpen, setBackgroundPicker] = useState(false)
@@ -43,7 +44,7 @@ export const SideMenu = ({ closeSideMenu, isSideMenuOpen, setBackgroundImg }) =>
             </div>
             <div className='activity-header-wrapper'>
                 <div className='activity-logo-wrapper'>
-                    <IClose />
+                    <IActivity />
                 </div>
                 <h4 className='activity-heading'>Activity</h4>
             </div>

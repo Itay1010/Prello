@@ -169,7 +169,7 @@
                 display: flex;
                 align-items: center;
                 margin: 5px 0;
-                padding: 0 6px;
+                padding: 5px 10px;
                 text-align: start;
                 background-color: unset;
                 width: 100%;
@@ -177,13 +177,16 @@
                 span {
                     transform: translate(0px, 1px);
                 }
+
                 &:hover {
                     background-color: $opc-black;
                 }
 
                 img {
                     width: 30px;
-                    margin-right: 14px;
+                    object-fit: cover;
+                    height: 30px;
+                    margin-right: 10px;
                 }
             }
         }
@@ -196,13 +199,13 @@
 
             .activity-logo-wrapper {
                 width: 38px;
-                padding-left: 5px;
+                padding-left: 11px;
                 padding-top: 5px;
             }
 
             .activity-heading {
                 justify-self: start;
-                padding-left: 13px;
+                padding-left: 12px;
                 font-family: secular-font;
                 font-size: 14px;
 
@@ -211,7 +214,6 @@
         }
 
         .activities-list {
-
             .activity-wrapper {
                 display: grid;
                 grid-template-columns: 50px 1fr;
