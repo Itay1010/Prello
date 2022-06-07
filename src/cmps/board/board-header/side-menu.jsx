@@ -36,9 +36,13 @@ export const SideMenu = ({ closeSideMenu, isSideMenuOpen, setBackgroundImg }) =>
             </div>
             <h1>Menu</h1>
             <div className='header-features-buttons-wrapper'>
-                <button>About this board</button>
                 <button onClick={() => setBackgroundPicker(true)}>Choose background</button>
-                <button>More</button>
+            </div>
+            <div className='activity-header-wrapper'>
+                <div className='activity-logo-wrapper'>
+                    <IClose />
+                </div>
+                <h4 className='activity-heading'>Activity</h4>
             </div>
             {!isBackgroundPickerOpen && <ActivitiesList activities={boardActivities} />}
             {isSideMenuOpen && <ChooseBackgroundModal isSideMenuOpen={isSideMenuOpen} isModalOpen={isBackgroundPickerOpen} closeBackgroundModal={() => setBackgroundPicker(false)} imgs={imgs} enterBackgroundSearch={searchImgvalue} setBackgroundImg={setBackgroundImg} />}

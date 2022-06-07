@@ -11,6 +11,7 @@
     font-family: pri-font;
     font-size: 0.9em;
     cursor: default;
+    // padding: 10px;
 
     &>* {
         margin-block-end: 6px;
@@ -22,10 +23,12 @@
         height: 100vh;
         width: 100vw;
     }
+
     .group-modal-header {
         display: flex;
         align-items: center;
-        padding: 0 10px;
+        border-bottom: 1px solid $opc-black;
+        margin: 10px;
 
 
         h3 {
@@ -64,15 +67,15 @@
         color: $txt;
 
         button {
-            border-radius: 0;
             @include btn();
+            border-radius: 0;
             padding: 0 10px;
             background-color: transparent;
             width: 100%;
             text-align: start;
 
             &:hover {
-                background-color: $opc-black-hov;
+                background-color: $opc-black;
             }
         }
 
@@ -88,8 +91,8 @@
             height: 30px;
             cursor: pointer;
         }
-        
-        
+
+
         .clear {
             display: flex;
             align-items: center;
