@@ -1,9 +1,9 @@
 .group-modal {
     position: absolute;
-    right: 0;
-    top: 47px;
     background-color: $bg;
-    transform: translateX(70%);
+    right: 0;
+    top: 40px;
+    transform: translateX(90%);
     width: 300px;
     z-index: 100;
     border-radius: 3px;
@@ -54,12 +54,14 @@
     }
 
     hr {
-        width: 90%;
+        width: calc(100% - 20px);
         margin: auto;
         height: 1px;
+        
     }
 
     .modal-body {
+        color: $txt;
 
         button {
             border-radius: 0;

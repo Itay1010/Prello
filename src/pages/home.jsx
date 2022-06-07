@@ -53,7 +53,9 @@ export const Home = () => {
                     Manage projects, organize tasks, and build team spirit—all in one place.
                 </p>
             </section>
-            <img src={boardSample} alt='' />
+            <section className='image-container'>
+                <img src={boardSample} alt='' />
+            </section>
         </section>
     </section >
 }

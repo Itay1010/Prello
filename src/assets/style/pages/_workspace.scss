@@ -323,7 +323,8 @@
             .board-container {
                 align-items: center;
                 margin-top: 80px;
-                margin-inline: 30px;
+                max-width: 420px;
+                margin-inline: auto;
 
                 .boards-wrapper {
                     justify-content: center;
@@ -341,13 +342,24 @@
             .board-container {
                 align-items: flex-start;
                 margin-top: 50px;
-                margin-inline: 30px;
-                padding-inline: 18%;
+                // margin-inline: auto;
+                max-width: 630px;
 
                 .boards-wrapper {
                     justify-content: flex-start;
 
                 }
+
+            }
+        }
+    }
+
+    @include wide-layout {
+        .workspace-container {
+            .board-container {
+                align-items: flex-start;
+                margin-top: 50px;
+                width: 840px;
 
             }
         }
