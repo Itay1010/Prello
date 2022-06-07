@@ -9,13 +9,6 @@ import LinearProgress from '@mui/material/LinearProgress'
 import { IChecklist } from '../../icons/i-checklist.jsx'
 import { createTheme, ThemeProvider } from '@mui/material/styles'
 
-const theme = createTheme({
-    palette: {
-        primary: {
-            main: '#5BA4D0',
-        },
-    }
-})
 
 export const ChecklistItemPreview = ({ item, saveChecklistTask, setIsDone, checklistId, deleteClTask, deleteChecklist, boardMembers, generalTask, saveMemberToClTask }) => {
 
@@ -36,6 +29,14 @@ export const ChecklistItemPreview = ({ item, saveChecklistTask, setIsDone, check
         setInput(false)
         saveChecklistTask(txt, item.id)
     }
+    let percentageBarColor = (donePercentage === 100) ? '#61bd4e' : '#5BA4D0'
+    const theme = createTheme({
+        palette: {
+            primary: {
+                main: percentageBarColor,
+            },
+        }
+    })
 
     const onToggleInput = () => {
         setInput(!isInputOpen)
@@ -57,6 +58,7 @@ export const ChecklistItemPreview = ({ item, saveChecklistTask, setIsDone, check
     useEffect(() => {
         setProgress(donePercentage)
     }, [checklistLength, checklistDoneLength])
+
 
     return <div className='checklist-item-preview'>
 
