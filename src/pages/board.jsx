@@ -124,7 +124,7 @@ class _Board extends React.Component {
             checklist: []
         }
         newBoard.groups[groupIdx].tasks.push(newTask)
-        actService.activity('added', 'card,', newTask, newBoard)
+        actService.activity('added', 'card,', newTask, newBoard, newBoard.groups[groupIdx])
         await this.props.updateBoard(newBoard)
         socketService.emit(SOCKET_EMIT_PULL, newBoard._id)
     }
@@ -139,7 +139,7 @@ class _Board extends React.Component {
                 archivedTask = task
             }
         })
-        actService.activity('archived', 'card', archivedTask, newBoard)
+        actService.activity('archived', 'card', archivedTask, newBoard, newBoard.groups[groupIdx])
         await this.props.updateBoard(newBoard)
         socketService.emit(SOCKET_EMIT_PULL, newBoard._id)
     }
@@ -153,7 +153,7 @@ class _Board extends React.Component {
                 archivedGroup = group
             }
         })
-        actService.activity('archived', 'group', archivedGroup, newBoard)
+        actService.activity('archived', 'group', archivedGroup, newBoard, newBoard)
         await this.props.updateBoard(newBoard)
         socketService.emit(SOCKET_EMIT_PULL, newBoard._id)
     }
