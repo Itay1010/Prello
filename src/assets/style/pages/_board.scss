@@ -44,6 +44,7 @@
         grid-column: 1 /-1;
         padding-left: 20px;
         margin-top: 8px;
+        margin-bottom: 10px;
 
         &:last-child {
             padding-inline-end: 20px;
@@ -56,12 +57,14 @@
 
         &::-webkit-scrollbar-track {
             border-radius: 10px;
-            background: rgba(128, 128, 128, 0.231);
+            // background: rgba(128, 128, 128, 0.231);
+            background: var(--clr-dynamic-faded);
 
         }
 
         &::-webkit-scrollbar-thumb {
-            background: rgba(128, 128, 128, 0.231);
+            // background: rgba(128, 128, 128, 0.231);
+            background: var(--clr-dynamic-faded-hover);
             border-radius: 10px;
         }
 
@@ -160,16 +163,27 @@
             display: flex;
             flex-direction: column;
 
-            button {
-
-                height: fit-content;
+            .background-select-btn {
                 @include btn;
+                height: fit-content;
+                display: flex;
+                align-items: center;
                 margin: 5px 0;
+                padding: 0 6px;
                 text-align: start;
                 background-color: unset;
+                width: 100%;
 
+                span {
+                    transform: translate(0px, 1px);
+                }
                 &:hover {
                     background-color: $opc-black;
+                }
+
+                img {
+                    width: 30px;
+                    margin-right: 14px;
                 }
             }
         }
@@ -188,7 +202,7 @@
 
             .activity-heading {
                 justify-self: start;
-                padding-left: 10px;
+                padding-left: 13px;
                 font-family: secular-font;
                 font-size: 14px;
 
