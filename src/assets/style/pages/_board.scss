@@ -177,12 +177,15 @@
                 span {
                     transform: translate(0px, 1px);
                 }
+
                 &:hover {
                     background-color: $opc-black;
                 }
 
                 img {
                     width: 30px;
+                    object-fit: fill;
+                    height: 30px;
                     margin-right: 14px;
                 }
             }
