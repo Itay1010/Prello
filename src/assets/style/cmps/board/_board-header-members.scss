@@ -19,7 +19,7 @@
             cursor: pointer;
 
             &:not(:first-child) {
-                margin-left: -8px;
+                margin-left: -4px;
             }
 
             img {
@@ -51,7 +51,7 @@
         border-radius: 3px;
         border: none;
 
-        
+
 
         svg {
             position: absolute;
