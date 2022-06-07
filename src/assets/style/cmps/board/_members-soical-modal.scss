@@ -23,6 +23,7 @@
     .modal-body {
         display: flex;
         flex-direction: column;
+
         .search-member {
             font-size: 1rem;
             flex-grow: 1;
@@ -35,7 +36,17 @@
             margin-right: 20px;
         }
 
+        .invite-qr {
+            cursor: pointer;
+            margin: 0 0 15px 20px;
+            width: fit-content;
+            padding: 5px;
+            background-color: $clr1;
+            color: $white;
+        }
+
         .user-list {
+            margin-bottom: 20px;
             .member {
                 display: flex;
                 align-items: center;
@@ -71,6 +82,11 @@
                 }
             }
         }
+
+        canvas {
+            margin: auto;
+        }
+
     }
 }
 

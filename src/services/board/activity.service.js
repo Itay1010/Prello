@@ -18,11 +18,11 @@ function activity(type, entityType, entity, board, desEntity) {
         id: utilService.makeId(),
         action: type,
         receiver: entityType,
-        destination: {id: desEntity.id, title: desEntity.title},
         createdAt: Date.now(),
         byMember: user,
         entity: { id: entity.id, title: entity.title }
     }
+    if(desEntity) newActivity.destination = { id: desEntity.id, title: desEntity.title }
     if (board.activities.length >= LIMIT) {
         board.activities.splice(0, 1)
     }
