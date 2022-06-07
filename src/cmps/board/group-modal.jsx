@@ -20,10 +20,6 @@ export const GroupModal = ({ groupInfo, setModal, archiveGroup, setColorSelect, 
         />}
 
         {isColorSelect || <section className='modal-body'>
-            <button className='archive' onClick={ev => {
-                archiveGroup(groupInfo.groupId)
-                setModal(false)
-            }}>Archive this list</button>
             <button className='btn' onClick={ev => {
                 setModal(false)
                 titleRef.current.focus()
@@ -31,6 +27,10 @@ export const GroupModal = ({ groupInfo, setModal, archiveGroup, setColorSelect, 
             <button className='btn' onClick={ev => {
                 setColorSelect(true)
             }}>Change color</button>
+            <button className='archive' onClick={ev => {
+                archiveGroup(groupInfo.groupId)
+                setModal(false)
+            }}>Archive this list</button>
         </section>}
     </div >
 }
