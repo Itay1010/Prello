@@ -4,11 +4,12 @@ import { IStar } from '../../../icons/i-star'
 
 
 
-export const DynamicFilter = ({ boards, modalType, toggleStar }) => {
+export const DynamicFilter = ({ boards, modalType, toggleStar, setModal }) => {
     const history = useHistory()
 
     const onGoTo = (boardId) => {
         history.push(`/board/${boardId}`)
+        setModal(false)
     }
     return <ul className='dynamic-filter'>
         <h3>{modalType === 'starred' ? 'Starred boards' : 'Recent boards'}</h3>
