@@ -30,7 +30,7 @@ export const ChooseBackgroundModal = ({ isModalOpen, closeBackgroundModal, imgs,
             <IClose />
         </div>
         <h1>Change background</h1>
-        <input ref={searchRef} type='text' placeholder='Enter search' onChange={searchValueTyped} name='searchValue' />
+        <input ref={searchRef} type='text' placeholder='Enter search' autoComplete='off' onChange={searchValueTyped} name='searchValue' />
         <div className='unsplash-imgs-wrapper'>
             {imgs.map((img, idx) => {
                 if (idx > 8) return
