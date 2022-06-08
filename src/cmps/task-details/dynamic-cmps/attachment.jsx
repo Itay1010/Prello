@@ -34,7 +34,6 @@ export const Attachment = ({ attachmentToUpdate, saveAttachment, closeModal }) =
         return /^(ftp|http|https):\/\/[^ ']+$/.test(url)
     }
 
-    console.log('hello')
     return <div className='attachments'>
         <div className='close-modal flex justify-center align-center' onClick={(event) => {
             event.stopPropagation()

@@ -209,7 +209,6 @@ export const TaskDetails = ({ onArchiveTask, onSaveBoard }) => {
         } else {
             requestedClTask.member = member
         }
-        console.log(requestedClTask.member)
         saveBoard(newBoard)
 
     }

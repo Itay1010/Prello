@@ -1,3 +1,12 @@
+.filter-screen {
+    width: 100vw;
+    height: 100vh;
+    transform: translateX(-8vw);
+    background-color: gold;
+    position: absolute;
+    z-index: 5;
+}
+
 .header-container {
     position: relative;
     z-index: 500;
@@ -69,6 +78,8 @@
     position: relative;
     z-index: 10;
 
+
+
     &>* {
         @include btn($type: dark);
         margin-inline-end: 4px;
@@ -80,7 +91,10 @@
             fill: $bg;
             transform: translateY(12%);
         }
+
+
     }
+
 
 }
 
@@ -99,6 +113,8 @@
     z-index: 30;
     color: $td-main;
     box-shadow: 0 8px 16px -4px rgb(9 30 66 / 25%), 0 0 0 1px rgb(9 30 66 / 8%);
+
+
 
     h3 {
         border-bottom: 1px solid $opc-black;
