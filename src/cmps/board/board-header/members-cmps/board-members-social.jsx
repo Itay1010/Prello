@@ -28,7 +28,6 @@ export const BoardMembersSocial = ({ setSocial, users, currentMembers, onChangeM
         try {
             const canvas = document.querySelector('#QRcanvas')
             const res = await QRcode.toCanvas(canvas, text)
-            console.log(res)
         } catch (err) {
             console.error(err)
         }
