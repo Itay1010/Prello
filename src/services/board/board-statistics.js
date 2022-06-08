@@ -195,22 +195,22 @@ function getChecklistCount(board) {
     return res
 }
 
-function getAttachsCount(board){
+function getAttachsCount(board) {
     console.log(board);
 }
 
 function getDates() {
     const today = new Date()
-    let timestamp = today - WEEK_TIMESTAMP
+    let timestamp = today - WEEK_TIMESTAMP + DAY_TIMESTAMP
 
     const res = []
-    for (let i = 0; i < 7; i++) {
+    for (let i = 0; i < 6; i++) {
         const date = new Date(timestamp)
         const dateStr = `${date.getDate()}/${date.getMonth() + 1}`
         res.push(dateStr)
         timestamp += DAY_TIMESTAMP
     }
-
+    res.push(`${today.getDate()}/${today.getMonth() + 1}`)
     return res
 }
 

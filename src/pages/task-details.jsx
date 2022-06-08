@@ -310,8 +310,21 @@ export const TaskDetails = ({ onArchiveTask, onSaveBoard }) => {
                                 <IDescription />
                             </div>
                             <div className='description-data flex col'>
-                                <h2>Description</h2>
-                                {!isDescriptionEditable && <p placeholder={task.description} onClick={toggleEditDescription}>{!task.description ? 'Add a more detailed description...' : `${task.description}`}</p>}
+                                <div className='util'>
+                                    <h2>Description</h2>
+                                    {task.description && !isDescriptionEditable && <button className='btn-edit' onClick={toggleEditDescription}>Edit</button>}
+                                </div>
+
+                                {
+                                    !isDescriptionEditable && <React.Fragment>
+
+                                        <p placeholder={task.description} style={({ backgroundColor: `${task.description ? 'inherit' : ''}` })}
+                                            onClick={toggleEditDescription}>
+                                            {!task.description ? 'Add a more detailed description...' : `${task.description}`}
+                                        </p>
+                                    </React.Fragment>
+                                }
+
                                 {isDescriptionEditable && <div className='edit-description'>
                                     <TextareaAutosize
                                         onChange={handleDescriptionChange}

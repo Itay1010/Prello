@@ -3,8 +3,9 @@
     background-color: $td-bg;
     left: 50%;
     top: 50%;
-    transform: translate(-50%, -50%);
     width: 400px;
+    transform: translate(-50%, -50%);
+    border-radius: 3px;
 
     .modal-header {
         display: flex;
@@ -85,6 +86,7 @@
 
         canvas {
             margin: auto;
+            margin-block-end: 20px;
         }
 
     }

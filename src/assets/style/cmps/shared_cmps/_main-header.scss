@@ -393,6 +393,7 @@
 
         .search {
             display: none;
+            position: absolute;
             left: 0;
             bottom: 0;
             width: 100%;
@@ -476,7 +477,7 @@
 
         .profile {
             position: absolute;
-            // right: 10px;
+            right: 10px;
         }
 
         .search {

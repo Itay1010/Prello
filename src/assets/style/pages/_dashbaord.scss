@@ -9,10 +9,10 @@
     margin: 52px 20px 20px;
     overflow: hidden;
     transform: translateX(-20px);
-    padding: 50px;
+    padding: 0 50px 50px;
     overflow-y: auto;
     gap: 50px;
-    padding-bottom: 50px;
+    padding-bottom: 75px;
 
     &::-webkit-scrollbar {
         border-radius: 10px;
@@ -40,8 +40,7 @@
         gap: 25px;
 
         .box {
-            padding: 25px;
-            justify-content: space-evenly;
+            padding-top: 25px;
             align-items: flex-start;
             background-color: $white;
             text-align: center;
@@ -50,23 +49,35 @@
             border-radius: 3px;
             box-shadow: 0 2px 0 #091e4240;
 
+            &:hover {
+                transform: scale(105%);
+                transition: transform, 0.5s;
+            }
+
             svg {
                 height: 40px;
-                transform: translateX(-4px);
-                transform: translateX(-4px);
                 fill: $td-svg;
+                padding-inline-start: 25px;
             }
 
             h2 {
                 font-weight: 700;
                 font-size: 40px;
                 color: $success;
+                height: 70px;
+                line-height: 70px;
+                text-align: center;
+                width: 100%;
+                background-color: $txt;
+
             }
 
             p {
                 font-weight: 500;
                 font-size: 16px;
-                // color: $bg;
+                transform: translateY(-10px);
+                padding-inline-start: 25px;
+
 
             }
         }
@@ -80,8 +91,8 @@
             gap: 25px;
 
             .act-box {
-                height: 125px;
-                background-color: $clr1;
+                height: 150px;
+                background-color: #DAE9F1;
                 border-radius: 3px;
                 box-shadow: 0 2px 0 #091e4240;
                 text-align: center;
@@ -90,14 +101,13 @@
                 h3 {
                     font-weight: 500;
                     font-size: 18px;
-                    color: $bg;
+                    color: $txt;
                 }
 
                 h2 {
-                    font-weight: 500;
+                    font-weight: 600;
                     font-size: 40px;
                     color: $success;
-
                 }
             }
         }
@@ -151,259 +161,87 @@
 
                 h3 {
                     font-weight: 500px;
-                    margin-bottom: 12px;
+                    margin-bottom: 20px;
                     text-align: left;
+                    width: 100%;
                 }
             }
 
             .members-chart {
                 width: 100%;
-                height: 200px;
+                height: 250px;
             }
 
         }
     }
 
-    // .dash-header {
-    //     padding-top: 25px;
-    //     background-color: $header-board;
-    //     width: 100%;
-    //     box-shadow: rgb(9 30 66 / 11%) 0px 6px 16px 0px;
-    //     gap: 25px;
+    .cards-stat {
+        padding: 25px;
+        gap: 25px;
+        background-color: $td-btn;
+        border-radius: 3px;
 
-    //     h1 {
-    //         font-size: 30px;
-    //         font-weight: 700;
-    //         // margin: 25px 0;
-    //     }
+        h2 {
+            font-weight: 600;
+            font-size: 20px;
+            color: $clr1;
 
-    //     .summary-box {
-    //         gap: 50px;
-    //         margin-bottom: 50px;
+        }
 
-    //         .box {
-    //             // margin-bottom: 8px;
-    //             background-color: $clr1-opc2;
-    //             text-align: center;
-    //             width: 180px;
-    //             height: 90px;
-    //             border-radius: 3px;
-    //             box-shadow: 0 2px 0 #091e4240;
+        .cards-data {
+            gap: 50px;
 
-    //             h2 {
-    //                 // color: $bg;
-    //                 font-weight: 700;
-    //                 font-size: 24px;
-    //                 color: $success;
-    //             }
-
-    //             p {
-    //                 font-weight: 500;
-    //                 font-size: 16px;
-    //                 // color: $bg;
-
-    //             }
-    //         }
-    //     }
-    // }
+            .cards-info {
+                background-color: $bg;
+                border-radius: 3px;
+                box-shadow: 0 2px 0 #091e4240;
+                padding: 25px;
+                width: 50%;
+                position: relative;
 
 
-    // .main-dash {
-    //     width: 100%;
+                h5 {
+                    font-size: 18px;
+                    font-weight: 400;
+                }
 
-    //     .activity {
-    //         width: 100%;
-    //         padding: 50px 150px;
-    //         background-color: $txt;
-    //         margin-bottom: 50px;
-    //         gap: 50px;
+                h3 {
+                    width: 100%;
+                    text-align: left;
+                    margin-bottom: -20px;
+                }
 
-    //         .act-title {
-    //             width: 100%;
-
-    //             h2 {
-    //                 color: $bg;
-    //                 font-weight: 100;
-    //                 text-align: left;
-    //                 font-size: 20px;
-    //             }
-    //         }
-
-    //         .act-data {
-    //             width: 100%;
-    //             gap: 25px;
-    //             flex-basis: 70%;
-    //             // padding: 0 150px;
-
-    //             .activity-chart {
-    //                 width: 100%;
-    //                 margin-bottom: 20px;
-
-    //                 canvas {
-    //                     height: 200px;
-
-    //                 }
-    //             }
-    //         }
-
-    //         .activity-info {
-    //             // height: 100%;
-    //             border-radius: 3px;
-    //             background-color: $clr1-opc;
-    //             padding: 50px;
-    //             text-align: center;
-    //             color: $bg;
-    //             gap: 50px;
-    //             box-shadow: 0 2px 0 #091e4240;
-
-    //             // flex-basis: 30%;
+                h6 {
+                    font-size: 24px;
+                    font-weight: 500;
+                    margin-bottom: 25px;
+                    position: relative;
+                    top: 45%;
+                    color: $txt;
 
 
-    //             span {
-    //                 color: $success;
-    //                 font-size: 30px;
-    //                 font-weight: 900;
-    //                 margin: 0 4px;
-    //             }
+                    span {
+                        color: $success;
+                        font-weight: 600;
+                    }
+                }
+            }
 
-    //             h2 {
-    //                 h3 {
-    //                     font-size: 18px;
-    //                 }
-    //             }
+            .cards-chart {
+                width: 100%;
+                height: 250px;
+                transform: translateY(-15px);
 
-    //             h4 {
-    //                 color: $star;
-    //                 font-size: 18px;
-    //                 font-weight: 400;
-
-    //             }
-    //         }
-    //     }
-
-    //     .more-stat {
-    //         // width: 80%;
-    //         width: 100%;
-    //         padding: 0 150px;
-    //         margin-bottom: 25px;
-    //         flex-wrap: wrap;
-    //         gap: 50px;
-
-    //         h2 {
-    //             font-weight: 600;
-    //             text-align: center;
-    //             color: $clr1;
-    //             font-size: 25px;
-    //             margin-bottom: -25px;
-    //         }
-
-    //         .member-stat {
-    //             border: 1px solid $opc-black-hov;
-    //             border-radius: 3px;
-    //             padding: 50px;
-    //             width: 100%;
-    //             gap: 50px;
-    //             margin-bottom: 25px;
-
-    //             .acts-member {
-    //                 flex-basis: 50%;
-
-    //                 h5 {
-    //                     font-size: 18px;
-    //                     font-weight: 500;
-    //                     margin-bottom: 25px;
-    //                 }
-
-    //                 .acts-member-chart {
-    //                     width: 100%;
-
-    //                 }
-    //             }
-
-    //             .by-member {
-    //                 flex-basis: 50%;
-
-    //                 h5 {
-    //                     font-size: 18px;
-    //                     font-weight: 500;
-    //                     margin-bottom: 25px;
-    //                 }
-
-    //                 .cards-member-chart {
-    //                     width: 100%;
-
-    //                 }
-    //             }
-    //         }
-
-
-    //         .cards-stat {
-    //             // background-color: $td-btn;
-    //             width: 100%;
-    //             border-radius: 3px;
-    //             background-color: $td-btn;
-    //             padding: 50px;
-    //             width: 100%;
-    //             // gap: 50px;
-    //             margin-bottom: 25px;
-    //             justify-content: space-evenly;
-
-
-
-    //             .by-checklist {
-    //                 max-width: 50%;
-
-    //                 h5 {
-    //                     font-size: 18px;
-    //                     font-weight: 400;
-    //                     margin-bottom: 10px;
-    //                 }
-
-    //                 h6 {
-    //                     font-size: 16px;
-    //                     margin-bottom: 25px;
-
-
-    //                     span {
-    //                         color: $success;
-    //                     }
-    //                 }
-
-    //                 .cards-checklist-chart {
-    //                     // width: 100%;
-    //                     height: 200px;
-
-    //                 }
-    //             }
-
-    //             .by-label {
-    //                 max-width: 50%;
-
-    //                 h5 {
-    //                     font-size: 18px;
-    //                     font-weight: 400;
-    //                     margin: 10px 0 10px;
-    //                 }
-
-    //                 .cards-labels-chart {
-    //                     // width: 100%;
-    //                     height: 200px;
-
-    //                 }
-    //             }
-    //         }
-
-
-    //     }
-    // }
+            }
+        }
+    }
 }
 
 
 .close-modal-dash {
     position: absolute;
-    // display: fixed;
-    right: 70px;
-    top: 112px;
+    right: 50px;
+    top: 58px;
     border-radius: 100px;
     cursor: pointer;
     z-index: 100;

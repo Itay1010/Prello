@@ -77,7 +77,7 @@ export function Activity({ dataToDisplay, datesToDisplay }) {
 
         elements: {
             line: {
-                tension: 0.1,
+                tension: 0,
             },
             point: {
                 radius: 5,
