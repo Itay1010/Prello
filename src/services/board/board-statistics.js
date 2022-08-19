@@ -4,21 +4,27 @@ const WEEK_TIMESTAMP = 7 * 24 * 60 * 60 * 1000 //604800000
 const DAY_TIMESTAMP = 86400000
 
 export const boardStatistics = {
-    getCardsCount,
-    getMemebersCount,
-    getCardsByMember,
-    getUnassignedTasksCount,
-    getCardsByLabels,
-    getActivityStats,
-    getActByMember,
-    getChecklistCount,
-    getAttachsCount,
-    getDates,
+    getStatistics,
     hexToRgb
 
 }
 
-function getCardsCount(board) {
+function getStatistics(board) {
+    return {
+        activity: _getActivityStats(board),
+        datesToDisplay: _getDates(board),
+        cardsPerMember: _getCardsByMember(board),
+        unAssignedTasks: _getUnassignedTasksCount(board),
+        cardsPerLabels: _getCardsByLabels(board),
+        actsByMember: _getActByMember(board),
+        checklists: _getChecklistCount(board),
+        summary: _getCardsCount(board),
+        membersCount: _getMemebersCount(board),
+        groupsCount: board.groups.length
+    }
+}
+
+function _getCardsCount(board) {
     if (!board) return ('waiting for board')
     const res = board.groups.reduce((acc, group) => {
         const count = {
@@ -48,11 +54,11 @@ function getCardsCount(board) {
     return res
 }
 
-function getMemebersCount(board) {
+function _getMemebersCount(board) {
     return board.members.length
 }
 
-function getCardsByMember(board) {
+function _getCardsByMember(board) {
     const res = board.groups.reduce((acc, group) => {
         const count = {}
 
@@ -97,7 +103,7 @@ function getCardsByMember(board) {
 
 }
 
-function getUnassignedTasksCount(board) {
+function _getUnassignedTasksCount(board) {
     const res = board.groups.reduce((acc, group) => {
         let count = 0
 
@@ -113,7 +119,7 @@ function getUnassignedTasksCount(board) {
 
 }
 
-function getCardsByLabels(board) {
+function _getCardsByLabels(board) {
     const labels = boardService.getLabels()
     const res = labels.reduce((acc, label) => {
         let labelCount = 0
@@ -131,7 +137,7 @@ function getCardsByLabels(board) {
     return res
 }
 
-function getActivityStats(board) {
+function _getActivityStats(board) {
     const currTimestamp = Date.now()
     const timeLimit = currTimestamp - WEEK_TIMESTAMP
 
@@ -152,7 +158,7 @@ function getActivityStats(board) {
     return res
 }
 
-function getActByMember(board) {
+function _getActByMember(board) {
 
     const res = board.members.reduce((acc, member) => {
         let count = 0
@@ -176,7 +182,7 @@ function getActByMember(board) {
 
 }
 
-function getChecklistCount(board) {
+function _getChecklistCount(board) {
     let todos = 0
     let done = 0
     board.groups.forEach(group => {
@@ -195,11 +201,11 @@ function getChecklistCount(board) {
     return res
 }
 
-function getAttachsCount(board) {
+function _getAttachsCount(board) {
     console.log(board);
 }
 
-function getDates() {
+function _getDates() {
     const today = new Date()
     let timestamp = today - WEEK_TIMESTAMP + DAY_TIMESTAMP
 
