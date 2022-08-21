@@ -14,7 +14,7 @@ function getStatistics(board) {
         activity: _getActivityStats(board),
         datesToDisplay: _getDates(board),
         cardsPerMember: _getCardsByMember(board),
-        unAssignedTasks: _getUnassignedTasksCount(board),
+        unAssignedCards: _getUnassignedTasksCount(board),
         cardsPerLabels: _getCardsByLabels(board),
         actsByMember: _getActByMember(board),
         checklists: _getChecklistCount(board),

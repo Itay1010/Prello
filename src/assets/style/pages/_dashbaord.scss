@@ -45,10 +45,23 @@
         }
     }
 
+    svg.close {
+        position: absolute;
+        right: 50px;
+        top: 58px;
+        border-radius: 100px;
+        cursor: pointer;
+        z-index: 100;
+        fill: $td-svg;
+        height: 25px;
+        width: 25px;
+    }
+
     h1 {
         font-size: 28px;
         font-weight: 600;
     }
+
 
     .summary-box {
         display: flex;
@@ -78,7 +91,7 @@
                 padding-inline-start: 25px;
             }
 
-            h2 {
+            h3 {
                 font-weight: 700;
                 font-size: 40px;
                 color: $success;
@@ -89,7 +102,7 @@
                 background-color: $txt;
             }
 
-            p {
+            h4 {
                 font-weight: 500;
                 font-size: 16px;
                 transform: translateY(-10px);
@@ -270,17 +283,17 @@
     }
 }
 
-.close-modal-dash {
-    position: absolute;
-    right: 50px;
-    top: 58px;
-    border-radius: 100px;
-    cursor: pointer;
-    z-index: 100;
+// .close-modal-dash {
+//     position: absolute;
+//     right: 50px;
+//     top: 58px;
+//     border-radius: 100px;
+//     cursor: pointer;
+//     z-index: 100;
 
-    svg {
-        fill: $td-svg;
-        height: 25px;
-        width: 25px;
-    }
-}
+//     svg {
+//         fill: $td-svg;
+//         height: 25px;
+//         width: 25px;
+//     }
+// }
