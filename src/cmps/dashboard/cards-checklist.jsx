@@ -32,5 +32,9 @@ export function CardsChecklist({ checklists }) {
         maintainAspectRatio: false,
     }
 
-    return <Doughnut data={data} options={options} />
+    return (
+        <div className="cards-chart ">
+            <Doughnut data={data} options={options} />
+        </div>
+    )
 }

@@ -61,6 +61,10 @@ export function ActsMembers({ actsByMember }) {
         }
     }
 
-    return <Bar options={options} data={data} />
+    return (
+        <div className="members-chart">
+            <Bar options={options} data={data} />
+        </div>
+    )
 
 } 

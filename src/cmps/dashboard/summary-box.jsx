@@ -1,6 +1,6 @@
 import { IMembers, IGroups, ITask, IUnassigned } from '../icons/icons'
 
-export const InfoBox = ({ title, data }) => {
+export const SummaryBox = ({ title, data }) => {
 
     let icon
 

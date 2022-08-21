@@ -64,6 +64,10 @@ export function CardsMember({ cardsPerMember, unAssignedTasks }) {
         }
     }
 
-    return <Bar options={options} data={data} />
+    return (
+        <div className="members-chart ">
+            <Bar options={options} data={data} />
+        </div>
+    )
 
 } 

@@ -31,5 +31,9 @@ export function CardsLabels({ cardsPerLabels }) {
         maintainAspectRatio: false,
     }
 
-    return <Pie data={data} options={options} />
+    return (
+        <div className="cards-chart ">
+            <Pie data={data} options={options} />
+        </div>
+    )
 }
