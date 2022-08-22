@@ -4,7 +4,8 @@ import {
     CategoryScale,
     LinearScale,
     PointElement,
-    LineElement
+    LineElement,
+    Filler
 } from 'chart.js'
 import { Line } from 'react-chartjs-2'
 
@@ -15,6 +16,7 @@ export function ActivityChart({ dataToDisplay, datesToDisplay }) {
         LinearScale,
         PointElement,
         LineElement,
+        Filler
     )
 
     const labels = datesToDisplay
@@ -35,6 +37,9 @@ export function ActivityChart({ dataToDisplay, datesToDisplay }) {
     }
 
     const options = {
+        animation: {
+            delay: 400,
+        },
         responsive: true,
         plugins: {
             legend: {

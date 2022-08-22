@@ -11,7 +11,7 @@
 
     height: calc(100vh - 44px);
     width: 100vw;
-    padding: 0 50px 75px;
+    padding: 50px 50px 75px;
     background-color: $group-bg;
 
     &::-webkit-scrollbar {
@@ -29,15 +29,32 @@
         border-radius: 10px;
     }
 
-    &.slide-top {
-        animation: slide-top 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
+    &.slide-in {
+        animation: slide-in 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
 
-        @keyframes slide-top {
+        @keyframes slide-in {
             0% {
+                opacity: 0.90;
                 transform: translateY(110%);
             }
             100% {
+                opacity: 1;
                 transform: translateY(0);
+            }
+        }
+    }
+
+    &.slide-out {
+        animation: slide-out 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
+
+        @keyframes slide-out {
+            0% {
+                opacity: 1;
+                transform: translateY(0);
+            }
+            100% {
+                opacity: 0.90;
+                transform: translateY(110%);
             }
         }
     }
@@ -81,7 +98,7 @@
 
             &:hover {
                 transform: scale(105%);
-                transition: transform, 0.5s;
+                transition: transform, 0.25s;
             }
 
             svg {
@@ -143,7 +160,6 @@
 
             .activity-chart {
                 height: 100%;
-
                 padding: 0 25px 25px;
             }
         }
