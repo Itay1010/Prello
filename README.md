@@ -1,6 +1,4 @@
-# Coding Academy Sprint 4
+# refactoring dashboard page and service
 
-This project was made by Eytan Silberberg, Offir Carmi, and Itay Zonshine, for coding academy's March 2022
-fullstack bootcamp.
-
-# Check it out on heroku: https://prello-tasks.herokuapp.com/
+The original project was written by Eytan Silberberg, Itay Zonshine and me as a final project for Coding Academy's fullstack bootcamp.
+Check out our project on https://prello-tasks.herokuapp.com/
