@@ -14,7 +14,6 @@ export function CardsChecklist({ checklists }) {
             {
                 data: DataToDisplay,
                 backgroundColor: ['#23C552', '#091e420a'],
-                // borderColor: backgroundColor,
                 borderWidth: 0,
             },
         ],
