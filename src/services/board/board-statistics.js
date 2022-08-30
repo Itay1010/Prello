@@ -1,96 +1,100 @@
+let g7DaysActivities = [];
+let gTasks = [];
+
 const DAY_TIMESTAMP = 1000 * 60 * 60 * 24;
 const WEEK_TIMESTAMP = DAY_TIMESTAMP * 7;
+const currTimestamp = Date.now();
+const timeLimit = currTimestamp - WEEK_TIMESTAMP;
+
 
 export const boardStatistics = {
     getStatistics
 }
 
 function getStatistics(board) {
+    g7DaysActivities = board.activities.filter(act => act.createdAt >= timeLimit);
+    board.groups.forEach(group => {
+        group.tasks.forEach(task => gTasks.push(task))
+    });
+
     return {
-        summary: _getSummary(board),
-        activity: _getActyivity(board),
-        members: _getMembersStat(board),
-        cards: _getCardsStat(board)
-    }
+        summary: getSummary(board),
+        activities: getActivities(),
+        members: getMembersStat(board),
+        cards: getCardsStat()
+    };
 }
 
-function _getSummary(board) {
+function getSummary(board) {
     return {
         members: board.members.length,
         groups: board.groups.length,
-        active: _getCardsCount(board).active,
-        unassigned: _getCardsCount(board).unassigned
-    }
+        active: _getCardsCount().active,
+        unassigned: _getCardsCount().unassigned
+    };
 }
 
-function _getActyivity(board) {
+function getActivities() {
     return {
         chart: {
-            data: _getActivityData(board).data,
+            data: _getActivityData().data,
             dates: _getDates()
         },
-        total: _getActivityData(board).total,
-        avg: _getActivityData(board).avg
-    }
+        total: _getActivityData().total,
+        avg: _getActivityData().avg
+    };
 }
 
-function _getMembersStat(board) {
+function getMembersStat(board) {
     return {
         activities: _getActsByMember(board),
         cards: _getCardsByMember(board),
-        unassigned: _getUnassignedTasksCount(board)
-    }
+        unassigned: _getUnassignedTasksCount()
+    };
 }
 
-function _getCardsStat(board) {
+function getCardsStat() {
     return {
-        checklist: _getChecklistCount(board),
-        labels: _getCardsByLabels(board)
-    }
+        checklist: _getChecklistCount(),
+        labels: _getCardsByLabels()
+    };
 }
 
-function _getCardsCount(board) {
-    return board.groups.reduce((acc, group) => {
-        group.tasks.forEach(task => {
-            if (!task.archivedAt) acc.active++
-            if (!task.archivedAt && !task.members.length) acc.unassigned++
-        })
-        return acc
-    }, { active: 0, unassigned: 0 })
+function _getCardsCount() {
+    return gTasks.reduce((acc, task) => {
+        if (!task.archivedAt) acc.active++;
+        if (!task.archivedAt && !task.members.length) acc.unassigned++;
+        return acc;
+    }, { active: 0, unassigned: 0 });
 }
 
-function _getActivityData(board) {
-    const currTimestamp = Date.now();
-    const timeLimit = currTimestamp - WEEK_TIMESTAMP;
-
-    const lastWeekActivities = board.activities.filter(act => act.createdAt >= timeLimit);
-
+function _getActivityData() {
     const res = {};
     let total = 0;
-    for (let act of lastWeekActivities) {
+    for (let act of g7DaysActivities) {
         const actDate = new Date(act.createdAt);
         const idxOrder = _getIndex(actDate.getDay());
         res[idxOrder] = (res[idxOrder] || 0) + 1;
         total++;
-    }
+    };
 
     for (let i = 0; i < 7; i++) {
         if (!res[i]) res[i] = 0;
-    }
+    };
 
     return {
         data: Object.values(res),
         total,
         avg: (total / 7).toFixed()
-    }
+    };
 }
 
 function _getActsByMember(board) {
 
-    const actsMap = board.activities.reduce((acc, act) => {
-        if (acc[act.byMember._id]) acc[act.byMember._id]++
-        else acc[act.byMember._id] = 1
-        return acc
+    const actsMap = g7DaysActivities.reduce((acc, act) => {
+        if (acc[act.byMember._id]) acc[act.byMember._id]++;
+        else acc[act.byMember._id] = 1;
+        return acc;
     }, {});
 
 
@@ -105,13 +109,11 @@ function _getActsByMember(board) {
 
 function _getCardsByMember(board) {
     const cardsMap = {}
-    board.groups.forEach(group => {
-        group.tasks.forEach(task => {
-            task.members.forEach(member => {
-                cardsMap[member] = (cardsMap[member] || 0) + 1;
-            })
+    for (let task of gTasks) {
+        task.members.forEach(member => {
+            cardsMap[member] = (cardsMap[member] || 0) + 1;
         })
-    })
+    }
 
     return board.members.map(member => {
         return {
@@ -119,52 +121,40 @@ function _getCardsByMember(board) {
             color: member.color,
             tasksCount: cardsMap[member._id] || 0
         }
-    })
+    });
 }
 
-function _getUnassignedTasksCount(board) {
-    const res = board.groups.reduce((acc, group) => {
-        let count = 0
-
-        group.tasks.forEach(task => {
-            if (task.members.length === 0 && !task.archivedAt) count++
-        })
-
-        acc += count
-        return acc
+function _getUnassignedTasksCount() {
+    return gTasks.reduce((acc, task) => {
+        if (!task.archivedAt && !task.members.length) acc++;
+        return acc;
     }, 0)
 
-    return res
-
 }
 
-function _getChecklistCount(board) {
-    return board.groups.reduce((acc, group) => {
-        group.tasks.forEach(task => {
-            if (task.checklist?.length) {
-                task.checklist.forEach(list => {
-                    list.items.forEach(item => {
-                        acc.todos++
-                        if (item.isDone) acc.done++
-                    })
+function _getChecklistCount() {
+    return gTasks.reduce((acc, task) => {
+        if (task.checklist?.length && !task.archivedAt) {
+            task.checklist.forEach(list => {
+                list.items.forEach(item => {
+                    acc.todos++;
+                    if (item.isDone) acc.done++;
                 })
-            }
-        })
-
-        return acc
+            })
+        }
+        return acc;
     }, { todos: 0, done: 0 })
+
 }
 
-function _getCardsByLabels(board) {
-    return board.groups.reduce((acc, group) => {
-        group.tasks.forEach(task => {
-            if (task.labels?.length) {
-                task.labels.forEach(label => {
-                    acc[label] = (acc[label] || 0) + 1
-                })
-            }
-        })
-        return acc
+function _getCardsByLabels() {
+    return gTasks.reduce((acc, task) => {
+        if (task.labels?.length && !task.archivedAt) {
+            task.labels.forEach(label => {
+                acc[label] = (acc[label] || 0) + 1;
+            })
+        }
+        return acc;
     }, {})
 }
 

@@ -20,7 +20,7 @@ export const Dashboard = ({ board }) => {
     const params = useParams()
     const { boardId } = params
 
-    const { summary, activity, members, cards } = boardStatistics.getStatistics(board)
+    const { summary, activities, members, cards } = boardStatistics.getStatistics(board)
 
     const onCloseDashboard = () => {
         setIsActive(false, setTimeout(() => {
@@ -42,18 +42,18 @@ export const Dashboard = ({ board }) => {
                 <section className="activity">
                     <div className="activity-data">
                         <h2 className="act-title">Board's activity in the last 7 days</h2>
-                        <ActivityChart dataToDisplay={activity.chart.data} datesToDisplay={activity.chart.dates} />
+                        <ActivityChart dataToDisplay={activities.chart.data} datesToDisplay={activities.chart.dates} />
                     </div>
                     <div className="activity-info ">
-                        <ActivityBox title="Total activities this week" data={activity.total} />
-                        <ActivityBox title="Daily average activities" data={activity.avg} />
+                        <ActivityBox title="Total activities this week" data={activities.total} />
+                        <ActivityBox title="Daily average activities" data={activities.avg} />
                     </div>
                 </section>
                 <section className="members">
                     <h2>Find out more about board's members</h2>
                     <div className="members-data ">
                         <div className="members-info">
-                            <h3>Activities per member</h3>
+                            <h3>Activities per member for the last 7 days</h3>
                             <ActsMembers actsByMember={members.activities} />
                         </div>
                         <div className="members-info ">
