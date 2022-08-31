@@ -70,12 +70,11 @@ function _getCardsCount() {
 
 function _getActivityData() {
     const res = {};
-    let total = 0;
+
     for (let act of g7DaysActivities) {
         const actDate = new Date(act.createdAt);
         const idxOrder = _getIndex(actDate.getDay());
         res[idxOrder] = (res[idxOrder] || 0) + 1;
-        total++;
     };
 
     for (let i = 0; i < 7; i++) {
@@ -84,44 +83,43 @@ function _getActivityData() {
 
     return {
         data: Object.values(res),
-        total,
-        avg: (total / 7).toFixed()
+        total: g7DaysActivities.length,
+        avg: (g7DaysActivities.length / 7).toFixed()
     };
 }
 
 function _getActsByMember(board) {
 
     const actsMap = g7DaysActivities.reduce((acc, act) => {
-        if (acc[act.byMember._id]) acc[act.byMember._id]++;
-        else acc[act.byMember._id] = 1;
-        return acc;
+        acc[act.byMember._id] = (acc[act.byMember._id] || 0) + 1;
+        return acc
     }, {});
 
-
-    return board.members.map(member => {
+    const res = board.members.map(member => {
         return {
             member: member.firstName + ' ' + member.lastName,
             color: member.color,
             count: actsMap[member._id] || 0
         }
     }).sort((a, b) => a.count - b.count);
+    return res
 }
 
 function _getCardsByMember(board) {
-    const cardsMap = {}
-    for (let task of gTasks) {
-        task.members.forEach(member => {
-            cardsMap[member] = (cardsMap[member] || 0) + 1;
-        })
-    }
+    const cardsMap = {};
+    const activeTasks = gTasks.filter(task => !task.archivedAt);
+    for (let task of activeTasks) {
+        task.members.forEach(member => (cardsMap[member] = (cardsMap[member] || 0) + 1));
+    };
 
-    return board.members.map(member => {
+    const res = board.members.map(member => {
         return {
             member: member.firstName + ' ' + member.lastName,
             color: member.color,
             tasksCount: cardsMap[member._id] || 0
         }
-    });
+    }).sort((a, b) => b.tasksCount - a.tasksCount);
+    return res
 }
 
 function _getUnassignedTasksCount() {
@@ -133,29 +131,41 @@ function _getUnassignedTasksCount() {
 }
 
 function _getChecklistCount() {
-    return gTasks.reduce((acc, task) => {
-        if (task.checklist?.length && !task.archivedAt) {
-            task.checklist.forEach(list => {
-                list.items.forEach(item => {
-                    acc.todos++;
-                    if (item.isDone) acc.done++;
-                })
-            })
-        }
-        return acc;
-    }, { todos: 0, done: 0 })
+    const tasksWithCL = gTasks.filter(task => task.checklist?.length && !task.archivedAt);
+    let checklists = [];
+    for (let task of tasksWithCL) checklists.push(...task['checklist']);
 
+    let items = [];
+    for (let list of checklists) items.push(...list['items']);
+
+    return items.reduce((acc, todo) => {
+        acc.todos++;
+        if (todo.isDone) acc.done++;
+        return acc;
+    }, { todos: 0, done: 0 });
+
+    // more readable with time complexity of O(n^3)
+    // return gTasks.reduce((acc, task) => {
+    //     if (task.checklist?.length && !task.archivedAt) {
+    //         task.checklist.forEach(list => {
+    //             list.items.forEach(item => {
+    //                 acc.todos++;
+    //                 if (item.isDone) acc.done++;
+    //             });
+    //         });
+    //     }
+    //     return acc;
+    // }, { todos: 0, done: 0 });
 }
 
 function _getCardsByLabels() {
-    return gTasks.reduce((acc, task) => {
-        if (task.labels?.length && !task.archivedAt) {
-            task.labels.forEach(label => {
-                acc[label] = (acc[label] || 0) + 1;
-            })
-        }
+    const activeTasks = gTasks.filter(task => task.labels?.length && !task.archivedAt);
+    return activeTasks.reduce((acc, task) => {
+        task.labels.forEach(label => {
+            acc[label] = (acc[label] || 0) + 1;
+        })
         return acc;
-    }, {})
+    }, {});
 }
 
 function _getIndex(day) {
@@ -168,15 +178,14 @@ function _getIndex(day) {
 }
 
 function _getDates() {
-    const today = new Date()
-    let timestamp = today - WEEK_TIMESTAMP + DAY_TIMESTAMP
+    const today = new Date();
+    let timestamp = today - WEEK_TIMESTAMP + DAY_TIMESTAMP;
 
-    const res = []
+    const res = [];
     for (let i = 0; i < 7; i++) {
-        const date = new Date(timestamp)
-        res.push(`${date.getDate()}/${date.getMonth() + 1}`)
-        timestamp += DAY_TIMESTAMP
+        const date = new Date(timestamp);
+        res.push(`${date.getDate()}/${date.getMonth() + 1}`);
+        timestamp += DAY_TIMESTAMP;
     }
-
-    return res
+    return res;
 }
