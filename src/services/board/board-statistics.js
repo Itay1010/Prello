@@ -71,11 +71,11 @@ function _getCardsCount() {
 function _getActivityData() {
     const res = {};
 
-    for (let act of g7DaysActivities) {
+    g7DaysActivities.forEach(act => {
         const actDate = new Date(act.createdAt);
         const idxOrder = _getIndex(actDate.getDay());
         res[idxOrder] = (res[idxOrder] || 0) + 1;
-    };
+    });
 
     for (let i = 0; i < 7; i++) {
         if (!res[i]) res[i] = 0;
@@ -108,9 +108,9 @@ function _getActsByMember(board) {
 function _getCardsByMember(board) {
     const cardsMap = {};
     const activeTasks = gTasks.filter(task => !task.archivedAt);
-    for (let task of activeTasks) {
+    activeTasks.forEach(task => {
         task.members.forEach(member => (cardsMap[member] = (cardsMap[member] || 0) + 1));
-    };
+    });
 
     const res = board.members.map(member => {
         return {
@@ -133,10 +133,10 @@ function _getUnassignedTasksCount() {
 function _getChecklistCount() {
     const tasksWithCL = gTasks.filter(task => task.checklist?.length && !task.archivedAt);
     let checklists = [];
-    for (let task of tasksWithCL) checklists.push(...task['checklist']);
+    tasksWithCL.forEach(task => checklists.push(...task['checklist']));
 
     let items = [];
-    for (let list of checklists) items.push(...list['items']);
+    checklists.forEach(list => items.push(...list['items']));
 
     return items.reduce((acc, todo) => {
         acc.todos++;
