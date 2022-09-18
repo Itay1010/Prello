@@ -1,4 +1,11 @@
-# refactoring dashboard page and service
+Prello - tasks manager app based on Trello
+App features: Drag&Drop, live update (Socket.IO), google login, dashboard, QR
 
-The original project was written by Eytan Silberberg, Itay Zonshine and me as a final project for Coding Academy's fullstack bootcamp.
-Check out our project on https://prello-tasks.herokuapp.com/
+This project was made by Eytan Silberberg, Offir Carmi, and Itay Zonshine, for coding academy's March 2022
+fullstack bootcamp.
+
+# Check it out on App Engine: https://prello-361810.oa.r.appspot.com/
+
+Stack:
+Front: React, Redux, Thunk
+Back: Node.js, express, MongoDB
