@@ -1,3 +1,13 @@
+const dark1 = '#172b4d'
+const dark2 = '#172b4d38'
+const dark3 = '#172b4d58'
+
+const light1 = '#FAFBFC'
+const light2 = '#fafbfc57'
+const light3 = '#fafbfc6e'
+const light4 = '#eaeaea'
+
+
 export const utilService = {
     makeId,
     getRandomIntInclusive,
@@ -44,10 +54,10 @@ function hexToRgb(hex) {
 }
 
 function setDynamicColors(isDark, avgColor) {
-    document.body.style.setProperty('--clr-dynamic-invert', `${isDark ? '#172b4d' : '#FAFBFC'}`)
-    document.body.style.setProperty('--clr-dynamic-faded', `${isDark ? '#fafbfc57' : '#172b4d38'}`)
-    document.body.style.setProperty('--clr-dynamic-faded-hover', `${isDark ? '#fafbfc6e' : '#172b4d58'}`)
-    document.body.style.setProperty('--clr-dynamic-inner', `${isDark ? '#eaeaea' : '#172b4d'}`)
-    document.body.style.setProperty('--clr-dynamic', `${isDark ? '#FAFBFC' : '#172b4d'}`)
+    document.body.style.setProperty('--clr-dynamic-invert', `${isDark ? dark1 : light1}`)
+    document.body.style.setProperty('--clr-dynamic-faded', `${isDark ? light2 : dark2}`)
+    document.body.style.setProperty('--clr-dynamic-faded-hover', `${isDark ? light3 : dark3}`)
+    document.body.style.setProperty('--clr-dynamic-inner', `${isDark ? light4 : dark1}`)
+    document.body.style.setProperty('--clr-dynamic', `${isDark ? light1 : dark1}`)
     document.body.style.setProperty('--clr-header', `${avgColor}`)
 }
