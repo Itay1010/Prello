@@ -3,68 +3,62 @@ import { Formik } from 'formik'
 
 
 export const LoginForm = ({ onLogin }) => {
-    return <section>
+    return <section className="login">
+        <h2>Sign in</h2>
+        <Formik
+            initialValues={{ email: '', password: '' }}
+            onSubmit={(values, actions) => {
+                onLogin(values)
+                actions.setSubmitting(false)
+            }}
+            enableReinitialize={true}
+            validateOnChange={true}
+            validateOnBlur={true}
+            validate={values => {
+                const errors = {}
+                if (!values.email) {
+                    errors.email = 'Required'
+                }
+                if (!values.password) {
+                    errors.password = 'Required'
+                }
+                return errors;
+            }}
+        >
+            {({
+                values,
+                errors,
+                handleChange,
+                handleBlur,
+                handleSubmit,
+                isSubmitting,
 
-        <div className='login'>
-            <h2>Sign in</h2>
-            <Formik
-                initialValues={{ email: '', password: '' }}
-                onSubmit={(values, actions) => {
-                    onLogin(values)
-                    actions.setSubmitting(false)
-                }}
-                enableReinitialize={true}
-                validateOnChange={false}
-                validateOnBlur={false}
-                validate={values => {
-                    const errors = {};
-                    if (!values.email) {
-                        errors.email = 'Required'
+            }) => (
+                <form className="login-form" onSubmit={handleSubmit}>
+                    <label className="inputs-wrapper">
+                        <input
+                            type="email"
+                            name="email"
+                            onChange={handleChange}
+                            onBlur={handleBlur}
+                            value={values.email}
+                            placeholder="Email address"
+                        />
+                        <input
+                            type="password"
+                            name="password"
+                            onChange={handleChange}
+                            onBlur={handleBlur}
+                            value={values.password}
+                            placeholder="Password"
+                        />
+                    </label>
 
-                    }
-                    if (!values.password) {
-                        errors.password = 'Required'
-
-                    }
-                    return errors;
-                }}
-            >
-                {({
-                    values,
-                    errors,
-                    handleChange,
-                    handleBlur,
-                    handleSubmit,
-                    isSubmitting,
-
-                }) => (
-                    <form className='login-form' onSubmit={handleSubmit}>
-                        <label className='inputs-wrapper flex col'>
-                            <input
-                                type='text'
-                                name='email'
-                                onChange={handleChange}
-                                onBlur={handleBlur}
-                                value={values.email}
-                                placeholder='Email address'
-                            />
-                            <input
-                                type='password'
-                                name='password'
-                                onChange={handleChange}
-                                onBlur={handleBlur}
-                                value={values.password}
-                                placeholder='Password'
-                            />
-                        </label>
-
-                        <button className='login-btn' type='submit' disabled={isSubmitting}>
-                            Login
-                        </button>
-                    </form>
-                )}
-            </Formik>
-        </div>
-
-    </section >
+                    <button className="auth-btn" type="submit" disabled={isSubmitting}>
+                        Login
+                    </button>
+                </form>
+            )}
+        </Formik>
+    </section>
 }

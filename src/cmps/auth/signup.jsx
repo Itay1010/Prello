@@ -51,7 +51,6 @@ export const SignupForm = ({ onSignup }) => {
                             onBlur={handleBlur}
                             value={values.email}
                             placeholder='Email address'
-                            className='long-field'
                         />
                         <div className='user-name flex'>
                             <input
@@ -78,11 +77,10 @@ export const SignupForm = ({ onSignup }) => {
                             onBlur={handleBlur}
                             value={values.password}
                             placeholder='Password'
-                            className='long-field'
                         />
                     </div>
-                    <button type='submit' disabled={isSubmitting}>
-                        Sign up
+                    <button className="auth-btn" type="submit" disabled={isSubmitting}>
+                        Signup
                     </button>
                 </form>
             )}

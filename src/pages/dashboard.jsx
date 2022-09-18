@@ -1,17 +1,17 @@
-import React, { useState } from 'react';
-import { useParams, useHistory } from 'react-router-dom';
+import React, { useState } from 'react'
+import { useParams, useHistory } from 'react-router-dom'
 
-import { boardStatistics } from '../services/board/board-statistics';
+import { boardStatistics } from '../services/board/dashboard.service'
 
-import { SummaryBox } from '../cmps/dashboard/summary-box';
-import { ActivityChart } from '../cmps/dashboard/activity-chart';
-import { ActivityBox } from '../cmps/dashboard/activity-box';
-import { ActsMembers } from '../cmps/dashboard/acts-members';
-import { CardsMember } from '../cmps/dashboard/cards-members';
-import { CardsChecklist } from '../cmps/dashboard/cards-checklist';
-import { CardsLabels } from '../cmps/dashboard/cards-labels';
+import { SummaryBox } from '../cmps/dashboard/summary-box'
+import { ActivityChart } from '../cmps/dashboard/activity-chart'
+import { ActivityBox } from '../cmps/dashboard/activity-box'
+import { ActsMembers } from '../cmps/dashboard/acts-members'
+import { CardsMember } from '../cmps/dashboard/cards-members'
+import { CardsChecklist } from '../cmps/dashboard/cards-checklist'
+import { CardsLabels } from '../cmps/dashboard/cards-labels'
 
-import { IClose } from '../cmps/icons/icons';
+import { IClose } from '../cmps/icons/icons'
 
 
 export const Dashboard = ({ board }) => {

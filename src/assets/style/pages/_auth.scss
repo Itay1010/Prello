@@ -5,120 +5,112 @@
     height: 100vh;
     background-color: $td-bg;
 
-
-    .background-container {
-        position: fixed;
-        display: flex;
-        align-items: flex-end;
-        justify-content: space-between;
-        top: 0;
-        left: 0;
+    button {
+        @include btn;
         width: 100%;
-        height: 100%;
+        background-color: #e2e4e6;
+    }
 
-        svg {
-            width: 400px;
-            height: 390px;
-        }
+    .svg-left,
+    .svg-right {
+        position: fixed;
+        bottom: 0;
+        height: 420px;
+    }
+
+    .svg-left {
+        left: 0;
+    }
+
+    .svg-right {
+        right: 0;
     }
 
     .auth-logo {
+        display: flex;
+        align-items: center;
+
         height: 40px;
         margin: 30px 0;
 
-        svg {
-            height: 100%;
-            fill: $clr1;
+        .logo-img {
+            width: 30px;
+            margin-right: 10px;
         }
 
         h1 {
-            padding: 40px 0;
-            font-size: 37px;
-            transform: translateY(-1%);
-
-
+            font-size: 38px;
+            transform: translateY(-2px);
+            cursor: default;
         }
     }
 
     .form-wrapper {
-        width: 100%;
-        max-width: 400px;
-        background-color: $white;
+        padding: 40px;
         text-align: center;
-        padding: 40px 40px 60px;
-        border-radius: 3px;
-        box-shadow: rgb(0 0 0 / 10%) 0 0 10px;
-        align-self: center;
         z-index: 100;
 
-        .login-btn {
-            background-color: $login-btn;
-            color: $bg;
-        }
+        width: 400px;
+        background-color: $white;
+        box-shadow: rgb(0 0 0 / 10%) 0 0 10px;
+        border-radius: 3px;
 
         h2 {
+            cursor: default;
             margin-bottom: 25px;
         }
 
-        .inputs-wrapper {
-            .user-name {
-                flex-wrap: wrap;
-                gap: 0 10px;
+        input {
+            height: 44px;
+            margin: 0 0 16px 0;
+            padding: 12px;
 
-                &>* {
-                    flex-grow: 1;
-                    margin-right: 0;
+            background-color: #fafbfc;
+            border: 2px solid #dfe1e6;
+
+            cursor: auto;
+            border-radius: 3px;
+        }
+
+        .inputs-wrapper {
+            display: flex;
+            flex-direction: column;
+
+            .user-name {
+                display: flex;
+                gap: 5px;
+
+                & > * {
+                    width: 50%;
+                    margin-inline-end: 0;
                 }
             }
         }
 
-        .long-field {
-            width: 100%;
+        .auth-btn {
+            font-size: 14px;
+            height: 44px;
+
+            color: $bg;
+            background-color: $login-btn;
         }
     }
 
-    button {
-        @include btn;
-        width: 100%;
-        background-color: #E2E4E6;
-
-    }
-
-    a:not(.reset) {
-        display: inline-block;
-        width: 100%;
-        height: 32px;
-        margin-bottom: 16px;
-        box-shadow: rgb(0 0 0 / 20%) 1px 1px 5px 0;
-        line-height: 32px;
-    }
-
-    input {
-        border: 2px solid #DFE1E6;
-        margin-bottom: 16px;
-        height: 44px;
-        border-radius: 3px;
-        background-color: #FAFBFC;
-        padding: 7px;
-        font-family: pri-font;
-
-    }
-
-    .login-method-separator {
+    h4.separator {
         margin: 16px 0;
+        cursor: default;
     }
 
-    .google-login {
-        button {
-            box-shadow: 0 0 6px 0px #0000002a !important;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            height: 50px;
+    .btn-google {
+        display: flex;
+        justify-content: center;
+        align-items: center;
 
-            div {
-                height: 45px;
-            }
+        height: 50px;
+        box-shadow: 0 0 6px 0px #0000002a !important;
+
+        div {
+            height: 45px;
         }
     }
 
@@ -129,18 +121,15 @@
         height: 2px;
     }
 
-    a.to-home {
-        text-align: start;
-        text-decoration: underline;
-    }
+    .links {
+        display: flex;
+        justify-content: center;
+        gap: 50px;
 
-    a.to-login {
-        text-decoration: underline;
-        margin-left: 20%;
-    }
-}
+        margin-top: 20px;
 
-.logo-img {
-    width: 31px;
-    margin-right: 10px;
+        a {
+            text-decoration: underline;
+        }
+    }
 }
