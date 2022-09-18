@@ -4,13 +4,11 @@ import {
     CategoryScale,
     LinearScale,
     BarElement,
-    Title,
-    Tooltip,
-    Legend,
+    Tooltip
 } from 'chart.js';
 import { Bar } from 'react-chartjs-2';
 
-import { boardStatistics } from '../../services/board/board-statistics';
+import { utilService } from '../../services/basic/util.service';
 
 
 export function CardsMember({ cardsPerMember, unAssignedTasks }) {
@@ -18,16 +16,14 @@ export function CardsMember({ cardsPerMember, unAssignedTasks }) {
         CategoryScale,
         LinearScale,
         BarElement,
-        Title,
-        Tooltip,
-        Legend
+        Tooltip
     );
 
-    const labels = cardsPerMember.map(item => `${item.firstName} ${item.lastName}`)
+    const labels = cardsPerMember.map(item => item.member)
     labels.push('Unassigned tasks')
-    const dataToDisplay = cardsPerMember.map(item => item.tasksNum)
+    const dataToDisplay = cardsPerMember.map(item => item.tasksCount)
     dataToDisplay.push(unAssignedTasks)
-    const colors = cardsPerMember.map(item => boardStatistics.hexToRgb(item.color))
+    const colors = cardsPerMember.map(item => utilService.hexToRgb(item.color))
     colors.push('#9F9F9F')
 
 
@@ -35,12 +31,10 @@ export function CardsMember({ cardsPerMember, unAssignedTasks }) {
         labels,
         datasets: [
             {
-                label: 'Total',
                 data: dataToDisplay,
-                borderColor: colors,
                 backgroundColor: colors,
             }
-        ],
+        ]
     };
 
     const options = {
@@ -64,6 +58,9 @@ export function CardsMember({ cardsPerMember, unAssignedTasks }) {
         }
     }
 
-    return <Bar options={options} data={data} />
-
+    return (
+        <div className="members-chart ">
+            <Bar options={options} data={data} />
+        </div>
+    )
 } 

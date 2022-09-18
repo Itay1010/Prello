@@ -4,13 +4,12 @@ import {
     CategoryScale,
     LinearScale,
     BarElement,
-    Title,
-    Tooltip,
-    Legend,
+    Tooltip
+
 } from 'chart.js';
 import { Bar } from 'react-chartjs-2';
 
-import { boardStatistics } from '../../services/board/board-statistics';
+import { utilService } from '../../services/basic/util.service'
 
 
 export function ActsMembers({ actsByMember }) {
@@ -18,26 +17,23 @@ export function ActsMembers({ actsByMember }) {
         CategoryScale,
         LinearScale,
         BarElement,
-        Title,
-        Tooltip,
-        Legend
+        Tooltip
     );
 
-    const labels = actsByMember.map(item => `${item.firstName} ${item.lastName}`)
+    const labels = actsByMember.map(item => item.member)
     const dataToDisplay = actsByMember.map(item => item.count)
-    const colors = actsByMember.map(item => boardStatistics.hexToRgb(item.color))
+    const colors = actsByMember.map(item => utilService.hexToRgb(item.color))
 
 
     const data = {
         labels,
         datasets: [
             {
-                label: 'Total',
                 data: dataToDisplay,
                 borderColor: colors,
                 backgroundColor: colors,
             }
-        ],
+        ]
     };
 
     const options = {
@@ -50,17 +46,15 @@ export function ActsMembers({ actsByMember }) {
         maintainAspectRatio: false,
         indexAxis: 'y',
         scales: {
-            yAxis:
-            {
-                display: true,
-            }
-            ,
             xAxis: {
                 display: false,
             }
         }
     }
 
-    return <Bar options={options} data={data} />
-
+    return (
+        <div className="members-chart">
+            <Bar options={options} data={data} />
+        </div>
+    )
 } 

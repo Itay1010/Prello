@@ -24,7 +24,6 @@ import { Dashboard } from './dashboard'
 import { socketService, SOCKET_EMIT_TOPIC, SOCKET_EVENT_BOARD_UPDATE, SOCKET_EMIT_PULL } from '../services/basic/socket.service'
 import { loadGuest, setUser } from '../store/user/user.actions'
 import { userService } from '../services/user.service'
-import { boardStatistics } from '../services/board/board-statistics'
 import { SideMenu } from '../cmps/board/board-header/side-menu'
 import { ILoader } from '../cmps/icons/i-loader'
 

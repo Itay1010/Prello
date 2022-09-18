@@ -44,13 +44,8 @@ function getRandomColor() {
 
 
 function hexToRgb(hex) {
-    console.log('hexToRgb - hex', hex)
-    const shorthandRegex = /^#?([a-f\d])([a-f\d])([a-f\d])$/i
-    const rgb = hex.replace(shorthandRegex, (m, r, g, b) => {
-        return r + r + g + g + b + b
-    })
-    let result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex)
-    return result ? { r: parseInt(result[1], 16), g: parseInt(result[2], 16), b: parseInt(result[3], 16) } : null
+    const res = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
+    return `rgba(${parseInt(res[1], 16)}, ${parseInt(res[2], 16)}, ${parseInt(res[3], 16)}, 1)`
 }
 
 function setDynamicColors(isDark, avgColor) {
