@@ -14,7 +14,6 @@ export function CardsChecklist({ checklists }) {
             {
                 data: DataToDisplay,
                 backgroundColor: ['#23C552', '#091e420a'],
-                // borderColor: backgroundColor,
                 borderWidth: 0,
             },
         ],
@@ -32,5 +31,9 @@ export function CardsChecklist({ checklists }) {
         maintainAspectRatio: false,
     }
 
-    return <Doughnut data={data} options={options} />
+    return (
+        <div className="cards-chart ">
+            <Doughnut data={data} options={options} />
+        </div>
+    )
 }

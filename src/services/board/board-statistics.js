@@ -1,230 +1,191 @@
-import { boardService } from './board.service'
+let g7DaysActivities = [];
+let gTasks = [];
 
-const WEEK_TIMESTAMP = 7 * 24 * 60 * 60 * 1000 //604800000
-const DAY_TIMESTAMP = 86400000
+const DAY_TIMESTAMP = 1000 * 60 * 60 * 24;
+const WEEK_TIMESTAMP = DAY_TIMESTAMP * 7;
+const currTimestamp = Date.now();
+const timeLimit = currTimestamp - WEEK_TIMESTAMP;
+
 
 export const boardStatistics = {
-    getCardsCount,
-    getMemebersCount,
-    getCardsByMember,
-    getUnassignedTasksCount,
-    getCardsByLabels,
-    getActivityStats,
-    getActByMember,
-    getChecklistCount,
-    getAttachsCount,
-    getDates,
-    hexToRgb
-
+    getStatistics
 }
 
-function getCardsCount(board) {
-    if (!board) return ('waiting for board')
-    const res = board.groups.reduce((acc, group) => {
-        const count = {
-            active: 0,
-            archived: 0,
-            groupCount: 0
-        }
+function getStatistics(board) {
+    g7DaysActivities = board.activities.filter(act => act.createdAt >= timeLimit);
+    board.groups.forEach(group => {
+        group.tasks.forEach(task => gTasks.push(task))
+    });
 
-        group.tasks.forEach(task => {
-            if (task.archivedAt) count.archived++
-            else count.active++
-        })
+    return {
+        summary: getSummary(board),
+        activities: getActivities(),
+        members: getMembersStat(board),
+        cards: getCardsStat()
+    };
+}
 
-        if (acc.active) acc.active += count.active
-        else acc.active = count.active
+function getSummary(board) {
+    return {
+        members: board.members.length,
+        groups: board.groups.length,
+        active: _getCardsCount().active,
+        unassigned: _getCardsCount().unassigned
+    };
+}
 
-        if (acc.archived) acc.archived += count.archived
-        else acc.archived = count.archived
+function getActivities() {
+    return {
+        chart: {
+            data: _getActivityData().data,
+            dates: _getDates()
+        },
+        total: _getActivityData().total,
+        avg: _getActivityData().avg
+    };
+}
 
-        if (acc.groupCount) acc.groupCount++
-        else acc.groupCount = 1
+function getMembersStat(board) {
+    return {
+        activities: _getActsByMember(board),
+        cards: _getCardsByMember(board),
+        unassigned: _getUnassignedTasksCount()
+    };
+}
 
+function getCardsStat() {
+    return {
+        checklist: _getChecklistCount(),
+        labels: _getCardsByLabels()
+    };
+}
 
+function _getCardsCount() {
+    return gTasks.reduce((acc, task) => {
+        if (!task.archivedAt) acc.active++;
+        if (!task.archivedAt && !task.members.length) acc.unassigned++;
+        return acc;
+    }, { active: 0, unassigned: 0 });
+}
+
+function _getActivityData() {
+    const res = {};
+
+    g7DaysActivities.forEach(act => {
+        const actDate = new Date(act.createdAt);
+        const idxOrder = _getIndex(actDate.getDay());
+        res[idxOrder] = (res[idxOrder] || 0) + 1;
+    });
+
+    for (let i = 0; i < 7; i++) {
+        if (!res[i]) res[i] = 0;
+    };
+
+    return {
+        data: Object.values(res),
+        total: g7DaysActivities.length,
+        avg: (g7DaysActivities.length / 7).toFixed()
+    };
+}
+
+function _getActsByMember(board) {
+
+    const actsMap = g7DaysActivities.reduce((acc, act) => {
+        acc[act.byMember._id] = (acc[act.byMember._id] || 0) + 1;
         return acc
-    }, {})
+    }, {});
 
+    const res = board.members.map(member => {
+        return {
+            member: member.firstName + ' ' + member.lastName,
+            color: member.color,
+            count: actsMap[member._id] || 0
+        }
+    }).sort((a, b) => a.count - b.count);
     return res
 }
 
-function getMemebersCount(board) {
-    return board.members.length
-}
+function _getCardsByMember(board) {
+    const cardsMap = {};
+    const activeTasks = gTasks.filter(task => !task.archivedAt);
+    activeTasks.forEach(task => {
+        task.members.forEach(member => (cardsMap[member] = (cardsMap[member] || 0) + 1));
+    });
 
-function getCardsByMember(board) {
-    const res = board.groups.reduce((acc, group) => {
-        const count = {}
-
-        group.tasks.forEach(task => {
-            for (let i = 0; i < task.members.length; i++) {
-                if (!task.archivedAt) {
-                    if (count[task.members[i]]) count[task.members[i]]++
-                    else count[task.members[i]] = 1
-                }
-            }
-        })
-
-        for (const id in count) {
-            if (acc[id]) acc[id] += count[id]
-            else acc[id] = count[id]
-        }
-
-        return acc
-    }, {})
-
-    const resToDisplay = []
-    for (const id in res) {
-        if (id === 'unassigned') return
-        const member = board.members.find(member => member._id === id)
-        const memberStatistics = {
-            firstName: member.firstName,
-            lastName: member.lastName,
+    const res = board.members.map(member => {
+        return {
+            member: member.firstName + ' ' + member.lastName,
             color: member.color,
-            id: member._id,
-            tasksNum: res[id]
+            tasksCount: cardsMap[member._id] || 0
         }
-        resToDisplay.push(memberStatistics)
-    }
-
-    resToDisplay.sort((a, b) => (a.tasksNum > b.tasksNum) ? -1 : ((b.tasksNum > a.tasksNum) ? 1 : 0))
-
-    if (resToDisplay.length === board.members.length) return resToDisplay
-    else {
-        //ADD MEMBERS WITH NO TASKS
-        return resToDisplay
-    }
-
+    }).sort((a, b) => b.tasksCount - a.tasksCount);
+    return res
 }
 
-function getUnassignedTasksCount(board) {
-    const res = board.groups.reduce((acc, group) => {
-        let count = 0
-
-        group.tasks.forEach(task => {
-            if (task.members.length === 0 && !task.archivedAt) count++
-        })
-
-        acc += count
-        return acc
+function _getUnassignedTasksCount() {
+    return gTasks.reduce((acc, task) => {
+        if (!task.archivedAt && !task.members.length) acc++;
+        return acc;
     }, 0)
 
-    return res
-
 }
 
-function getCardsByLabels(board) {
-    const labels = boardService.getLabels()
-    const res = labels.reduce((acc, label) => {
-        let labelCount = 0
-        board.groups.forEach(group => {
-            group.tasks.forEach(task => {
-                if (task.archivedAt) return
-                if (task.labels?.length) {
-                    if (task.labels.includes(label)) labelCount++
-                }
-            })
+function _getChecklistCount() {
+    const tasksWithCL = gTasks.filter(task => task.checklist?.length && !task.archivedAt);
+    let checklists = [];
+    tasksWithCL.forEach(task => checklists.push(...task['checklist']));
+
+    let items = [];
+    checklists.forEach(list => items.push(...list['items']));
+
+    return items.reduce((acc, todo) => {
+        acc.todos++;
+        if (todo.isDone) acc.done++;
+        return acc;
+    }, { todos: 0, done: 0 });
+
+    // more readable with time complexity of O(n^3)
+    // return gTasks.reduce((acc, task) => {
+    //     if (task.checklist?.length && !task.archivedAt) {
+    //         task.checklist.forEach(list => {
+    //             list.items.forEach(item => {
+    //                 acc.todos++;
+    //                 if (item.isDone) acc.done++;
+    //             });
+    //         });
+    //     }
+    //     return acc;
+    // }, { todos: 0, done: 0 });
+}
+
+function _getCardsByLabels() {
+    const activeTasks = gTasks.filter(task => task.labels?.length && !task.archivedAt);
+    return activeTasks.reduce((acc, task) => {
+        task.labels.forEach(label => {
+            acc[label] = (acc[label] || 0) + 1;
         })
-        acc[label] = labelCount
-        return acc
-    }, {})
-    return res
-}
-
-function getActivityStats(board) {
-    const currTimestamp = Date.now()
-    const timeLimit = currTimestamp - WEEK_TIMESTAMP
-
-    const lastWeekActivity = []
-    board.activities.forEach(act => {
-        // if (act.action !== 'moved' && act.createdAt >= timeLimit) lastWeekActivity.push(act)
-        if (act.createdAt >= timeLimit) lastWeekActivity.push(act)
-    })
-
-    const res = [0, 0, 0, 0, 0, 0, 0]
-    lastWeekActivity.forEach(act => {
-        const dateTimestamp = new Date(act.createdAt)
-        const day = dateTimestamp.getDay()
-        const idx = _getIndex(day)
-        res[idx]++
-
-    })
-    return res
-}
-
-function getActByMember(board) {
-
-    const res = board.members.reduce((acc, member) => {
-        let count = 0
-        board.activities.forEach(act => {
-            if (act.byMember._id === member._id) count++
-        })
-        const actsForMember = {
-            firstName: member.firstName,
-            lastName: member.lastName,
-            color: member.color,
-            id: member._id,
-            count
-        }
-        acc.push(actsForMember)
-        return acc
-    }, [])
-
-    res.sort((a, b) => (a.count > b.count) ? 1 : ((b.count > a.count) ? -1 : 0))
-
-    return res
-
-}
-
-function getChecklistCount(board) {
-    let todos = 0
-    let done = 0
-    board.groups.forEach(group => {
-        group.tasks.forEach(task => {
-            if (task.checklist?.length) {
-                task.checklist.forEach(cl => {
-                    cl.items.forEach(item => {
-                        todos++
-                        if (item.isDone) done++
-                    })
-                })
-            }
-        })
-    })
-    const res = { todos, done }
-    return res
-}
-
-function getAttachsCount(board) {
-    console.log(board);
-}
-
-function getDates() {
-    const today = new Date()
-    let timestamp = today - WEEK_TIMESTAMP + DAY_TIMESTAMP
-
-    const res = []
-    for (let i = 0; i < 6; i++) {
-        const date = new Date(timestamp)
-        const dateStr = `${date.getDate()}/${date.getMonth() + 1}`
-        res.push(dateStr)
-        timestamp += DAY_TIMESTAMP
-    }
-    res.push(`${today.getDate()}/${today.getMonth() + 1}`)
-    return res
-}
-
-function hexToRgb(hex) {
-    const res = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
-    return `rgba(${parseInt(res[1], 16)}, ${parseInt(res[2], 16)}, ${parseInt(res[3], 16)}, 1)`
-
+        return acc;
+    }, {});
 }
 
 function _getIndex(day) {
-    const now = new Date()
-    const today = now.getDay()
+    const now = new Date();
+    const today = now.getDay();
 
-    if (today - day > 0) return 6 - day
-    else if (today - day < 0) return day - today - 1
-    else return 6
+    if (today - day > 0) return 6 - day;
+    else if (today - day < 0) return day - today - 1;
+    else return 6;
+}
+
+function _getDates() {
+    const today = new Date();
+    let timestamp = today - WEEK_TIMESTAMP + DAY_TIMESTAMP;
+
+    const res = [];
+    for (let i = 0; i < 7; i++) {
+        const date = new Date(timestamp);
+        res.push(`${date.getDate()}/${date.getMonth() + 1}`);
+        timestamp += DAY_TIMESTAMP;
+    }
+    return res;
 }

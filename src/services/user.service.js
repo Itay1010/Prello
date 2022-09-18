@@ -38,7 +38,7 @@ async function signup(userCred) {
         userCred.color = utilService.getRandomColor()
         if (!userCred.imgUrl) {
             const colorHex = userCred.color.slice(1)
-            userCred.imgUrl = `https://ui-avatars.com/api/?background=${colorHex}`
+            userCred.imgUrl = `https://ui-avatars.com/api/?name=${userCred.firstName}+${userCred.lastName}&background=${colorHex}`
 
         }
         const user = await httpService.post(`${BASE_URL}signup`, userCred)

@@ -1,12 +1,12 @@
 import React from 'react'
 import { Chart as ChartJS, ArcElement, Tooltip, Legend } from 'chart.js'
 import { Pie } from 'react-chartjs-2'
-import { boardStatistics } from '../../services/board/board-statistics'
+import { utilService } from '../../services/basic/util.service'
 
 ChartJS.register(ArcElement, Tooltip, Legend)
 
 export function CardsLabels({ cardsPerLabels }) {
-    const backgroundColor = Object.keys(cardsPerLabels).map(color => boardStatistics.hexToRgb(color))
+    const backgroundColor = Object.keys(cardsPerLabels).map(color => utilService.hexToRgb(color))
     const data = {
         labels: Object.keys(cardsPerLabels),
         datasets: [
@@ -31,5 +31,9 @@ export function CardsLabels({ cardsPerLabels }) {
         maintainAspectRatio: false,
     }
 
-    return <Pie data={data} options={options} />
+    return (
+        <div className="cards-chart ">
+            <Pie data={data} options={options} />
+        </div>
+    )
 }
