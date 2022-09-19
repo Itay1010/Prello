@@ -3,7 +3,7 @@ import { userService } from '../../services/user.service'
 
 import { IAttachment } from '../icons/i-attachment'
 import { IChecklist } from '../icons/i-checklist'
-import { IComments } from '../icons/i-comments'
+// import { IComments } from '../icons/i-comments'
 import { IDescription } from '../icons/i-description'
 import { IWatch } from '../icons/i-watch'
 
@@ -18,7 +18,7 @@ export function TaskBadges({ task, getClStatus }) {
         {task.description && <div className='badge'> <IDescription /> </div>}
         {task.checklist?.length > 0 && <div className='badge flex'> <IChecklist /> <p>{getClStatus(task)}</p> </div>}
         {task.attachments?.length > 0 && <div className='badge'><IAttachment /></div>}
-        {task.comments?.length > 0 && <div className='badge'><IComments /> </div>}
+        {/* {task.comments?.length > 0 && <div className='badge'><IComments /> </div>} */}
         {/*  {task.loaction?.length > 0 && <div className='badge'>L</div>} */}
         {/*  {task.activities?.length > 0 && <div className='badge'>L</div>} */}
     </section>
