@@ -9,24 +9,32 @@ const BASE_URL = 'auth/'
 export const userService = {
     getUsers,
     getLoggedinUser,
+    getGoogleUser,
     signup,
     login,
     logout,
     loginGuest,
 }
 
-// window.userService = userService
+async function getUsers() {
+    try {
+        return await httpService.get('user')
+    } catch (err) {
+        console.error('error getting users')
+        throw err
+    }
+}
 
 function getLoggedinUser() {
     return JSON.parse(sessionStorage.getItem(LOCAL_STORAGE_LOGGEDIN_USER) || 'null')
 }
 
-async function getUsers() {
+async function getGoogleUser(email) {
     try {
-        const users = await httpService.get('user')
-
-        return users
-
+        // const user = await httpService.get('user', email)
+        // console.log('user', user);
+        // return user
+        return await httpService.get(`user/email=${email}`)
     } catch (err) {
         console.error('error getting users')
         throw err
@@ -68,25 +76,19 @@ async function logout() {
     return await httpService.post(`${BASE_URL}logout`)
 }
 
-async function loginGuest() {
+function loginGuest() {
     const user = {
-
-        _id: 'g' + utilService.makeId(20),
+        _id: 'guest-' + utilService.makeId(10),
         firstName: 'Guest',
         lastName: 'Guest',
         username: 'Guest',
         password: '123',
         email: 'Guest@gmail.com',
-        // imgUrl: 'https://res.cloudinary.com/di5o0obqy/image/upload/v1653742446/eytan_vl7skf.jpg',
         color: '#0E1856'
 
     }
     sessionStorage.setItem(LOCAL_STORAGE_LOGGEDIN_USER, JSON.stringify(user))
     return user
-}
-
-async function getUserById(id) {
-    
 }
 
 function _saveLocalUser(user) {
@@ -98,7 +100,6 @@ function _saveLocalUser(user) {
 // This is relevant when backend is connected
 ; (async () => {
     var user = getLoggedinUser()
-    // console.log('; - user', user._id)
     if (user) socketService.emit('set-user-socket', user._id)
 })()
 

@@ -4,7 +4,7 @@ import { Formik } from 'formik'
 
 export const LoginForm = ({ onLogin }) => {
     return <section className="login">
-        <h2>Sign in</h2>
+        <h2>Login</h2>
         <Formik
             initialValues={{ email: '', password: '' }}
             onSubmit={(values, actions) => {

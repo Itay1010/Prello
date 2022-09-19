@@ -51,7 +51,7 @@ export function onLogin(credentials) {
 
 
 export function onSignup(credentials) {
-    console.log('onSignup - credentials', credentials)
+    console.log('action activated)');
     return async (dispatch) => {
         try {
             const user = await userService.signup(credentials)

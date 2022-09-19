@@ -1,10 +1,12 @@
 import React, { useState, useEffect } from 'react'
-import { useParams, Link } from 'react-router-dom'
+import { useParams, useHistory, Link } from 'react-router-dom'
+import { useDispatch } from 'react-redux'
+
 import { GoogleLogin } from 'react-google-login'
 import { gapi } from 'gapi-script'
-// import { connect } from 'react-redux'
 
-// import { onLogin, onSignup } from '../store/user/user.actions'
+import { userService } from '../services/user.service'
+import { onLogin, onSignup } from '../store/user/user.actions'
 import { SignupForm } from '../cmps/auth/signup.jsx'
 import { LoginForm } from '../cmps/auth/login.jsx'
 
@@ -16,6 +18,8 @@ const clientId = '168490950789-fil5g5m4nauiousknnut75avvh0dhsb5.apps.googleuserc
 export const Auth = () => {
     const [authType, setAuthType] = useState(null)
     const { type } = useParams()
+    const history = useHistory()
+    const dispatch = useDispatch()
 
     useEffect(() => {
         setAuthType(type)
@@ -30,48 +34,50 @@ export const Auth = () => {
     }, [type])
 
 
-    const signup = async (credentials) => {
-        // try {
-        //     await this.props.onSignup(credentials)
-        //     this.onGoOn()
-        // } catch (err) {
-        //     console.error(err)
-        // }
+    const signup = (credentials) => {
+        try {
+            dispatch(onSignup(credentials))
+            onGoOn()
+        } catch (err) {
+            console.error(err)
+        }
     }
 
     const login = async (credentials) => {
-        // try {
-        //     const user = await this.props.onLogin(credentials)
-        //     this.onGoOn()
-        // } catch (err) {
-        //     console.error(err)
-        // }
+        try {
+            dispatch(onLogin(credentials))
+            onGoOn()
+        } catch (err) {
+            console.error(err)
+        }
     }
 
-    // const onGoOn = () => {
-    //     this.props.history.push('/workspace')
-    // }
+    const onGoOn = () => {
+        history.push('/workspace')
+    }
 
-    const onGoogleAuth = (googleUser) => {
-        const { profileObj } = googleUser
-        const user = {
-            email: profileObj.email,
-            firstName: profileObj.givenName,
-            lastName: profileObj.familyName,
-            imageUrl: profileObj.imageUrl,
-            googleId: profileObj.googleId
+    const onGoogleAuth = async (googleUser) => {
+        const { profileObj: { email, givenName, familyName, imageUrl, googleId } } = googleUser
+        const registeredUser = await userService.getGoogleUser(email)
+        if (registeredUser) login(googleUser)
+        else {
+            const newUser = {
+                email,
+                firstName: givenName,
+                lastName: familyName,
+                imageUrl,
+                googleId
+            }
+            signup(newUser)
         }
-        if (this.props.match.params.type === 'signup') this.signup(user)
-        else this.login(user)
-
     }
 
     const onGoogleFailure = (res) => {
         console.log('LOGIN FAILED! ,res ', res)
     }
 
-    return <section className="auth-page">
-        <div className="background-container">
+    return <section className="auth-page" >
+        <div className="background-container" >
             <Img1 />
             <Img2 />
         </div>
@@ -87,20 +93,20 @@ export const Auth = () => {
 
             <GoogleLogin
                 clientId={clientId}
-                buttonText='Continue with Google'
+                buttonText="Continue with Google"
                 onSuccess={onGoogleAuth}
                 onFailure={onGoogleFailure}
-                cookiePolicy={'single_host_origin'}
+                cookiePolicy={"single_host_origin"}
                 isSignedIn={false}
-                className={'btn-google'}
+                className={"btn-google"}
             />
 
             <hr />
 
             <aside className="links">
-                <Link to="/" className="to-home reset" >Home</Link>
-                {authType === 'login' && <a href="signup">Signup</a>}
-                {authType === 'signup' && <a href="login">Login</a>}
+                <Link to="/">Home</Link>
+                {authType === 'login' && <Link to="/auth/signup">Sign up</Link>}
+                {authType === 'signup' && <Link to="/auth/login">Login</Link>}
             </aside>
         </section>
     </section>
