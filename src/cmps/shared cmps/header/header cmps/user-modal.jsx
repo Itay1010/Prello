@@ -1,11 +1,13 @@
 import React from 'react'
 import { useDispatch } from 'react-redux'
+import { useHistory } from 'react-router-dom'
 import { userService } from '../../../../services/user.service'
 import { onLogout } from '../../../../store/user/user.actions'
 import { IClose } from '../../../icons/i-close'
 
 export const UserModal = ({ closeModal, user, goLogin }) => {
     const dispatch = useDispatch()
+    const history = useHistory()
 
     return <div className='user-modal flex col'>
         <div className='modal-header flex'>
@@ -33,6 +35,7 @@ export const UserModal = ({ closeModal, user, goLogin }) => {
 
             dispatch(onLogout())
             closeModal()
+            history.push('/')
         }
         }>Log out</p>}
     </div>

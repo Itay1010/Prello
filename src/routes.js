@@ -1,6 +1,5 @@
 import { Home } from './pages/home';
-// import { Auth } from './pages/auth';
-import { Auth } from './pages/auth-hook';
+import { Auth } from './pages/auth';
 import { Workspace } from './pages/workspace';
 import { Board } from './pages/board';
 

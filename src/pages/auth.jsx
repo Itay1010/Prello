@@ -1,129 +1,114 @@
-import React from 'react'
-import { connect } from 'react-redux'
-
-import { onLogin, onSignup } from '../store/user/user.actions'
-
-import { SignupForm } from '../cmps/auth/signup.jsx'
-import { LoginForm } from '../cmps/auth/login.jsx'
+import React, { useState, useEffect } from 'react'
+import { useParams, useHistory, Link } from 'react-router-dom'
+import { useDispatch } from 'react-redux'
 
 import { GoogleLogin } from 'react-google-login'
 import { gapi } from 'gapi-script'
-import { Link } from 'react-router-dom'
 
-import { ReactComponent as Img1 } from '../assets/imgs/auth-img-1.svg';
-import { ReactComponent as Img2 } from '../assets/imgs/auth-img-2.svg';
+import { userService } from '../services/user.service'
+import { onLogin, onSignup } from '../store/user/user.actions'
+import { SignupForm } from '../cmps/auth/signup.jsx'
+import { LoginForm } from '../cmps/auth/login.jsx'
+
+import { ReactComponent as Img1 } from '../assets/imgs/auth-img-1.svg'
+import { ReactComponent as Img2 } from '../assets/imgs/auth-img-2.svg'
 
 const clientId = '168490950789-fil5g5m4nauiousknnut75avvh0dhsb5.apps.googleusercontent.com'
 
-export class _Auth extends React.Component {
-    state = {
-        type: null
-    }
+export const Auth = () => {
+    const [authType, setAuthType] = useState(null)
+    const { type } = useParams()
+    const history = useHistory()
+    const dispatch = useDispatch()
 
-    componentDidMount() {
-        const { type } = this.props.match.params
-        this.setState({ type })
+    useEffect(() => {
+        setAuthType(type)
 
-        function start() {
-            gapi.client.init({
+        const start = () => {
+            gapi.auth2.init({
                 clientId,
                 scope: ''
             })
         }
         gapi.load('client:auth2', start)
-    }
+    }, [type])
 
-    signup = async (credentials) => {
+
+    const signup = (credentials) => {
         try {
-            await this.props.onSignup(credentials)
-            this.onGoOn()
+            dispatch(onSignup(credentials))
+            onGoOn()
         } catch (err) {
             console.error(err)
         }
     }
 
-    login = async (credentials) => {
+    const login = async (credentials) => {
         try {
-            const user = await this.props.onLogin(credentials)
-            this.onGoOn()
+            dispatch(onLogin(credentials))
+            onGoOn()
         } catch (err) {
             console.error(err)
         }
     }
 
-    onGoOn = () => {
-        this.props.history.push('/workspace')
+    const onGoOn = () => {
+        history.push('/workspace')
     }
 
-    onGoogleAuth = (googleUser) => {
-        const { profileObj } = googleUser
-        const user = {
-            email: profileObj.email,
-            firstName: profileObj.givenName,
-            lastName: profileObj.familyName,
-            imageUrl: profileObj.imageUrl,
-            googleId: profileObj.googleId
+    const onGoogleAuth = async (googleUser) => {
+        const { profileObj: { email, givenName, familyName, imageUrl, googleId } } = googleUser
+        const registeredUser = await userService.getGoogleUser(email)
+        if (registeredUser) login(googleUser)
+        else {
+            const newUser = {
+                email,
+                firstName: givenName,
+                lastName: familyName,
+                imageUrl,
+                googleId
+            }
+            signup(newUser)
         }
-        if (this.props.match.params.type === 'signup') this.signup(user)
-        else this.login(user)
-
     }
 
-    onGoogleFailure = (res) => {
+    const onGoogleFailure = (res) => {
         console.log('LOGIN FAILED! ,res ', res)
     }
 
-    render() {
-        const { type } = this.state
-        return <section className='auth-page'>
-            <section className='background-container'>
-                <Img1 />
-                <Img2 />
-            </section>
-            <div className='auth-logo flex align-center'>
-                <img className='logo-img' src={require('../assets/imgs/logo/Prello_logo_40.png')} />
-                <h1>Prello</h1>
-            </div>
-            <div className='form-wrapper'>
-                {(type === 'signup') && <SignupForm onSignup={this.signup} />}
-                {(type === 'login') && <LoginForm onLogin={this.login} />}
+    return <section className="auth-page" >
+        <div className="background-container" >
+            <Img1 />
+            <Img2 />
+        </div>
+        <div className="auth-logo">
+            <img className="logo-img" src={require("../assets/imgs/logo/Prello_logo_40.png")} alt="logo" />
+            <h1>Prello</h1>
+        </div>
 
-                <div className='login-method-separator'>OR</div>
+        <section className="form-wrapper">
+            {(authType === 'login') && <LoginForm onLogin={login} />}
+            {(authType === 'signup') && <SignupForm onSignup={signup} />}
 
-                {type === 'login' && <button style={({ margin: '0 0 16px' })} onClick={() => {
-                    window.location.assign('/auth/signup')
-                    this.setState((prevState) => 'signup')
-                }}>
-                    Sign up
-                </button>}
+            <h4 className="separator">OR</h4>
 
-                <div className='google-login'>
-                    <GoogleLogin
-                        clientId={clientId}
-                        buttonText='Continue with Google'
-                        onSuccess={this.onGoogleAuth}
-                        onFailure={this.onGoogleFailure}
-                        cookiePolicy={'single_host_origin'}
-                        isSignedIn={false}
-                    />
-                </div>
-                <hr />
-                <Link to='/' className='to-home reset' >Home</Link>
-                {type === 'signup' && <a href='login' className='to-login reset'>Login</a>}
-            </div>
-            <svg></svg>
+            <GoogleLogin
+                clientId={clientId}
+                buttonText="Continue with Google"
+                onSuccess={onGoogleAuth}
+                onFailure={onGoogleFailure}
+                cookiePolicy={"single_host_origin"}
+                isSignedIn={false}
+                className={"btn-google"}
+            />
+
+            <hr />
+
+            <aside className="links">
+                <Link to="/">Home</Link>
+                {authType === 'login' && <Link to="/auth/signup">Sign up</Link>}
+                {authType === 'signup' && <Link to="/auth/login">Login</Link>}
+            </aside>
         </section>
-    }
+    </section>
 }
-
-const mapStateToProps = state => {
-
-}
-
-const mapDispatchToProps = {
-    onLogin,
-    onSignup,
-    // onGoogleAuth
-}
-
-export const Auth = connect(mapStateToProps, mapDispatchToProps)(_Auth)
