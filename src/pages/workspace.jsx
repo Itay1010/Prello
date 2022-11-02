@@ -22,7 +22,6 @@ export const Workspace = () => {
     }
 
     const onCreateNewBoard = async (newBoardInfo) => {
-        // newBoardInfo.createdAt = Date.now()
         newBoardInfo.creator = user
         const newBoard = await dispatch(addBoard(newBoardInfo))
         history.push(`/board/${newBoard[0]._id}`)
@@ -38,7 +37,7 @@ export const Workspace = () => {
     }
 
     if (!boards || !user) return <ILoader />
-    return <section className='workspace-wrapper'>
+    return <section className="workspace-wrapper">
         <MainHeader />
         <BoardList boards={boards} userId={userId} toggleStar={toggleStar} createNewBoard={onCreateNewBoard} />
     </section>
