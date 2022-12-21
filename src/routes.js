@@ -6,22 +6,22 @@ import { Board } from './pages/board';
 export const routes = [
     {
         path: '/auth/:type',
-        Element: Auth,
+        component: Auth,
         isExact: true
     },
     {
         path: '/workspace',
-        Element: Workspace,
+        component: Workspace,
         isExact: true
     },
     {
         path: '/board/:boardId',
-        Element: Board,
+        component: Board,
         isExact: true
     },
     {
         path: '/',
-        Element: Home,
+        component: Home,
         isExact: true
     }
 ]
